@@ -47,7 +47,11 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
   const alerts = liveAlerts.length > 0 ? liveAlerts : null;
   const months = scoresForPark(parkCode);
   const labels = parkHeaderLabels(parkCode);
-  const chapters = detail ? CHAPTERS : CHAPTERS.filter((c) => ["overview", "when-to-go", "must-see", "crowds"].includes(c.id));
+  const fieldNote = cohortPark?.fieldNote ?? liveProfile?.description;
+  const hasMustSee = Boolean(detail) || liveThings.length > 0;
+  const chapters = (detail ? CHAPTERS : CHAPTERS.filter((c) => ["overview", "when-to-go", "must-see", "crowds"].includes(c.id))).filter(
+    (c) => c.id !== "must-see" || hasMustSee
+  );
 
   return (
     <div className="flex flex-col">
@@ -56,6 +60,7 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
         name={name}
         state={state}
         accent={accent}
+        description={fieldNote}
         acreageLabel={cohortPark ? `${cohortPark.acreage.toLocaleString()} ac` : undefined}
         officialRankLabel={cohortPark?.officialVisitRank2025 ? `#${cohortPark.officialVisitRank2025} most visited (official)` : undefined}
         liveContext={liveContext}

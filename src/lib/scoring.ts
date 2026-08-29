@@ -26,14 +26,6 @@ export function scoreToTier(score: number): Tier {
 
 export const TIER_ORDER: Tier[] = ["Exceptional", "Excellent", "Good", "Specialized", "Limited"];
 
-export const TIER_COLOR: Record<Tier, string> = {
-  Exceptional: "#D6A63B",
-  Excellent: "#D6A63B99",
-  Good: "#ffffff33",
-  Specialized: "#ffffff1a",
-  Limited: "#ffffff0d",
-};
-
 /** % of peak-month visitation this month sees. Informational — never a scoring input. */
 export function crowdRelativeToPeak(percentOfAnnualVisits: number, peakPercentOfAnnual: number): number {
   return percentOfAnnualVisits / peakPercentOfAnnual;

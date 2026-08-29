@@ -9,20 +9,20 @@ export function NearestGemFallback({ currentMonth }: { currentMonth: MonthAbbr }
   const monthName = monthByAbbr(currentMonth)!.name;
 
   if (!nearest) {
-    return <p className="text-paper-dim text-sm font-mono">No park clears the Hidden Gems bar in {monthName}.</p>;
+    return <p className="text-ink-soft text-sm font-mono">No park clears the Hidden Gems bar in {monthName}.</p>;
   }
 
   const park = getParkSummary(nearest.park);
   const nearestMonthName = monthByAbbr(nearest.month)!.name;
 
   return (
-    <p className="text-paper-dim text-sm font-mono">
+    <p className="text-ink-soft text-sm font-mono">
       No park clears the Hidden Gems bar in {monthName} &mdash; nearest:{" "}
-      <Link href={`/parks/${nearest.park}`} className="underline underline-offset-2 text-paper">
+      <Link href={`/parks/${nearest.park}`} className="underline underline-offset-2 text-ink font-semibold">
         {park.name}
       </Link>{" "}
       in{" "}
-      <Link href={`/discover/month/${nearest.month}`} className="underline underline-offset-2 text-paper">
+      <Link href={`/discover/month/${nearest.month}`} className="underline underline-offset-2 text-ink font-semibold">
         {nearestMonthName}
       </Link>{" "}
       &rarr;

@@ -26,7 +26,10 @@ export function WhyDrawer({
   const reduceMotion = useReducedMotion();
   const month = monthByAbbr(row.month)!;
   const showWhyNotNow = (row.tier === "Specialized" || row.tier === "Limited") && row.whyNotNow?.length;
-  const isEstimated = row.climateStationElevFt === 0;
+  // 0ft is a real, valid elevation for a sea-level station — check the
+  // actual sentinel string, not elevation, so a real coastal station never
+  // gets mislabeled as an estimate.
+  const isEstimated = row.climateStation === "Regional estimate — no station identified yet";
 
   useEffect(() => {
     if (!open) return;

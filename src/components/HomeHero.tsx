@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
 import type { ParkImage } from "@/lib/nps";
+import { ContourField } from "./ContourField";
 
 export function HomeHero({
   image,
@@ -23,21 +24,21 @@ export function HomeHero({
 
   return (
     <section ref={ref} className="relative h-screen w-full overflow-hidden bg-ink">
-      <motion.div className="absolute inset-0" style={{ y, scale }}>
+      {/* filter-free: this layer is under a continuous scroll-linked transform */}
+      <motion.div className="absolute inset-0" style={{ y, scale, willChange: "transform" }}>
         {image ? (
-          <Image src={image.url} alt={image.altText || ""} fill priority sizes="100vw" className="object-cover img-grade" />
+          <Image src={image.url} alt={image.altText || ""} fill priority sizes="100vw" quality={85} className="object-cover" />
         ) : (
-          <div className="absolute inset-0" style={{ background: `linear-gradient(180deg, var(--ink), ${accent}22)` }} />
+          <ContourField name="" accent={accent} />
         )}
       </motion.div>
-      <div className="absolute inset-0 bg-ink/25" />
-      <div className="grain-overlay" />
+      <div className="absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-ink/80 via-ink/25 to-transparent" />
 
       <div className="relative h-full max-w-[1360px] mx-auto px-6 md:px-10 flex flex-col justify-end pb-20">
         <motion.h1
           initial={reduceMotion ? undefined : { opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="font-display text-display-xl leading-[0.95] text-bone mb-6"
         >
           Find your park.
@@ -47,7 +48,7 @@ export function HomeHero({
         <motion.p
           initial={reduceMotion ? undefined : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.45, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="font-mono text-mono-sm uppercase tracking-wide text-bone/70 flex flex-wrap gap-x-4"
         >
           {sourceStrip.map((s) => (

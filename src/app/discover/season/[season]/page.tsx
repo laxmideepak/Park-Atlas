@@ -8,6 +8,9 @@ export function generateStaticParams() {
   return SEASONS.map((s) => ({ season: s.key }));
 }
 
+export const revalidate = 86400; // no live fetches on this page otherwise — without this,
+// the shared Nav's "This month" badge freezes at build time on this route forever
+
 export default async function SeasonPage(props: PageProps<"/discover/season/[season]">) {
   const { season: seasonParam } = await props.params;
   const season = SEASONS.find((s) => s.key === seasonParam);

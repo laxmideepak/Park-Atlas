@@ -30,7 +30,7 @@ export function Preloader({ facts }: { facts: string[] }) {
   useEffect(() => {
     if (!shouldShow || done) return;
     const start = performance.now();
-    const DURATION = 1200;
+    const DURATION = 800;
     let raf: number;
     const tick = (t: number) => {
       const elapsed = t - start;

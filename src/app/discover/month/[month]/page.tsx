@@ -9,6 +9,8 @@ import { MONTHS, monthByAbbr } from "@/lib/months";
 import { MonthAbbr, Tier } from "@/lib/types";
 import { TIER_ORDER } from "@/lib/scoring";
 import { fetchParkImages } from "@/lib/nps";
+import { getParkAccent } from "@/lib/park-theme";
+import { ContourField } from "@/components/ContourField";
 
 export function generateStaticParams() {
   return MONTHS.map((m) => ({ month: m.abbr }));
@@ -39,13 +41,11 @@ export default async function MonthPage(props: PageProps<"/discover/month/[month
       {/* ink hero */}
       <section className="relative h-[60vh] min-h-[380px] w-full overflow-hidden bg-ink">
         {heroImage ? (
-          <Image src={heroImage.url} alt={heroImage.altText || ""} fill priority sizes="100vw" className="object-cover img-grade" />
+          <Image src={heroImage.url} alt={heroImage.altText || ""} fill priority sizes="100vw" quality={85} className="object-cover" />
         ) : (
-          <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, var(--ink), var(--brass) 220%)" }} />
+          <ContourField name={topSummary.name} accent={getParkAccent(top.park)} />
         )}
-        <div className="absolute inset-0 bg-ink/30" />
-        <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-ink to-transparent" />
-        <div className="grain-overlay" />
+        <div className="absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-ink/80 via-ink/25 to-transparent" />
         <div className="relative h-full max-w-[1360px] mx-auto px-6 md:px-10 flex flex-col justify-end pb-10">
           <p className="font-mono text-mono-sm uppercase tracking-wide text-bone/70 mb-1">By month</p>
           <h1 className="font-display text-display-xl leading-[0.95] text-bone mb-3">{month.name}</h1>

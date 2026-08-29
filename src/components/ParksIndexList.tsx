@@ -48,7 +48,7 @@ export function ParksIndexList({ rows }: { rows: IndexRow[] }) {
   return (
     <div
       className="relative"
-      onMouseMove={(e) => setPos({ x: e.clientX, y: e.clientY })}
+      onMouseMove={hovered ? (e) => setPos({ x: e.clientX, y: e.clientY }) : undefined}
     >
       {/* filters */}
       <div className="flex flex-wrap gap-2 mb-8 font-mono text-mono-sm">
