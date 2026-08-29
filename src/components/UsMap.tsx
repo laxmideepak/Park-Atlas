@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { motion, useReducedMotion, AnimatePresence } from "motion/react";
+import { useRef, useState, memo } from "react";
+import { motion, useReducedMotion, useInView, AnimatePresence } from "motion/react";
 import type { StatePath } from "@/lib/us-map-geo";
 import type { MapPin } from "@/lib/us-map-pins";
 import type { Tier } from "@/lib/types";
@@ -44,6 +44,8 @@ export function UsMap({
   const [hovered, setHovered] = useState<string | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
   const reduceMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(sectionRef, { once: true, amount: 0.2 });
   const active = pins.find((p) => p.code === hovered);
   const picked = pins.find((p) => p.code === selected);
 
@@ -54,18 +56,14 @@ export function UsMap({
   const originY = picked ? (picked.y / height) * 100 : 50;
 
   return (
-    <div className="relative w-full">
+    <div ref={sectionRef} className="relative w-full">
       <motion.div
         animate={{ scale: picked && !reduceMotion ? ZOOM_SCALE : 1 }}
         transition={{ type: "spring", stiffness: 140, damping: 18 }}
         style={{ transformOrigin: `${originX}% ${originY}%` }}
       >
         <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-auto overflow-visible" role="img" aria-label="Map of the United States showing all 63 National Parks">
-          <g>
-            {statePaths.map((sp) => (
-              <path key={sp.id} d={sp.d} fill="var(--ink-deep, #1c211a)" stroke="var(--bone)" strokeOpacity={0.08} strokeWidth={1} />
-            ))}
-          </g>
+          <StatePaths statePaths={statePaths} />
           <g>
             {pins.map((pin, i) => {
               const v = pinVisual(pin.tier);
@@ -73,7 +71,7 @@ export function UsMap({
                 <motion.g
                   key={pin.code}
                   initial={reduceMotion ? undefined : { scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
+                  animate={inView ? { scale: 1, opacity: 1 } : undefined}
                   transition={reduceMotion ? { duration: 0 } : { delay: i * 0.012, type: "spring", stiffness: 320, damping: 22 }}
                   style={{ transformOrigin: `${pin.x}px ${pin.y}px`, cursor: "pointer" }}
                   whileHover={reduceMotion ? undefined : { scale: 1.7 }}
@@ -121,3 +119,13 @@ export function UsMap({
     </div>
   );
 }
+
+const StatePaths = memo(function StatePaths({ statePaths }: { statePaths: StatePath[] }) {
+  return (
+    <g>
+      {statePaths.map((sp) => (
+        <path key={sp.id} d={sp.d} fill="var(--ink-deep, #1c211a)" stroke="var(--bone)" strokeOpacity={0.08} strokeWidth={1} />
+      ))}
+    </g>
+  );
+});
