@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
-    "probe-images": "node --env-file=.env.local --import tsx scripts/probe-images.ts"
+    "probe-images": "node --env-file=.env.local --import tsx scripts/probe-images.ts",
+    "pick-hero-manifest": "node --env-file=.env.local --import tsx scripts/pick-hero-manifest.ts"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
