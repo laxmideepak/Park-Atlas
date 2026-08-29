@@ -40,17 +40,27 @@ interface RawAlertsResponse {
 async function npsFetch<T>(path: string, params: Record<string, string>): Promise<T | null> {
   const key = process.env.NPS_API_KEY;
   if (!key) return null;
-  try {
-    const qs = new URLSearchParams(params).toString();
-    const res = await fetch(`${NPS_BASE}${path}?${qs}`, {
-      headers: { "X-Api-Key": key },
-      next: { revalidate: REVALIDATE_SECONDS },
-    });
-    if (!res.ok) return null;
-    return (await res.json()) as T;
-  } catch {
-    return null;
+  const qs = new URLSearchParams(params).toString();
+  const url = `${NPS_BASE}${path}?${qs}`;
+  // The static build fires a couple hundred of these in one burst (63 park
+  // pages x 3-4 endpoints, plus home/month/index pages). The NPS API
+  // throttles bursts, and a silently-nulled response here means a park page
+  // prerenders imageless until its next ISR pass — so failed calls retry
+  // with backoff instead of giving up on the first 429.
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      const res = await fetch(url, {
+        headers: { "X-Api-Key": key },
+        next: { revalidate: REVALIDATE_SECONDS },
+      });
+      if (res.ok) return (await res.json()) as T;
+      if (res.status !== 429 && res.status < 500) return null; // real error, don't hammer
+    } catch {
+      // network hiccup — fall through to retry
+    }
+    await new Promise((r) => setTimeout(r, 1500 * (attempt + 1) + Math.floor(Math.random() * 500)));
   }
+  return null;
 }
 
 export interface NpsParkProfile {
