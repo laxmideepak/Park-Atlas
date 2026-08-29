@@ -726,7 +726,7 @@ git commit -m "Home: apply Reveal/RevealGroup to below-fold sections, content-vi
 **Files:**
 - Modify: `src/app/parks/[parkCode]/page.tsx`
 
-- [ ] **Step 1: Import the new components**
+- [x] **Step 1: Import the new components**
 
 Add to the top import block (after the `SITE_URL` import):
 ```tsx
@@ -734,7 +734,7 @@ import { Reveal, RevealGroup } from "@/components/Reveal";
 import { CountUp } from "@/components/CountUp";
 ```
 
-- [ ] **Step 2: Convert the Stat grid's ternary to an array so `RevealGroup` staggers the 4 real children, and gate Acreage through `CountUp`**
+- [x] **Step 2: Convert the Stat grid's ternary to an array so `RevealGroup` staggers the 4 real children, and gate Acreage through `CountUp`**
 
 Replace:
 ```tsx
@@ -792,7 +792,7 @@ with:
               </RevealGroup>
 ```
 
-- [ ] **Step 3: Update `Stat`'s type to accept a `ReactNode` value (needed for `CountUp`)**
+- [x] **Step 3: Update `Stat`'s type to accept a `ReactNode` value (needed for `CountUp`)**
 
 At the bottom of the file, change:
 ```tsx
@@ -816,7 +816,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 ```
 
-- [ ] **Step 4: Reveal the "When to go" heading/subtitle and stagger the 4 `FigureLabel`s**
+- [x] **Step 4: Reveal the "When to go" heading/subtitle and stagger the 4 `FigureLabel`s**
 
 Replace:
 ```tsx
@@ -845,7 +845,7 @@ with:
               </RevealGroup>
 ```
 
-- [ ] **Step 5: Reveal the Crowd Calendar section heading**
+- [x] **Step 5: Reveal the Crowd Calendar section heading**
 
 Replace:
 ```tsx
@@ -862,7 +862,7 @@ with:
             </section>
 ```
 
-- [ ] **Step 6: Reveal the Current Conditions heading and each alert row**
+- [x] **Step 6: Reveal the Current Conditions heading and each alert row**
 
 Replace:
 ```tsx
@@ -947,12 +947,12 @@ Add `Fragment` to the React import — change the import added in Step 3 to:
 import { Fragment, type ReactNode } from "react";
 ```
 
-- [ ] **Step 7: Verify**
+- [x] **Step 7: Verify**
 
 Run: `npm run build && npm run lint && npm run test`
 Expected: build succeeds (all 63 park pages), lint clean, 32/32 tests pass.
 
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit**
 
 ```bash
 git add src/app/parks/\[parkCode\]/page.tsx
@@ -966,7 +966,7 @@ git commit -m "Park detail: Reveal headings/figures/alerts, CountUp on Acreage"
 **Files:**
 - Modify: `src/app/parks/[parkCode]/page.tsx` (the `EditorialSections` and `NonCohortSections` functions)
 
-- [ ] **Step 1: Add `Fragment` usage (already imported in Task 8) and reveal the Hiking section**
+- [x] **Step 1: Add `Fragment` usage (already imported in Task 8) and reveal the Hiking section**
 
 Replace:
 ```tsx
@@ -1019,7 +1019,7 @@ with:
       </section>
 ```
 
-- [ ] **Step 2: Reveal the Must-see section**
+- [x] **Step 2: Reveal the Must-see section**
 
 Replace:
 ```tsx
@@ -1054,7 +1054,7 @@ with:
       </section>
 ```
 
-- [ ] **Step 3: Reveal the Water section**
+- [x] **Step 3: Reveal the Water section**
 
 Replace:
 ```tsx
@@ -1093,7 +1093,7 @@ with:
       </section>
 ```
 
-- [ ] **Step 4: Reveal the Dining section's operations grid**
+- [x] **Step 4: Reveal the Dining section's operations grid**
 
 Replace:
 ```tsx
@@ -1125,7 +1125,7 @@ with:
 ```
 (Note: `{detail.dining.operations.length === 0 && (...)}` moves outside the `RevealGroup` — `RevealGroup` requires real children to stagger over an empty array produces zero children, which is fine, but the "no dining" message is a sibling fallback, not a grid item, so it shouldn't be inside the grid.)
 
-- [ ] **Step 5: Reveal the Dining section's own heading**
+- [x] **Step 5: Reveal the Dining section's own heading**
 
 Replace:
 ```tsx
@@ -1146,7 +1146,7 @@ with:
         <Reveal as="p" delay={0.06} className="text-mono-sm font-mono text-ink-soft mb-6">Categorical label &mdash; never a taste score. NPS authorized-concessioner records.</Reveal>
 ```
 
-- [ ] **Step 6: Reveal `NonCohortSections`' must-see grid**
+- [x] **Step 6: Reveal `NonCohortSections`' must-see grid**
 
 Replace:
 ```tsx
@@ -1189,7 +1189,7 @@ with:
       )}
 ```
 
-- [ ] **Step 7: Verify**
+- [x] **Step 7: Verify**
 
 Run: `npm run build && npm run lint && npm run test`
 Expected: build succeeds (exercises both `EditorialSections` — cohort parks — and `NonCohortSections` — the other 59), lint clean, 32/32 tests pass.
@@ -1204,7 +1204,7 @@ kill %1
 ```
 Expected: both print a nonzero count (page rendered without a 500).
 
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit**
 
 ```bash
 git add src/app/parks/\[parkCode\]/page.tsx
