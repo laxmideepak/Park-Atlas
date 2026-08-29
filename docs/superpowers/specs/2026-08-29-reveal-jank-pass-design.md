@@ -92,3 +92,7 @@ No changes to pure-logic files, so the existing Vitest suite (`scoring.test.ts`,
 
 - The Living Atlas map revamp (terrain relief, entrance choreography beyond the two W2 fixes above, month scrubber, layers, region panel) — W3/W4.
 - Field Companions wildlife animation system, and the decision on what to do with the currently-unused `WildlifeCard`/`WildlifeIcon` — W5/W6.
+
+## Known follow-up (found in final review, not blocking)
+
+`UsMap.tsx`'s pin `tabIndex` is gated on the map section's `inView` boolean (flips true once), but each pin's own entrance animation is individually staggered (`delay: i * 0.012`, up to ~0.75s for the last of 63 pins). In that narrow window right after the section scrolls into view, a keyboard user tabbing quickly could still land focus on a pin that's visually still mid-animation (near `scale:0, opacity:0`). Narrower than the bug Task 5 originally fixed (which had no time bound at all), but not fully closed. Proper fix would derive `tabIndex` from each pin's own animation completion rather than the shared section-level flag — left as a fast follow-up rather than blocking this merge.
