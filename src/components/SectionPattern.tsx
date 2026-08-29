@@ -45,7 +45,7 @@ const STAR = "M0 -5 L1.2 -1.2 L5 0 L1.2 1.2 L0 5 L-1.2 1.2 L-5 0 L-1.2 -1.2 Z";
 
 const BAND_YS = ["14%", "38%", "62%", "86%"];
 
-export function SectionPattern({ kind, hue }: { kind: SectionTheme["pattern"]; hue: string }) {
+export function SectionPattern({ kind, hue, uid }: { kind: SectionTheme["pattern"]; hue: string; uid: string }) {
   if (kind === "none") return null;
 
   if (kind === "contour" || kind === "ripple") {
@@ -70,7 +70,7 @@ export function SectionPattern({ kind, hue }: { kind: SectionTheme["pattern"]; h
   }
 
   if (kind === "grid") {
-    const id = `sp-grid-${hue.replace("#", "")}`;
+    const id = `sp-grid-${uid}`;
     return (
       <svg className={SVG_CLASS} aria-hidden>
         <defs>

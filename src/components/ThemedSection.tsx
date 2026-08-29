@@ -20,13 +20,13 @@ export function ThemedSection({ id, className, children }: { id: string; classNa
     );
   }
   return (
-    <section id={id} className={`relative ${className ?? ""}`}>
+    <section id={id} className={["relative", className].filter(Boolean).join(" ")}>
       <div
         className="absolute -inset-x-6 -inset-y-8 rounded-sm overflow-hidden pointer-events-none"
         aria-hidden
         style={{ background: `${theme.hue}0D` }}
       >
-        <SectionPattern kind={theme.pattern} hue={theme.hue} />
+        <SectionPattern kind={theme.pattern} hue={theme.hue} uid={id} />
       </div>
       <div className="relative">
         <p className="font-mono text-mono-sm uppercase tracking-wide mb-1 flex items-center gap-2">
