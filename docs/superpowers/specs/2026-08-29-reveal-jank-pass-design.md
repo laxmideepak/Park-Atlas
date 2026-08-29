@@ -75,6 +75,15 @@ Verified against current code before deciding what's actually left to do:
 
 **Accept:** avg frame ≤ 18ms, frames >26ms ≤ 5, worst ≤ 60ms (matches the brief's own target). If the real numbers don't hit that after the fixes above, report the honest number rather than rounding up — same practice as the T5 static/ISR verification earlier this project.
 
+**Real before/after (Task 1 baseline vs. Task 14 final, both via `npm run build && npm run start` + `npm run audit-scroll` against `/`):**
+
+| | Avg frame | Worst frame | Frames >26ms |
+|---|---|---|---|
+| Before (Task 1, pre-work) | 16.6ms | 17.5ms | 0 |
+| After (Task 14, all 13 tasks merged) | 16.6ms | 17.7ms | 0 |
+
+Essentially flat despite many more `whileInView`/IntersectionObserver listeners now active site-wide from the `Reveal`/`RevealGroup` usage added in Tasks 7–13 — well within the accept thresholds above, no regression.
+
 ## Testing
 
 No changes to pure-logic files, so the existing Vitest suite (`scoring.test.ts`, `repo.test.ts`) is untouched and should still pass 32/32. `CountUp`'s formatting is a one-line `toLocaleString()` call — not worth a dedicated test file for that alone.
