@@ -124,7 +124,7 @@ git commit -m "Add scripts/audit-scroll.mjs: reproducible scroll frame-timing me
 **Files:**
 - Create: `src/components/Reveal.tsx`
 
-- [ ] **Step 1: Write the component**
+- [x] **Step 1: Write the component**
 
 ```tsx
 "use client";
@@ -220,7 +220,7 @@ export function RevealGroup({
 }
 ```
 
-- [ ] **Step 2: Verify it type-checks and lints**
+- [x] **Step 2: Verify it type-checks and lints**
 
 Run: `npm run build`
 Expected: build succeeds (this file isn't imported anywhere yet, so it only needs to compile standalone — Next's TypeScript pass covers unimported files in `src/`).
@@ -228,7 +228,7 @@ Expected: build succeeds (this file isn't imported anywhere yet, so it only need
 Run: `npm run lint`
 Expected: no errors.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/components/Reveal.tsx
