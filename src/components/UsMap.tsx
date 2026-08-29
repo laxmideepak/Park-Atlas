@@ -4,9 +4,31 @@ import { useState } from "react";
 import { motion, useReducedMotion, AnimatePresence } from "motion/react";
 import type { StatePath } from "@/lib/us-map-geo";
 import type { MapPin } from "@/lib/us-map-pins";
+import type { Tier } from "@/lib/types";
 import { MapSummaryCard } from "./MapSummaryCard";
 
 const ZOOM_SCALE = 1.7;
+
+/** §6.1.4 — pins encode this month's tier, not per-park identity or "live" status. */
+function pinVisual(tier: Tier): { r: number; fill: string; stroke: string; strokeWidth: number; glow: boolean } {
+  switch (tier) {
+    case "Exceptional":
+      return { r: 4, fill: "var(--brass)", stroke: "var(--brass)", strokeWidth: 0, glow: true };
+    case "Excellent":
+      return { r: 4, fill: "var(--brass)", stroke: "none", strokeWidth: 0, glow: false };
+    case "Good":
+      return { r: 3.5, fill: "var(--bone)", stroke: "none", strokeWidth: 0, glow: false };
+    default:
+      return { r: 3, fill: "none", stroke: "var(--bone)", strokeWidth: 1, glow: false };
+  }
+}
+const TIER_OPACITY: Record<Tier, number> = {
+  Exceptional: 1,
+  Excellent: 0.65,
+  Good: 0.4,
+  Specialized: 0.9,
+  Limited: 0.6,
+};
 
 export function UsMap({
   statePaths,
@@ -41,30 +63,34 @@ export function UsMap({
         <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-auto overflow-visible" role="img" aria-label="Map of the United States showing all 63 National Parks">
           <g>
             {statePaths.map((sp) => (
-              <path key={sp.id} d={sp.d} fill="#1b2027" stroke="#ffffff22" strokeWidth={1} />
+              <path key={sp.id} d={sp.d} fill="var(--ink-deep, #1c211a)" stroke="var(--bone)" strokeOpacity={0.08} strokeWidth={1} />
             ))}
           </g>
           <g>
-            {pins.map((pin, i) => (
-              <motion.g
-                key={pin.code}
-                initial={reduceMotion ? undefined : { scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={reduceMotion ? { duration: 0 } : { delay: i * 0.012, type: "spring", stiffness: 320, damping: 22 }}
-                style={{ transformOrigin: `${pin.x}px ${pin.y}px`, cursor: "pointer" }}
-                whileHover={reduceMotion ? undefined : { scale: 1.7 }}
-                onHoverStart={() => setHovered(pin.code)}
-                onHoverEnd={() => setHovered(null)}
-                onFocus={() => setHovered(pin.code)}
-                onBlur={() => setHovered(null)}
-                onClick={() => setSelected((s) => (s === pin.code ? null : pin.code))}
-                tabIndex={0}
-                role="button"
-                aria-label={`${pin.name}, ${pin.state}${pin.live ? " — full guide" : " — scored, profile only"}`}
-              >
-                <circle cx={pin.x} cy={pin.y} r={pin.live ? 5.5 : 3.4} fill={pin.accent} stroke="#171b1f" strokeWidth={pin.live ? 1.5 : 1} />
-              </motion.g>
-            ))}
+            {pins.map((pin, i) => {
+              const v = pinVisual(pin.tier);
+              return (
+                <motion.g
+                  key={pin.code}
+                  initial={reduceMotion ? undefined : { scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={reduceMotion ? { duration: 0 } : { delay: i * 0.012, type: "spring", stiffness: 320, damping: 22 }}
+                  style={{ transformOrigin: `${pin.x}px ${pin.y}px`, cursor: "pointer" }}
+                  whileHover={reduceMotion ? undefined : { scale: 1.7 }}
+                  onHoverStart={() => setHovered(pin.code)}
+                  onHoverEnd={() => setHovered(null)}
+                  onFocus={() => setHovered(pin.code)}
+                  onBlur={() => setHovered(null)}
+                  onClick={() => setSelected((s) => (s === pin.code ? null : pin.code))}
+                  tabIndex={0}
+                  role="button"
+                  aria-label={`${pin.name}, ${pin.state} — ${pin.tier} this month`}
+                >
+                  {v.glow && <circle cx={pin.x} cy={pin.y} r={8} fill={v.fill} opacity={0.35} />}
+                  <circle cx={pin.x} cy={pin.y} r={v.r} fill={v.fill} stroke={v.stroke} strokeWidth={v.strokeWidth} opacity={TIER_OPACITY[pin.tier]} />
+                </motion.g>
+              );
+            })}
           </g>
         </svg>
       </motion.div>
@@ -76,11 +102,11 @@ export function UsMap({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
-            className="pointer-events-none absolute z-10 -translate-x-1/2 -translate-y-full rounded-sm bg-paper text-basalt-deep text-xs font-medium px-2.5 py-1.5 whitespace-nowrap"
+            className="pointer-events-none absolute z-10 -translate-x-1/2 -translate-y-full rounded-sm bg-bone text-ink text-xs font-medium px-2.5 py-1.5 whitespace-nowrap font-mono"
             style={{ left: `${(active.x / width) * 100}%`, top: `${(active.y / height) * 100}%` }}
           >
             {active.name}, {active.state}
-            <span className="block text-[0.65rem] opacity-60">{active.live ? "Full guide (hikes, water, dining)" : "Scored + live profile"}</span>
+            <span className="block text-mono-sm opacity-60">{active.tier} this month{active.live ? " · full guide" : ""}</span>
           </motion.div>
         )}
       </AnimatePresence>

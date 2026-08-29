@@ -3,6 +3,9 @@ import { getParkAccent } from "@/lib/park-theme";
 import { projectLngLat } from "./us-map-geo";
 import { getWildlife, type Wildlife } from "./data/park-wildlife";
 import { getTimezone } from "./live-context";
+import { scoreForParkMonth } from "./repo";
+import { currentMonthAbbr } from "./months";
+import type { Tier } from "./types";
 
 export interface MapPin {
   code: string;
@@ -15,17 +18,21 @@ export interface MapPin {
   accent: string;
   wildlife?: Wildlife;
   timezone: string | null;
+  tier: Tier;
 }
 
 /** Computed once server-side — the client only ever receives {x,y} pixel coordinates.
- * Every park now has a real page, so every pin is clickable; `live` distinguishes
- * the 4 parks with full Month Fit scoring from the 59 with profile + live conditions only. */
+ * `tier` is this month's Month Fit tier, used for the map's tier-encoded pins (§6.1.4);
+ * `live` distinguishes the 4-park editorial cohort (full guide) from the 59 with a
+ * live profile + Month Fit scoring only. */
 export async function getMapPins(): Promise<MapPin[]> {
+  const month = currentMonthAbbr();
   const pins = await Promise.all(
     ALL_PARKS_MINI.map(async (p): Promise<MapPin | null> => {
       const xy = projectLngLat(p.lng, p.lat);
       if (!xy) return null;
       const timezone = await getTimezone(p.lat, p.lng);
+      const score = scoreForParkMonth(p.code, month);
       return {
         code: p.code,
         name: p.name,
@@ -37,6 +44,7 @@ export async function getMapPins(): Promise<MapPin[]> {
         accent: getParkAccent(p.code),
         wildlife: getWildlife(p.code),
         timezone,
+        tier: score?.tier ?? "Limited",
       };
     })
   );

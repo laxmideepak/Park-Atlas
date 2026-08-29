@@ -1,22 +1,38 @@
 import Link from "next/link";
-import { MonthDial } from "@/components/MonthDial";
 import { ParkCard } from "@/components/ParkCard";
-import { ParkScape } from "@/components/ParkScape";
-import { WildlifeIcon } from "@/components/WildlifeIcon";
 import { getParkAccent } from "@/lib/park-theme";
 import { UsMap } from "@/components/UsMap";
-import { bestByMonth, hiddenGemsForMonth, getParkSummary } from "@/lib/repo";
+import { HomeHero } from "@/components/HomeHero";
+import { YearScroller, type YearChapter } from "@/components/YearScroller";
+import { Preloader } from "@/components/Preloader";
+import { bestByMonth, hiddenGemsForMonth, getParkSummary, scoresForPark } from "@/lib/repo";
 import { NearestGemFallback } from "@/components/NearestGemFallback";
-import { monthByAbbr, currentMonthAbbr } from "@/lib/months";
+import { monthByAbbr, currentMonthAbbr, MONTHS } from "@/lib/months";
 import { US_MAP_WIDTH, US_MAP_HEIGHT, US_STATE_PATHS } from "@/lib/us-map-geo";
 import { getMapPins, getOffMapParks } from "@/lib/us-map-pins";
-import { ALL_PARKS_MINI } from "@/lib/data/all-parks-mini";
-import { getWildlife } from "@/lib/data/park-wildlife";
-
-/** Real species, real parks, real links — one per wildlife category so the mix isn't all bears. */
-const WILDLIFE_SHOWCASE = ["yell", "deva", "ever", "indu", "grca", "acad"];
+import { fetchParkImages } from "@/lib/nps";
+import { crowdRelief } from "@/lib/scoring";
 
 export const revalidate = 86400; // re-check the calendar daily so "this month" never goes stale
+
+/** One curated park per month for the hero photo — chosen for photography
+ * quality and seasonal fit (alpine in August, desert in January), not
+ * derived from the Fit engine. The Year Scroller below uses the real
+ * engine (bestByMonth) instead. */
+const HERO_BY_MONTH: Record<string, string> = {
+  jan: "deva",
+  feb: "jotr",
+  mar: "grca",
+  apr: "grsm",
+  may: "acad",
+  jun: "glac",
+  jul: "yell",
+  aug: "grte",
+  sep: "zion",
+  oct: "acad",
+  nov: "romo",
+  dec: "wrst",
+};
 
 export default async function Home() {
   const DEFAULT_MONTH = currentMonthAbbr();
@@ -26,38 +42,96 @@ export default async function Home() {
   const pins = await getMapPins();
   const offMap = getOffMapParks();
 
+  const heroParkCode = HERO_BY_MONTH[DEFAULT_MONTH] ?? "yell";
+  const heroImages = await fetchParkImages(heroParkCode);
+
+  // Year Scroller: real engine data, one photo fetch per unique winning park
+  const monthTops = MONTHS.map((m) => ({ m, top: bestByMonth(m.abbr)[0] }));
+  const uniqueParkCodes = [...new Set(monthTops.map((mt) => mt.top.park))];
+  const imagesByCode = new Map(
+    await Promise.all(uniqueParkCodes.map(async (code) => [code, await fetchParkImages(code)] as const))
+  );
+  const yearChapters: YearChapter[] = monthTops.map(({ m, top }) => {
+    const summary = getParkSummary(top.park);
+    const rows = scoresForPark(top.park);
+    const peak = Math.max(...rows.map((r) => r.percentOfAnnualVisits));
+    const relief = crowdRelief(top.percentOfAnnualVisits, peak);
+    return {
+      monthAbbr: m.abbr,
+      monthName: m.name,
+      parkCode: top.park,
+      parkName: summary.name,
+      accent: getParkAccent(top.park),
+      image: imagesByCode.get(top.park)?.[0] ?? null,
+      fit: top.overallMonthFit,
+      tier: top.tier,
+      crowdReliefPct: Math.round(relief * 100),
+    };
+  });
+
+  const preloaderFacts = yearChapters
+    .filter((c) => c.tier === "Limited" || c.tier === "Specialized")
+    .map((c) => `${c.parkName}'s toughest month is ${c.monthName} — its Fit is ${c.fit}.`);
+  const facts = preloaderFacts.length > 0
+    ? preloaderFacts
+    : [`${month.name}'s best-scoring park right now is ${getParkSummary(best[0].park).name} — Fit ${best[0].overallMonthFit}.`];
+
   return (
     <>
-      <div className="max-w-[1400px] mx-auto px-6 md:px-10 pt-10 pb-6 grid md:grid-cols-[1fr_1.15fr] gap-12 items-center">
-        <div>
-          <h1 className="font-display uppercase text-5xl md:text-7xl leading-[0.98] mb-5">
-            Find your park.<br />
-            Find your <span className="text-accent">month</span>.
-          </h1>
-          <p className="max-w-[36ch] text-paper-dim mb-7">
-            63 National Parks, scored on climate and access &mdash; never on popularity.
-            Click a pin to see what&rsquo;s actually good right now.
-          </p>
-          <div className="flex flex-wrap gap-4 mb-7">
-            <Link href="#results" className="px-6 py-3.5 rounded-sm bg-accent text-basalt-deep font-semibold text-sm">
-              Explore by month &rarr;
-            </Link>
-            <Link href="/rankings" className="px-6 py-3.5 rounded-sm border border-paper-dim text-sm">
-              See rankings
-            </Link>
+      <Preloader facts={facts} />
+
+      <HomeHero
+        image={heroImages[0] ?? null}
+        accent={getParkAccent(heroParkCode)}
+        sourceStrip={["63 parks", "scored on climate + access", "never on popularity", "Month Fit v1.0"]}
+      />
+
+      <YearScroller chapters={yearChapters} />
+
+      {/* Best right now — bone */}
+      <section className="bg-bone text-ink py-20">
+        <div className="max-w-[1360px] mx-auto px-6 md:px-10">
+          <h2 className="font-display text-display-lg leading-none mb-2">This is {month.name}.</h2>
+          <p className="font-mono text-mono-sm text-ink-soft mb-10">Climate 60 &middot; access 40 &middot; popularity 0</p>
+
+          <div className="grid gap-5 mb-8" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))" }}>
+            {best.slice(0, 8).map((row) => (
+              <ParkCard key={row.park} park={getParkSummary(row.park)} row={row} />
+            ))}
           </div>
-          <div className="flex flex-wrap gap-6 text-xs font-mono text-paper-dim border-t border-white/15 pt-3">
-            <span>Climate: NOAA 1991&ndash;2020 Normals</span>
-            <span>Visitation: NPS IRMA, 5-yr median</span>
-            <span>Month Fit v1.0</span>
+          <Link href={`/discover/month/${DEFAULT_MONTH}`} className="font-mono text-mono-sm underline underline-offset-2">
+            See all 63 parks ranked for {month.name} &rarr;
+          </Link>
+
+          <div className="mt-16 pt-10 border-t border-ink/10">
+            <div className="flex justify-between items-baseline flex-wrap gap-2 mb-6">
+              <h3 className="font-display text-display-md">Hidden gems this month</h3>
+              <span className="font-mono text-mono-sm text-ink-soft">Month Fit &ge;85 AND crowd percentile &le;40</span>
+            </div>
+            {gems.length === 0 ? (
+              <NearestGemFallback currentMonth={DEFAULT_MONTH} />
+            ) : (
+              <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))" }}>
+                {gems.map((g) => (
+                  <ParkCard key={g.park} park={getParkSummary(g.park)} row={g} />
+                ))}
+              </div>
+            )}
           </div>
         </div>
-        <div>
+      </section>
+
+      {/* The Atlas — ink */}
+      <section className="bg-ink text-bone py-20">
+        <div className="max-w-[1360px] mx-auto px-6 md:px-10">
+          <h2 className="font-display text-display-lg leading-none mb-8">Where it&rsquo;s good, right now.</h2>
           <UsMap statePaths={US_STATE_PATHS} width={US_MAP_WIDTH} height={US_MAP_HEIGHT} pins={pins} />
-          <div className="flex justify-between items-start gap-4 mt-3 text-xs text-paper-dim flex-wrap">
+          <div className="flex justify-between items-start gap-4 mt-4 font-mono text-mono-sm text-bone/60 flex-wrap">
             <span className="flex items-center gap-4">
-              <span><span className="inline-block w-2 h-2 rounded-full bg-accent mr-1.5" />Full guide (hikes, water, dining)</span>
-              <span><span className="inline-block w-2.5 h-2.5 rounded-full border border-paper-dim mr-1.5" />Scored + live profile</span>
+              <span><span className="inline-block w-2 h-2 rounded-full bg-brass mr-1.5" />Exceptional</span>
+              <span><span className="inline-block w-2 h-2 rounded-full bg-brass/65 mr-1.5" />Excellent</span>
+              <span><span className="inline-block w-2 h-2 rounded-full bg-bone/40 mr-1.5" />Good</span>
+              <span><span className="inline-block w-2 h-2 rounded-full border border-bone/60 mr-1.5" />Specialized/Limited</span>
             </span>
             {offMap.length > 0 && (
               <span>
@@ -72,101 +146,17 @@ export default async function Home() {
             )}
           </div>
         </div>
-      </div>
-
-      <TopoDivider accent={getParkAccent(best[0].park)} />
-
-      <section id="results" className="max-w-[1400px] mx-auto px-6 md:px-10 py-10">
-        <div className="flex items-center gap-8 flex-wrap mb-8">
-          <div className="flex-1 min-w-[240px]">
-            <h2 className="font-display uppercase text-3xl mb-1">Best in {month.name}</h2>
-            <span className="text-xs font-mono text-paper-dim">Top 8 of 63 &middot; tiered, not ranked &middot; Why-panel on every card</span>
-          </div>
-          <MonthDial activeMonth={DEFAULT_MONTH} subtitle="Turn to change month" />
-        </div>
-        <div className="grid gap-5 mb-6" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))" }}>
-          {best.slice(0, 8).map((row) => (
-            <ParkCard key={row.park} park={getParkSummary(row.park)} row={row} />
-          ))}
-        </div>
-        <Link href={`/discover/month/${DEFAULT_MONTH}`} className="text-sm underline underline-offset-2">
-          See all 63 parks ranked for {month.name} &rarr;
-        </Link>
       </section>
 
-      <section className="max-w-[1400px] mx-auto px-6 md:px-10 py-10">
-        <div className="flex justify-between items-baseline flex-wrap gap-2 mb-6">
-          <h2 className="font-display uppercase text-3xl">Hidden Gems This Month</h2>
-          <span className="text-xs font-mono text-paper-dim">Month Fit &ge;85 AND crowd percentile &le;40</span>
-        </div>
-        {gems.length === 0 ? (
-          <NearestGemFallback currentMonth={DEFAULT_MONTH} />
-        ) : (
-          <div className="flex gap-4 overflow-x-auto pb-2">
-            {gems.map((g) => {
-              const p = getParkSummary(g.park);
-              const accent = getParkAccent(g.park);
-              const wildlife = getWildlife(g.park);
-              return (
-                <Link
-                  key={g.park}
-                  href={`/parks/${g.park}`}
-                  className="flex-none w-[240px] rounded-sm overflow-hidden bg-paper text-basalt-deep flex flex-col"
-                >
-                  <div className="relative">
-                    <ParkScape park={g.park} state={p.state} accent={accent} aspect="16/8" />
-                    {wildlife && (
-                      <span className="absolute bottom-2 left-2 rounded-full p-1" style={{ background: `${accent}55` }}>
-                        <WildlifeIcon wildlife={wildlife} color={accent} size={20} />
-                      </span>
-                    )}
-                  </div>
-                  <div className="p-3.5 flex flex-col gap-1">
-                    <span className="font-bold">{p.name}</span>
-                    <p className="text-xs text-basalt-deep/70">Fit {g.overallMonthFit} &middot; {g.crowdPercentile}th crowd percentile</p>
-                    <span className="text-xs font-semibold" style={{ color: accent }}>{g.percentOfAnnualVisits}% of annual visits</span>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
-        )}
-      </section>
-
-      <section className="max-w-[1400px] mx-auto px-6 md:px-10 py-10">
-        <div className="flex justify-between items-baseline flex-wrap gap-2 mb-6">
-          <h2 className="font-display uppercase text-3xl">Who You Might Meet</h2>
-          <Link href="/parks" className="text-xs underline underline-offset-2">See every park &rarr;</Link>
-        </div>
-        <div className="grid gap-4" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))" }}>
-          {WILDLIFE_SHOWCASE.map((code) => {
-            const p = ALL_PARKS_MINI.find((mp) => mp.code === code)!;
-            const wildlife = getWildlife(code)!;
-            const accent = getParkAccent(code);
-            return (
-              <Link key={code} href={`/parks/${code}`} className="rounded-sm border border-white/15 p-4 flex flex-col gap-2 hover:border-white/30 transition-colors">
-                <span className="rounded-full p-1.5 self-start" style={{ background: `${accent}33` }}>
-                  <WildlifeIcon wildlife={wildlife} color={accent} size={32} />
-                </span>
-                <div>
-                  <div className="font-bold">{wildlife.name}</div>
-                  <p className="text-xs text-paper-dim">{p.name}, {p.state}</p>
-                </div>
-                <p className="text-sm text-paper-dim">{wildlife.fact}</p>
-              </Link>
-            );
-          })}
+      {/* Index teaser — bone */}
+      <section className="bg-bone text-ink py-20">
+        <div className="max-w-[1360px] mx-auto px-6 md:px-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+          <p className="font-display text-display-md leading-tight max-w-[20ch]">Sixty-three parks. One page each. No exceptions.</p>
+          <Link href="/parks" className="font-mono text-sm px-6 py-3.5 rounded-sm bg-brass text-ink font-semibold whitespace-nowrap">
+            Browse all 63 &rarr;
+          </Link>
         </div>
       </section>
     </>
-  );
-}
-
-function TopoDivider({ accent }: { accent: string }) {
-  return (
-    <svg className="w-full h-[50px] block" viewBox="0 0 1400 50" preserveAspectRatio="none" aria-hidden>
-      <path d="M0,25 Q175,5 350,25 T700,25 T1050,25 T1400,25" fill="none" stroke={accent} strokeWidth={1.5} opacity={0.8} />
-      <path d="M0,35 Q175,18 350,35 T700,35 T1050,35 T1400,35" fill="none" stroke="#cfc9b8" strokeWidth={1} opacity={0.3} />
-    </svg>
   );
 }
