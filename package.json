@@ -9,7 +9,8 @@
     "lint": "eslint",
     "test": "vitest run",
     "probe-images": "node --env-file=.env.local --import tsx scripts/probe-images.ts",
-    "pick-hero-manifest": "node --env-file=.env.local --import tsx scripts/pick-hero-manifest.ts"
+    "pick-hero-manifest": "node --env-file=.env.local --import tsx scripts/pick-hero-manifest.ts",
+    "audit-scroll": "node scripts/audit-scroll.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
@@ -33,6 +34,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.3.3",
     "image-size": "^2.0.2",
+    "playwright": "^1.62.1",
     "tailwindcss": "^4",
     "tsx": "^4.23.12",
     "typescript": "^5",
