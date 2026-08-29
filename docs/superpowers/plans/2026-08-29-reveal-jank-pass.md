@@ -1690,7 +1690,7 @@ git commit -m "Parks index: Reveal heading and intro paragraph"
 **Files:**
 - Modify: `src/components/Footer.tsx`
 
-- [ ] **Step 1: Reveal the sign-off line**
+- [x] **Step 1: Reveal the sign-off line**
 
 Add to the top of `src/components/Footer.tsx`, after the existing imports:
 ```tsx
@@ -1706,7 +1706,7 @@ with:
         <Reveal as="p" className="font-display text-display-lg leading-none">Public data. Plain answers.</Reveal>
 ```
 
-- [ ] **Step 2: Full verification**
+- [x] **Step 2: Full verification**
 
 Run:
 ```bash
@@ -1714,7 +1714,7 @@ npm run build && npm run lint && npm run test
 ```
 Expected: build succeeds (165 pages), lint clean, 32/32 tests pass.
 
-- [ ] **Step 3: Re-run the scroll-jank audit and compare to Task 1's baseline**
+- [x] **Step 3: Re-run the scroll-jank audit and compare to Task 1's baseline**
 
 Run:
 ```bash
@@ -1725,11 +1725,11 @@ kill %1
 ```
 Expected: `Avg frame:` ≤ 18ms, `Frames >26ms:` ≤ 5, `Worst frame:` ≤ 60ms (per the spec's accept criteria). If the real numbers don't hit that, report the honest numbers rather than rounding up — do not edit the audit script to make the numbers look better.
 
-- [ ] **Step 4: Manual pass with reduced motion**
+- [x] **Step 4: Manual pass with reduced motion**
 
 In Chrome DevTools → Rendering tab → "Emulate CSS media feature prefers-reduced-motion: reduce", reload `http://localhost:3000/` and click through a park page, a month page, and rankings. Expected: every section that used to just appear now still just appears (no animation), nothing is invisible or stuck at `opacity:0`.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/components/Footer.tsx
