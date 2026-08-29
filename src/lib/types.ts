@@ -1,4 +1,6 @@
-export type ParkCode = "acad" | "yell" | "deva" | "grsm";
+/** Any of the 63 NPS park codes. Widened from a 4-value literal union now that
+ * every park carries Month Fit scoring (was cohort-only through Phase 0.5). */
+export type ParkCode = string;
 
 export type Tier = "Exceptional" | "Excellent" | "Good" | "Specialized" | "Limited";
 

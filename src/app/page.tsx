@@ -5,7 +5,7 @@ import { ParkScape } from "@/components/ParkScape";
 import { WildlifeIcon } from "@/components/WildlifeIcon";
 import { getParkAccent } from "@/lib/park-theme";
 import { UsMap } from "@/components/UsMap";
-import { bestByMonth, hiddenGemsForMonth, parkByCode } from "@/lib/repo";
+import { bestByMonth, hiddenGemsForMonth, getParkSummary } from "@/lib/repo";
 import { monthByAbbr, currentMonthAbbr } from "@/lib/months";
 import { US_MAP_WIDTH, US_MAP_HEIGHT, US_STATE_PATHS } from "@/lib/us-map-geo";
 import { getMapPins, getOffMapParks } from "@/lib/us-map-pins";
@@ -55,8 +55,8 @@ export default async function Home() {
           <UsMap statePaths={US_STATE_PATHS} width={US_MAP_WIDTH} height={US_MAP_HEIGHT} pins={pins} />
           <div className="flex justify-between items-start gap-4 mt-3 text-xs text-paper-dim flex-wrap">
             <span className="flex items-center gap-4">
-              <span><span className="inline-block w-2 h-2 rounded-full bg-accent mr-1.5" />Full Month Fit scoring</span>
-              <span><span className="inline-block w-2.5 h-2.5 rounded-full border border-paper-dim mr-1.5" />Profile &amp; live conditions</span>
+              <span><span className="inline-block w-2 h-2 rounded-full bg-accent mr-1.5" />Full guide (hikes, water, dining)</span>
+              <span><span className="inline-block w-2.5 h-2.5 rounded-full border border-paper-dim mr-1.5" />Scored + live profile</span>
             </span>
             {offMap.length > 0 && (
               <span>
@@ -79,15 +79,18 @@ export default async function Home() {
         <div className="flex items-center gap-8 flex-wrap mb-8">
           <div className="flex-1 min-w-[240px]">
             <h2 className="font-display uppercase text-3xl mb-1">Best in {month.name}</h2>
-            <span className="text-xs font-mono text-paper-dim">Tiered, not ranked &middot; Why-panel on every card</span>
+            <span className="text-xs font-mono text-paper-dim">Top 8 of 63 &middot; tiered, not ranked &middot; Why-panel on every card</span>
           </div>
           <MonthDial activeMonth={DEFAULT_MONTH} subtitle="Turn to change month" />
         </div>
-        <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))" }}>
-          {best.map((row) => (
-            <ParkCard key={row.park} park={parkByCode(row.park)!} row={row} />
+        <div className="grid gap-5 mb-6" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))" }}>
+          {best.slice(0, 8).map((row) => (
+            <ParkCard key={row.park} park={getParkSummary(row.park)} row={row} />
           ))}
         </div>
+        <Link href={`/discover/month/${DEFAULT_MONTH}`} className="text-sm underline underline-offset-2">
+          See all 63 parks ranked for {month.name} &rarr;
+        </Link>
       </section>
 
       <section className="max-w-[1400px] mx-auto px-6 md:px-10 py-10">
@@ -96,11 +99,11 @@ export default async function Home() {
           <span className="text-xs font-mono text-paper-dim">Month Fit &ge;85 AND crowd percentile &le;40</span>
         </div>
         {gems.length === 0 ? (
-          <p className="text-paper-dim text-sm">No cohort park clears the Hidden Gems bar for {month.name} yet &mdash; check another month.</p>
+          <p className="text-paper-dim text-sm">No park clears the Hidden Gems bar for {month.name} yet &mdash; check another month.</p>
         ) : (
           <div className="flex gap-4 overflow-x-auto pb-2">
             {gems.map((g) => {
-              const p = parkByCode(g.park)!;
+              const p = getParkSummary(g.park);
               const accent = getParkAccent(g.park);
               const wildlife = getWildlife(g.park);
               return (

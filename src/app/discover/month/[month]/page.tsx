@@ -6,7 +6,7 @@ import { ParkScape } from "@/components/ParkScape";
 import { WildlifeIcon } from "@/components/WildlifeIcon";
 import { getParkAccent } from "@/lib/park-theme";
 import { getWildlife } from "@/lib/data/park-wildlife";
-import { bestByMonth, hiddenGemsForMonth, parkByCode } from "@/lib/repo";
+import { bestByMonth, hiddenGemsForMonth, getParkSummary } from "@/lib/repo";
 import { MONTHS, monthByAbbr } from "@/lib/months";
 import { MonthAbbr } from "@/lib/types";
 
@@ -32,12 +32,12 @@ export default async function MonthPage(props: PageProps<"/discover/month/[month
             Ranked by Month Fit &mdash; climate suitability (60%) and seasonal accessibility (40%). Never by popularity.
           </p>
         </div>
-        <MonthDial activeMonth={month.abbr} subtitle={`${best.length} cohort parks scored`} />
+        <MonthDial activeMonth={month.abbr} subtitle={`${best.length} of 63 parks scored`} />
       </div>
 
       <div className="grid gap-5 mb-14" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))" }}>
         {best.map((row) => (
-          <ParkCard key={row.park} park={parkByCode(row.park)!} row={row} />
+          <ParkCard key={row.park} park={getParkSummary(row.park)} row={row} />
         ))}
       </div>
 
@@ -46,11 +46,11 @@ export default async function MonthPage(props: PageProps<"/discover/month/[month
         <span className="text-xs font-mono text-paper-dim">Month Fit &ge;85 AND crowd percentile &le;40</span>
       </div>
       {gems.length === 0 ? (
-        <p className="text-paper-dim text-sm">No cohort park clears the Hidden Gems bar for {month.name}.</p>
+        <p className="text-paper-dim text-sm">No park clears the Hidden Gems bar for {month.name}.</p>
       ) : (
         <div className="flex gap-4 overflow-x-auto pb-2">
           {gems.map((g) => {
-            const p = parkByCode(g.park)!;
+            const p = getParkSummary(g.park);
             const accent = getParkAccent(g.park);
             const wildlife = getWildlife(g.park);
             return (

@@ -1,8 +1,32 @@
 import { ParkCode, ParkMonthScore, MonthAbbr, Season, Tier } from "./types";
 import { PARKS, getPark } from "./data/parks";
+import { ALL_PARKS_MINI } from "./data/all-parks-mini";
 import { PARK_MONTH_SCORES } from "./data/park-month-scores";
 import { MONTHS, SEASONS, monthByAbbr } from "./months";
 import { overallMonthFit, scoreToTier, bestBalanceScore } from "./scoring";
+
+export interface ParkSummary {
+  code: string;
+  name: string;
+  state: string;
+  tagline: string;
+}
+
+/** Lightweight lookup covering all 63 parks — falls back to the mini directory
+ * for the 59 outside the editorial cohort, which only have name/state, not
+ * a hand-written tagline. Use this anywhere a list spans every scored park;
+ * use `parkByCode` only where full editorial content is required. */
+export function getParkSummary(code: string): ParkSummary {
+  const full = getPark(code);
+  if (full) return { code: full.code, name: full.name, state: full.state, tagline: full.tagline };
+  const mini = ALL_PARKS_MINI.find((p) => p.code === code);
+  return {
+    code,
+    name: mini?.name ?? code,
+    state: mini?.state ?? "",
+    tagline: "One of the 63 U.S. National Parks.",
+  };
+}
 
 export interface ScoredMonth extends ParkMonthScore {
   overallMonthFit: number;

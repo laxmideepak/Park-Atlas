@@ -18,14 +18,15 @@ export default function ParksIndexPage() {
         <div>
           <h1 className="font-display uppercase text-4xl md:text-5xl mb-2">All 63 National Parks</h1>
           <p className="text-paper-dim max-w-[65ch]">
-            Every designated National Park has a page — the 4-park validation cohort carries full Month Fit
-            scoring; the rest show a live profile, current conditions, and their own signature wildlife
-            while the scoring pipeline scales up.
+            Every designated National Park now has Month Fit scoring — hand-authored for the 4-park
+            validation cohort, estimated by park type for the rest pending real NOAA/NPS data. Only the
+            cohort carries the full curated guide (hikes, water, dining); every park gets a live profile,
+            current conditions, and its own signature wildlife.
           </p>
         </div>
         <div className="flex items-center gap-4 text-xs text-paper-dim flex-none">
-          <span><span className="inline-block w-2 h-2 rounded-full bg-accent mr-1.5" />Full Month Fit scoring</span>
-          <span><span className="inline-block w-2.5 h-2.5 rounded-full border border-paper-dim mr-1.5" />Profile &amp; live conditions</span>
+          <span><span className="inline-block w-2 h-2 rounded-full bg-accent mr-1.5" />Full guide (hikes, water, dining)</span>
+          <span><span className="inline-block w-2.5 h-2.5 rounded-full border border-paper-dim mr-1.5" />Scored + live profile</span>
         </div>
       </div>
 
@@ -44,7 +45,7 @@ export default function ParksIndexPage() {
                 <span
                   className="absolute top-2 right-2 w-3 h-3 rounded-full"
                   style={{ background: p.cohort ? accent : "transparent", border: p.cohort ? "none" : "1.5px solid #ffffffaa" }}
-                  title={p.cohort ? "Full Month Fit scoring" : "Profile & live conditions"}
+                  title={p.cohort ? "Full guide (hikes, water, dining)" : "Scored + live profile"}
                 />
                 {wildlife && (
                   <span className="absolute bottom-2 left-2 rounded-full p-1" style={{ background: `${accent}55` }}>

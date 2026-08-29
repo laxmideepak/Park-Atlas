@@ -1,5 +1,7 @@
 import { ParkCode, ParkMonthScore } from "../types";
 import { MONTHS } from "../months";
+import { ALL_PARKS_MINI } from "./all-parks-mini";
+import { getSeed, getSilhouetteFamily, seededRandom, type SilhouetteFamily } from "../park-theme";
 
 /**
  * Seed data for the Phase 0.5 validation cohort (PRD sec 10). Monthly
@@ -150,10 +152,82 @@ function confidenceFor(curve: ParkCurve, i: number): { level: "High" | "Medium" 
   return { level: "High", missing: [] };
 }
 
+/**
+ * Estimated curves for the 59 parks outside the hand-authored validation
+ * cohort above. There is no live API for either input: NOAA normals need a
+ * separate NCEI token plus per-park weather-station research, and NPS
+ * publishes no "% roads open per month" dataset at all — that's why the 4
+ * cohort curves above are hand-authored too, not live-fetched. This applies
+ * the same seed-data methodology at Phase 1 scale: a deterministic estimate
+ * per park (from real climate/geography family + a stable per-park seed,
+ * never randomized per request), always labeled Medium confidence with the
+ * missing live inputs listed — never presented as measured.
+ */
+const FAMILY_BASE: Record<SilhouetteFamily, { climate: number[]; access: number[] }> = {
+  mountain: { climate: [20, 22, 30, 45, 62, 80, 90, 88, 78, 55, 30, 20], access: [20, 20, 25, 35, 70, 92, 97, 97, 90, 60, 20, 18] },
+  desert: { climate: [82, 85, 88, 75, 48, 20, 12, 15, 30, 58, 78, 84], access: [88, 90, 90, 88, 72, 58, 52, 52, 65, 82, 88, 88] },
+  coastal: { climate: [35, 38, 48, 58, 68, 78, 84, 86, 84, 72, 55, 38], access: [45, 45, 55, 70, 85, 95, 97, 97, 93, 85, 60, 45] },
+  forest: { climate: [42, 45, 55, 68, 78, 80, 75, 75, 78, 82, 60, 42], access: [65, 65, 75, 90, 95, 97, 97, 97, 95, 90, 80, 65] },
+};
+
+const FAMILY_WHY_NOT_NOW: Record<SilhouetteFamily, string[]> = {
+  mountain: ["❄️ cold, high-elevation conditions typical this time of year", "🚧 seasonal road closures are common for parks like this", "🏔️ still workable for a prepared, cold-weather visit"],
+  desert: ["🥵 very hot conditions typical for a desert park this time of year", "🚧 midday hiking isn't recommended", "🌅 early morning or sunset visits still work well"],
+  coastal: ["🌧️ cooler, wetter shoulder-season weather typical here", "🏠 some seasonal facilities may be reduced or closed"],
+  forest: ["🌦️ cold or transitional weather typical this time of year", "🚧 some higher-elevation roads may be limited"],
+};
+
+function clamp(v: number): number {
+  return Math.max(0, Math.min(100, Math.round(v)));
+}
+
+function estimatedCurve(code: string, state: string): ParkCurve {
+  const family = getSilhouetteFamily(code, state);
+  const base = FAMILY_BASE[family];
+  const rand = seededRandom(getSeed(code));
+  const climate = base.climate.map((v) => clamp(v + (rand() - 0.5) * 12));
+  const access = base.access.map((v) => clamp(v + (rand() - 0.5) * 10));
+
+  const rawShare = climate.map((c, i) => Math.max(1, (c + access[i]) / 2));
+  const shareSum = rawShare.reduce((a, b) => a + b, 0);
+  const percentOfAnnual = rawShare.map((v) => Math.max(1, Math.round((v / shareSum) * 100)));
+
+  const missing = [
+    `climate: regional estimate by park type — no per-park NOAA normals station identified yet`,
+    `accessibility: regional estimate by park type — NPS publishes no monthly-access dataset`,
+  ];
+  const confidenceOverride: ParkCurve["confidenceOverride"] = {};
+  const whyNotNow: ParkCurve["whyNotNow"] = {};
+  for (let i = 0; i < 12; i++) {
+    confidenceOverride[i] = { level: "Medium", missing };
+    whyNotNow[i] = FAMILY_WHY_NOT_NOW[family];
+  }
+
+  return {
+    climateStation: "Regional estimate — no station identified yet",
+    climateStationElevFt: 0,
+    climate,
+    access,
+    percentOfAnnual,
+    confidenceOverride,
+    tags: {},
+    whyNotNow,
+  };
+}
+
+function withEstimatedParks(hand: Record<ParkCode, ParkCurve>): Record<ParkCode, ParkCurve> {
+  const merged: Record<ParkCode, ParkCurve> = { ...hand };
+  ALL_PARKS_MINI.forEach((p) => {
+    if (!merged[p.code]) merged[p.code] = estimatedCurve(p.code, p.state);
+  });
+  return merged;
+}
+
 export function buildParkMonthScores(): ParkMonthScore[] {
+  const allCurves = withEstimatedParks(CURVES);
   const rows: ParkMonthScore[] = [];
-  (Object.keys(CURVES) as ParkCode[]).forEach((park) => {
-    const curve = CURVES[park];
+  (Object.keys(allCurves) as ParkCode[]).forEach((park) => {
+    const curve = allCurves[park];
     MONTHS.forEach((m, i) => {
       const conf = confidenceFor(curve, i);
       rows.push({

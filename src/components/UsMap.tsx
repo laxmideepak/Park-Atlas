@@ -60,7 +60,7 @@ export function UsMap({
                 onClick={() => setSelected((s) => (s === pin.code ? null : pin.code))}
                 tabIndex={0}
                 role="button"
-                aria-label={`${pin.name}, ${pin.state}${pin.live ? " — full Month Fit scoring" : " — profile & live conditions"}`}
+                aria-label={`${pin.name}, ${pin.state}${pin.live ? " — full guide" : " — scored, profile only"}`}
               >
                 <circle cx={pin.x} cy={pin.y} r={pin.live ? 5.5 : 3.4} fill={pin.accent} stroke="#171b1f" strokeWidth={pin.live ? 1.5 : 1} />
               </motion.g>
@@ -80,7 +80,7 @@ export function UsMap({
             style={{ left: `${(active.x / width) * 100}%`, top: `${(active.y / height) * 100}%` }}
           >
             {active.name}, {active.state}
-            <span className="block text-[0.65rem] opacity-60">{active.live ? "Full Month Fit scoring" : "Profile & live conditions"}</span>
+            <span className="block text-[0.65rem] opacity-60">{active.live ? "Full guide (hikes, water, dining)" : "Scored + live profile"}</span>
           </motion.div>
         )}
       </AnimatePresence>

@@ -41,6 +41,8 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
   const alerts = liveAlerts.length > 0 ? liveAlerts : null;
   const fieldNote = cohortPark?.fieldNote ?? liveProfile?.description ?? `${name} is one of the 63 U.S. National Parks.`;
   const wildlife = getWildlife(parkCode);
+  const months = scoresForPark(parkCode);
+  const labels = parkHeaderLabels(parkCode);
 
   return (
     <div className="flex flex-col gap-16 pb-10">
@@ -73,8 +75,8 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
               <>
                 <Stat label="Entry fee" value={liveProfile?.entranceFeeCost ? `${liveProfile.entranceFeeCost} ${liveProfile.entranceFeeDescription ?? ""}`.trim() : "See nps.gov"} />
                 <Stat label="Location" value={state} />
-                <Stat label="Acreage / visitation" value="Pending Phase 1 pipeline" />
-                <Stat label="Month Fit scoring" value="Pending Phase 1 pipeline" />
+                <Stat label="Best overall month" value={labels.bestOverall.name} />
+                <Stat label="Acreage / visitation" value="Not yet live" />
               </>
             )}
           </div>
@@ -95,11 +97,53 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
           )}
         </section>
 
+        {/* When to Go — every park now has Month Fit scoring (hand-authored for the
+            4-park cohort, estimated-by-park-type for the rest; see Why-panel/footer) */}
+        <section>
+          <h2 className="font-display uppercase text-3xl mb-1">When to Go ⭐</h2>
+          <p className="text-sm text-paper-dim mb-8">Weighed on climate and access, never on crowds — see below for how each month scores and why.</p>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
+            <Label label="Best overall" month={labels.bestOverall.name} accent={accent} />
+            <Label label="Best weather" month={labels.bestWeather.name} accent={accent} />
+            <Label label="Fewest crowds" month={labels.fewestCrowds.name} accent={accent} />
+            <Label label="Best balance" month={labels.bestBalance.name} accent={accent} />
+          </div>
+
+          <div className="grid grid-cols-6 md:grid-cols-12 gap-1.5 mb-6">
+            {months.map((m) => (
+              <a key={m.month} href={`#why-${m.month}`} className="flex flex-col items-center gap-1 rounded-sm py-3 text-center" style={{ background: TIER_COLOR[m.tier] }}>
+                <span className="text-[0.65rem] uppercase">{m.month}</span>
+                <span className="text-sm font-semibold">{m.overallMonthFit}</span>
+              </a>
+            ))}
+          </div>
+
+          <details className="group">
+            <summary className="cursor-pointer text-sm text-paper-dim underline underline-offset-2 mb-3 list-none">
+              See the full 12-month Month Fit breakdown &amp; Why panels &darr;
+            </summary>
+            <div className="flex flex-col gap-2 mt-3">
+              {months.map((m) => (
+                <div key={m.month} id={`why-${m.month}`} className="scroll-mt-24">
+                  <WhyPanel row={m} parkName={name} />
+                </div>
+              ))}
+            </div>
+          </details>
+        </section>
+
         {cohortPark && detail ? (
-          <CohortSections park={cohortPark} accent={accent} detail={detail} />
+          <EditorialSections detail={detail} />
         ) : (
           <NonCohortSections name={name} liveThings={liveThings} npsUrl={liveProfile?.sourceUrl} />
         )}
+
+        {/* Crowd Calendar */}
+        <section>
+          <h2 className="font-display uppercase text-3xl mb-6">Crowd Calendar ⭐</h2>
+          <CrowdCalendar rows={months} estimated={!cohortPark} />
+        </section>
 
         {/* Current Conditions */}
         <section>
@@ -139,55 +183,9 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
   );
 }
 
-function CohortSections({
-  park,
-  accent,
-  detail,
-}: {
-  park: NonNullable<ReturnType<typeof parkByCode>>;
-  accent: string;
-  detail: ParkDetail;
-}) {
-  const months = scoresForPark(park.code);
-  const labels = parkHeaderLabels(park.code);
-
+function EditorialSections({ detail }: { detail: ParkDetail }) {
   return (
     <>
-      {/* When to Go */}
-      <section>
-        <h2 className="font-display uppercase text-3xl mb-1">When to Go ⭐</h2>
-        <p className="text-sm text-paper-dim mb-8">Weighed on climate and access, never on crowds — see below for how each month scores and why.</p>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
-          <Label label="Best overall" month={labels.bestOverall.name} accent={accent} />
-          <Label label="Best weather" month={labels.bestWeather.name} accent={accent} />
-          <Label label="Fewest crowds" month={labels.fewestCrowds.name} accent={accent} />
-          <Label label="Best balance" month={labels.bestBalance.name} accent={accent} />
-        </div>
-
-        <div className="grid grid-cols-6 md:grid-cols-12 gap-1.5 mb-6">
-          {months.map((m) => (
-            <a key={m.month} href={`#why-${m.month}`} className="flex flex-col items-center gap-1 rounded-sm py-3 text-center" style={{ background: TIER_COLOR[m.tier] }}>
-              <span className="text-[0.65rem] uppercase">{m.month}</span>
-              <span className="text-sm font-semibold">{m.overallMonthFit}</span>
-            </a>
-          ))}
-        </div>
-
-        <details className="group">
-          <summary className="cursor-pointer text-sm text-paper-dim underline underline-offset-2 mb-3 list-none">
-            See the full 12-month Month Fit breakdown &amp; Why panels &darr;
-          </summary>
-          <div className="flex flex-col gap-2 mt-3">
-            {months.map((m) => (
-              <div key={m.month} id={`why-${m.month}`} className="scroll-mt-24">
-                <WhyPanel row={m} parkName={park.name} />
-              </div>
-            ))}
-          </div>
-        </details>
-      </section>
-
       {/* Hiking & Trekking */}
       <section>
         <h2 className="font-display uppercase text-3xl mb-1">Hiking & Trekking</h2>
@@ -263,12 +261,6 @@ function CohortSections({
           )}
         </div>
       </section>
-
-      {/* Crowd Calendar */}
-      <section>
-        <h2 className="font-display uppercase text-3xl mb-6">Crowd Calendar ⭐</h2>
-        <CrowdCalendar rows={months} />
-      </section>
     </>
   );
 }
@@ -284,16 +276,6 @@ function NonCohortSections({
 }) {
   return (
     <>
-      <section>
-        <h2 className="font-display uppercase text-3xl mb-1">When to Go</h2>
-        <div className="rounded-sm border border-dashed border-white/25 p-5 text-sm text-paper-dim">
-          Month Fit scoring needs NOAA climate normals and NPS accessibility data per park &mdash; that
-          pipeline is validated today on 4 parks (Acadia, Yellowstone, Death Valley, Great Smoky
-          Mountains) before scaling to all 63. {name} doesn&rsquo;t have a real score yet, so none is shown
-          here &mdash; no invented numbers.
-        </div>
-      </section>
-
       {liveThings.length > 0 && (
         <section>
           <div className="flex items-baseline gap-3 mb-1">

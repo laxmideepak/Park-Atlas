@@ -1,7 +1,7 @@
 import { ScoredMonth } from "@/lib/repo";
 import { monthByAbbr } from "@/lib/months";
 
-export function CrowdCalendar({ rows }: { rows: ScoredMonth[] }) {
+export function CrowdCalendar({ rows, estimated = false }: { rows: ScoredMonth[]; estimated?: boolean }) {
   const max = Math.max(...rows.map((r) => r.percentOfAnnualVisits));
   const min = Math.min(...rows.map((r) => r.percentOfAnnualVisits));
   const busiest = rows.find((r) => r.percentOfAnnualVisits === max)!;
@@ -12,7 +12,7 @@ export function CrowdCalendar({ rows }: { rows: ScoredMonth[] }) {
       <div className="flex gap-6 text-xs font-mono text-paper-dim flex-wrap">
         <span>Busiest: <strong className="text-paper">{monthByAbbr(busiest.month)!.name}</strong> ({busiest.percentOfAnnualVisits}% of visits)</span>
         <span>Quietest: <strong className="text-paper">{monthByAbbr(quietest.month)!.name}</strong> ({quietest.percentOfAnnualVisits}% of visits)</span>
-        <span>5-yr medians &middot; NPS IRMA</span>
+        <span>{estimated ? "Estimated by park type · pending real IRMA data" : "5-yr medians · NPS IRMA"}</span>
       </div>
       <div className="flex items-end gap-2 h-40">
         {rows.map((r) => {

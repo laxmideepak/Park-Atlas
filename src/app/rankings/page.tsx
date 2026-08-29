@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { OFFICIAL_MOST_VISITED_2025, OFFICIAL_SYSTEMWIDE_2025 } from "@/lib/data/official-rankings";
 import { PARKS } from "@/lib/data/parks";
-import { hiddenGemsForMonth, parkByCode, visitsPerAcre } from "@/lib/repo";
+import { hiddenGemsForMonth, getParkSummary, visitsPerAcre } from "@/lib/repo";
 import { TierBadge } from "@/components/TierBadge";
 import { getParkAccent } from "@/lib/park-theme";
 import { currentMonthAbbr } from "@/lib/months";
@@ -90,11 +90,11 @@ export default function RankingsPage() {
         </div>
         <p className="text-xs text-paper-dim font-mono mb-4">Month Fit &ge;85 AND crowd percentile &le;40 &middot; recomputed monthly</p>
         {gems.length === 0 ? (
-          <p className="text-sm text-paper-dim">No cohort park clears the bar this month.</p>
+          <p className="text-sm text-paper-dim">No park clears the bar this month.</p>
         ) : (
           <ol className="flex flex-col gap-1">
             {gems.map((g, i) => {
-              const p = parkByCode(g.park)!;
+              const p = getParkSummary(g.park);
               return (
                 <li key={g.park} className="flex items-center gap-4 py-2 border-b border-white/10 text-sm">
                   <span className="font-mono text-paper-dim w-6">{i + 1}</span>
@@ -113,7 +113,7 @@ export default function RankingsPage() {
 
       <section>
         <h2 className="font-display uppercase text-2xl mb-1">Best by Month <span className="text-xs font-mono text-paper-dim normal-case">&middot; Calculated</span></h2>
-        <p className="text-sm text-paper-dim mb-4">Tiered results for any month of the year, cohort-wide.</p>
+        <p className="text-sm text-paper-dim mb-4">Tiered results for any month of the year, across all 63 parks.</p>
         <div className="flex flex-wrap gap-2">
           {["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"].map((m) => (
             <Link key={m} href={`/discover/month/${m}`} className="px-3 py-1.5 rounded-full border border-white/20 text-xs uppercase font-mono hover:border-accent transition-colors">

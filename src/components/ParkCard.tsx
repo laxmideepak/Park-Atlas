@@ -1,15 +1,14 @@
 import Link from "next/link";
-import { ScoredMonth } from "@/lib/repo";
-import { Park } from "@/lib/types";
+import { ScoredMonth, ParkSummary } from "@/lib/repo";
 import { TierBadge } from "./TierBadge";
 import { WhyPanel } from "./WhyPanel";
 import { ParkScape } from "./ParkScape";
 import { getParkAccent } from "@/lib/park-theme";
 
-export function ParkCard({ park, row }: { park: Park; row: ScoredMonth }) {
+export function ParkCard({ park, row }: { park: ParkSummary; row: ScoredMonth }) {
   return (
     <div className="bg-paper text-basalt-deep rounded-sm overflow-hidden flex flex-col">
-      <ParkScape park={park.code} accent={getParkAccent(park.code)} aspect="16/8" />
+      <ParkScape park={park.code} state={park.state} accent={getParkAccent(park.code)} aspect="16/8" />
       <div className="p-5 flex flex-col gap-2.5 flex-1">
       <TierBadge tier={row.tier} onLight />
       <Link href={`/parks/${park.code}`} className="text-lg font-bold hover:underline underline-offset-2">

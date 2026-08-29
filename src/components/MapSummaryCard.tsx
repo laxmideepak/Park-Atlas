@@ -34,7 +34,7 @@ export function MapSummaryCard({ pin, onClose }: { pin: MapPin; onClose: () => v
         className="self-start text-[0.65rem] uppercase tracking-wide font-semibold px-2 py-0.5 rounded-full"
         style={{ background: `${pin.accent}33` }}
       >
-        {pin.live ? "Full Month Fit scoring" : "Profile & live conditions"}
+        {pin.live ? "Full guide (hikes, water, dining)" : "Scored + live profile"}
       </span>
 
       {pin.wildlife && (

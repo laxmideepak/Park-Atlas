@@ -6,6 +6,7 @@ import { TierBadge } from "./TierBadge";
 export function WhyPanel({ row, parkName }: { row: ScoredMonth; parkName: string }) {
   const month = monthByAbbr(row.month)!;
   const showWhyNotNow = (row.tier === "Specialized" || row.tier === "Limited") && row.whyNotNow?.length;
+  const isEstimated = row.climateStationElevFt === 0;
 
   return (
     <details className="group rounded-sm border border-white/15 bg-basalt-deep/60 open:bg-basalt-deep">
@@ -28,13 +29,15 @@ export function WhyPanel({ row, parkName }: { row: ScoredMonth; parkName: string
               <td className="py-1.5 pr-2">Climate suitability</td>
               <td className="py-1.5 pr-2">{Math.round(CLIMATE_WEIGHT * 100)}%</td>
               <td className="py-1.5 pr-2">{row.climateScore}</td>
-              <td className="py-1.5">NOAA 1991&ndash;2020 Normals &middot; {row.climateStation} ({row.climateStationElevFt} ft)</td>
+              <td className="py-1.5">
+                {isEstimated ? row.climateStation : `NOAA 1991–2020 Normals · ${row.climateStation} (${row.climateStationElevFt} ft)`}
+              </td>
             </tr>
             <tr>
               <td className="py-1.5 pr-2">Seasonal accessibility</td>
               <td className="py-1.5 pr-2">{Math.round(ACCESSIBILITY_WEIGHT * 100)}%</td>
               <td className="py-1.5 pr-2">{row.accessibilityScore}</td>
-              <td className="py-1.5">NPS operating seasons &middot; road status</td>
+              <td className="py-1.5">{isEstimated ? "Estimated by park type — no NPS monthly-access dataset exists" : "NPS operating seasons · road status"}</td>
             </tr>
           </tbody>
         </table>

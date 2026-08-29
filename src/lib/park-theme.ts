@@ -65,13 +65,16 @@ const MOUNTAIN_STATES = ["AK", "MT", "WY", "CO", "WA", "ID", "OR"];
 const DESERT_STATES = ["AZ", "NV", "UT", "NM", "TX"];
 const COASTAL_STATES = ["ME", "FL", "SC", "HI", "AS", "VI", "OH", "MI", "IN", "MN"];
 
+const COHORT_FAMILY: Record<string, SilhouetteFamily> = {
+  acad: "coastal",
+  yell: "mountain",
+  deva: "desert",
+  grsm: "forest",
+};
+
 /** Rough regional heuristic driving which silhouette shape family a park gets — decorative, not a GIS classification. */
 export function getSilhouetteFamily(code: string, state: string): SilhouetteFamily {
-  if (COHORT_CODES.has(code)) {
-    return { acad: "coastal" as const, yell: "mountain" as const, deva: "desert" as const, grsm: "forest" as const }[
-      code as ParkCode
-    ];
-  }
+  if (COHORT_FAMILY[code]) return COHORT_FAMILY[code];
   const parts = state.split("/").map((s) => s.trim());
   if (parts.some((p) => MOUNTAIN_STATES.includes(p))) return "mountain";
   if (parts.some((p) => DESERT_STATES.includes(p))) return "desert";

@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { TierBadge } from "@/components/TierBadge";
-import { bestBySeason, parkByCode } from "@/lib/repo";
+import { bestBySeason, getParkSummary } from "@/lib/repo";
 import { SEASONS } from "@/lib/months";
 import Link from "next/link";
 
@@ -34,7 +34,7 @@ export default async function SeasonPage(props: PageProps<"/discover/season/[sea
 
       <div className="flex flex-col gap-3 mt-8">
         {ranked.map(({ park, fit, tier }) => {
-          const p = parkByCode(park)!;
+          const p = getParkSummary(park);
           return (
             <div key={park} className="flex items-center justify-between gap-4 rounded-sm border border-white/15 px-5 py-4">
               <div>
