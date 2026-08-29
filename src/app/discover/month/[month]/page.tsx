@@ -1,7 +1,11 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MonthDial } from "@/components/MonthDial";
 import { ParkCard } from "@/components/ParkCard";
+import { ParkScape } from "@/components/ParkScape";
+import { WildlifeIcon } from "@/components/WildlifeIcon";
 import { getParkAccent } from "@/lib/park-theme";
+import { getWildlife } from "@/lib/data/park-wildlife";
 import { bestByMonth, hiddenGemsForMonth, parkByCode } from "@/lib/repo";
 import { MONTHS, monthByAbbr } from "@/lib/months";
 import { MonthAbbr } from "@/lib/types";
@@ -47,12 +51,28 @@ export default async function MonthPage(props: PageProps<"/discover/month/[month
         <div className="flex gap-4 overflow-x-auto pb-2">
           {gems.map((g) => {
             const p = parkByCode(g.park)!;
+            const accent = getParkAccent(g.park);
+            const wildlife = getWildlife(g.park);
             return (
-              <div key={g.park} className="flex-none w-[220px] rounded-sm border-l-4 bg-basalt-deep p-4" style={{ borderColor: getParkAccent(g.park) }}>
-                <div className="font-bold mb-1">{p.name}</div>
-                <p className="text-sm text-paper-dim">Fit {g.overallMonthFit} &middot; {g.crowdPercentile}th crowd percentile</p>
-                <span className="text-xs mt-2 block" style={{ color: getParkAccent(g.park) }}>{g.percentOfAnnualVisits}% of annual visits</span>
-              </div>
+              <Link
+                key={g.park}
+                href={`/parks/${g.park}`}
+                className="flex-none w-[240px] rounded-sm overflow-hidden bg-paper text-basalt-deep flex flex-col"
+              >
+                <div className="relative">
+                  <ParkScape park={g.park} state={p.state} accent={accent} aspect="16/8" />
+                  {wildlife && (
+                    <span className="absolute bottom-2 left-2 rounded-full p-1" style={{ background: `${accent}55` }}>
+                      <WildlifeIcon wildlife={wildlife} color={accent} size={20} />
+                    </span>
+                  )}
+                </div>
+                <div className="p-3.5 flex flex-col gap-1">
+                  <span className="font-bold">{p.name}</span>
+                  <p className="text-xs text-basalt-deep/70">Fit {g.overallMonthFit} &middot; {g.crowdPercentile}th crowd percentile</p>
+                  <span className="text-xs font-semibold" style={{ color: accent }}>{g.percentOfAnnualVisits}% of annual visits</span>
+                </div>
+              </Link>
             );
           })}
         </div>
