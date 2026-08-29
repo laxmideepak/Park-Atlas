@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export function Nav() {
   return (
-    <header className="max-w-[1400px] mx-auto flex items-center justify-between px-6 md:px-10 py-6">
+    <header className="max-w-[1400px] mx-auto flex items-center justify-between gap-10 px-6 md:px-10 py-6">
       <Link href="/" className="flex items-center gap-2 font-display text-lg tracking-wide uppercase">
         <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" aria-hidden>
           <path d="M2 20 L9 6 L13 14 L16 9 L22 20 Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />

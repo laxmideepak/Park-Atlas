@@ -15,7 +15,7 @@ export function ParkCard({ park, row }: { park: ParkSummary; row: ScoredMonth })
         {park.name}
       </Link>
       <p className="text-sm text-basalt-deep/70 flex-1">{park.tagline}</p>
-      <div className="flex justify-between text-xs text-basalt-deep/60 border-t border-dashed border-black/15 pt-2 font-mono">
+      <div className="flex flex-wrap gap-x-3 gap-y-1 justify-between text-xs text-basalt-deep/60 border-t border-dashed border-black/15 pt-2 font-mono">
         <span>Fit {row.overallMonthFit} &middot; Conf: {row.dataConfidence}</span>
         <span>{row.percentOfAnnualVisits}% of annual visits</span>
       </div>

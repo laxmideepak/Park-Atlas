@@ -1,25 +1,65 @@
 @import "tailwindcss";
 
+/* OVERLOOK design tokens — "limestone & conifer" (see redesign brief §2).
+   Old token names (basalt/paper/accent) are kept as aliases onto the new
+   palette so existing components keep working through Phase A; later
+   phases migrate call sites to the semantic names directly and these
+   aliases can be dropped. */
 :root {
-  --basalt: #21262b;
-  --basalt-deep: #171b1f;
-  --paper: #e7e2d3;
-  --paper-dim: #cfc9b8;
-  --accent: #d6a63b;
-  --accent-soft: #d6a63b33;
+  /* canonical OVERLOOK palette */
+  --bone: #ede7da;
+  --bone-deep: #e2dac8;
+  --ink: #131711;
+  --ink-soft: #454b41;
+  --brass: #b8862b;
+  --brass-soft: #b8862b33;
+  --glacial: #7fa3ad;
   --focus: #f2e9ce;
+
+  /* legacy aliases -> new palette (Phase A: values change, class names don't) */
+  --basalt: var(--ink);
+  --basalt-deep: #1c211a; /* elevated surface on ink, per §2.3 */
+  --paper: var(--bone);
+  --paper-dim: var(--ink-soft);
+  --accent: var(--brass);
+  --accent-soft: var(--brass-soft);
+
+  /* motion (§3) */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 250ms;
+  --dur-base: 600ms;
+  --dur-slow: 900ms;
+
+  /* spacing rhythm (§2.3) */
+  --space-section: clamp(6rem, 12vh, 10rem);
 }
 
 @theme inline {
+  --color-bone: var(--bone);
+  --color-bone-deep: var(--bone-deep);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-brass: var(--brass);
+  --color-glacial: var(--glacial);
+
   --color-basalt: var(--basalt);
   --color-basalt-deep: var(--basalt-deep);
   --color-paper: var(--paper);
   --color-paper-dim: var(--paper-dim);
   --color-accent: var(--accent);
   --color-focus: var(--focus);
-  --font-display: var(--font-big-shoulders);
-  --font-sans: var(--font-plex-sans);
+
+  --font-display: var(--font-instrument-serif);
+  --font-sans: var(--font-instrument-sans);
   --font-mono: var(--font-plex-mono);
+
+  /* fluid type scale (§2.2) */
+  --text-display-xl: clamp(3.25rem, 9.5vw, 9rem);
+  --text-display-lg: clamp(2.5rem, 6vw, 5.5rem);
+  --text-display-md: clamp(1.75rem, 3.5vw, 3rem);
+  --text-body-lg: clamp(1.0625rem, 1.4vw, 1.25rem);
+  --text-mono-sm: 0.75rem;
 }
 
 body {
@@ -30,6 +70,20 @@ body {
 :focus-visible {
   outline: 2px solid var(--focus);
   outline-offset: 3px;
+}
+
+/* §5 imagery grade recipe — one recipe for cohesion across 63 parks' photography, never per-image tweaks */
+.img-grade {
+  filter: saturate(0.92) contrast(1.04);
+}
+
+/* §2.1 dark-chapter film grain — 3%, ink chapters only */
+.grain-overlay {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 @media (prefers-reduced-motion: reduce) {

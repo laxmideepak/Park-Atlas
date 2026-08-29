@@ -6,6 +6,7 @@ import { WildlifeIcon } from "@/components/WildlifeIcon";
 import { getParkAccent } from "@/lib/park-theme";
 import { UsMap } from "@/components/UsMap";
 import { bestByMonth, hiddenGemsForMonth, getParkSummary } from "@/lib/repo";
+import { NearestGemFallback } from "@/components/NearestGemFallback";
 import { monthByAbbr, currentMonthAbbr } from "@/lib/months";
 import { US_MAP_WIDTH, US_MAP_HEIGHT, US_STATE_PATHS } from "@/lib/us-map-geo";
 import { getMapPins, getOffMapParks } from "@/lib/us-map-pins";
@@ -99,7 +100,7 @@ export default async function Home() {
           <span className="text-xs font-mono text-paper-dim">Month Fit &ge;85 AND crowd percentile &le;40</span>
         </div>
         {gems.length === 0 ? (
-          <p className="text-paper-dim text-sm">No park clears the Hidden Gems bar for {month.name} yet &mdash; check another month.</p>
+          <NearestGemFallback currentMonth={DEFAULT_MONTH} />
         ) : (
           <div className="flex gap-4 overflow-x-auto pb-2">
             {gems.map((g) => {

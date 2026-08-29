@@ -7,6 +7,7 @@ import { WildlifeIcon } from "@/components/WildlifeIcon";
 import { getParkAccent } from "@/lib/park-theme";
 import { getWildlife } from "@/lib/data/park-wildlife";
 import { bestByMonth, hiddenGemsForMonth, getParkSummary } from "@/lib/repo";
+import { NearestGemFallback } from "@/components/NearestGemFallback";
 import { MONTHS, monthByAbbr } from "@/lib/months";
 import { MonthAbbr } from "@/lib/types";
 
@@ -46,7 +47,7 @@ export default async function MonthPage(props: PageProps<"/discover/month/[month
         <span className="text-xs font-mono text-paper-dim">Month Fit &ge;85 AND crowd percentile &le;40</span>
       </div>
       {gems.length === 0 ? (
-        <p className="text-paper-dim text-sm">No park clears the Hidden Gems bar for {month.name}.</p>
+        <NearestGemFallback currentMonth={month.abbr} />
       ) : (
         <div className="flex gap-4 overflow-x-auto pb-2">
           {gems.map((g) => {

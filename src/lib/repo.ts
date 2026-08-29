@@ -87,6 +87,23 @@ export function hiddenGemsForMonth(month: MonthAbbr): (ScoredMonth & { crowdPerc
     .sort((a, b) => b.overallMonthFit - a.overallMonthFit);
 }
 
+/** When no park clears the Hidden Gems bar this month, point somewhere real
+ * instead of an empty box: the nearest month (by calendar distance) that does. */
+export function nearestHiddenGem(month: MonthAbbr): { park: ParkCode; month: MonthAbbr; fit: number } | null {
+  const startIdx = monthByAbbr(month)!.index;
+  for (let dist = 1; dist <= 6; dist++) {
+    for (const dir of [1, -1]) {
+      const idx = (((startIdx + dir * dist) % 12) + 12) % 12;
+      const candidateMonth = MONTHS[idx].abbr;
+      const gems = hiddenGemsForMonth(candidateMonth);
+      if (gems.length > 0) {
+        return { park: gems[0].park, month: candidateMonth, fit: gems[0].overallMonthFit };
+      }
+    }
+  }
+  return null;
+}
+
 /** Least Crowded ranking: cross-park percentile bands (PRD §6.4), not an
  * ordinal rank and not raw visits-per-acre — sorted least-crowded first. */
 export function crowdBandsForMonth(month: MonthAbbr): (ScoredMonth & { crowdPercentile: number; band: CrowdBand })[] {

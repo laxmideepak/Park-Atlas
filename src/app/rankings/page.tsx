@@ -6,6 +6,7 @@ import { TierBadge } from "@/components/TierBadge";
 import { getParkAccent } from "@/lib/park-theme";
 import { CROWD_BAND_COLOR, type CrowdBand } from "@/lib/scoring";
 import { currentMonthAbbr } from "@/lib/months";
+import { NearestGemFallback } from "@/components/NearestGemFallback";
 
 export const revalidate = 86400; // re-check the calendar daily so "this month" never goes stale
 
@@ -115,7 +116,7 @@ export default function RankingsPage() {
         </div>
         <p className="text-xs text-paper-dim font-mono mb-4">Month Fit &ge;85 AND crowd percentile &le;40 &middot; recomputed monthly</p>
         {gems.length === 0 ? (
-          <p className="text-sm text-paper-dim">No park clears the bar this month.</p>
+          <NearestGemFallback currentMonth={CURRENT_MONTH} />
         ) : (
           <ol className="flex flex-col gap-1">
             {gems.map((g, i) => {

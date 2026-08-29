@@ -5,7 +5,6 @@ import { ALL_PARKS_MINI } from "@/lib/data/all-parks-mini";
 import { PARK_DETAIL, type ParkDetail } from "@/lib/data/park-detail";
 import { parkByCode, scoresForPark, parkHeaderLabels } from "@/lib/repo";
 import { TIER_COLOR } from "@/lib/scoring";
-import { TierBadge } from "@/components/TierBadge";
 import { WhyPanel } from "@/components/WhyPanel";
 import { CrowdCalendar } from "@/components/CrowdCalendar";
 import { ParkScape } from "@/components/ParkScape";
@@ -13,8 +12,6 @@ import { LiveBanner } from "@/components/LiveBanner";
 import { getParkAccent } from "@/lib/park-theme";
 import { fetchParkProfile, fetchParkAlerts, fetchThingsToDo } from "@/lib/nps";
 import { getLiveContext } from "@/lib/live-context";
-import { getWildlife } from "@/lib/data/park-wildlife";
-import { WildlifeCritter } from "@/components/WildlifeCritter";
 
 export function generateStaticParams() {
   return ALL_PARKS_MINI.map((p) => ({ parkCode: p.code }));
@@ -40,7 +37,6 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
   const detail = cohortPark ? PARK_DETAIL[cohortPark.code] : null;
   const alerts = liveAlerts.length > 0 ? liveAlerts : null;
   const fieldNote = cohortPark?.fieldNote ?? liveProfile?.description ?? `${name} is one of the 63 U.S. National Parks.`;
-  const wildlife = getWildlife(parkCode);
   const months = scoresForPark(parkCode);
   const labels = parkHeaderLabels(parkCode);
 
@@ -49,7 +45,6 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
       {/* Overview — hero */}
       <section className="relative">
         <ParkScape park={parkCode} state={state} accent={accent} fill />
-        {wildlife && <WildlifeCritter wildlife={wildlife} accent={accent} />}
         <div className="relative pt-20 px-6 md:px-10 pb-8 max-w-[1400px] mx-auto flex flex-col gap-4">
           <p className="text-xs uppercase tracking-wide" style={{ color: accent }}>{state}</p>
           <h1 className="font-display uppercase text-4xl md:text-6xl max-w-[16ch]">{name}</h1>
@@ -239,7 +234,6 @@ function EditorialSections({ detail }: { detail: ParkDetail }) {
       <section>
         <div className="flex items-baseline gap-3 mb-1">
           <h2 className="font-display uppercase text-3xl">Dining Availability</h2>
-          <TierBadge tier={detail.dining.label === "Excellent" || detail.dining.label === "Good" ? "Excellent" : "Specialized"} />
           <span className="font-semibold">{detail.dining.label}</span>
         </div>
         <p className="text-xs text-paper-dim font-mono mb-6">Categorical label &mdash; never a taste score. NPS authorized-concessioner records.</p>
