@@ -1,4 +1,5 @@
 import dims from "./data/image-dims.json";
+import { HERO_MANIFEST } from "./data/hero-manifest";
 import type { ParkImage } from "./nps";
 
 /**
@@ -34,8 +35,17 @@ function passes(url: string, minWidth: number, aspectRange?: [number, number]): 
   return true;
 }
 
-/** Hero: needs real resolution and a landscape, crop-safe aspect ratio. */
-export function pickHero(images: ParkImage[]): ParkImage | null {
+function fromManifest(parkCode?: string): ParkImage | null {
+  if (!parkCode) return null;
+  const entry = HERO_MANIFEST[parkCode];
+  return entry ? { url: entry.url, credit: entry.credit, altText: entry.alt, title: entry.alt } : null;
+}
+
+/** Hero: needs real resolution and a landscape, crop-safe aspect ratio.
+ * Checks the hand-picked manifest first (T4 — empty until filled in). */
+export function pickHero(images: ParkImage[], parkCode?: string): ParkImage | null {
+  const manifest = fromManifest(parkCode);
+  if (manifest) return manifest;
   const candidates = images.filter((im) => passes(im.url, 1600, [1.3, 2.1]));
   if (candidates.length === 0) return images.length > 0 && !getDims(images[0].url) ? images[0] : null;
   return [...candidates].sort((a, b) => (getDims(b.url)?.width ?? 0) - (getDims(a.url)?.width ?? 0))[0];
@@ -47,8 +57,11 @@ export function pickCard(images: ParkImage[]): ParkImage | null {
   return candidates[0] ?? null;
 }
 
-/** Year Scroller chapters are the site's 12 most-seen pixels — hold them to a higher bar. */
-export function pickScrollerChapter(images: ParkImage[]): ParkImage | null {
+/** Year Scroller chapters are the site's 12 most-seen pixels — hold them to
+ * a higher bar. Also checks the manifest first. */
+export function pickScrollerChapter(images: ParkImage[], parkCode?: string): ParkImage | null {
+  const manifest = fromManifest(parkCode);
+  if (manifest) return manifest;
   const candidates = images.filter((im) => passes(im.url, 2000, [1.3, 2.1]));
   if (candidates.length > 0) {
     return [...candidates].sort((a, b) => (getDims(b.url)?.width ?? 0) - (getDims(a.url)?.width ?? 0))[0];

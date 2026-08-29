@@ -33,7 +33,7 @@ export function ParkHero({
   liveContext: LiveContext | null;
   parkCode: string;
 }) {
-  const hero = pickHero(images);
+  const hero = pickHero(images, parkCode);
 
   return (
     <section className="relative bg-ink">

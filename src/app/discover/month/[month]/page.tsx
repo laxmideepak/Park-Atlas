@@ -31,7 +31,7 @@ export default async function MonthPage(props: PageProps<"/discover/month/[month
   const imagesByCode = new Map(
     await Promise.all(uniqueCodes.map(async (code) => [code, await fetchParkImages(code)] as const))
   );
-  const heroImage = pickHero(imagesByCode.get(top.park) ?? []);
+  const heroImage = pickHero(imagesByCode.get(top.park) ?? [], top.park);
 
   const byTier = new Map<Tier, typeof best>();
   for (const t of TIER_ORDER) byTier.set(t, []);

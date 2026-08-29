@@ -70,8 +70,8 @@ export default async function Home() {
     // higher resolution bar than a regular hero; fall through to the
     // month's runner-up park if the #1 has nothing that large.
     const chapterImage =
-      pickScrollerChapter(imagesByCode.get(top.park) ?? []) ??
-      (runnerUp ? pickScrollerChapter(imagesByCode.get(runnerUp.park) ?? []) : null);
+      pickScrollerChapter(imagesByCode.get(top.park) ?? [], top.park) ??
+      (runnerUp ? pickScrollerChapter(imagesByCode.get(runnerUp.park) ?? [], runnerUp.park) : null);
     return {
       monthAbbr: m.abbr,
       monthName: m.name,
@@ -97,7 +97,7 @@ export default async function Home() {
       <Preloader facts={facts} />
 
       <HomeHero
-        image={pickHero(heroImages)}
+        image={pickHero(heroImages, heroParkCode)}
         accent={getParkAccent(heroParkCode)}
         sourceStrip={["63 parks", "scored on climate + access", "never on popularity", "Month Fit v1.0"]}
       />
