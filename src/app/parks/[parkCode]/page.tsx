@@ -13,6 +13,7 @@ import { getParkAccent } from "@/lib/park-theme";
 import { fetchParkProfile, fetchParkAlerts, fetchThingsToDo, fetchParkImages } from "@/lib/nps";
 import { getLiveContext } from "@/lib/live-context";
 import { SITE_URL } from "@/lib/site";
+import { VIDEO_MANIFEST } from "@/lib/data/video-manifest";
 import { Reveal, RevealGroup } from "@/components/Reveal";
 import { CountUp } from "@/components/CountUp";
 
@@ -97,6 +98,7 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
         officialRankLabel={cohortPark?.officialVisitRank2025 ? `#${cohortPark.officialVisitRank2025} most visited (official)` : undefined}
         liveContext={liveContext}
         parkCode={parkCode}
+        video={VIDEO_MANIFEST[parkCode] ?? null}
       />
 
       <div className="bg-bone text-ink">

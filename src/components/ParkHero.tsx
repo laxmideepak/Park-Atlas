@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { ContourField } from "./ContourField";
+import { LivingHero } from "./LivingHero";
 import type { ParkImage } from "@/lib/nps";
+import type { VideoManifestEntry } from "@/lib/data/video-manifest";
 import { pickHero } from "@/lib/image-select";
 import { LiveBanner } from "./LiveBanner";
 import type { LiveContext } from "@/lib/live-context";
@@ -22,6 +24,7 @@ export function ParkHero({
   officialRankLabel,
   liveContext,
   parkCode,
+  video = null,
 }: {
   images: ParkImage[];
   name: string;
@@ -32,13 +35,20 @@ export function ParkHero({
   officialRankLabel?: string;
   liveContext: LiveContext | null;
   parkCode: string;
+  /** Living Hero clip (spec §1.4) — top-10 parks only; photo fallback when null. */
+  video?: VideoManifestEntry | null;
 }) {
   const hero = pickHero(images, parkCode);
 
   return (
     <section className="relative bg-ink">
       <div className="relative h-[78vh] min-h-[420px] w-full overflow-hidden">
-        {hero ? (
+        {video ? (
+          <>
+            <LivingHero entry={video} alt={hero?.altText || name} />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-ink/80 via-ink/25 to-transparent" />
+          </>
+        ) : hero ? (
           <>
             <Image
               src={hero.url}
