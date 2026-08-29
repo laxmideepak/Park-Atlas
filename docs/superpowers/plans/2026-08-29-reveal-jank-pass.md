@@ -337,7 +337,7 @@ git commit -m "ParkCard: add h-full (prerequisite for RevealGroup grid wrapping)
 **Files:**
 - Modify: `src/components/UsMap.tsx`
 
-- [ ] **Step 1: Memo the state-path layer**
+- [x] **Step 1: Memo the state-path layer**
 
 At the top of `src/components/UsMap.tsx`, change:
 ```tsx
@@ -388,7 +388,7 @@ const StatePaths = memo(function StatePaths({ statePaths }: { statePaths: StateP
 });
 ```
 
-- [ ] **Step 2: Gate the pin-entrance stagger behind in-view instead of mount**
+- [x] **Step 2: Gate the pin-entrance stagger behind in-view instead of mount**
 
 Today the pins' `initial`/`animate` fire on component mount, even if the map section is below the fold on page load — wasting the entrance polish before anyone scrolls to it. Change the component body: add a ref and `useInView` near the top of `UsMap`:
 
@@ -435,14 +435,14 @@ Replace with:
                   transition={reduceMotion ? { duration: 0 } : { delay: i * 0.012, type: "spring", stiffness: 320, damping: 22 }}
 ```
 
-- [ ] **Step 3: Verify**
+- [x] **Step 3: Verify**
 
 Run: `npm run build && npm run lint`
 Expected: both succeed. `npm run test` — expected 32/32 still passing (no pure-logic files touched).
 
 Manually: `npm run dev`, open `http://localhost:3000/`, scroll to the map section — pins should cascade in as the section enters view, not before.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add src/components/UsMap.tsx
