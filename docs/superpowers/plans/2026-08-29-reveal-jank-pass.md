@@ -1322,7 +1322,7 @@ git commit -m "Month page: Reveal tier headings, stagger ParkCard grids"
 **Files:**
 - Modify: `src/app/discover/season/[season]/page.tsx`
 
-- [ ] **Step 1: Import the new component**
+- [x] **Step 1: Import the new component**
 
 Add to the top import block (after the `Link` import):
 ```tsx
@@ -1330,7 +1330,7 @@ import { RevealGroup } from "@/components/Reveal";
 ```
 (No `Reveal` needed standalone here — the page's own heading already uses plain tags and this page's brief only calls for the ranked list to stagger; keeping the diff minimal.)
 
-- [ ] **Step 2: Stagger the ranked list**
+- [x] **Step 2: Stagger the ranked list**
 
 Replace:
 ```tsx
@@ -1392,12 +1392,12 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 ```
 
-- [ ] **Step 3: Verify**
+- [x] **Step 3: Verify**
 
 Run: `npm run build && npm run lint && npm run test`
 Expected: build succeeds (all 4 season pages), lint clean, 32/32 tests pass.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add src/app/discover/season/\[season\]/page.tsx
