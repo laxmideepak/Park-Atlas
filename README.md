@@ -62,6 +62,17 @@ npm run test    # pure-function test suite (scoring + repo)
 npm run lint
 ```
 
+### Smoke testing
+
+`e2e/smoke.spec.ts` is a Playwright audit across `/`, `/parks/acad`, `/parks/zion`, `/discover/month/oct`, `/parks`, and `/rankings` — zero console/page/network errors, stable `document.body.scrollHeight` while scrolling (catches the content-visibility class of scroll-height-drift bug), and no duplicate `view-transition-name`s on a page. Plus two interaction checks (WhyDrawer opens with real content, a ParkCard link navigates correctly).
+
+```bash
+npm run build && npm run start &
+npm run smoke
+```
+
+Against a deployed site instead of local: `BASE_URL=https://parkatlas.vercel.app npm run smoke`.
+
 ### Deploying
 
 `NPS_API_KEY` must be set as an environment variable **on the host**, not just locally — it's gitignored and never leaves your machine otherwise. On Vercel: Project → Settings → Environment Variables → add `NPS_API_KEY` for Production, then redeploy (env vars only apply to builds that happen after they're set, since pages are statically generated at build time). Works on the free Hobby plan, no Pro required. If `NPS_API_KEY` is unset, pages degrade gracefully — live NPS profile/images/alerts sections just don't render, everything else still works.

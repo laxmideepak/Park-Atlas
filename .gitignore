@@ -42,3 +42,5 @@ yarn-error.log*
 next-env.d.ts
 .superpowers/
 .worktrees/
+test-results/
+playwright-report/

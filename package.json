@@ -10,7 +10,8 @@
     "test": "vitest run",
     "probe-images": "node --env-file=.env.local --import tsx scripts/probe-images.ts",
     "pick-hero-manifest": "node --env-file=.env.local --import tsx scripts/pick-hero-manifest.ts",
-    "audit-scroll": "node scripts/audit-scroll.mjs"
+    "audit-scroll": "node scripts/audit-scroll.mjs",
+    "smoke": "playwright test e2e/smoke.spec.ts"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
