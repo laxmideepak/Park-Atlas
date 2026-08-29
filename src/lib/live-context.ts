@@ -1,9 +1,11 @@
 /**
  * Live location context per park — U.S. National Weather Service API
  * (api.weather.gov). No key required; a descriptive User-Agent is the only
- * requirement per NWS's own usage guidance. Covers CONUS, Alaska, Hawaii,
- * and territories (confirmed against American Samoa & US Virgin Islands
- * coordinates). Cached server-side; never called from the browser.
+ * requirement per NWS's own usage guidance. Timezone/nearest-city resolve
+ * for all 63 parks; gridpoint forecasts exist for 62 of 63 — American Samoa
+ * (npsa) returns points data with a null forecast URL, so temp/forecast
+ * degrade to null there (live-verified in the gov-data audit).
+ * Cached server-side; never called from the browser.
  */
 
 const USER_AGENT = "ParkAtlas (https://github.com/laxmideepak/Park-Atlas)";
@@ -12,7 +14,7 @@ const REVALIDATE_SECONDS = 60 * 30; // 30 min
 interface PointsResponse {
   properties: {
     timeZone: string;
-    forecast: string;
+    forecast: string | null; // null for American Samoa — no gridpoint product
     relativeLocation: { properties: { city: string; state: string } };
   };
 }
@@ -51,7 +53,9 @@ export async function getLiveContext(lat: number, lng: number): Promise<LiveCont
     ? `${points.properties.relativeLocation.properties.city}, ${points.properties.relativeLocation.properties.state}`
     : null;
 
-  const forecast = await nwsFetch<ForecastResponse>(points.properties.forecast);
+  const forecast = points.properties.forecast
+    ? await nwsFetch<ForecastResponse>(points.properties.forecast)
+    : null; // npsa: no gridpoint forecast product exists — skip, don't fetch "null"
   const period = forecast?.properties.periods?.[0];
 
   return {

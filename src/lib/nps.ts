@@ -71,14 +71,33 @@ export interface NpsParkProfile {
   retrievedAt: string;
 }
 
+/** One /parks request per park, shared by profile + images. The two callers
+ * previously used different no-op `fields` strings, so Next's fetch cache
+ * saw two distinct URLs and every park cost 2 of the 1,000 hourly requests
+ * for identical data (gov-data audit finding). Identical URL = deduped. */
+function fetchParkRaw(park: string) {
+  return npsFetch<RawParksResponse>("/parks", { parkCode: park, fields: "images,entranceFees" });
+}
+
+/** The fees array has no guaranteed order — Acadia's [0] is the $6 Cadillac
+ * Summit timed-entry reservation, not the $35 vehicle fee (live-verified in
+ * the gov-data audit). Prefer the private-vehicle entrance fee, then the
+ * cheapest "Entrance -" item, never blindly [0]. */
+function pickEntranceFee(fees: { cost: string; description: string; title: string }[] | undefined) {
+  if (!fees?.length) return undefined;
+  return (
+    fees.find((f) => f.title === "Entrance - Private Vehicle") ??
+    fees
+      .filter((f) => f.title.startsWith("Entrance -"))
+      .sort((a, b) => parseFloat(a.cost) - parseFloat(b.cost))[0]
+  );
+}
+
 export async function fetchParkProfile(park: string): Promise<NpsParkProfile | null> {
-  const json = await npsFetch<RawParksResponse>("/parks", {
-    parkCode: park,
-    fields: "entranceFees",
-  });
+  const json = await fetchParkRaw(park);
   const d = json?.data?.[0];
   if (!d) return null;
-  const fee = d.entranceFees?.[0];
+  const fee = pickEntranceFee(d.entranceFees);
   return {
     description: d.description,
     entranceFeeCost: fee ? `$${fee.cost}` : null,
@@ -112,7 +131,7 @@ function isPublicDomainCredit(credit: string): boolean {
 }
 
 export async function fetchParkImages(park: string): Promise<ParkImage[]> {
-  const json = await npsFetch<RawParksResponse>("/parks", { parkCode: park, fields: "images" });
+  const json = await fetchParkRaw(park);
   const images = json?.data?.[0]?.images ?? [];
   return images
     .filter((im) => im.url && isPublicDomainCredit(im.credit ?? ""))

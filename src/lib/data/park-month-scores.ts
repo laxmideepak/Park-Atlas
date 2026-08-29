@@ -25,7 +25,7 @@ interface ParkCurve {
 const CURVES: Record<ParkCode, ParkCurve> = {
   acad: {
     climateStation: "Bar Harbor, ME (McFarland Hill)",
-    climateStationElevFt: 144,
+    climateStationElevFt: 470, // NCEI USC00170100 reports 143.3 METERS — was mislabeled as feet (gov-data audit)
     climate:  [25, 28, 40, 55, 68, 78, 85, 90, 90, 82, 55, 32],
     access:   [30, 30, 35, 55, 85, 95, 98, 98, 96, 90, 50, 32],
     percentOfAnnual: [1, 1, 2, 4, 8, 12, 18, 19, 15, 12, 5, 2],

@@ -104,14 +104,16 @@ export function WhyDrawer({
                     <td className="py-1.5 pr-2">{Math.round(CLIMATE_WEIGHT * 100)}%</td>
                     <td className="py-1.5 pr-2">{row.climateScore}</td>
                     <td className="py-1.5">
-                      {isEstimated ? row.climateStation : `NOAA 1991–2020 Normals · ${row.climateStation} (${row.climateStationElevFt} ft)`}
+                      {isEstimated
+                        ? row.climateStation
+                        : `Hand-authored from ${row.climateStation} climatology (${row.climateStationElevFt} ft) · NOAA Normals pipeline pending`}
                     </td>
                   </tr>
                   <tr>
                     <td className="py-1.5 pr-2">Seasonal accessibility</td>
                     <td className="py-1.5 pr-2">{Math.round(ACCESSIBILITY_WEIGHT * 100)}%</td>
                     <td className="py-1.5 pr-2">{row.accessibilityScore}</td>
-                    <td className="py-1.5">{isEstimated ? "Estimated by park type — no NPS monthly-access dataset exists" : "NPS operating seasons · road status"}</td>
+                    <td className="py-1.5">{isEstimated ? "Estimated by park type — no NPS monthly-access dataset exists" : "Hand-authored from published NPS seasonal closure patterns"}</td>
                   </tr>
                 </tbody>
               </table>

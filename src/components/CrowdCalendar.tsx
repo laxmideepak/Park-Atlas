@@ -27,7 +27,7 @@ export function CrowdCalendar({
       <div className="flex gap-6 text-mono-sm font-mono text-ink-soft flex-wrap">
         <span>Busiest: <strong className="text-ink">{monthByAbbr(busiest.month)!.name}</strong> ({busiest.percentOfAnnualVisits}% of visits)</span>
         <span>Quietest: <strong className="text-ink">{monthByAbbr(quietest.month)!.name}</strong> ({quietest.percentOfAnnualVisits}% of visits)</span>
-        <span>{estimated ? "Estimated by park type · pending real IRMA data" : "5-yr medians · NPS IRMA"}</span>
+        <span>{estimated ? "Estimated by park type · pending real IRMA data" : "Hand-authored monthly shares · totals from the NPS 2025 release"}</span>
       </div>
       <div className="flex items-end gap-2 h-40">
         {rows.map((r, i) => {

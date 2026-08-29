@@ -293,7 +293,7 @@ function EditorialSections({ detail }: { detail: ParkDetail }) {
 
       <ThemedSection id="water" className="scroll-mt-24">
         <Reveal as="h2" className="font-display text-display-md mb-1">Lakes & water</Reveal>
-        <Reveal as="p" delay={0.06} className="text-mono-sm font-mono text-ink-soft mb-6">USGS GNIS naming + hydrography intersected with NPS boundary</Reveal>
+        <Reveal as="p" delay={0.06} className="text-mono-sm font-mono text-ink-soft mb-6">Hand-curated — USGS GNIS/NHD boundary intersection planned</Reveal>
         <RevealGroup
           as="div"
           variant="float"
