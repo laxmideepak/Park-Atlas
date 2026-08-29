@@ -13,6 +13,7 @@ import { getMapPins, getOffMapParks } from "@/lib/us-map-pins";
 import { fetchParkImages } from "@/lib/nps";
 import { crowdRelief } from "@/lib/scoring";
 import { pickHero, pickCard, pickScrollerChapter } from "@/lib/image-select";
+import { Reveal, RevealGroup } from "@/components/Reveal";
 
 export const revalidate = 86400; // re-check the calendar daily so "this month" never goes stale
 
@@ -105,16 +106,22 @@ export default async function Home() {
       <YearScroller chapters={yearChapters} />
 
       {/* Best right now — bone */}
-      <section className="bg-bone text-ink py-20">
+      <section className="bg-bone text-ink py-20" style={{ contentVisibility: "auto", containIntrinsicSize: "auto 800px" }}>
         <div className="max-w-[1360px] mx-auto px-6 md:px-10">
-          <h2 className="font-display text-display-lg leading-none mb-2">This is {month.name}.</h2>
-          <p className="font-mono text-mono-sm text-ink-soft mb-10">Climate 60 &middot; access 40 &middot; popularity 0</p>
+          <Reveal as="h2" className="font-display text-display-lg leading-none mb-2">This is {month.name}.</Reveal>
+          <Reveal as="p" delay={0.06} className="font-mono text-mono-sm text-ink-soft mb-10">Climate 60 &middot; access 40 &middot; popularity 0</Reveal>
 
-          <div className="grid gap-5 mb-8" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))" }}>
+          <RevealGroup
+            as="div"
+            className="grid gap-5 mb-8"
+            style={{ gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))" }}
+            itemClassName="h-full"
+            stagger={0.05}
+          >
             {best.slice(0, 8).map((row) => (
               <ParkCard key={row.park} park={getParkSummary(row.park)} row={row} image={pickCard(imagesByCode.get(row.park) ?? [])} />
             ))}
-          </div>
+          </RevealGroup>
           <Link href={`/discover/month/${DEFAULT_MONTH}`} className="font-mono text-mono-sm underline underline-offset-2">
             See all 63 parks ranked for {month.name} &rarr;
           </Link>
@@ -127,22 +134,28 @@ export default async function Home() {
             {gems.length === 0 ? (
               <NearestGemFallback currentMonth={DEFAULT_MONTH} />
             ) : (
-              <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))" }}>
+              <RevealGroup
+                as="div"
+                className="grid gap-5"
+                style={{ gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))" }}
+                itemClassName="h-full"
+                stagger={0.05}
+              >
                 {gems.map((g) => (
                   <ParkCard key={g.park} park={getParkSummary(g.park)} row={g} image={pickCard(imagesByCode.get(g.park) ?? [])} />
                 ))}
-              </div>
+              </RevealGroup>
             )}
           </div>
         </div>
       </section>
 
       {/* The Atlas — ink */}
-      <section className="bg-ink text-bone py-20">
+      <section className="bg-ink text-bone py-20" style={{ contentVisibility: "auto", containIntrinsicSize: "auto 800px" }}>
         <div className="max-w-[1360px] mx-auto px-6 md:px-10">
-          <h2 className="font-display text-display-lg leading-none mb-8">Where it&rsquo;s good, right now.</h2>
+          <Reveal as="h2" className="font-display text-display-lg leading-none mb-8">Where it&rsquo;s good, right now.</Reveal>
           <UsMap statePaths={US_STATE_PATHS} width={US_MAP_WIDTH} height={US_MAP_HEIGHT} pins={pins} />
-          <div className="flex justify-between items-start gap-4 mt-4 font-mono text-mono-sm text-bone/60 flex-wrap">
+          <Reveal as="div" delay={0.1} className="flex justify-between items-start gap-4 mt-4 font-mono text-mono-sm text-bone/60 flex-wrap">
             <span className="flex items-center gap-4">
               <span><span className="inline-block w-2 h-2 rounded-full bg-brass mr-1.5" />Exceptional</span>
               <span><span className="inline-block w-2 h-2 rounded-full bg-brass/65 mr-1.5" />Excellent</span>
@@ -160,18 +173,18 @@ export default async function Home() {
                 ))}
               </span>
             )}
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* Index teaser — bone */}
-      <section className="bg-bone text-ink py-20">
-        <div className="max-w-[1360px] mx-auto px-6 md:px-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+      <section className="bg-bone text-ink py-20" style={{ contentVisibility: "auto", containIntrinsicSize: "auto 300px" }}>
+        <Reveal as="div" className="max-w-[1360px] mx-auto px-6 md:px-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <p className="font-display text-display-md leading-tight max-w-[20ch]">Sixty-three parks. One page each. No exceptions.</p>
           <Link href="/parks" className="font-mono text-sm px-6 py-3.5 rounded-sm bg-brass text-ink font-semibold whitespace-nowrap">
             Browse all 63 &rarr;
           </Link>
-        </div>
+        </Reveal>
       </section>
     </>
   );
