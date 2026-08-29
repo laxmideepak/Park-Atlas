@@ -3,7 +3,10 @@
 import { useRef, useState, memo } from "react";
 import { motion, useReducedMotion, useInView, AnimatePresence } from "motion/react";
 import type { StatePath } from "@/lib/us-map-geo";
-import { tierToBucket, type MapBucket, type MapPin } from "@/lib/us-map-pins";
+// MapPin must stay a type-only import: us-map-pins' module graph is server-sized
+// (d3-geo, us-atlas topojson, scoring data). Runtime helpers live in map-buckets.
+import type { MapPin } from "@/lib/us-map-pins";
+import { tierToBucket, type MapBucket } from "@/lib/map-buckets";
 import type { MonthAbbr } from "@/lib/types";
 import { MONTHS, monthByAbbr } from "@/lib/months";
 import { MapSummaryCard } from "./MapSummaryCard";

@@ -7,15 +7,6 @@ import { scoreForParkMonth } from "./repo";
 import { MONTHS } from "./months";
 import type { MonthAbbr, Tier } from "./types";
 
-/** The map's 3 human-readable buckets — Month Fit tiers are jargon at map scale. */
-export type MapBucket = "great" | "good" | "off";
-
-export function tierToBucket(tier: Tier): MapBucket {
-  if (tier === "Exceptional" || tier === "Excellent") return "great";
-  if (tier === "Good") return "good";
-  return "off"; // Specialized | Limited
-}
-
 export interface MapPin {
   code: string;
   name: string;
