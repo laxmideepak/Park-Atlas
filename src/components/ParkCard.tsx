@@ -11,7 +11,7 @@ import type { ParkImage } from "@/lib/nps";
 export function ParkCard({ park, row, image }: { park: ParkSummary; row: ScoredMonth; image?: ParkImage | null }) {
   const accent = getParkAccent(park.code);
   return (
-    <div className="bg-bone-deep text-ink rounded-sm overflow-hidden flex flex-col">
+    <div className="bg-bone-deep text-ink rounded-sm overflow-hidden flex flex-col h-full">
       <Link href={`/parks/${park.code}`} className="group block relative aspect-[4/5] overflow-hidden">
         {image ? (
           <Image
