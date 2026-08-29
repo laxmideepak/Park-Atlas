@@ -62,6 +62,21 @@ npm run test    # pure-function test suite (scoring + repo)
 npm run lint
 ```
 
+### Living Heroes (video heroes)
+
+Heroes upgrade from photo to short, silent, public-domain NPS b-roll where a clip has been curated — spec in `docs/specs/living-heroes-spec.md`, manifest in `src/lib/data/video-manifest.ts`, provenance in `docs/sources.md`. A missing manifest key = photo hero, automatically.
+
+**Sourcing rules:** official NPS pages only (nps.gov / NPGallery), page must credit NPS with no copyright symbol / third-party rights holder (e.g. Yellowstone's Video Library pages state "Copyright Info: Public domain"); 8–15s loopable, slow subject motion, no identifiable people; every clip gets a row in `docs/sources.md`.
+
+**Encode** (never hand-encode — the script enforces the budgets):
+
+```bash
+node scripts/encode-hero-video.mjs <input.mp4> <basename> [startSec] [durationSec]
+# -> public/video/<basename>-1080.mp4 (≤2.5MB), -540.mp4 (≤1.0MB), -poster.jpg + blurDataURL
+```
+
+**Politeness rules** (enforced by `LivingHero` + smoke tests): the poster is the LCP (`next/image` priority) — never the video; `<video muted loop playsInline preload="none">` gets a `src` only once in-view with reduced-motion and Save-Data both off, so opted-out users load zero video bytes; 600ms crossfade on `canplay`; pauses offscreen; mobile gets the separately-encoded 540p file; mono `Video: NPS` credit links the source page. One video mounted per page.
+
 ### Smoke testing
 
 `e2e/smoke.spec.ts` is a Playwright audit across `/`, `/parks/acad`, `/parks/zion`, `/discover/month/oct`, `/parks`, and `/rankings` — zero console/page/network errors, stable `document.body.scrollHeight` while scrolling (catches the content-visibility class of scroll-height-drift bug), and no duplicate `view-transition-name`s on a page. Plus two interaction checks (WhyDrawer opens with real content, a ParkCard link navigates correctly).

@@ -72,6 +72,22 @@ async function viewTransitionNames(page: Page): Promise<string[]> {
   });
 }
 
+/** The LAST buffered LCP entry is the real one — resolving on the first
+ * observer callback races the image entry and mis-reports (learned the
+ * hard way during Living Heroes verification). */
+async function lcpElementTag(page: Page): Promise<string> {
+  return page.evaluate(
+    () =>
+      new Promise<string>((res) => {
+        const entries: LargestContentfulPaint[] = [];
+        new PerformanceObserver((list) => {
+          entries.push(...(list.getEntries() as LargestContentfulPaint[]));
+        }).observe({ type: "largest-contentful-paint", buffered: true });
+        setTimeout(() => res(entries.at(-1)?.element?.tagName ?? "none"), 2500);
+      })
+  );
+}
+
 for (const route of ROUTES) {
   test(`${route} — no console/page/network errors, stable scroll height, unique view-transition names`, async ({
     page,
@@ -89,13 +105,59 @@ for (const route of ROUTES) {
     const names = await viewTransitionNames(page);
     const duplicates = names.filter((name, i) => names.indexOf(name) !== i);
 
+    // Living Heroes politeness (spec §3): any <video> anywhere must be a
+    // polite one — poster-first, byte-frugal, silent.
+    const impoliteVideos = await page.evaluate(() =>
+      Array.from(document.querySelectorAll("video"))
+        .filter((v) => v.getAttribute("preload") !== "none" || !v.muted || !v.hasAttribute("playsinline"))
+        .map((v) => v.outerHTML.slice(0, 120))
+    );
+
     expect(consoleErrors, "console errors").toEqual([]);
     expect(pageErrors, "uncaught page errors").toEqual([]);
     expect(failedRequests, "failed same-origin requests").toEqual([]);
     expect(max - min, `scrollHeight drift on ${route} (samples: ${heights.join(", ")})`).toBeLessThanOrEqual(100);
     expect(duplicates, `duplicate view-transition-name on ${route}`).toEqual([]);
+    expect(impoliteVideos, "videos missing preload=none/muted/playsinline").toEqual([]);
   });
 }
+
+for (const route of ["/", "/parks/acad"]) {
+  test(`${route} — LCP element is an IMG (never the video)`, async ({ page }) => {
+    await page.goto(route, { waitUntil: "load" });
+    const tag = await lcpElementTag(page);
+    expect(tag, `LCP element on ${route}`).toBe("IMG");
+  });
+}
+
+test("home: hero video plays after settling in view (when a clip is curated for this month)", async ({ page }) => {
+  await page.goto("/", { waitUntil: "load" });
+  const hasVideo = (await page.locator("video").count()) > 0;
+  test.skip(!hasVideo, "no Living Hero clip curated for the current month — photo fallback in effect");
+  await page.waitForTimeout(5000);
+  const state = await page.evaluate(() => {
+    const v = document.querySelector("video")!;
+    return { playing: !v.paused && v.currentTime > 0, src: v.currentSrc.split("/").pop() };
+  });
+  expect(state.playing, `hero video should be playing (src: ${state.src})`).toBe(true);
+});
+
+test("home: reduced motion loads zero video bytes and plays nothing", async ({ browser }) => {
+  const ctx = await browser.newContext({ reducedMotion: "reduce", viewport: { width: 1440, height: 900 } });
+  const page = await ctx.newPage();
+  const videoRequests: string[] = [];
+  page.on("request", (r) => {
+    if (r.url().endsWith(".mp4")) videoRequests.push(r.url());
+  });
+  await page.goto("/", { waitUntil: "load" });
+  await page.waitForTimeout(4000);
+  const anyPlaying = await page.evaluate(() =>
+    Array.from(document.querySelectorAll("video")).some((v) => !v.paused && v.currentTime > 0)
+  );
+  expect(videoRequests, "reduced motion must never request video bytes").toEqual([]);
+  expect(anyPlaying, "no video may play under reduced motion").toBe(false);
+  await ctx.close();
+});
 
 test("park detail: WhyDrawer opens and mentions data confidence", async ({ page }) => {
   await page.goto("/parks/acad", { waitUntil: "load" });
