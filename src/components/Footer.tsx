@@ -1,13 +1,14 @@
 import Link from "next/link";
 import { METHODOLOGY_VERSION, METHODOLOGY_CALCULATED_AT } from "@/lib/scoring";
 import { MONTHS } from "@/lib/months";
+import { Reveal } from "./Reveal";
 
 /** §7.7 — ink chapter, serif sign-off, mono columns. */
 export function Footer() {
   return (
     <footer className="bg-ink text-bone mt-16">
       <div className="max-w-[1360px] mx-auto px-6 md:px-10 py-16 flex flex-col gap-12">
-        <p className="font-display text-display-lg leading-none">Public data. Plain answers.</p>
+        <Reveal as="p" className="font-display text-display-lg leading-none">Public data. Plain answers.</Reveal>
 
         <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8 font-mono text-mono-sm text-bone/70">
           <div className="flex flex-col gap-2">
