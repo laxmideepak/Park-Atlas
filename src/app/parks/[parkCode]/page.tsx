@@ -1,3 +1,4 @@
+import { Fragment, type ReactNode } from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -12,6 +13,8 @@ import { getParkAccent } from "@/lib/park-theme";
 import { fetchParkProfile, fetchParkAlerts, fetchThingsToDo, fetchParkImages } from "@/lib/nps";
 import { getLiveContext } from "@/lib/live-context";
 import { SITE_URL } from "@/lib/site";
+import { Reveal, RevealGroup } from "@/components/Reveal";
+import { CountUp } from "@/components/CountUp";
 
 export function generateStaticParams() {
   return ALL_PARKS_MINI.map((p) => ({ parkCode: p.code }));
@@ -102,26 +105,33 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
 
           <div className="flex-1 min-w-0 flex flex-col gap-20">
             <section id="overview" className="scroll-mt-24 flex flex-col gap-6">
-              <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                {cohortPark ? (
-                  <>
-                    <Stat label="Acreage" value={`${cohortPark.acreage.toLocaleString()} ac`} />
-                    <Stat label="Entry fee" value={liveProfile?.entranceFeeCost ? `${liveProfile.entranceFeeCost} ${liveProfile.entranceFeeDescription ?? ""}`.trim() : cohortPark.entryFee} />
-                    <Stat
-                      label={`Visits (${cohortPark.visitsWindow})`}
-                      value={`${cohortPark.medianAnnualVisits.toLocaleString()}${cohortPark.officialVisitRank2025 ? ` · #${cohortPark.officialVisitRank2025} official 2025` : " · outside 2025 top 10"}`}
-                    />
-                    <Stat label="Typical trip" value={cohortPark.quickStats.tripLength} />
-                  </>
-                ) : (
-                  <>
-                    <Stat label="Entry fee" value={liveProfile?.entranceFeeCost ? `${liveProfile.entranceFeeCost} ${liveProfile.entranceFeeDescription ?? ""}`.trim() : "See nps.gov"} />
-                    <Stat label="Location" value={state} />
-                    <Stat label="Best overall month" value={labels.bestOverall.name} />
-                    <Stat label="Acreage / visitation" value="Not yet live" />
-                  </>
-                )}
-              </div>
+              <RevealGroup as="div" className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 text-sm" itemClassName="h-full">
+                {cohortPark
+                  ? [
+                      <Stat key="acreage" label="Acreage" value={<CountUp value={cohortPark.acreage} suffix=" ac" />} />,
+                      <Stat
+                        key="fee"
+                        label="Entry fee"
+                        value={liveProfile?.entranceFeeCost ? `${liveProfile.entranceFeeCost} ${liveProfile.entranceFeeDescription ?? ""}`.trim() : cohortPark.entryFee}
+                      />,
+                      <Stat
+                        key="visits"
+                        label={`Visits (${cohortPark.visitsWindow})`}
+                        value={`${cohortPark.medianAnnualVisits.toLocaleString()}${cohortPark.officialVisitRank2025 ? ` · #${cohortPark.officialVisitRank2025} official 2025` : " · outside 2025 top 10"}`}
+                      />,
+                      <Stat key="trip" label="Typical trip" value={cohortPark.quickStats.tripLength} />,
+                    ]
+                  : [
+                      <Stat
+                        key="fee"
+                        label="Entry fee"
+                        value={liveProfile?.entranceFeeCost ? `${liveProfile.entranceFeeCost} ${liveProfile.entranceFeeDescription ?? ""}`.trim() : "See nps.gov"}
+                      />,
+                      <Stat key="location" label="Location" value={state} />,
+                      <Stat key="best-month" label="Best overall month" value={labels.bestOverall.name} />,
+                      <Stat key="acreage" label="Acreage / visitation" value="Not yet live" />,
+                    ]}
+              </RevealGroup>
 
               {liveProfile && (
                 <details className="group rounded-sm border border-ink/12 bg-bone-deep open:bg-bone-deep">
@@ -140,15 +150,15 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
             </section>
 
             <section id="when-to-go" className="scroll-mt-24">
-              <h2 className="font-display text-display-md mb-1">When to go</h2>
-              <p className="text-sm text-ink-soft mb-8">Weighed on climate and access, never on crowds.</p>
+              <Reveal as="h2" className="font-display text-display-md mb-1">When to go</Reveal>
+              <Reveal as="p" delay={0.06} className="text-sm text-ink-soft mb-8">Weighed on climate and access, never on crowds.</Reveal>
 
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
+              <RevealGroup as="div" className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10" itemClassName="h-full">
                 <FigureLabel label="Best overall" month={labels.bestOverall.name} />
                 <FigureLabel label="Best weather" month={labels.bestWeather.name} />
                 <FigureLabel label="Fewest crowds" month={labels.fewestCrowds.name} />
                 <FigureLabel label="Best balance" month={labels.bestBalance.name} />
-              </div>
+              </RevealGroup>
 
               <div className="flex items-end gap-2 h-32 mb-2">
                 {months.map((m) => (
@@ -184,7 +194,7 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
             {!detail && <NonCohortSections name={name} liveThings={liveThings} npsUrl={liveProfile?.sourceUrl} />}
 
             <section id="crowds" className="scroll-mt-24">
-              <h2 className="font-display text-display-md mb-6">Crowd calendar</h2>
+              <Reveal as="h2" className="font-display text-display-md mb-6">Crowd calendar</Reveal>
               <CrowdCalendar rows={months} estimated={!cohortPark} bestBalanceMonth={labels.bestBalance.month} />
             </section>
           </div>
@@ -192,38 +202,40 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
       </div>
 
       {/* Current Conditions — ink chapter */}
-      <section className="bg-ink text-bone py-16">
+      <section className="bg-ink text-bone py-16" style={{ contentVisibility: "auto", containIntrinsicSize: "auto 400px" }}>
         <div className="max-w-[1360px] mx-auto px-6 md:px-10">
           <div className="flex items-baseline gap-3 mb-6">
-            <h2 className="font-display text-display-md">Current conditions</h2>
+            <Reveal as="h2" className="font-display text-display-md">Current conditions</Reveal>
             <span className="text-mono-sm font-mono text-bone/60">{alerts ? "Live · NPS Alerts API" : "No alerts reported"}</span>
           </div>
-          <div className="flex flex-col gap-3">
-            {alerts ? (
-              alerts.map((a, i) => (
-                <div key={i} className="rounded-sm border border-bone/15 p-4 flex justify-between gap-4 flex-wrap">
+          {alerts ? (
+            <RevealGroup as="div" className="flex flex-col gap-3" itemClassName="rounded-sm border border-bone/15 p-4 flex justify-between gap-4 flex-wrap">
+              {alerts.map((a, i) => (
+                <Fragment key={i}>
                   <div>
                     <span className="text-mono-sm font-mono uppercase tracking-wide text-brass">{a.category}</span>
                     <p className="text-sm mt-1 font-medium">{a.title}</p>
                     <p className="text-sm text-bone/70 mt-0.5">{a.description}</p>
                   </div>
                   <span className="text-mono-sm font-mono text-bone/60 whitespace-nowrap">{new Date(a.lastIndexedDate).toLocaleDateString()}</span>
-                </div>
-              ))
-            ) : !cohortPark ? (
-              <p className="text-sm text-bone/70">No active NPS alerts for {name} right now.</p>
-            ) : (
-              detail!.alerts.map((a, i) => (
-                <div key={i} className="rounded-sm border border-bone/15 p-4 flex justify-between gap-4 flex-wrap">
+                </Fragment>
+              ))}
+            </RevealGroup>
+          ) : !cohortPark ? (
+            <p className="text-sm text-bone/70">No active NPS alerts for {name} right now.</p>
+          ) : (
+            <RevealGroup as="div" className="flex flex-col gap-3" itemClassName="rounded-sm border border-bone/15 p-4 flex justify-between gap-4 flex-wrap">
+              {detail!.alerts.map((a, i) => (
+                <Fragment key={i}>
                   <div>
                     <span className="text-mono-sm font-mono uppercase tracking-wide text-brass">{a.type}</span>
                     <p className="text-sm mt-1">{a.description}</p>
                   </div>
                   <span className="text-mono-sm font-mono text-bone/60 whitespace-nowrap">{new Date(a.lastUpdated).toLocaleString()}</span>
-                </div>
-              ))
-            )}
-          </div>
+                </Fragment>
+              ))}
+            </RevealGroup>
+          )}
         </div>
       </section>
     </div>
@@ -234,11 +246,15 @@ function EditorialSections({ detail }: { detail: ParkDetail }) {
   return (
     <>
       <section id="hiking" className="scroll-mt-24">
-        <h2 className="font-display text-display-md mb-1">Hiking & trekking</h2>
-        <p className="text-mono-sm font-mono text-ink-soft mb-6">Officially listed hikes (NPS) &mdash; computed GIS trail totals land in Phase 2</p>
-        <div className="flex flex-col divide-y divide-ink/10 border-t border-b border-ink/10">
+        <Reveal as="h2" className="font-display text-display-md mb-1">Hiking & trekking</Reveal>
+        <Reveal as="p" delay={0.06} className="text-mono-sm font-mono text-ink-soft mb-6">Officially listed hikes (NPS) &mdash; computed GIS trail totals land in Phase 2</Reveal>
+        <RevealGroup
+          as="div"
+          className="flex flex-col divide-y divide-ink/10 border-t border-b border-ink/10"
+          itemClassName="py-4 flex flex-col sm:flex-row sm:items-baseline gap-1.5 sm:gap-6"
+        >
           {detail.hikes.map((h) => (
-            <div key={h.name} className="py-4 flex flex-col sm:flex-row sm:items-baseline gap-1.5 sm:gap-6">
+            <Fragment key={h.name}>
               <div className="font-display text-display-md sm:w-64 flex-none leading-none">{h.name}</div>
               <div className="flex flex-wrap gap-x-4 gap-y-1 font-mono text-mono-sm text-ink-soft">
                 <span>{h.distanceMi} mi</span>
@@ -249,60 +265,68 @@ function EditorialSections({ detail }: { detail: ParkDetail }) {
                 {h.waterFeature && <span>Water feature</span>}
                 {h.reservation && <span>Reservation required</span>}
               </div>
-            </div>
+            </Fragment>
           ))}
-        </div>
+        </RevealGroup>
       </section>
 
       <section id="must-see" className="scroll-mt-24">
-        <h2 className="font-display text-display-md mb-6">Must-see spots</h2>
-        <div className="flex gap-4 overflow-x-auto pb-2 snap-x">
+        <Reveal as="h2" className="font-display text-display-md mb-6">Must-see spots</Reveal>
+        <RevealGroup
+          as="div"
+          className="flex gap-4 overflow-x-auto pb-2 snap-x"
+          itemClassName="flex-none w-56 snap-start rounded-sm border border-ink/12 bg-bone-deep p-4 h-full"
+        >
           {detail.spots.map((s) => (
-            <div key={s.name} className="flex-none w-56 snap-start rounded-sm border border-ink/12 bg-bone-deep p-4">
+            <Fragment key={s.name}>
               <span className="font-mono text-mono-sm uppercase tracking-wide text-ink-soft">{s.category}</span>
               <div className="font-display text-display-md leading-tight mt-1">{s.name}</div>
-            </div>
+            </Fragment>
           ))}
-        </div>
+        </RevealGroup>
       </section>
 
       <section id="water" className="scroll-mt-24">
-        <h2 className="font-display text-display-md mb-1">Lakes & water</h2>
-        <p className="text-mono-sm font-mono text-ink-soft mb-6">USGS GNIS naming + hydrography intersected with NPS boundary</p>
-        <div className="grid md:grid-cols-3 gap-4">
+        <Reveal as="h2" className="font-display text-display-md mb-1">Lakes & water</Reveal>
+        <Reveal as="p" delay={0.06} className="text-mono-sm font-mono text-ink-soft mb-6">USGS GNIS naming + hydrography intersected with NPS boundary</Reveal>
+        <RevealGroup
+          as="div"
+          className="grid md:grid-cols-3 gap-4"
+          itemClassName="rounded-sm border border-ink/12 bg-bone-deep p-4 h-full"
+        >
           {detail.water.map((w) => (
-            <div key={w.name} className="rounded-sm border border-ink/12 bg-bone-deep p-4">
+            <Fragment key={w.name}>
               <span className="font-mono text-mono-sm uppercase tracking-wide text-ink-soft">{w.type}</span>
               <div className="font-display text-display-md leading-tight mt-1 mb-1">{w.name}</div>
               <p className="text-sm text-ink-soft">{w.note}</p>
-            </div>
+            </Fragment>
           ))}
-        </div>
+        </RevealGroup>
       </section>
 
       <section id="dining" className="scroll-mt-24">
         <div className="flex items-baseline gap-3 mb-1">
-          <h2 className="font-display text-display-md">Dining availability</h2>
+          <Reveal as="h2" className="font-display text-display-md">Dining availability</Reveal>
           <span className="font-mono text-sm font-semibold uppercase tracking-wide">{detail.dining.label}</span>
         </div>
-        <p className="text-mono-sm font-mono text-ink-soft mb-6">Categorical label &mdash; never a taste score. NPS authorized-concessioner records.</p>
+        <Reveal as="p" delay={0.06} className="text-mono-sm font-mono text-ink-soft mb-6">Categorical label &mdash; never a taste score. NPS authorized-concessioner records.</Reveal>
         <div className="flex flex-wrap gap-6 text-sm mb-5 font-mono">
           <span>{detail.dining.restaurants} restaurants</span>
           <span>{detail.dining.quickService} quick service</span>
           <span>{detail.dining.generalStores} general stores</span>
           {detail.dining.bringFood && <span className="text-ink font-semibold">Recommend bringing food</span>}
         </div>
-        <div className="grid md:grid-cols-2 gap-4">
+        <RevealGroup as="div" className="grid md:grid-cols-2 gap-4" itemClassName="rounded-sm border border-ink/12 bg-bone-deep p-4 h-full">
           {detail.dining.operations.map((op) => (
-            <div key={op.name} className="rounded-sm border border-ink/12 bg-bone-deep p-4">
+            <Fragment key={op.name}>
               <div className="font-display text-display-md leading-tight">{op.name}</div>
               <p className="text-sm text-ink-soft mt-1">{op.type} &middot; {op.location} &middot; {op.seasonal ? "Seasonal" : "Year-round"} &middot; Authorized NPS concessioner</p>
-            </div>
+            </Fragment>
           ))}
-          {detail.dining.operations.length === 0 && (
-            <p className="text-sm text-ink-soft">No concessioner dining inside the park &mdash; bring your own food.</p>
-          )}
-        </div>
+        </RevealGroup>
+        {detail.dining.operations.length === 0 && (
+          <p className="text-sm text-ink-soft">No concessioner dining inside the park &mdash; bring your own food.</p>
+        )}
       </section>
     </>
   );
@@ -322,18 +346,18 @@ function NonCohortSections({
       {liveThings.length > 0 && (
         <section id="must-see" className="scroll-mt-24">
           <div className="flex items-baseline gap-3 mb-1">
-            <h2 className="font-display text-display-md">Must-see spots</h2>
+            <Reveal as="h2" className="font-display text-display-md">Must-see spots</Reveal>
             <span className="text-mono-sm font-mono text-ink-soft">Live &middot; NPS Data API</span>
           </div>
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <RevealGroup as="div" className="grid sm:grid-cols-2 md:grid-cols-3 gap-4" itemClassName="rounded-sm border border-ink/12 bg-bone-deep p-4 h-full">
             {liveThings.map((t) => (
-              <div key={t.title} className="rounded-sm border border-ink/12 bg-bone-deep p-4">
+              <Fragment key={t.title}>
                 {t.activity && <span className="font-mono text-mono-sm uppercase tracking-wide text-ink-soft">{t.activity}</span>}
                 <div className="font-display text-display-md leading-tight mt-1 mb-1">{t.title}</div>
                 <p className="text-sm text-ink-soft line-clamp-3">{t.shortDescription}</p>
-              </div>
+              </Fragment>
             ))}
-          </div>
+          </RevealGroup>
         </section>
       )}
 
@@ -351,9 +375,9 @@ function NonCohortSections({
   );
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
+function Stat({ label, value }: { label: string; value: ReactNode }) {
   return (
-    <div className="rounded-sm border border-ink/12 px-4 py-3">
+    <div className="h-full rounded-sm border border-ink/12 px-4 py-3">
       <div className="text-mono-sm font-mono uppercase tracking-wide text-ink-soft">{label}</div>
       <div className="font-semibold mt-0.5">{value}</div>
     </div>
@@ -362,7 +386,7 @@ function Stat({ label, value }: { label: string; value: string }) {
 
 function FigureLabel({ label, month }: { label: string; month: string }) {
   return (
-    <div className="rounded-sm bg-bone-deep px-4 py-3">
+    <div className="h-full rounded-sm bg-bone-deep px-4 py-3">
       <div className="text-mono-sm font-mono uppercase tracking-wide text-ink-soft">{label}</div>
       <div className="font-display text-display-md leading-none mt-1">{month}</div>
     </div>
