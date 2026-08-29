@@ -1736,7 +1736,7 @@ git add src/components/Footer.tsx
 git commit -m "Footer: Reveal the sign-off line"
 ```
 
-- [ ] **Step 6: Update the spec/README with the real before/after numbers**
+- [x] **Step 6: Update the spec/README with the real before/after numbers**
 
 In `docs/superpowers/specs/2026-08-29-reveal-jank-pass-design.md`, under "Measurement", add a final line with the actual before/after numbers from Task 1 Step 4 and Task 14 Step 3. Commit:
 ```bash
