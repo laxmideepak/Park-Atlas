@@ -456,7 +456,7 @@ git commit -m "UsMap: memo state-path layer, gate pin entrance behind in-view"
 **Files:**
 - Modify: `src/components/CrowdCalendar.tsx`
 
-- [ ] **Step 1: Convert to a client component and animate the bars**
+- [x] **Step 1: Convert to a client component and animate the bars**
 
 Replace the full file content of `src/components/CrowdCalendar.tsx` with:
 
@@ -527,12 +527,12 @@ export function CrowdCalendar({
 }
 ```
 
-- [ ] **Step 2: Verify**
+- [x] **Step 2: Verify**
 
 Run: `npm run build && npm run lint && npm run test`
 Expected: build/lint clean, 32/32 tests pass (this component has no pure-logic tests, `CrowdCalendar` is only consumed by the park detail page which is exercised at build time via `generateStaticParams`, so a build failure here would show up immediately).
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/components/CrowdCalendar.tsx
