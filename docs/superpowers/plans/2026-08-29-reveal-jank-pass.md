@@ -1411,7 +1411,7 @@ git commit -m "Season page: stagger the ranked list"
 **Files:**
 - Modify: `src/app/rankings/page.tsx`
 
-- [ ] **Step 1: Import the new components**
+- [x] **Step 1: Import the new components**
 
 Add to the top import block (after the `NearestGemFallback` import):
 ```tsx
@@ -1419,7 +1419,7 @@ import { Fragment } from "react";
 import { Reveal, RevealGroup } from "@/components/Reveal";
 ```
 
-- [ ] **Step 2: Reveal the "Most visited" section**
+- [x] **Step 2: Reveal the "Most visited" section**
 
 Replace:
 ```tsx
@@ -1460,7 +1460,7 @@ with:
         </section>
 ```
 
-- [ ] **Step 3: Reveal the "Largest" section**
+- [x] **Step 3: Reveal the "Largest" section**
 
 Replace:
 ```tsx
@@ -1499,7 +1499,7 @@ with:
         </section>
 ```
 
-- [ ] **Step 4: Reveal the "Least crowded" section (its heading/subtitle and its `RevealGroup`), leave the `<details>`-nested visits-per-acre table alone**
+- [x] **Step 4: Reveal the "Least crowded" section (its heading/subtitle and its `RevealGroup`), leave the `<details>`-nested visits-per-acre table alone**
 
 The visits-per-acre table is inside a collapsed `<details>` element — it's not visible until the user expands it, so `whileInView` would never fire naturally there (it starts `display:none` in most browsers' default `<details>` rendering, meaning it's never "in view" until manually opened, and once opened it should just show, not re-trigger a scroll animation). Leave that inner `<ol>` untouched.
 
@@ -1549,7 +1549,7 @@ with:
 ```
 (everything from the `<details>` block onward stays exactly as-is)
 
-- [ ] **Step 5: Reveal the "Hidden gems this month" section**
+- [x] **Step 5: Reveal the "Hidden gems this month" section**
 
 Replace:
 ```tsx
@@ -1608,7 +1608,7 @@ with:
         </section>
 ```
 
-- [ ] **Step 6: Reveal the "Best by month" heading (leave the 12 nav pills unstaggered — they're navigation chrome, not data rows; staggering 12 tiny pills would read as noise, not polish)**
+- [x] **Step 6: Reveal the "Best by month" heading (leave the 12 nav pills unstaggered — they're navigation chrome, not data rows; staggering 12 tiny pills would read as noise, not polish)**
 
 Replace:
 ```tsx
@@ -1623,12 +1623,12 @@ with:
           <Reveal as="p" delay={0.06} className="text-ink-soft mb-6">Tiered results for any month of the year, across all 63 parks.</Reveal>
 ```
 
-- [ ] **Step 7: Verify**
+- [x] **Step 7: Verify**
 
 Run: `npm run build && npm run lint && npm run test`
 Expected: build succeeds, lint clean, 32/32 tests pass.
 
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit**
 
 ```bash
 git add src/app/rankings/page.tsx
