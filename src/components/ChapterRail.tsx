@@ -1,7 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
+import { useLenis } from "lenis/react";
+
+const RAIL_SCROLL_OFFSET = -96; // matches the sections' scroll-mt-24 (6rem)
 
 export interface Chapter {
   id: string;
@@ -12,6 +15,17 @@ export interface Chapter {
  * a brass tick slides between items via layoutId instead of just toggling color. */
 export function ChapterRail({ chapters }: { chapters: Chapter[] }) {
   const [active, setActive] = useState(chapters[0]?.id);
+  const lenis = useLenis();
+  const reduceMotion = useReducedMotion();
+
+  const goToChapter = (e: React.MouseEvent, id: string) => {
+    if (!lenis) return; // let the native #hash jump happen
+    e.preventDefault();
+    lenis.scrollTo(`#${id}`, {
+      offset: RAIL_SCROLL_OFFSET,
+      ...(reduceMotion ? { immediate: true } : { duration: 0.9 }),
+    });
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -37,6 +51,7 @@ export function ChapterRail({ chapters }: { chapters: Chapter[] }) {
           <a
             key={c.id}
             href={`#${c.id}`}
+            onClick={(e) => goToChapter(e, c.id)}
             className="relative pl-4 py-1.5"
             style={{ color: active === c.id ? "var(--ink)" : "var(--ink-soft)" }}
           >
@@ -58,6 +73,7 @@ export function ChapterRail({ chapters }: { chapters: Chapter[] }) {
           <a
             key={c.id}
             href={`#${c.id}`}
+            onClick={(e) => goToChapter(e, c.id)}
             className="flex-none px-3 py-1.5 rounded-full border"
             style={{
               borderColor: active === c.id ? "var(--brass)" : "var(--ink-soft)",

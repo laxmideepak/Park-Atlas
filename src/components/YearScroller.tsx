@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform, useMotionValueEvent, useReducedMotion } from "motion/react";
+import { useLenis } from "lenis/react";
 import { TierBadge } from "./TierBadge";
 import { ContourField } from "./ContourField";
 import type { ParkImage } from "@/lib/nps";
@@ -31,6 +32,7 @@ export function YearScroller({ chapters }: { chapters: YearChapter[] }) {
   const reduceMotion = useReducedMotion();
   const pinRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
+  const lenis = useLenis();
 
   const { scrollYProgress } = useScroll({ target: pinRef, offset: ["start start", "end end"] });
   const x = useTransform(scrollYProgress, [0, 1], ["0vw", `-${(N - 1) * 100}vw`]);
@@ -45,7 +47,12 @@ export function YearScroller({ chapters }: { chapters: YearChapter[] }) {
     const rect = el.getBoundingClientRect();
     const docTop = window.scrollY + rect.top;
     const range = el.offsetHeight - window.innerHeight;
-    window.scrollTo({ top: docTop + (i / (N - 1)) * range, behavior: reduceMotion ? "auto" : "smooth" });
+    const top = docTop + (i / (N - 1)) * range;
+    if (lenis) {
+      lenis.scrollTo(top, reduceMotion ? { immediate: true } : { duration: 0.9 });
+    } else {
+      window.scrollTo(0, top);
+    }
   };
 
   useEffect(() => {
