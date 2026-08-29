@@ -1642,7 +1642,7 @@ git commit -m "Rankings: Reveal section headings, stagger the 3 open list sectio
 **Files:**
 - Modify: `src/app/parks/page.tsx`
 
-- [ ] **Step 1: Import and apply**
+- [x] **Step 1: Import and apply**
 
 Add to the top import block (after the `ParksIndexList` import):
 ```tsx
@@ -1671,12 +1671,12 @@ with:
 ```
 (`ParksIndexList` itself — the interactive hover-preview list — is left untouched, per the approved design: it's already a complex client component with its own hover state, out of scope for this pass.)
 
-- [ ] **Step 2: Verify**
+- [x] **Step 2: Verify**
 
 Run: `npm run build && npm run lint && npm run test`
 Expected: build succeeds, lint clean, 32/32 tests pass.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/app/parks/page.tsx
