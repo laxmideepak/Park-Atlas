@@ -164,16 +164,9 @@ export default async function Home() {
       {/* The Atlas — ink */}
       <section className="bg-ink text-bone py-20">
         <div className="max-w-[1360px] mx-auto px-6 md:px-10">
-          <Reveal as="h2" className="font-display text-display-lg leading-none mb-8">Where it&rsquo;s good, right now.</Reveal>
-          <UsMap statePaths={US_STATE_PATHS} width={US_MAP_WIDTH} height={US_MAP_HEIGHT} pins={pins} />
-          <Reveal as="div" delay={0.1} className="flex justify-between items-start gap-4 mt-4 font-mono text-mono-sm text-bone/60 flex-wrap">
-            <span className="flex items-center gap-4">
-              <span><span className="inline-block w-2 h-2 rounded-full bg-brass mr-1.5" />Exceptional</span>
-              <span><span className="inline-block w-2 h-2 rounded-full bg-brass/65 mr-1.5" />Excellent</span>
-              <span><span className="inline-block w-2 h-2 rounded-full bg-bone/40 mr-1.5" />Good</span>
-              <span><span className="inline-block w-2 h-2 rounded-full border border-bone/60 mr-1.5" />Specialized/Limited</span>
-            </span>
-            {offMap.length > 0 && (
+          <UsMap statePaths={US_STATE_PATHS} width={US_MAP_WIDTH} height={US_MAP_HEIGHT} pins={pins} initialMonth={DEFAULT_MONTH} />
+          {offMap.length > 0 && (
+            <Reveal as="div" delay={0.1} className="mt-4 font-mono text-mono-sm text-bone/60">
               <span>
                 Not shown on this projection:{" "}
                 {offMap.map((p, i) => (
@@ -183,8 +176,8 @@ export default async function Home() {
                   </span>
                 ))}
               </span>
-            )}
-          </Reveal>
+            </Reveal>
+          )}
         </div>
       </section>
 
