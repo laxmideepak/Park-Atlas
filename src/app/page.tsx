@@ -45,9 +45,12 @@ export default async function Home() {
   const heroParkCode = HERO_BY_MONTH[DEFAULT_MONTH] ?? "yell";
   const heroImages = await fetchParkImages(heroParkCode);
 
-  // Year Scroller: real engine data, one photo fetch per unique winning park
+  // One photo fetch per unique park needed anywhere on this page (Year
+  // Scroller + Best-in-Month + Hidden Gems), deduped by code.
   const monthTops = MONTHS.map((m) => ({ m, top: bestByMonth(m.abbr)[0] }));
-  const uniqueParkCodes = [...new Set(monthTops.map((mt) => mt.top.park))];
+  const uniqueParkCodes = [
+    ...new Set([...monthTops.map((mt) => mt.top.park), ...best.slice(0, 8).map((r) => r.park), ...gems.map((g) => g.park)]),
+  ];
   const imagesByCode = new Map(
     await Promise.all(uniqueParkCodes.map(async (code) => [code, await fetchParkImages(code)] as const))
   );
@@ -96,7 +99,7 @@ export default async function Home() {
 
           <div className="grid gap-5 mb-8" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))" }}>
             {best.slice(0, 8).map((row) => (
-              <ParkCard key={row.park} park={getParkSummary(row.park)} row={row} />
+              <ParkCard key={row.park} park={getParkSummary(row.park)} row={row} image={imagesByCode.get(row.park)?.[0] ?? null} />
             ))}
           </div>
           <Link href={`/discover/month/${DEFAULT_MONTH}`} className="font-mono text-mono-sm underline underline-offset-2">
@@ -113,7 +116,7 @@ export default async function Home() {
             ) : (
               <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))" }}>
                 {gems.map((g) => (
-                  <ParkCard key={g.park} park={getParkSummary(g.park)} row={g} />
+                  <ParkCard key={g.park} park={getParkSummary(g.park)} row={g} image={imagesByCode.get(g.park)?.[0] ?? null} />
                 ))}
               </div>
             )}

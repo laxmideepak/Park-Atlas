@@ -64,9 +64,11 @@ export function crowdBand(percentile: number): CrowdBand {
   return "Very High";
 }
 
+/** §2.1 — glacial is data-secondary only (crowd lines/water), never decorative;
+ * brass stays reserved for Month Fit tiers. Steps by opacity, one hue. */
 export const CROWD_BAND_COLOR: Record<CrowdBand, string> = {
-  Low: "#6B8F5A",
-  Moderate: "#D6A63B99",
-  High: "#B5502C99",
-  "Very High": "#B5502C",
+  Low: "#7fa3ad4d",
+  Moderate: "#7fa3ad80",
+  High: "#7fa3adb3",
+  "Very High": "#7fa3ad",
 };

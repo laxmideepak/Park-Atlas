@@ -1,15 +1,14 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { MonthDial } from "@/components/MonthDial";
 import { ParkCard } from "@/components/ParkCard";
-import { ParkScape } from "@/components/ParkScape";
-import { WildlifeIcon } from "@/components/WildlifeIcon";
-import { getParkAccent } from "@/lib/park-theme";
-import { getWildlife } from "@/lib/data/park-wildlife";
-import { bestByMonth, hiddenGemsForMonth, getParkSummary } from "@/lib/repo";
+import { getParkSummary } from "@/lib/repo";
+import { bestByMonth, hiddenGemsForMonth } from "@/lib/repo";
 import { NearestGemFallback } from "@/components/NearestGemFallback";
 import { MONTHS, monthByAbbr } from "@/lib/months";
-import { MonthAbbr } from "@/lib/types";
+import { MonthAbbr, Tier } from "@/lib/types";
+import { TIER_ORDER } from "@/lib/scoring";
+import { fetchParkImages } from "@/lib/nps";
 
 export function generateStaticParams() {
   return MONTHS.map((m) => ({ month: m.abbr }));
@@ -22,62 +21,91 @@ export default async function MonthPage(props: PageProps<"/discover/month/[month
 
   const best = bestByMonth(month.abbr as MonthAbbr);
   const gems = hiddenGemsForMonth(month.abbr as MonthAbbr);
+  const top = best[0];
+  const topSummary = getParkSummary(top.park);
+
+  const uniqueCodes = [...new Set([...best.map((r) => r.park), ...gems.map((g) => g.park)])];
+  const imagesByCode = new Map(
+    await Promise.all(uniqueCodes.map(async (code) => [code, await fetchParkImages(code)] as const))
+  );
+  const heroImage = imagesByCode.get(top.park)?.[0] ?? null;
+
+  const byTier = new Map<Tier, typeof best>();
+  for (const t of TIER_ORDER) byTier.set(t, []);
+  for (const row of best) byTier.get(row.tier)!.push(row);
 
   return (
-    <div className="max-w-[1400px] mx-auto px-6 md:px-10 py-10">
-      <div className="grid md:grid-cols-[1fr_auto] gap-8 items-center mb-10">
-        <div>
-          <p className="text-xs font-mono text-paper-dim uppercase tracking-wide mb-2">By Month</p>
-          <h1 className="font-display uppercase text-4xl md:text-5xl mb-3">Best parks in {month.name}</h1>
-          <p className="text-paper-dim max-w-[50ch]">
-            Ranked by Month Fit &mdash; climate suitability (60%) and seasonal accessibility (40%). Never by popularity.
-          </p>
+    <div className="flex flex-col">
+      {/* ink hero */}
+      <section className="relative h-[60vh] min-h-[380px] w-full overflow-hidden bg-ink">
+        {heroImage ? (
+          <Image src={heroImage.url} alt={heroImage.altText || ""} fill priority sizes="100vw" className="object-cover img-grade" />
+        ) : (
+          <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, var(--ink), var(--brass) 220%)" }} />
+        )}
+        <div className="absolute inset-0 bg-ink/30" />
+        <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-ink to-transparent" />
+        <div className="grain-overlay" />
+        <div className="relative h-full max-w-[1360px] mx-auto px-6 md:px-10 flex flex-col justify-end pb-10">
+          <p className="font-mono text-mono-sm uppercase tracking-wide text-bone/70 mb-1">By month</p>
+          <h1 className="font-display text-display-xl leading-[0.95] text-bone mb-3">{month.name}</h1>
+          <p className="font-mono text-mono-sm text-bone/70">climate 60 &middot; access 40 &middot; popularity 0 &middot; #1 right now: {topSummary.name}</p>
         </div>
-        <MonthDial activeMonth={month.abbr} subtitle={`${best.length} of 63 parks scored`} />
-      </div>
+      </section>
 
-      <div className="grid gap-5 mb-14" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))" }}>
-        {best.map((row) => (
-          <ParkCard key={row.park} park={getParkSummary(row.park)} row={row} />
-        ))}
-      </div>
+      {/* month switcher */}
+      <nav className="bg-ink border-t border-bone/10 overflow-x-auto" aria-label="Choose a month">
+        <div className="max-w-[1360px] mx-auto px-6 md:px-10 flex gap-1">
+          {MONTHS.map((m) => (
+            <Link
+              key={m.abbr}
+              href={`/discover/month/${m.abbr}`}
+              className="relative flex-none px-4 py-4 font-mono text-mono-sm uppercase tracking-wide min-w-[44px] text-center"
+              style={{ color: "var(--bone)", opacity: m.abbr === month.abbr ? 1 : 0.5 }}
+            >
+              {m.abbr}
+              {m.abbr === month.abbr && <span className="absolute left-2 right-2 bottom-2 h-[2px]" style={{ background: "var(--brass)" }} />}
+            </Link>
+          ))}
+        </div>
+      </nav>
 
-      <div className="flex justify-between items-baseline flex-wrap gap-2 mb-6">
-        <h2 className="font-display uppercase text-2xl">Hidden Gems This Month</h2>
-        <span className="text-xs font-mono text-paper-dim">Month Fit &ge;85 AND crowd percentile &le;40</span>
-      </div>
-      {gems.length === 0 ? (
-        <NearestGemFallback currentMonth={month.abbr} />
-      ) : (
-        <div className="flex gap-4 overflow-x-auto pb-2">
-          {gems.map((g) => {
-            const p = getParkSummary(g.park);
-            const accent = getParkAccent(g.park);
-            const wildlife = getWildlife(g.park);
+      {/* bone body, grouped by tier */}
+      <div className="bg-bone text-ink py-16">
+        <div className="max-w-[1360px] mx-auto px-6 md:px-10 flex flex-col gap-16">
+          {TIER_ORDER.map((tier) => {
+            const rows = byTier.get(tier)!;
+            if (rows.length === 0) return null;
             return (
-              <Link
-                key={g.park}
-                href={`/parks/${g.park}`}
-                className="flex-none w-[240px] rounded-sm overflow-hidden bg-paper text-basalt-deep flex flex-col"
-              >
-                <div className="relative">
-                  <ParkScape park={g.park} state={p.state} accent={accent} aspect="16/8" />
-                  {wildlife && (
-                    <span className="absolute bottom-2 left-2 rounded-full p-1" style={{ background: `${accent}55` }}>
-                      <WildlifeIcon wildlife={wildlife} color={accent} size={20} />
-                    </span>
-                  )}
+              <section key={tier}>
+                <h2 className="font-display text-display-lg leading-none mb-1">{tier}</h2>
+                <p className="font-mono text-mono-sm text-ink-soft mb-6">{rows.length} park{rows.length === 1 ? "" : "s"}</p>
+                <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))" }}>
+                  {rows.map((row) => (
+                    <ParkCard key={row.park} park={getParkSummary(row.park)} row={row} image={imagesByCode.get(row.park)?.[0] ?? null} />
+                  ))}
                 </div>
-                <div className="p-3.5 flex flex-col gap-1">
-                  <span className="font-bold">{p.name}</span>
-                  <p className="text-xs text-basalt-deep/70">Fit {g.overallMonthFit} &middot; {g.crowdPercentile}th crowd percentile</p>
-                  <span className="text-xs font-semibold" style={{ color: accent }}>{g.percentOfAnnualVisits}% of annual visits</span>
-                </div>
-              </Link>
+              </section>
             );
           })}
+
+          <section className="pt-10 border-t border-ink/10">
+            <div className="flex justify-between items-baseline flex-wrap gap-2 mb-6">
+              <h2 className="font-display text-display-md">Hidden gems this month</h2>
+              <span className="font-mono text-mono-sm text-ink-soft">Month Fit &ge;85 AND crowd percentile &le;40</span>
+            </div>
+            {gems.length === 0 ? (
+              <NearestGemFallback currentMonth={month.abbr} />
+            ) : (
+              <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))" }}>
+                {gems.map((g) => (
+                  <ParkCard key={g.park} park={getParkSummary(g.park)} row={g} image={imagesByCode.get(g.park)?.[0] ?? null} />
+                ))}
+              </div>
+            )}
+          </section>
         </div>
-      )}
+      </div>
     </div>
   );
 }

@@ -1,19 +1,29 @@
 import Link from "next/link";
+import { currentMonthAbbr, monthByAbbr } from "@/lib/months";
 
+/** §7.6, simplified: a solid ink bar rather than transparent-over-hero — the
+ * transparent variant would go invisible on bone-first pages (rankings,
+ * season pages), which is a worse trade than skipping the scroll effect. */
 export function Nav() {
+  const month = monthByAbbr(currentMonthAbbr())!;
   return (
-    <header className="max-w-[1400px] mx-auto flex items-center justify-between gap-10 px-6 md:px-10 py-6">
-      <Link href="/" className="flex items-center gap-2 font-display text-lg tracking-wide uppercase">
-        <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" aria-hidden>
-          <path d="M2 20 L9 6 L13 14 L16 9 L22 20 Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
-        </svg>
-        ParkAtlas
-      </Link>
-      <nav className="hidden md:flex gap-8 text-sm tracking-wide">
-        <Link href="/discover/month/oct" className="opacity-75 hover:opacity-100 transition-opacity">Discover</Link>
-        <Link href="/rankings" className="opacity-75 hover:opacity-100 transition-opacity">Rankings</Link>
-        <Link href="/parks" className="opacity-75 hover:opacity-100 transition-opacity">Parks</Link>
-      </nav>
+    <header className="sticky top-0 z-30 bg-ink text-bone border-b border-bone/10">
+      <div className="max-w-[1360px] mx-auto flex items-center justify-between gap-10 px-6 md:px-10 py-5">
+        <Link href="/" className="font-display italic text-2xl">
+          ParkAtlas
+        </Link>
+        <nav className="hidden md:flex items-center gap-8 font-mono text-mono-sm">
+          <Link href={`/discover/month/${month.abbr}`} className="opacity-75 hover:opacity-100 hover:text-brass transition-colors">Months</Link>
+          <Link href="/parks" className="opacity-75 hover:opacity-100 hover:text-brass transition-colors">Parks</Link>
+          <Link href="/rankings" className="opacity-75 hover:opacity-100 hover:text-brass transition-colors">Rankings</Link>
+          <Link
+            href={`/discover/month/${month.abbr}`}
+            className="px-3 py-1.5 rounded-full border border-bone/25 uppercase tracking-wide hover:border-brass transition-colors"
+          >
+            This month: {month.abbr}
+          </Link>
+        </nav>
+      </div>
     </header>
   );
 }

@@ -81,3 +81,19 @@ export function getSilhouetteFamily(code: string, state: string): SilhouetteFami
   if (parts.some((p) => COASTAL_STATES.includes(p))) return "coastal";
   return "forest";
 }
+
+export type Region = "West" | "Rockies" | "Southwest" | "East" | "AK + Islands";
+
+const REGION_BY_STATE: Record<string, Region> = {
+  AK: "AK + Islands", HI: "AK + Islands", AS: "AK + Islands", VI: "AK + Islands",
+  CA: "West", OR: "West", WA: "West", NV: "West",
+  MT: "Rockies", WY: "Rockies", ID: "Rockies", CO: "Rockies",
+  UT: "Southwest", AZ: "Southwest", NM: "Southwest", TX: "Southwest",
+};
+
+/** Same "first listed state wins" convention as getSilhouetteFamily, for the
+ * mobile region list (§6.1.4) and the parks-index filter row (§6.5). */
+export function getRegion(state: string): Region {
+  const first = state.split("/")[0]?.trim();
+  return REGION_BY_STATE[first] ?? "East";
+}
