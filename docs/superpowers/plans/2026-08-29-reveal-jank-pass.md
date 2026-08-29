@@ -18,7 +18,7 @@
 - Create: `scripts/audit-scroll.mjs`
 - Modify: `package.json` (add `audit-scroll` script + `playwright` devDependency)
 
-- [ ] **Step 1: Install Playwright and its browser binary**
+- [x] **Step 1: Install Playwright and its browser binary**
 
 Run:
 ```bash
@@ -27,7 +27,7 @@ npx playwright install chromium
 ```
 Expected: both commands exit 0. `playwright` appears under `devDependencies` in `package.json`.
 
-- [ ] **Step 2: Write the audit script**
+- [x] **Step 2: Write the audit script**
 
 Create `scripts/audit-scroll.mjs`:
 
@@ -91,14 +91,14 @@ main().catch((e) => {
 });
 ```
 
-- [ ] **Step 3: Add the npm script**
+- [x] **Step 3: Add the npm script**
 
 In `package.json`, inside `"scripts"`, add (after `"pick-hero-manifest"`):
 ```json
     "audit-scroll": "node scripts/audit-scroll.mjs"
 ```
 
-- [ ] **Step 4: Capture the BEFORE baseline**
+- [x] **Step 4: Capture the BEFORE baseline**
 
 Run:
 ```bash
@@ -110,7 +110,7 @@ kill %1
 ```
 Expected: prints `Avg frame:`, `Worst frame:`, `Frames >26ms:` lines. **Write these three numbers down** (in your task notes / PR description) — they're the "before" numbers Task 14 compares against. Do not commit them anywhere as code; they're a spoken record for the final report only.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add scripts/audit-scroll.mjs package.json package-lock.json
