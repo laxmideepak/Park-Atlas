@@ -1218,14 +1218,14 @@ git commit -m "Park detail: Reveal hiking/must-see/water/dining rows"
 **Files:**
 - Modify: `src/app/discover/month/[month]/page.tsx`
 
-- [ ] **Step 1: Import the new components**
+- [x] **Step 1: Import the new components**
 
 Add to the top import block (after the `ContourField` import):
 ```tsx
 import { Reveal, RevealGroup } from "@/components/Reveal";
 ```
 
-- [ ] **Step 2: Reveal each tier group's heading/subtitle and stagger its `ParkCard` grid**
+- [x] **Step 2: Reveal each tier group's heading/subtitle and stagger its `ParkCard` grid**
 
 Replace:
 ```tsx
@@ -1258,7 +1258,7 @@ with:
               </section>
 ```
 
-- [ ] **Step 3: Reveal the Hidden gems heading and stagger its grid**
+- [x] **Step 3: Reveal the Hidden gems heading and stagger its grid**
 
 Replace:
 ```tsx
@@ -1303,12 +1303,12 @@ with:
           </section>
 ```
 
-- [ ] **Step 4: Verify**
+- [x] **Step 4: Verify**
 
 Run: `npm run build && npm run lint && npm run test`
 Expected: build succeeds (all 12 month pages), lint clean, 32/32 tests pass.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/app/discover/month/\[month\]/page.tsx
