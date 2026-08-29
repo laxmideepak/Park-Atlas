@@ -13,6 +13,7 @@ import { fetchParkImages } from "@/lib/nps";
 import { pickHero, pickCard } from "@/lib/image-select";
 import { getParkAccent } from "@/lib/park-theme";
 import { ContourField } from "@/components/ContourField";
+import { Reveal, RevealGroup } from "@/components/Reveal";
 
 export function generateStaticParams() {
   return MONTHS.map((m) => ({ month: m.abbr }));
@@ -97,30 +98,42 @@ export default async function MonthPage(props: PageProps<"/discover/month/[month
             if (rows.length === 0) return null;
             return (
               <section key={tier}>
-                <h2 className="font-display text-display-lg leading-none mb-1">{tier}</h2>
-                <p className="font-mono text-mono-sm text-ink-soft mb-6">{rows.length} park{rows.length === 1 ? "" : "s"}</p>
-                <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))" }}>
+                <Reveal as="h2" className="font-display text-display-lg leading-none mb-1">{tier}</Reveal>
+                <Reveal as="p" delay={0.06} className="font-mono text-mono-sm text-ink-soft mb-6">{rows.length} park{rows.length === 1 ? "" : "s"}</Reveal>
+                <RevealGroup
+                  as="div"
+                  className="grid gap-5"
+                  style={{ gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))" }}
+                  itemClassName="h-full"
+                  stagger={0.04}
+                >
                   {rows.map((row) => (
                     <ParkCard key={row.park} park={getParkSummary(row.park)} row={row} image={pickCard(imagesByCode.get(row.park) ?? [])} />
                   ))}
-                </div>
+                </RevealGroup>
               </section>
             );
           })}
 
           <section className="pt-10 border-t border-ink/10">
             <div className="flex justify-between items-baseline flex-wrap gap-2 mb-6">
-              <h2 className="font-display text-display-md">Hidden gems this month</h2>
+              <Reveal as="h2" className="font-display text-display-md">Hidden gems this month</Reveal>
               <span className="font-mono text-mono-sm text-ink-soft">Month Fit &ge;85 AND crowd percentile &le;40</span>
             </div>
             {gems.length === 0 ? (
               <NearestGemFallback currentMonth={month.abbr} />
             ) : (
-              <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))" }}>
+              <RevealGroup
+                as="div"
+                className="grid gap-5"
+                style={{ gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))" }}
+                itemClassName="h-full"
+                stagger={0.04}
+              >
                 {gems.map((g) => (
                   <ParkCard key={g.park} park={getParkSummary(g.park)} row={g} image={pickCard(imagesByCode.get(g.park) ?? [])} />
                 ))}
-              </div>
+              </RevealGroup>
             )}
           </section>
         </div>
