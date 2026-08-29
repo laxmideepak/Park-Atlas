@@ -19,19 +19,22 @@ export function ThemedSection({ id, className, children }: { id: string; classNa
       </section>
     );
   }
+  // Eyebrow text takes the hue mixed 55/45 toward ink — hue-flavored but
+  // always >= 4.5:1 on bone (pure #D6A63B/#7FA3AD would fail as text).
+  const eyebrowColor = `color-mix(in srgb, ${theme.hue} 55%, var(--ink))`;
   return (
     <section id={id} className={["relative", className].filter(Boolean).join(" ")}>
       <div
         className="absolute -inset-x-6 -inset-y-8 rounded-sm overflow-hidden pointer-events-none"
         aria-hidden
-        style={{ background: `${theme.hue}0D` }}
+        style={{ background: `${theme.hue}14`, boxShadow: `inset 3px 0 0 0 ${theme.hue}B3` }}
       >
         <SectionPattern kind={theme.pattern} hue={theme.hue} uid={id} />
       </div>
       <div className="relative">
-        <p className="font-mono text-mono-sm uppercase tracking-wide mb-1 flex items-center gap-2">
-          <span aria-hidden className="inline-block w-4 h-[2px]" style={{ background: theme.hue }} />
-          <span className="text-ink-soft">{theme.eyebrow}</span>
+        <p className="font-mono text-mono-sm uppercase tracking-wide mb-2 flex items-center gap-2">
+          <span aria-hidden className="inline-block w-6 h-[2px]" style={{ background: theme.hue }} />
+          <span className="font-semibold" style={{ color: eyebrowColor }}>{theme.eyebrow}</span>
         </p>
         {children}
       </div>

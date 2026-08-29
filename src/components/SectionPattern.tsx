@@ -53,7 +53,7 @@ export function SectionPattern({ kind, hue, uid }: { kind: SectionTheme["pattern
     return (
       <svg className={SVG_CLASS} viewBox="0 0 400 200" preserveAspectRatio="none" aria-hidden>
         {paths.map((d, i) => (
-          <path key={i} d={d} fill="none" stroke={hue} strokeOpacity={0.12} strokeWidth={1} vectorEffect="non-scaling-stroke" />
+          <path key={i} d={d} fill="none" stroke={hue} strokeOpacity={0.22} strokeWidth={1} vectorEffect="non-scaling-stroke" />
         ))}
       </svg>
     );
@@ -63,7 +63,7 @@ export function SectionPattern({ kind, hue, uid }: { kind: SectionTheme["pattern
     return (
       <svg className={SVG_CLASS} viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice" aria-hidden>
         {MARKS.map(([x, y, s], i) => (
-          <path key={i} d={STAR} transform={`translate(${x} ${y}) scale(${s})`} fill={hue} fillOpacity={0.14} />
+          <path key={i} d={STAR} transform={`translate(${x} ${y}) scale(${s})`} fill={hue} fillOpacity={0.25} />
         ))}
       </svg>
     );
@@ -75,7 +75,7 @@ export function SectionPattern({ kind, hue, uid }: { kind: SectionTheme["pattern
       <svg className={SVG_CLASS} aria-hidden>
         <defs>
           <pattern id={id} width={24} height={24} patternUnits="userSpaceOnUse">
-            <circle cx={2} cy={2} r={1} fill={hue} fillOpacity={0.14} />
+            <circle cx={2} cy={2} r={1} fill={hue} fillOpacity={0.25} />
           </pattern>
         </defs>
         <rect width="100%" height="100%" fill={`url(#${id})`} />
@@ -87,7 +87,7 @@ export function SectionPattern({ kind, hue, uid }: { kind: SectionTheme["pattern
   return (
     <svg className={SVG_CLASS} aria-hidden>
       {BAND_YS.map((y) => (
-        <rect key={y} x="0" y={y} width="100%" height="10" fill={hue} fillOpacity={0.05} />
+        <rect key={y} x="0" y={y} width="100%" height="10" fill={hue} fillOpacity={0.09} />
       ))}
     </svg>
   );
