@@ -546,14 +546,14 @@ git commit -m "CrowdCalendar: animate bars growing in on scroll (scaleY, stagger
 **Files:**
 - Modify: `src/app/page.tsx`
 
-- [ ] **Step 1: Import the new components**
+- [x] **Step 1: Import the new components**
 
 Add to the top import block (after the `image-select` import):
 ```tsx
 import { Reveal, RevealGroup } from "@/components/Reveal";
 ```
 
-- [ ] **Step 2: Reveal the "This is {month}" section heading/subtitle, stagger its two ParkCard grids, and gate the section's paint cost**
+- [x] **Step 2: Reveal the "This is {month}" section heading/subtitle, stagger its two ParkCard grids, and gate the section's paint cost**
 
 Replace:
 ```tsx
@@ -638,7 +638,7 @@ with:
       </section>
 ```
 
-- [ ] **Step 3: Reveal the map section's heading + legend, gate its paint cost**
+- [x] **Step 3: Reveal the map section's heading + legend, gate its paint cost**
 
 Replace:
 ```tsx
@@ -678,7 +678,7 @@ and replace with:
 ```
 )
 
-- [ ] **Step 4: Reveal the index-teaser section, gate its paint cost**
+- [x] **Step 4: Reveal the index-teaser section, gate its paint cost**
 
 Replace:
 ```tsx
@@ -705,14 +705,14 @@ with:
       </section>
 ```
 
-- [ ] **Step 5: Verify**
+- [x] **Step 5: Verify**
 
 Run: `npm run build && npm run lint && npm run test`
 Expected: build succeeds (all 165 pages), lint clean, 32/32 tests pass.
 
 Manually: `npm run dev`, open `http://localhost:3000/`, scroll down — the "This is {month}" heading, card grids, map heading/legend, and index teaser should each fade+rise in as they enter view; card grids should stagger.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add src/app/page.tsx
