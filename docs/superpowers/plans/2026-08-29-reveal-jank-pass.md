@@ -304,7 +304,7 @@ git commit -m "Add CountUp component"
 
 **Why:** `RevealGroup` wraps each grid child in its own wrapper div. CSS Grid's default `align-items: stretch` stretches that *wrapper* to the row's full height, but `ParkCard`'s own root div (height:auto) won't automatically fill the taller wrapper unless it also has `h-full` — without this, cards in the same row would end up misaligned/different heights instead of the current equal-height look.
 
-- [ ] **Step 1: Edit the root div's className**
+- [x] **Step 1: Edit the root div's className**
 
 In `src/components/ParkCard.tsx`, change line 14:
 ```tsx
@@ -315,7 +315,7 @@ to:
     <div className="bg-bone-deep text-ink rounded-sm overflow-hidden flex flex-col h-full">
 ```
 
-- [ ] **Step 2: Verify no visual regression on a page that already uses ParkCard**
+- [x] **Step 2: Verify no visual regression on a page that already uses ParkCard**
 
 Run: `npm run dev` (if not already running), then in another terminal:
 ```bash
@@ -323,7 +323,7 @@ curl -s http://localhost:3000/ | grep -o 'bg-bone-deep[^"]*' | head -1
 ```
 Expected: output includes `h-full`.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/components/ParkCard.tsx
