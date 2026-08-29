@@ -1,21 +1,20 @@
+import type { CSSProperties } from "react";
 import { Tier } from "@/lib/types";
 
-const TIER_STYLE: Record<Tier, string> = {
-  Exceptional: "bg-accent text-basalt-deep border-accent",
-  Excellent: "bg-accent-soft text-paper border-accent/70",
-  Good: "bg-white/10 text-paper border-white/30",
-  Specialized: "bg-white/5 text-paper-dim border-white/20",
-  Limited: "bg-transparent text-paper-dim border-white/15",
+/** §7.2 — reads as a map-legend key, not a web chip: a leading swatch + mono uppercase text. */
+const TIER_SWATCH: Record<Tier, CSSProperties> = {
+  Exceptional: { background: "var(--brass)" },
+  Excellent: { background: "var(--brass)", opacity: 0.65 },
+  Good: { background: "var(--ink)", opacity: 0.3 },
+  Specialized: { border: "1px solid currentColor", background: "transparent" },
+  Limited: { border: "1px dashed currentColor", background: "transparent" },
 };
 
 export function TierBadge({ tier, onLight = false }: { tier: Tier; onLight?: boolean }) {
-  const style = onLight
-    ? tier === "Exceptional" || tier === "Excellent"
-      ? "bg-accent-soft text-basalt-deep border-accent"
-      : "bg-black/5 text-basalt-deep/70 border-black/15"
-    : TIER_STYLE[tier];
+  const textColor = onLight ? "text-ink-soft" : "text-bone/80";
   return (
-    <span className={`inline-block text-[0.68rem] uppercase tracking-wide font-semibold px-2.5 py-1 rounded-full border ${style}`}>
+    <span className={`inline-flex items-center gap-1.5 font-mono text-mono-sm uppercase tracking-wide ${textColor}`}>
+      <span className="w-1.5 h-1.5 flex-none" style={TIER_SWATCH[tier]} />
       {tier}
     </span>
   );

@@ -1,21 +1,29 @@
 import { notFound } from "next/navigation";
-import type { ReactNode } from "react";
 import Link from "next/link";
 import { ALL_PARKS_MINI } from "@/lib/data/all-parks-mini";
 import { PARK_DETAIL, type ParkDetail } from "@/lib/data/park-detail";
 import { parkByCode, scoresForPark, parkHeaderLabels } from "@/lib/repo";
-import { TIER_COLOR } from "@/lib/scoring";
-import { WhyPanel } from "@/components/WhyPanel";
+import { WhyDrawer } from "@/components/WhyDrawer";
 import { CrowdCalendar } from "@/components/CrowdCalendar";
-import { ParkScape } from "@/components/ParkScape";
-import { LiveBanner } from "@/components/LiveBanner";
+import { ParkHero } from "@/components/ParkHero";
+import { ChapterRail, type Chapter } from "@/components/ChapterRail";
 import { getParkAccent } from "@/lib/park-theme";
-import { fetchParkProfile, fetchParkAlerts, fetchThingsToDo } from "@/lib/nps";
+import { fetchParkProfile, fetchParkAlerts, fetchThingsToDo, fetchParkImages } from "@/lib/nps";
 import { getLiveContext } from "@/lib/live-context";
 
 export function generateStaticParams() {
   return ALL_PARKS_MINI.map((p) => ({ parkCode: p.code }));
 }
+
+const CHAPTERS: Chapter[] = [
+  { id: "overview", label: "Overview" },
+  { id: "when-to-go", label: "When to Go" },
+  { id: "hiking", label: "Hiking" },
+  { id: "must-see", label: "Must-See" },
+  { id: "water", label: "Water" },
+  { id: "dining", label: "Dining" },
+  { id: "crowds", label: "Crowds" },
+];
 
 export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
   const { parkCode } = await props.params;
@@ -27,153 +35,163 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
   const name = cohortPark?.name ?? mini.name;
   const state = cohortPark?.state ?? mini.state;
 
-  const [liveProfile, liveAlerts, liveContext, liveThings] = await Promise.all([
+  const [liveProfile, liveAlerts, liveContext, liveThings, liveImages] = await Promise.all([
     fetchParkProfile(parkCode),
     fetchParkAlerts(parkCode),
     getLiveContext(mini.lat, mini.lng),
     cohortPark ? Promise.resolve<Awaited<ReturnType<typeof fetchThingsToDo>>>([]) : fetchThingsToDo(parkCode),
+    fetchParkImages(parkCode),
   ]);
 
   const detail = cohortPark ? PARK_DETAIL[cohortPark.code] : null;
   const alerts = liveAlerts.length > 0 ? liveAlerts : null;
-  const fieldNote = cohortPark?.fieldNote ?? liveProfile?.description ?? `${name} is one of the 63 U.S. National Parks.`;
   const months = scoresForPark(parkCode);
   const labels = parkHeaderLabels(parkCode);
+  const chapters = detail ? CHAPTERS : CHAPTERS.filter((c) => ["overview", "when-to-go", "must-see", "crowds"].includes(c.id));
 
   return (
-    <div className="flex flex-col gap-16 pb-10">
-      {/* Overview — hero */}
-      <section className="relative">
-        <ParkScape park={parkCode} state={state} accent={accent} fill />
-        <div className="relative pt-20 px-6 md:px-10 pb-8 max-w-[1400px] mx-auto flex flex-col gap-4">
-          <p className="text-xs uppercase tracking-wide" style={{ color: accent }}>{state}</p>
-          <h1 className="font-display uppercase text-4xl md:text-6xl max-w-[16ch]">{name}</h1>
-          <p className="max-w-[62ch] text-paper/90 line-clamp-3">{fieldNote}</p>
-          <LiveBanner context={liveContext} state={state} />
-        </div>
-      </section>
+    <div className="flex flex-col">
+      <ParkHero
+        images={liveImages}
+        name={name}
+        state={state}
+        accent={accent}
+        acreageLabel={cohortPark ? `${cohortPark.acreage.toLocaleString()} ac` : undefined}
+        officialRankLabel={cohortPark?.officialVisitRank2025 ? `#${cohortPark.officialVisitRank2025} most visited (official)` : undefined}
+        liveContext={liveContext}
+        parkCode={parkCode}
+      />
 
-      <div className="max-w-[1400px] mx-auto px-6 md:px-10 flex flex-col gap-16 w-full">
-        <section className="flex flex-col gap-6">
-          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-            {cohortPark ? (
-              <>
-                <Stat label="Acreage" value={`${cohortPark.acreage.toLocaleString()} ac`} />
-                <Stat label="Entry fee" value={liveProfile?.entranceFeeCost ? `${liveProfile.entranceFeeCost} ${liveProfile.entranceFeeDescription ?? ""}`.trim() : cohortPark.entryFee} />
-                <Stat
-                  label={`Visits (${cohortPark.visitsWindow})`}
-                  value={`${cohortPark.medianAnnualVisits.toLocaleString()}${cohortPark.officialVisitRank2025 ? ` · #${cohortPark.officialVisitRank2025} official 2025` : " · outside 2025 top 10"}`}
-                />
-                <Stat label="Typical trip" value={cohortPark.quickStats.tripLength} />
-              </>
-            ) : (
-              <>
-                <Stat label="Entry fee" value={liveProfile?.entranceFeeCost ? `${liveProfile.entranceFeeCost} ${liveProfile.entranceFeeDescription ?? ""}`.trim() : "See nps.gov"} />
-                <Stat label="Location" value={state} />
-                <Stat label="Best overall month" value={labels.bestOverall.name} />
-                <Stat label="Acreage / visitation" value="Not yet live" />
-              </>
-            )}
-          </div>
+      <div className="bg-bone text-ink">
+        <div className="max-w-[1360px] mx-auto px-6 md:px-10 py-10 flex flex-col lg:flex-row gap-12">
+          <ChapterRail chapters={chapters} />
 
-          {liveProfile && (
-            <details className="group rounded-sm border border-white/15 bg-basalt-deep/60 open:bg-basalt-deep">
-              <summary className="cursor-pointer list-none flex items-center justify-between gap-3 px-4 py-3 text-sm font-medium">
-                <span>Official NPS description</span>
-                <span className="font-mono text-xs text-paper-dim group-open:rotate-180 transition-transform">&#9660;</span>
-              </summary>
-              <div className="px-4 pb-4 pt-1 flex flex-col gap-2">
-                <p className="text-sm text-paper-dim">{liveProfile.description}</p>
-                <p className="text-xs font-mono text-paper-dim">
-                  Live &middot; NPS Data API &middot; <a href={liveProfile.sourceUrl} className="underline underline-offset-2">{liveProfile.sourceUrl}</a> &middot; fetched {new Date(liveProfile.retrievedAt).toLocaleDateString()}
-                </p>
+          <div className="flex-1 min-w-0 flex flex-col gap-20">
+            <section id="overview" className="scroll-mt-24 flex flex-col gap-6">
+              <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                {cohortPark ? (
+                  <>
+                    <Stat label="Acreage" value={`${cohortPark.acreage.toLocaleString()} ac`} />
+                    <Stat label="Entry fee" value={liveProfile?.entranceFeeCost ? `${liveProfile.entranceFeeCost} ${liveProfile.entranceFeeDescription ?? ""}`.trim() : cohortPark.entryFee} />
+                    <Stat
+                      label={`Visits (${cohortPark.visitsWindow})`}
+                      value={`${cohortPark.medianAnnualVisits.toLocaleString()}${cohortPark.officialVisitRank2025 ? ` · #${cohortPark.officialVisitRank2025} official 2025` : " · outside 2025 top 10"}`}
+                    />
+                    <Stat label="Typical trip" value={cohortPark.quickStats.tripLength} />
+                  </>
+                ) : (
+                  <>
+                    <Stat label="Entry fee" value={liveProfile?.entranceFeeCost ? `${liveProfile.entranceFeeCost} ${liveProfile.entranceFeeDescription ?? ""}`.trim() : "See nps.gov"} />
+                    <Stat label="Location" value={state} />
+                    <Stat label="Best overall month" value={labels.bestOverall.name} />
+                    <Stat label="Acreage / visitation" value="Not yet live" />
+                  </>
+                )}
               </div>
-            </details>
-          )}
-        </section>
 
-        {/* When to Go — every park now has Month Fit scoring (hand-authored for the
-            4-park cohort, estimated-by-park-type for the rest; see Why-panel/footer) */}
-        <section>
-          <h2 className="font-display uppercase text-3xl mb-1">When to Go ⭐</h2>
-          <p className="text-sm text-paper-dim mb-8">Weighed on climate and access, never on crowds — see below for how each month scores and why.</p>
+              {liveProfile && (
+                <details className="group rounded-sm border border-ink/12 bg-bone-deep open:bg-bone-deep">
+                  <summary className="cursor-pointer list-none flex items-center justify-between gap-3 px-4 py-3 text-sm font-medium">
+                    <span>Official NPS description</span>
+                    <span className="font-mono text-mono-sm text-ink-soft group-open:rotate-180 transition-transform">&#9660;</span>
+                  </summary>
+                  <div className="px-4 pb-4 pt-1 flex flex-col gap-2">
+                    <p className="text-sm text-ink-soft">{liveProfile.description}</p>
+                    <p className="text-mono-sm font-mono text-ink-soft">
+                      Live &middot; NPS Data API &middot; <a href={liveProfile.sourceUrl} className="underline underline-offset-2">{liveProfile.sourceUrl}</a> &middot; fetched {new Date(liveProfile.retrievedAt).toLocaleDateString()}
+                    </p>
+                  </div>
+                </details>
+              )}
+            </section>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
-            <Label label="Best overall" month={labels.bestOverall.name} accent={accent} />
-            <Label label="Best weather" month={labels.bestWeather.name} accent={accent} />
-            <Label label="Fewest crowds" month={labels.fewestCrowds.name} accent={accent} />
-            <Label label="Best balance" month={labels.bestBalance.name} accent={accent} />
+            <section id="when-to-go" className="scroll-mt-24">
+              <h2 className="font-display text-display-md mb-1">When to go</h2>
+              <p className="text-sm text-ink-soft mb-8">Weighed on climate and access, never on crowds.</p>
+
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
+                <FigureLabel label="Best overall" month={labels.bestOverall.name} />
+                <FigureLabel label="Best weather" month={labels.bestWeather.name} />
+                <FigureLabel label="Fewest crowds" month={labels.fewestCrowds.name} />
+                <FigureLabel label="Best balance" month={labels.bestBalance.name} />
+              </div>
+
+              <div className="flex items-end gap-2 h-32 mb-2">
+                {months.map((m) => (
+                  <WhyDrawer
+                    key={m.month}
+                    row={m}
+                    parkName={name}
+                    triggerClassName="flex-1 h-full flex flex-col justify-end items-center gap-1.5 group"
+                    trigger={
+                      <>
+                        <span className="font-mono text-mono-sm text-ink-soft group-hover:text-brass transition-colors">{m.overallMonthFit}</span>
+                        <span
+                          className="w-full rounded-t-sm transition-opacity group-hover:opacity-80"
+                          style={{
+                            height: `${Math.max(m.overallMonthFit, 6)}%`,
+                            background: m.month === labels.bestOverall.month ? "var(--brass)" : "var(--ink)",
+                          }}
+                        />
+                      </>
+                    }
+                  />
+                ))}
+              </div>
+              <div className="flex gap-2 mb-8">
+                {months.map((m) => (
+                  <span key={m.month} className="flex-1 text-center font-mono text-mono-sm uppercase text-ink-soft">{m.month}</span>
+                ))}
+              </div>
+              <p className="text-mono-sm font-mono text-ink-soft">Tap any month for its full Why-panel — factor weights, sources, confidence.</p>
+            </section>
+
+            {detail && <EditorialSections detail={detail} />}
+            {!detail && <NonCohortSections name={name} liveThings={liveThings} npsUrl={liveProfile?.sourceUrl} />}
+
+            <section id="crowds" className="scroll-mt-24">
+              <h2 className="font-display text-display-md mb-6">Crowd calendar</h2>
+              <CrowdCalendar rows={months} estimated={!cohortPark} bestBalanceMonth={labels.bestBalance.month} />
+            </section>
           </div>
+        </div>
+      </div>
 
-          <div className="grid grid-cols-6 md:grid-cols-12 gap-1.5 mb-6">
-            {months.map((m) => (
-              <a key={m.month} href={`#why-${m.month}`} className="flex flex-col items-center gap-1 rounded-sm py-3 text-center" style={{ background: TIER_COLOR[m.tier] }}>
-                <span className="text-[0.65rem] uppercase">{m.month}</span>
-                <span className="text-sm font-semibold">{m.overallMonthFit}</span>
-              </a>
-            ))}
-          </div>
-
-          <details className="group">
-            <summary className="cursor-pointer text-sm text-paper-dim underline underline-offset-2 mb-3 list-none">
-              See the full 12-month Month Fit breakdown &amp; Why panels &darr;
-            </summary>
-            <div className="flex flex-col gap-2 mt-3">
-              {months.map((m) => (
-                <div key={m.month} id={`why-${m.month}`} className="scroll-mt-24">
-                  <WhyPanel row={m} parkName={name} />
-                </div>
-              ))}
-            </div>
-          </details>
-        </section>
-
-        {cohortPark && detail ? (
-          <EditorialSections detail={detail} />
-        ) : (
-          <NonCohortSections name={name} liveThings={liveThings} npsUrl={liveProfile?.sourceUrl} />
-        )}
-
-        {/* Crowd Calendar */}
-        <section>
-          <h2 className="font-display uppercase text-3xl mb-6">Crowd Calendar ⭐</h2>
-          <CrowdCalendar rows={months} estimated={!cohortPark} />
-        </section>
-
-        {/* Current Conditions */}
-        <section>
+      {/* Current Conditions — ink chapter */}
+      <section className="bg-ink text-bone py-16">
+        <div className="max-w-[1360px] mx-auto px-6 md:px-10">
           <div className="flex items-baseline gap-3 mb-6">
-            <h2 className="font-display uppercase text-3xl">Current Conditions</h2>
-            <span className="text-xs font-mono text-paper-dim">{alerts ? "Live · NPS Alerts API" : "No alerts reported"}</span>
+            <h2 className="font-display text-display-md">Current conditions</h2>
+            <span className="text-mono-sm font-mono text-bone/60">{alerts ? "Live · NPS Alerts API" : "No alerts reported"}</span>
           </div>
           <div className="flex flex-col gap-3">
             {alerts ? (
               alerts.map((a, i) => (
-                <div key={i} className="rounded-sm border border-white/15 p-4 flex justify-between gap-4 flex-wrap">
+                <div key={i} className="rounded-sm border border-bone/15 p-4 flex justify-between gap-4 flex-wrap">
                   <div>
-                    <span className="text-[0.65rem] uppercase tracking-wide text-accent">{a.category}</span>
+                    <span className="text-mono-sm font-mono uppercase tracking-wide text-brass">{a.category}</span>
                     <p className="text-sm mt-1 font-medium">{a.title}</p>
-                    <p className="text-sm text-paper-dim mt-0.5">{a.description}</p>
+                    <p className="text-sm text-bone/70 mt-0.5">{a.description}</p>
                   </div>
-                  <span className="text-xs text-paper-dim font-mono whitespace-nowrap">{new Date(a.lastIndexedDate).toLocaleDateString()}</span>
+                  <span className="text-mono-sm font-mono text-bone/60 whitespace-nowrap">{new Date(a.lastIndexedDate).toLocaleDateString()}</span>
                 </div>
               ))
             ) : !cohortPark ? (
-              <p className="text-sm text-paper-dim">No active NPS alerts for {name} right now.</p>
+              <p className="text-sm text-bone/70">No active NPS alerts for {name} right now.</p>
             ) : (
               detail!.alerts.map((a, i) => (
-                <div key={i} className="rounded-sm border border-white/15 p-4 flex justify-between gap-4 flex-wrap">
+                <div key={i} className="rounded-sm border border-bone/15 p-4 flex justify-between gap-4 flex-wrap">
                   <div>
-                    <span className="text-[0.65rem] uppercase tracking-wide text-accent">{a.type}</span>
+                    <span className="text-mono-sm font-mono uppercase tracking-wide text-brass">{a.type}</span>
                     <p className="text-sm mt-1">{a.description}</p>
                   </div>
-                  <span className="text-xs text-paper-dim font-mono whitespace-nowrap">{new Date(a.lastUpdated).toLocaleString()}</span>
+                  <span className="text-mono-sm font-mono text-bone/60 whitespace-nowrap">{new Date(a.lastUpdated).toLocaleString()}</span>
                 </div>
               ))
             )}
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </div>
   );
 }
@@ -181,77 +199,74 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
 function EditorialSections({ detail }: { detail: ParkDetail }) {
   return (
     <>
-      {/* Hiking & Trekking */}
-      <section>
-        <h2 className="font-display uppercase text-3xl mb-1">Hiking & Trekking</h2>
-        <p className="text-xs text-paper-dim font-mono mb-6">Officially listed hikes (NPS) &mdash; computed GIS trail totals land in Phase 2</p>
-        <div className="grid md:grid-cols-3 gap-4">
+      <section id="hiking" className="scroll-mt-24">
+        <h2 className="font-display text-display-md mb-1">Hiking & trekking</h2>
+        <p className="text-mono-sm font-mono text-ink-soft mb-6">Officially listed hikes (NPS) &mdash; computed GIS trail totals land in Phase 2</p>
+        <div className="flex flex-col divide-y divide-ink/10 border-t border-b border-ink/10">
           {detail.hikes.map((h) => (
-            <div key={h.name} className="rounded-sm border border-white/15 p-4 flex flex-col gap-1.5">
-              <div className="font-bold">{h.name}</div>
-              <p className="text-sm text-paper-dim">{h.distanceMi} mi &middot; {h.difficulty} &middot; {h.durationHr} hr</p>
-              <p className="text-xs text-paper-dim">Best: {h.bestMonths}</p>
-              <div className="flex flex-wrap gap-1.5 mt-1">
-                {h.npsRecommended && <Tag>NPS-recommended</Tag>}
-                {h.waterFeature && <Tag>Water feature</Tag>}
-                {h.reservation && <Tag>Reservation required</Tag>}
-                <Tag>{h.officiallyListed ? "Officially listed" : "Computed"}</Tag>
+            <div key={h.name} className="py-4 flex flex-col sm:flex-row sm:items-baseline gap-1.5 sm:gap-6">
+              <div className="font-display text-display-md sm:w-64 flex-none leading-none">{h.name}</div>
+              <div className="flex flex-wrap gap-x-4 gap-y-1 font-mono text-mono-sm text-ink-soft">
+                <span>{h.distanceMi} mi</span>
+                <span>{h.difficulty}</span>
+                <span>{h.durationHr} hr</span>
+                <span>Best: {h.bestMonths}</span>
+                {h.npsRecommended && <span>NPS-recommended</span>}
+                {h.waterFeature && <span>Water feature</span>}
+                {h.reservation && <span>Reservation required</span>}
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Must-See Spots */}
-      <section>
-        <h2 className="font-display uppercase text-3xl mb-6">Must-See Spots</h2>
-        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
+      <section id="must-see" className="scroll-mt-24">
+        <h2 className="font-display text-display-md mb-6">Must-see spots</h2>
+        <div className="flex gap-4 overflow-x-auto pb-2 snap-x">
           {detail.spots.map((s) => (
-            <div key={s.name} className="rounded-sm border border-white/15 p-4">
-              <span className="text-[0.65rem] uppercase tracking-wide text-accent">{s.category}</span>
-              <div className="font-bold mt-1">{s.name}</div>
+            <div key={s.name} className="flex-none w-56 snap-start rounded-sm border border-ink/12 bg-bone-deep p-4">
+              <span className="font-mono text-mono-sm uppercase tracking-wide text-ink-soft">{s.category}</span>
+              <div className="font-display text-display-md leading-tight mt-1">{s.name}</div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Lakes & Water */}
-      <section>
-        <h2 className="font-display uppercase text-3xl mb-1">Lakes & Water</h2>
-        <p className="text-xs text-paper-dim font-mono mb-6">USGS GNIS naming + hydrography intersected with NPS boundary</p>
+      <section id="water" className="scroll-mt-24">
+        <h2 className="font-display text-display-md mb-1">Lakes & water</h2>
+        <p className="text-mono-sm font-mono text-ink-soft mb-6">USGS GNIS naming + hydrography intersected with NPS boundary</p>
         <div className="grid md:grid-cols-3 gap-4">
           {detail.water.map((w) => (
-            <div key={w.name} className="rounded-sm border border-white/15 p-4">
-              <span className="text-[0.65rem] uppercase tracking-wide text-accent">{w.type}</span>
-              <div className="font-bold mt-1 mb-1">{w.name}</div>
-              <p className="text-sm text-paper-dim">{w.note}</p>
+            <div key={w.name} className="rounded-sm border border-ink/12 bg-bone-deep p-4">
+              <span className="font-mono text-mono-sm uppercase tracking-wide text-ink-soft">{w.type}</span>
+              <div className="font-display text-display-md leading-tight mt-1 mb-1">{w.name}</div>
+              <p className="text-sm text-ink-soft">{w.note}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Dining Availability */}
-      <section>
+      <section id="dining" className="scroll-mt-24">
         <div className="flex items-baseline gap-3 mb-1">
-          <h2 className="font-display uppercase text-3xl">Dining Availability</h2>
-          <span className="font-semibold">{detail.dining.label}</span>
+          <h2 className="font-display text-display-md">Dining availability</h2>
+          <span className="font-mono text-sm font-semibold uppercase tracking-wide">{detail.dining.label}</span>
         </div>
-        <p className="text-xs text-paper-dim font-mono mb-6">Categorical label &mdash; never a taste score. NPS authorized-concessioner records.</p>
-        <div className="flex flex-wrap gap-6 text-sm mb-5">
+        <p className="text-mono-sm font-mono text-ink-soft mb-6">Categorical label &mdash; never a taste score. NPS authorized-concessioner records.</p>
+        <div className="flex flex-wrap gap-6 text-sm mb-5 font-mono">
           <span>{detail.dining.restaurants} restaurants</span>
           <span>{detail.dining.quickService} quick service</span>
           <span>{detail.dining.generalStores} general stores</span>
-          {detail.dining.bringFood && <span className="text-accent">Recommend bringing food</span>}
+          {detail.dining.bringFood && <span className="text-ink font-semibold">Recommend bringing food</span>}
         </div>
         <div className="grid md:grid-cols-2 gap-4">
           {detail.dining.operations.map((op) => (
-            <div key={op.name} className="rounded-sm border border-white/15 p-4">
-              <div className="font-bold">{op.name}</div>
-              <p className="text-sm text-paper-dim">{op.type} &middot; {op.location} &middot; {op.seasonal ? "Seasonal" : "Year-round"} &middot; Authorized NPS concessioner</p>
+            <div key={op.name} className="rounded-sm border border-ink/12 bg-bone-deep p-4">
+              <div className="font-display text-display-md leading-tight">{op.name}</div>
+              <p className="text-sm text-ink-soft mt-1">{op.type} &middot; {op.location} &middot; {op.seasonal ? "Seasonal" : "Year-round"} &middot; Authorized NPS concessioner</p>
             </div>
           ))}
           {detail.dining.operations.length === 0 && (
-            <p className="text-sm text-paper-dim">No concessioner dining inside the park &mdash; bring your own food.</p>
+            <p className="text-sm text-ink-soft">No concessioner dining inside the park &mdash; bring your own food.</p>
           )}
         </div>
       </section>
@@ -271,17 +286,17 @@ function NonCohortSections({
   return (
     <>
       {liveThings.length > 0 && (
-        <section>
+        <section id="must-see" className="scroll-mt-24">
           <div className="flex items-baseline gap-3 mb-1">
-            <h2 className="font-display uppercase text-3xl">Must-See Spots</h2>
-            <span className="text-xs font-mono text-paper-dim">Live &middot; NPS Data API</span>
+            <h2 className="font-display text-display-md">Must-see spots</h2>
+            <span className="text-mono-sm font-mono text-ink-soft">Live &middot; NPS Data API</span>
           </div>
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
             {liveThings.map((t) => (
-              <div key={t.title} className="rounded-sm border border-white/15 p-4">
-                {t.activity && <span className="text-[0.65rem] uppercase tracking-wide text-accent">{t.activity}</span>}
-                <div className="font-bold mt-1 mb-1">{t.title}</div>
-                <p className="text-sm text-paper-dim line-clamp-3">{t.shortDescription}</p>
+              <div key={t.title} className="rounded-sm border border-ink/12 bg-bone-deep p-4">
+                {t.activity && <span className="font-mono text-mono-sm uppercase tracking-wide text-ink-soft">{t.activity}</span>}
+                <div className="font-display text-display-md leading-tight mt-1 mb-1">{t.title}</div>
+                <p className="text-sm text-ink-soft line-clamp-3">{t.shortDescription}</p>
               </div>
             ))}
           </div>
@@ -290,8 +305,8 @@ function NonCohortSections({
 
       {npsUrl && (
         <section>
-          <div className="rounded-sm border border-white/15 p-5 flex items-center justify-between gap-4 flex-wrap">
-            <p className="text-sm text-paper-dim">Hiking, dining, and lodging details for {name} aren&rsquo;t in ParkAtlas yet.</p>
+          <div className="rounded-sm border border-ink/12 bg-bone-deep p-5 flex items-center justify-between gap-4 flex-wrap">
+            <p className="text-sm text-ink-soft">Hiking, dining, and lodging details for {name} aren&rsquo;t in ParkAtlas yet.</p>
             <Link href={npsUrl} className="text-sm underline underline-offset-2 whitespace-nowrap">
               See the official NPS page &rarr;
             </Link>
@@ -304,22 +319,18 @@ function NonCohortSections({
 
 function Stat({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-sm border border-white/15 px-4 py-3">
-      <div className="text-[0.65rem] uppercase tracking-wide text-paper-dim font-mono">{label}</div>
+    <div className="rounded-sm border border-ink/12 px-4 py-3">
+      <div className="text-mono-sm font-mono uppercase tracking-wide text-ink-soft">{label}</div>
       <div className="font-semibold mt-0.5">{value}</div>
     </div>
   );
 }
 
-function Label({ label, month, accent }: { label: string; month: string; accent: string }) {
+function FigureLabel({ label, month }: { label: string; month: string }) {
   return (
-    <div className="rounded-sm bg-paper text-basalt-deep px-4 py-3 border-l-4" style={{ borderColor: accent }}>
-      <div className="text-[0.65rem] uppercase tracking-wide opacity-60">{label}</div>
-      <div className="font-bold">{month}</div>
+    <div className="rounded-sm bg-bone-deep px-4 py-3">
+      <div className="text-mono-sm font-mono uppercase tracking-wide text-ink-soft">{label}</div>
+      <div className="font-display text-display-md leading-none mt-1">{month}</div>
     </div>
   );
-}
-
-function Tag({ children }: { children: ReactNode }) {
-  return <span className="text-[0.65rem] px-2 py-0.5 rounded-full border border-white/20 text-paper-dim">{children}</span>;
 }

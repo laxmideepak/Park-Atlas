@@ -9,12 +9,21 @@
 const NPS_BASE = "https://developer.nps.gov/api/v1";
 const REVALIDATE_SECONDS = 60 * 60 * 24; // daily
 
+interface RawImage {
+  url: string;
+  title: string;
+  altText: string;
+  caption: string;
+  credit: string;
+}
+
 interface RawParksResponse {
   data: {
     description: string;
     url: string;
     entranceFees?: { cost: string; description: string; title: string }[];
     operatingHours?: { name: string; description: string }[];
+    images?: RawImage[];
   }[];
 }
 
@@ -67,6 +76,38 @@ export async function fetchParkProfile(park: string): Promise<NpsParkProfile | n
     sourceUrl: d.url,
     retrievedAt: new Date().toISOString(),
   };
+}
+
+export interface ParkImage {
+  url: string;
+  title: string;
+  altText: string;
+  credit: string;
+}
+
+/**
+ * P0-10 rights gate: display only if public_domain OR approved_usage. The
+ * NPS `/parks` images array has no explicit rights field, only a free-text
+ * credit line — so "NPS" (or "National Park Service") appearing in the
+ * credit is used as the public-domain proxy (federal work product), the
+ * same signal NPGallery itself surfaces. A credit naming a private
+ * photographer or partner org ("Photo courtesy of ..., Friends of Acadia")
+ * is excluded — approved_usage review for those is a future pipeline step,
+ * not something to assume here. Parks with zero images passing this filter
+ * get the ContourField fallback, on purpose — never a fake landscape.
+ */
+function isPublicDomainCredit(credit: string): boolean {
+  const c = credit.toLowerCase();
+  return c.includes("nps") || c.includes("national park service");
+}
+
+export async function fetchParkImages(park: string): Promise<ParkImage[]> {
+  const json = await npsFetch<RawParksResponse>("/parks", { parkCode: park, fields: "images" });
+  const images = json?.data?.[0]?.images ?? [];
+  return images
+    .filter((im) => im.url && isPublicDomainCredit(im.credit ?? ""))
+    .slice(0, 8)
+    .map((im) => ({ url: im.url, title: im.title, altText: im.altText, credit: im.credit }));
 }
 
 export interface NpsAlert {
