@@ -202,7 +202,7 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
       </div>
 
       {/* Current Conditions — ink chapter */}
-      <section className="bg-ink text-bone py-16" style={{ contentVisibility: "auto", containIntrinsicSize: "auto 400px" }}>
+      <section className="bg-ink text-bone py-16">
         <div className="max-w-[1360px] mx-auto px-6 md:px-10">
           <div className="flex items-baseline gap-3 mb-6">
             <Reveal as="h2" className="font-display text-display-md">Current conditions</Reveal>

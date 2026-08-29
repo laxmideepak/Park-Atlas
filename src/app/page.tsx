@@ -106,7 +106,7 @@ export default async function Home() {
       <YearScroller chapters={yearChapters} />
 
       {/* Best right now — bone */}
-      <section className="bg-bone text-ink py-20" style={{ contentVisibility: "auto", containIntrinsicSize: "auto 800px" }}>
+      <section className="bg-bone text-ink py-20">
         <div className="max-w-[1360px] mx-auto px-6 md:px-10">
           <Reveal as="h2" className="font-display text-display-lg leading-none mb-2">This is {month.name}.</Reveal>
           <Reveal as="p" delay={0.06} className="font-mono text-mono-sm text-ink-soft mb-10">Climate 60 &middot; access 40 &middot; popularity 0</Reveal>
@@ -151,7 +151,7 @@ export default async function Home() {
       </section>
 
       {/* The Atlas — ink */}
-      <section className="bg-ink text-bone py-20" style={{ contentVisibility: "auto", containIntrinsicSize: "auto 800px" }}>
+      <section className="bg-ink text-bone py-20">
         <div className="max-w-[1360px] mx-auto px-6 md:px-10">
           <Reveal as="h2" className="font-display text-display-lg leading-none mb-8">Where it&rsquo;s good, right now.</Reveal>
           <UsMap statePaths={US_STATE_PATHS} width={US_MAP_WIDTH} height={US_MAP_HEIGHT} pins={pins} />
@@ -178,7 +178,7 @@ export default async function Home() {
       </section>
 
       {/* Index teaser — bone */}
-      <section className="bg-bone text-ink py-20" style={{ contentVisibility: "auto", containIntrinsicSize: "auto 300px" }}>
+      <section className="bg-bone text-ink py-20">
         <Reveal as="div" className="max-w-[1360px] mx-auto px-6 md:px-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <p className="font-display text-display-md leading-tight max-w-[20ch]">Sixty-three parks. One page each. No exceptions.</p>
           <Link href="/parks" className="font-mono text-sm px-6 py-3.5 rounded-sm bg-brass text-ink font-semibold whitespace-nowrap">
