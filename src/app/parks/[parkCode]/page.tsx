@@ -377,7 +377,7 @@ function NonCohortSections({
 
 function Stat({ label, value }: { label: string; value: ReactNode }) {
   return (
-    <div className="rounded-sm border border-ink/12 px-4 py-3">
+    <div className="h-full rounded-sm border border-ink/12 px-4 py-3">
       <div className="text-mono-sm font-mono uppercase tracking-wide text-ink-soft">{label}</div>
       <div className="font-semibold mt-0.5">{value}</div>
     </div>
@@ -386,7 +386,7 @@ function Stat({ label, value }: { label: string; value: ReactNode }) {
 
 function FigureLabel({ label, month }: { label: string; month: string }) {
   return (
-    <div className="rounded-sm bg-bone-deep px-4 py-3">
+    <div className="h-full rounded-sm bg-bone-deep px-4 py-3">
       <div className="text-mono-sm font-mono uppercase tracking-wide text-ink-soft">{label}</div>
       <div className="font-display text-display-md leading-none mt-1">{month}</div>
     </div>
