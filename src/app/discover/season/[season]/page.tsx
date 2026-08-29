@@ -1,9 +1,11 @@
+import { Fragment } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { TierBadge } from "@/components/TierBadge";
 import { bestBySeason, getParkSummary } from "@/lib/repo";
 import { SEASONS } from "@/lib/months";
 import Link from "next/link";
+import { RevealGroup } from "@/components/Reveal";
 
 export function generateStaticParams() {
   return SEASONS.map((s) => ({ season: s.key }));
@@ -54,11 +56,15 @@ export default async function SeasonPage(props: PageProps<"/discover/season/[sea
           ))}
         </p>
 
-        <div className="flex flex-col divide-y divide-ink/10 border-t border-b border-ink/10">
+        <RevealGroup
+          as="div"
+          className="flex flex-col divide-y divide-ink/10 border-t border-b border-ink/10"
+          itemClassName="flex items-center justify-between gap-4 py-4"
+        >
           {ranked.map(({ park, fit, tier }) => {
             const p = getParkSummary(park);
             return (
-              <div key={park} className="flex items-center justify-between gap-4 py-4">
+              <Fragment key={park}>
                 <div>
                   <Link href={`/parks/${park}`} className="font-display text-display-md leading-tight hover:underline underline-offset-4">
                     {p.name}
@@ -69,10 +75,10 @@ export default async function SeasonPage(props: PageProps<"/discover/season/[sea
                   <span>Season Fit {fit}</span>
                   <TierBadge tier={tier} onLight />
                 </div>
-              </div>
+              </Fragment>
             );
           })}
-        </div>
+        </RevealGroup>
       </div>
     </div>
   );
