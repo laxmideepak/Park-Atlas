@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ParkCard } from "@/components/ParkCard";
 import { getParkSummary } from "@/lib/repo";
@@ -15,6 +16,23 @@ import { ContourField } from "@/components/ContourField";
 
 export function generateStaticParams() {
   return MONTHS.map((m) => ({ month: m.abbr }));
+}
+
+export async function generateMetadata(props: PageProps<"/discover/month/[month]">): Promise<Metadata> {
+  const { month: monthParam } = await props.params;
+  const month = monthByAbbr(monthParam);
+  if (!month) return {};
+  const top = bestByMonth(month.abbr as MonthAbbr)[0];
+  const topName = getParkSummary(top.park).name;
+  const title = `Best National Parks to Visit in ${month.name} | ParkAtlas`;
+  const description = `Month Fit rankings for all 63 U.S. National Parks in ${month.name}, weighted on climate and accessibility. #1 right now: ${topName}.`;
+  return {
+    title,
+    description,
+    alternates: { canonical: `/discover/month/${month.abbr}` },
+    openGraph: { title, description, type: "website" },
+    twitter: { card: "summary_large_image", title, description },
+  };
 }
 
 export default async function MonthPage(props: PageProps<"/discover/month/[month]">) {

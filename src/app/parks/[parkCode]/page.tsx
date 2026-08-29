@@ -1,8 +1,9 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { ALL_PARKS_MINI } from "@/lib/data/all-parks-mini";
 import { PARK_DETAIL, type ParkDetail } from "@/lib/data/park-detail";
-import { parkByCode, scoresForPark, parkHeaderLabels } from "@/lib/repo";
+import { parkByCode, scoresForPark, parkHeaderLabels, getParkSummary } from "@/lib/repo";
 import { WhyDrawer } from "@/components/WhyDrawer";
 import { CrowdCalendar } from "@/components/CrowdCalendar";
 import { ParkHero } from "@/components/ParkHero";
@@ -10,9 +11,26 @@ import { ChapterRail, type Chapter } from "@/components/ChapterRail";
 import { getParkAccent } from "@/lib/park-theme";
 import { fetchParkProfile, fetchParkAlerts, fetchThingsToDo, fetchParkImages } from "@/lib/nps";
 import { getLiveContext } from "@/lib/live-context";
+import { SITE_URL } from "@/lib/site";
 
 export function generateStaticParams() {
   return ALL_PARKS_MINI.map((p) => ({ parkCode: p.code }));
+}
+
+export async function generateMetadata(props: PageProps<"/parks/[parkCode]">): Promise<Metadata> {
+  const { parkCode } = await props.params;
+  const mini = ALL_PARKS_MINI.find((p) => p.code === parkCode);
+  if (!mini) return {};
+  const summary = getParkSummary(parkCode);
+  const title = `${summary.name}, ${summary.state} — Best time to visit | ParkAtlas`;
+  const description = `${summary.tagline} Month-by-month climate and crowd scoring for ${summary.name} National Park.`;
+  return {
+    title,
+    description,
+    alternates: { canonical: `/parks/${parkCode}` },
+    openGraph: { title, description, type: "website" },
+    twitter: { card: "summary_large_image", title, description },
+  };
 }
 
 const CHAPTERS: Chapter[] = [
@@ -53,8 +71,19 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
     (c) => c.id !== "must-see" || hasMustSee
   );
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "TouristAttraction",
+    name,
+    description: fieldNote,
+    address: { "@type": "PostalAddress", addressRegion: state, addressCountry: "US" },
+    geo: { "@type": "GeoCoordinates", latitude: mini.lat, longitude: mini.lng },
+    url: `${SITE_URL}/parks/${parkCode}`,
+  };
+
   return (
     <div className="flex flex-col">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <ParkHero
         images={liveImages}
         name={name}

@@ -38,9 +38,11 @@ What genuinely **is** live: NPS park descriptions, entrance fees, photos, and cu
 - ✅ Live NPS photography (rights-filtered) + descriptions + fees + alerts, all 63 parks
 - ✅ Live NWS local time/weather for every park
 - ✅ OVERLOOK visual redesign (tokens, Year Scroller, park-page rebuild, index/rankings/month restyle)
+- ✅ Production layer: per-page `generateMetadata` + OG images (dynamic, per park/month), `sitemap.ts`, `robots.ts`, `TouristAttraction` JSON-LD, branded `icon`/`apple-icon`, in-voice `error.tsx`/`not-found.tsx`, Vercel Analytics + Speed Insights wired, CI workflow (lint/test/build + Lighthouse CI)
 - ⏳ Real NOAA normals + NPS accessibility pipeline (would replace the estimated curves above)
 - ⏳ Real acreage/visitation for the 59 parks outside the editorial cohort
-- ⏳ Map's mobile region-list view; a Lighthouse pass against the perf/a11y budget
+- ⏳ Hand-picked hero image manifest (`src/lib/data/hero-manifest.ts` — mechanism built, empty by design; needs a human to pick real NPGallery URLs)
+- ⏳ Map's mobile region-list view
 
 ## Stack
 
@@ -62,7 +64,13 @@ npm run lint
 
 ### Deploying
 
-`NPS_API_KEY` must be set as an environment variable **on the host**, not just locally — it's gitignored and never leaves your machine otherwise. On Vercel: Project → Settings → Environment Variables → add `NPS_API_KEY` for Production, then redeploy (env vars only apply to builds that happen after they're set, since pages are statically generated at build time). Works on the free Hobby plan, no Pro required.
+`NPS_API_KEY` must be set as an environment variable **on the host**, not just locally — it's gitignored and never leaves your machine otherwise. On Vercel: Project → Settings → Environment Variables → add `NPS_API_KEY` for Production, then redeploy (env vars only apply to builds that happen after they're set, since pages are statically generated at build time). Works on the free Hobby plan, no Pro required. If `NPS_API_KEY` is unset, pages degrade gracefully — live NPS profile/images/alerts sections just don't render, everything else still works.
+
+Optionally set `NEXT_PUBLIC_SITE_URL` (e.g. `https://parkatlas.vercel.app`) so metadata, the sitemap, and OG images point at the right domain; without it, it's inferred from Vercel's own env var at build time, falling back to `localhost:3000`.
+
+**CI** (`.github/workflows/ci.yml`) runs lint/test/build plus a Lighthouse CI pass on every push/PR — add `NPS_API_KEY` as a **repository secret** (Settings → Secrets and variables → Actions) for the build step to see live data.
+
+**Analytics**: `@vercel/analytics` and `@vercel/speed-insights` are wired into the root layout, but Vercel's dashboard toggle (Project → Analytics / Speed Insights → Enable) still has to be flipped on manually — code alone won't turn it on.
 
 ## Project structure
 

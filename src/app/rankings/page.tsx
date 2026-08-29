@@ -9,6 +9,13 @@ import { NearestGemFallback } from "@/components/NearestGemFallback";
 
 export const revalidate = 86400; // re-check the calendar daily so "this month" never goes stale
 
+export const metadata = {
+  title: "Rankings — Official vs. Calculated | ParkAtlas",
+  description:
+    "Official NPS visitation rankings alongside ParkAtlas's own versioned, confidence-rated tier rankings — least crowded, hidden gems, and largest parks.",
+  alternates: { canonical: "/rankings" },
+};
+
 export default function RankingsPage() {
   const CURRENT_MONTH = currentMonthAbbr();
   const gems = hiddenGemsForMonth(CURRENT_MONTH);

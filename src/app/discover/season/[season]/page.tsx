@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { TierBadge } from "@/components/TierBadge";
 import { bestBySeason, getParkSummary } from "@/lib/repo";
@@ -6,6 +7,23 @@ import Link from "next/link";
 
 export function generateStaticParams() {
   return SEASONS.map((s) => ({ season: s.key }));
+}
+
+export async function generateMetadata(props: PageProps<"/discover/season/[season]">): Promise<Metadata> {
+  const { season: seasonParam } = await props.params;
+  const season = SEASONS.find((s) => s.key === seasonParam);
+  if (!season) return {};
+  const top = bestBySeason(season.key)[0];
+  const topName = top ? getParkSummary(top.park).name : undefined;
+  const title = `Best National Parks for ${season.name} | ParkAtlas`;
+  const description = `Season Fit rankings for all 63 U.S. National Parks in ${season.name}.${topName ? ` #1 right now: ${topName}.` : ""}`;
+  return {
+    title,
+    description,
+    alternates: { canonical: `/discover/season/${season.key}` },
+    openGraph: { title, description, type: "website" },
+    twitter: { card: "summary_large_image", title, description },
+  };
 }
 
 export const revalidate = 86400; // no live fetches on this page otherwise — without this,
