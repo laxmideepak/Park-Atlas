@@ -80,7 +80,7 @@ export function UsMap({
                   onFocus={() => setHovered(pin.code)}
                   onBlur={() => setHovered(null)}
                   onClick={() => setSelected((s) => (s === pin.code ? null : pin.code))}
-                  tabIndex={0}
+                  tabIndex={inView || reduceMotion ? 0 : -1}
                   role="button"
                   aria-label={`${pin.name}, ${pin.state} — ${pin.tier} this month`}
                 >
