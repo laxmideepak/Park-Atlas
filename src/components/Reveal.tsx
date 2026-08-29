@@ -17,30 +17,49 @@ const REVEAL_TAGS = {
 
 type RevealTag = keyof typeof REVEAL_TAGS;
 
+export type RevealVariant = "rise" | "slide" | "scale" | "float";
+
+/** Per-section motion flavors. `rise` is the original recipe and stays the
+ * default; the others only shift the initial offset (and, for float, a touch
+ * more duration) so every variant still reads as the same animation language. */
+const VARIANTS: Record<RevealVariant, { x: number; y: number; scale?: number; duration: number }> = {
+  rise: { x: 0, y: 24, duration: 0.6 },
+  slide: { x: -20, y: 0, duration: 0.6 },
+  scale: { x: 0, y: 12, scale: 0.94, duration: 0.6 },
+  float: { x: 0, y: 28, duration: 0.8 },
+};
+
 /** Wraps a single element with the site's one scroll-reveal recipe: fade + rise
  * 24px, once, 20% in view, 0.6s, same easing as the hero/Scroller on-mount
- * reveals so scroll-triggered content reads as the same animation language. */
+ * reveals so scroll-triggered content reads as the same animation language.
+ * Explicit `x`/`y` props override the chosen variant's offsets. */
 export function Reveal({
   children,
   delay = 0,
-  y = 24,
+  y,
+  x,
   as = "div",
   className,
+  variant = "rise",
 }: {
   children: ReactNode;
   delay?: number;
   y?: number;
+  x?: number;
   as?: RevealTag;
   className?: string;
+  variant?: RevealVariant;
 }) {
   const reduce = useReducedMotion();
   const Tag = REVEAL_TAGS[as];
+  const v = VARIANTS[variant];
+  const withScale = v.scale != null;
   return (
     <Tag
-      initial={reduce ? false : { opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={reduce ? false : { opacity: 0, x: x ?? v.x, y: y ?? v.y, ...(withScale ? { scale: v.scale } : {}) }}
+      whileInView={{ opacity: 1, x: 0, y: 0, ...(withScale ? { scale: 1 } : {}) }}
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.6, delay, ease: EASE }}
+      transition={{ duration: v.duration, delay, ease: EASE }}
       className={className}
     >
       {children}
@@ -63,6 +82,7 @@ export function RevealGroup({
   style,
   itemAs = "div",
   itemClassName,
+  variant = "rise",
 }: {
   children: ReactNode;
   stagger?: number;
@@ -72,6 +92,7 @@ export function RevealGroup({
   style?: CSSProperties;
   itemAs?: RevealTag;
   itemClassName?: string;
+  variant?: RevealVariant;
 }) {
   const items = Children.toArray(children);
   return createElement(
@@ -83,6 +104,7 @@ export function RevealGroup({
         delay={Math.min(i, cap) * stagger}
         as={itemAs}
         className={itemClassName}
+        variant={variant}
       >
         {child}
       </Reveal>

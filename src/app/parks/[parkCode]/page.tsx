@@ -15,6 +15,7 @@ import { getLiveContext } from "@/lib/live-context";
 import { SITE_URL } from "@/lib/site";
 import { VIDEO_MANIFEST } from "@/lib/data/video-manifest";
 import { Reveal, RevealGroup } from "@/components/Reveal";
+import { ThemedSection } from "@/components/ThemedSection";
 import { CountUp } from "@/components/CountUp";
 
 export function generateStaticParams() {
@@ -151,7 +152,7 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
               )}
             </section>
 
-            <section id="when-to-go" className="scroll-mt-24">
+            <ThemedSection id="when-to-go" className="scroll-mt-24">
               <Reveal as="h2" className="font-display text-display-md mb-1">When to go</Reveal>
               <Reveal as="p" delay={0.06} className="text-sm text-ink-soft mb-8">Weighed on climate and access, never on crowds.</Reveal>
 
@@ -190,15 +191,15 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
                 ))}
               </div>
               <p className="text-mono-sm font-mono text-ink-soft">Tap any month for its full Why-panel — factor weights, sources, confidence.</p>
-            </section>
+            </ThemedSection>
 
             {detail && <EditorialSections detail={detail} />}
             {!detail && <NonCohortSections name={name} liveThings={liveThings} npsUrl={liveProfile?.sourceUrl} />}
 
-            <section id="crowds" className="scroll-mt-24">
+            <ThemedSection id="crowds" className="scroll-mt-24">
               <Reveal as="h2" className="font-display text-display-md mb-6">Crowd calendar</Reveal>
               <CrowdCalendar rows={months} estimated={!cohortPark} bestBalanceMonth={labels.bestBalance.month} />
-            </section>
+            </ThemedSection>
           </div>
         </div>
       </div>
@@ -247,11 +248,12 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
 function EditorialSections({ detail }: { detail: ParkDetail }) {
   return (
     <>
-      <section id="hiking" className="scroll-mt-24">
+      <ThemedSection id="hiking" className="scroll-mt-24">
         <Reveal as="h2" className="font-display text-display-md mb-1">Hiking & trekking</Reveal>
         <Reveal as="p" delay={0.06} className="text-mono-sm font-mono text-ink-soft mb-6">Officially listed hikes (NPS) &mdash; computed GIS trail totals land in Phase 2</Reveal>
         <RevealGroup
           as="div"
+          variant="slide"
           className="flex flex-col divide-y divide-ink/10 border-t border-b border-ink/10"
           itemClassName="py-4 flex flex-col sm:flex-row sm:items-baseline gap-1.5 sm:gap-6"
         >
@@ -270,12 +272,13 @@ function EditorialSections({ detail }: { detail: ParkDetail }) {
             </Fragment>
           ))}
         </RevealGroup>
-      </section>
+      </ThemedSection>
 
-      <section id="must-see" className="scroll-mt-24">
+      <ThemedSection id="must-see" className="scroll-mt-24">
         <Reveal as="h2" className="font-display text-display-md mb-6">Must-see spots</Reveal>
         <RevealGroup
           as="div"
+          variant="scale"
           className="flex gap-4 overflow-x-auto pb-2 snap-x"
           itemClassName="flex-none w-56 snap-start rounded-sm border border-ink/12 bg-bone-deep p-4 h-full"
         >
@@ -286,13 +289,14 @@ function EditorialSections({ detail }: { detail: ParkDetail }) {
             </Fragment>
           ))}
         </RevealGroup>
-      </section>
+      </ThemedSection>
 
-      <section id="water" className="scroll-mt-24">
+      <ThemedSection id="water" className="scroll-mt-24">
         <Reveal as="h2" className="font-display text-display-md mb-1">Lakes & water</Reveal>
         <Reveal as="p" delay={0.06} className="text-mono-sm font-mono text-ink-soft mb-6">USGS GNIS naming + hydrography intersected with NPS boundary</Reveal>
         <RevealGroup
           as="div"
+          variant="float"
           className="grid md:grid-cols-3 gap-4"
           itemClassName="rounded-sm border border-ink/12 bg-bone-deep p-4 h-full"
         >
@@ -304,9 +308,9 @@ function EditorialSections({ detail }: { detail: ParkDetail }) {
             </Fragment>
           ))}
         </RevealGroup>
-      </section>
+      </ThemedSection>
 
-      <section id="dining" className="scroll-mt-24">
+      <ThemedSection id="dining" className="scroll-mt-24">
         <div className="flex items-baseline gap-3 mb-1">
           <Reveal as="h2" className="font-display text-display-md">Dining availability</Reveal>
           <span className="font-mono text-sm font-semibold uppercase tracking-wide">{detail.dining.label}</span>
@@ -329,7 +333,7 @@ function EditorialSections({ detail }: { detail: ParkDetail }) {
         {detail.dining.operations.length === 0 && (
           <p className="text-sm text-ink-soft">No concessioner dining inside the park &mdash; bring your own food.</p>
         )}
-      </section>
+      </ThemedSection>
     </>
   );
 }
@@ -346,12 +350,12 @@ function NonCohortSections({
   return (
     <>
       {liveThings.length > 0 && (
-        <section id="must-see" className="scroll-mt-24">
+        <ThemedSection id="must-see" className="scroll-mt-24">
           <div className="flex items-baseline gap-3 mb-1">
             <Reveal as="h2" className="font-display text-display-md">Must-see spots</Reveal>
             <span className="text-mono-sm font-mono text-ink-soft">Live &middot; NPS Data API</span>
           </div>
-          <RevealGroup as="div" className="grid sm:grid-cols-2 md:grid-cols-3 gap-4" itemClassName="rounded-sm border border-ink/12 bg-bone-deep p-4 h-full">
+          <RevealGroup as="div" variant="scale" className="grid sm:grid-cols-2 md:grid-cols-3 gap-4" itemClassName="rounded-sm border border-ink/12 bg-bone-deep p-4 h-full">
             {liveThings.map((t) => (
               <Fragment key={t.title}>
                 {t.activity && <span className="font-mono text-mono-sm uppercase tracking-wide text-ink-soft">{t.activity}</span>}
@@ -360,7 +364,7 @@ function NonCohortSections({
               </Fragment>
             ))}
           </RevealGroup>
-        </section>
+        </ThemedSection>
       )}
 
       {npsUrl && (
