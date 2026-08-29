@@ -5,16 +5,21 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
 import type { ParkImage } from "@/lib/nps";
+import type { VideoManifestEntry } from "@/lib/data/video-manifest";
 import { ContourField } from "./ContourField";
+import { LivingHero } from "./LivingHero";
 
 export function HomeHero({
   image,
   accent,
   sourceStrip,
+  video = null,
 }: {
   image: ParkImage | null;
   accent: string;
   sourceStrip: string[];
+  /** Living Hero clip for the current month (spec §1.4) — photo fallback when null. */
+  video?: VideoManifestEntry | null;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
@@ -26,7 +31,9 @@ export function HomeHero({
     <section ref={ref} className="relative h-screen w-full overflow-hidden bg-ink">
       {/* filter-free: this layer is under a continuous scroll-linked transform */}
       <motion.div className="absolute inset-0" style={{ y, scale, willChange: "transform" }}>
-        {image ? (
+        {video ? (
+          <LivingHero entry={video} alt={image?.altText || "Living footage from a U.S. National Park"} />
+        ) : image ? (
           <Image src={image.url} alt={image.altText || ""} fill priority sizes="100vw" quality={85} className="object-cover" />
         ) : (
           <ContourField name="" accent={accent} />

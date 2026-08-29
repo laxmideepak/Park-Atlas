@@ -44,3 +44,4 @@ next-env.d.ts
 .worktrees/
 test-results/
 playwright-report/
+.claude/settings.local.json

@@ -13,6 +13,7 @@ import { getMapPins, getOffMapParks } from "@/lib/us-map-pins";
 import { fetchParkImages } from "@/lib/nps";
 import { crowdRelief } from "@/lib/scoring";
 import { pickHero, pickCard, pickScrollerChapter } from "@/lib/image-select";
+import { VIDEO_MANIFEST } from "@/lib/data/video-manifest";
 import { Reveal, RevealGroup } from "@/components/Reveal";
 
 export const revalidate = 86400; // re-check the calendar daily so "this month" never goes stale
@@ -104,6 +105,7 @@ export default async function Home() {
         image={pickHero(heroImages, heroParkCode)}
         accent={getParkAccent(heroParkCode)}
         sourceStrip={["63 parks", "scored on climate + access", "never on popularity", "Month Fit v1.0"]}
+        video={VIDEO_MANIFEST[`home-${DEFAULT_MONTH}`] ?? null}
       />
 
       <YearScroller chapters={yearChapters} />
