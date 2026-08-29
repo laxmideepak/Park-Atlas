@@ -242,7 +242,7 @@ git commit -m "Add Reveal/RevealGroup scroll-reveal primitive"
 **Files:**
 - Create: `src/components/CountUp.tsx`
 
-- [ ] **Step 1: Write the component**
+- [x] **Step 1: Write the component**
 
 ```tsx
 "use client";
@@ -283,12 +283,12 @@ export function CountUp({ value, suffix = "" }: { value: number; suffix?: string
 }
 ```
 
-- [ ] **Step 2: Verify it type-checks and lints**
+- [x] **Step 2: Verify it type-checks and lints**
 
 Run: `npm run build && npm run lint`
 Expected: both succeed.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/components/CountUp.tsx
