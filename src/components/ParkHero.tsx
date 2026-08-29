@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ContourField } from "./ContourField";
 import type { ParkImage } from "@/lib/nps";
+import { pickHero } from "@/lib/image-select";
 import { LiveBanner } from "./LiveBanner";
 import type { LiveContext } from "@/lib/live-context";
 
@@ -32,7 +33,7 @@ export function ParkHero({
   liveContext: LiveContext | null;
   parkCode: string;
 }) {
-  const hero = images[0];
+  const hero = pickHero(images);
 
   return (
     <section className="relative bg-ink">

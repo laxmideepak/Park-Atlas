@@ -3,6 +3,7 @@ import { getRegion } from "@/lib/park-theme";
 import { scoreForParkMonth } from "@/lib/repo";
 import { currentMonthAbbr } from "@/lib/months";
 import { fetchParkImages } from "@/lib/nps";
+import { pickCard } from "@/lib/image-select";
 import { ParksIndexList, type IndexRow } from "@/components/ParksIndexList";
 
 export const metadata = {
@@ -28,7 +29,7 @@ export default async function ParksIndexPage() {
       region: getRegion(p.state),
       tier: score?.tier ?? "Limited",
       hasFullGuide: Boolean(p.cohort),
-      image: imagesByCode.get(p.code)?.[0] ?? null,
+      image: pickCard(imagesByCode.get(p.code) ?? []),
     };
   });
 

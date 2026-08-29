@@ -12,6 +12,7 @@ import { US_MAP_WIDTH, US_MAP_HEIGHT, US_STATE_PATHS } from "@/lib/us-map-geo";
 import { getMapPins, getOffMapParks } from "@/lib/us-map-pins";
 import { fetchParkImages } from "@/lib/nps";
 import { crowdRelief } from "@/lib/scoring";
+import { pickHero, pickCard, pickScrollerChapter } from "@/lib/image-select";
 
 export const revalidate = 86400; // re-check the calendar daily so "this month" never goes stale
 
@@ -46,26 +47,38 @@ export default async function Home() {
   const heroImages = await fetchParkImages(heroParkCode);
 
   // One photo fetch per unique park needed anywhere on this page (Year
-  // Scroller + Best-in-Month + Hidden Gems), deduped by code.
-  const monthTops = MONTHS.map((m) => ({ m, top: bestByMonth(m.abbr)[0] }));
+  // Scroller + Best-in-Month + Hidden Gems), deduped by code. Also fetch
+  // each month's #2 park as a fallback source for the Scroller's >=2000px bar.
+  const monthTops = MONTHS.map((m) => ({ m, top: bestByMonth(m.abbr)[0], runnerUp: bestByMonth(m.abbr)[1] }));
   const uniqueParkCodes = [
-    ...new Set([...monthTops.map((mt) => mt.top.park), ...best.slice(0, 8).map((r) => r.park), ...gems.map((g) => g.park)]),
+    ...new Set([
+      ...monthTops.map((mt) => mt.top.park),
+      ...monthTops.map((mt) => mt.runnerUp?.park).filter((c): c is string => Boolean(c)),
+      ...best.slice(0, 8).map((r) => r.park),
+      ...gems.map((g) => g.park),
+    ]),
   ];
   const imagesByCode = new Map(
     await Promise.all(uniqueParkCodes.map(async (code) => [code, await fetchParkImages(code)] as const))
   );
-  const yearChapters: YearChapter[] = monthTops.map(({ m, top }) => {
+  const yearChapters: YearChapter[] = monthTops.map(({ m, top, runnerUp }) => {
     const summary = getParkSummary(top.park);
     const rows = scoresForPark(top.park);
     const peak = Math.max(...rows.map((r) => r.percentOfAnnualVisits));
     const relief = crowdRelief(top.percentOfAnnualVisits, peak);
+    // Scroller chapters are the site's 12 most-seen pixels — hold to a
+    // higher resolution bar than a regular hero; fall through to the
+    // month's runner-up park if the #1 has nothing that large.
+    const chapterImage =
+      pickScrollerChapter(imagesByCode.get(top.park) ?? []) ??
+      (runnerUp ? pickScrollerChapter(imagesByCode.get(runnerUp.park) ?? []) : null);
     return {
       monthAbbr: m.abbr,
       monthName: m.name,
       parkCode: top.park,
       parkName: summary.name,
       accent: getParkAccent(top.park),
-      image: imagesByCode.get(top.park)?.[0] ?? null,
+      image: chapterImage,
       fit: top.overallMonthFit,
       tier: top.tier,
       crowdReliefPct: Math.round(relief * 100),
@@ -84,7 +97,7 @@ export default async function Home() {
       <Preloader facts={facts} />
 
       <HomeHero
-        image={heroImages[0] ?? null}
+        image={pickHero(heroImages)}
         accent={getParkAccent(heroParkCode)}
         sourceStrip={["63 parks", "scored on climate + access", "never on popularity", "Month Fit v1.0"]}
       />
@@ -99,7 +112,7 @@ export default async function Home() {
 
           <div className="grid gap-5 mb-8" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))" }}>
             {best.slice(0, 8).map((row) => (
-              <ParkCard key={row.park} park={getParkSummary(row.park)} row={row} image={imagesByCode.get(row.park)?.[0] ?? null} />
+              <ParkCard key={row.park} park={getParkSummary(row.park)} row={row} image={pickCard(imagesByCode.get(row.park) ?? [])} />
             ))}
           </div>
           <Link href={`/discover/month/${DEFAULT_MONTH}`} className="font-mono text-mono-sm underline underline-offset-2">
@@ -116,7 +129,7 @@ export default async function Home() {
             ) : (
               <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))" }}>
                 {gems.map((g) => (
-                  <ParkCard key={g.park} park={getParkSummary(g.park)} row={g} image={imagesByCode.get(g.park)?.[0] ?? null} />
+                  <ParkCard key={g.park} park={getParkSummary(g.park)} row={g} image={pickCard(imagesByCode.get(g.park) ?? [])} />
                 ))}
               </div>
             )}

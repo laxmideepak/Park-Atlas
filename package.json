@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "vitest run"
+    "test": "vitest run",
+    "probe-images": "node --env-file=.env.local --import tsx scripts/probe-images.ts"
   },
   "dependencies": {
     "d3-geo": "^3.1.1",
@@ -28,7 +29,9 @@
     "@types/topojson-client": "^3.1.5",
     "eslint": "^9",
     "eslint-config-next": "16.3.3",
+    "image-size": "^2.0.2",
     "tailwindcss": "^4",
+    "tsx": "^4.23.12",
     "typescript": "^5",
     "vitest": "^4.1.11"
   }

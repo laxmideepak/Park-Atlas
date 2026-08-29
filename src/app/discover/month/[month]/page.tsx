@@ -9,6 +9,7 @@ import { MONTHS, monthByAbbr } from "@/lib/months";
 import { MonthAbbr, Tier } from "@/lib/types";
 import { TIER_ORDER } from "@/lib/scoring";
 import { fetchParkImages } from "@/lib/nps";
+import { pickHero, pickCard } from "@/lib/image-select";
 import { getParkAccent } from "@/lib/park-theme";
 import { ContourField } from "@/components/ContourField";
 
@@ -30,7 +31,7 @@ export default async function MonthPage(props: PageProps<"/discover/month/[month
   const imagesByCode = new Map(
     await Promise.all(uniqueCodes.map(async (code) => [code, await fetchParkImages(code)] as const))
   );
-  const heroImage = imagesByCode.get(top.park)?.[0] ?? null;
+  const heroImage = pickHero(imagesByCode.get(top.park) ?? []);
 
   const byTier = new Map<Tier, typeof best>();
   for (const t of TIER_ORDER) byTier.set(t, []);
@@ -82,7 +83,7 @@ export default async function MonthPage(props: PageProps<"/discover/month/[month
                 <p className="font-mono text-mono-sm text-ink-soft mb-6">{rows.length} park{rows.length === 1 ? "" : "s"}</p>
                 <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))" }}>
                   {rows.map((row) => (
-                    <ParkCard key={row.park} park={getParkSummary(row.park)} row={row} image={imagesByCode.get(row.park)?.[0] ?? null} />
+                    <ParkCard key={row.park} park={getParkSummary(row.park)} row={row} image={pickCard(imagesByCode.get(row.park) ?? [])} />
                   ))}
                 </div>
               </section>
@@ -99,7 +100,7 @@ export default async function MonthPage(props: PageProps<"/discover/month/[month
             ) : (
               <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))" }}>
                 {gems.map((g) => (
-                  <ParkCard key={g.park} park={getParkSummary(g.park)} row={g} image={imagesByCode.get(g.park)?.[0] ?? null} />
+                  <ParkCard key={g.park} park={getParkSummary(g.park)} row={g} image={pickCard(imagesByCode.get(g.park) ?? [])} />
                 ))}
               </div>
             )}
