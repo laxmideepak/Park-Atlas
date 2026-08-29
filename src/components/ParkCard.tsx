@@ -7,8 +7,22 @@ import { ContourField } from "./ContourField";
 import { getParkAccent } from "@/lib/park-theme";
 import type { ParkImage } from "@/lib/nps";
 
-/** §7.1 ParkFeatureCard. */
-export function ParkCard({ park, row, image }: { park: ParkSummary; row: ScoredMonth; image?: ParkImage | null }) {
+/** §7.1 ParkFeatureCard.
+ * `viewTransition` defaults to true; pass `false` when the same park's card
+ * can render twice on one page (e.g. a top-ranked park that's also a hidden
+ * gem) — Chrome silently skips the morph for any duplicate
+ * view-transition-name on the page, so only one instance may claim it. */
+export function ParkCard({
+  park,
+  row,
+  image,
+  viewTransition = true,
+}: {
+  park: ParkSummary;
+  row: ScoredMonth;
+  image?: ParkImage | null;
+  viewTransition?: boolean;
+}) {
   const accent = getParkAccent(park.code);
   return (
     <div className="bg-bone-deep text-ink rounded-sm overflow-hidden flex flex-col h-full">
@@ -20,7 +34,7 @@ export function ParkCard({ park, row, image }: { park: ParkSummary; row: ScoredM
             fill
             sizes="(min-width: 768px) 25vw, 50vw"
             className="object-cover img-grade transition-transform duration-[600ms] group-hover:scale-[1.04]"
-            style={{ viewTransitionName: `park-hero-${park.code}` }}
+            style={viewTransition ? { viewTransitionName: `park-hero-${park.code}` } : undefined}
           />
         ) : (
           <ContourField name={park.name} accent={accent} />

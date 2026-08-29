@@ -131,7 +131,17 @@ export default async function MonthPage(props: PageProps<"/discover/month/[month
                 stagger={0.04}
               >
                 {gems.map((g) => (
-                  <ParkCard key={g.park} park={getParkSummary(g.park)} row={g} image={pickCard(imagesByCode.get(g.park) ?? [])} />
+                  // Hidden gems are always a subset of the tier grids above
+                  // (TIER_ORDER is exhaustive over all 63 parks), so every
+                  // gem here is guaranteed to duplicate a code already
+                  // rendered — view-transition-name must stay unique per page.
+                  <ParkCard
+                    key={g.park}
+                    park={getParkSummary(g.park)}
+                    row={g}
+                    image={pickCard(imagesByCode.get(g.park) ?? [])}
+                    viewTransition={false}
+                  />
                 ))}
               </RevealGroup>
             )}

@@ -41,6 +41,9 @@ export default async function Home() {
   const month = monthByAbbr(DEFAULT_MONTH)!;
   const best = bestByMonth(DEFAULT_MONTH);
   const gems = hiddenGemsForMonth(DEFAULT_MONTH);
+  // A park can be both a top-8 pick and a hidden gem; view-transition-name
+  // must be unique per page, so only the first (top-8) instance keeps it.
+  const topEightCodes = new Set(best.slice(0, 8).map((row) => row.park));
   const pins = await getMapPins();
   const offMap = getOffMapParks();
 
@@ -142,7 +145,13 @@ export default async function Home() {
                 stagger={0.05}
               >
                 {gems.map((g) => (
-                  <ParkCard key={g.park} park={getParkSummary(g.park)} row={g} image={pickCard(imagesByCode.get(g.park) ?? [])} />
+                  <ParkCard
+                    key={g.park}
+                    park={getParkSummary(g.park)}
+                    row={g}
+                    image={pickCard(imagesByCode.get(g.park) ?? [])}
+                    viewTransition={!topEightCodes.has(g.park)}
+                  />
                 ))}
               </RevealGroup>
             )}
