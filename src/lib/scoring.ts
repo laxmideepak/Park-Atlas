@@ -53,3 +53,20 @@ export function bestBalanceScore(
     BEST_BALANCE_CROWD_RELIEF_WEIGHT * crowdRelief(percentOfAnnualVisits, peakPercentOfAnnual) * 100
   );
 }
+
+/** PRD §6.4 secondary crowd measure: cross-park percentile bands, not an ordinal rank. */
+export type CrowdBand = "Low" | "Moderate" | "High" | "Very High";
+
+export function crowdBand(percentile: number): CrowdBand {
+  if (percentile <= 25) return "Low";
+  if (percentile <= 50) return "Moderate";
+  if (percentile <= 75) return "High";
+  return "Very High";
+}
+
+export const CROWD_BAND_COLOR: Record<CrowdBand, string> = {
+  Low: "#6B8F5A",
+  Moderate: "#D6A63B99",
+  High: "#B5502C99",
+  "Very High": "#B5502C",
+};

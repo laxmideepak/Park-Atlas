@@ -25,8 +25,10 @@ export interface Park {
   state: string;
   acreage: number;
   entryFee: string;
-  annualVisits2025: number;
-  officialVisitRank2025: number | null; // null = outside official top 10
+  /** PRD principle: medians over the 5 most recent completed years, never a single year. */
+  medianAnnualVisits: number;
+  visitsWindow: string; // e.g. "2021-2025"
+  officialVisitRank2025: number | null; // real one-time snapshot from the 2025 NPS release (Appendix B) — correctly year-pinned, unlike the median above
   tagline: string;
   fieldNote: string;
   quickStats: { tripLength: string; typicalTempRange: string };

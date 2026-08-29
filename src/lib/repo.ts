@@ -3,7 +3,7 @@ import { PARKS, getPark } from "./data/parks";
 import { ALL_PARKS_MINI } from "./data/all-parks-mini";
 import { PARK_MONTH_SCORES } from "./data/park-month-scores";
 import { MONTHS, SEASONS, monthByAbbr } from "./months";
-import { overallMonthFit, scoreToTier, bestBalanceScore } from "./scoring";
+import { overallMonthFit, scoreToTier, bestBalanceScore, crowdBand, type CrowdBand } from "./scoring";
 
 export interface ParkSummary {
   code: string;
@@ -68,18 +68,31 @@ function peakPercentFor(park: ParkCode): number {
   return Math.max(...scoresForPark(park).map((s) => s.percentOfAnnualVisits));
 }
 
-/** Hidden Gems This Month: Month Fit >= 85 AND crowd percentile <= 40 within the cohort. */
-export function hiddenGemsForMonth(month: MonthAbbr): (ScoredMonth & { crowdPercentile: number })[] {
-  const rows = scoresForMonth(month);
-  const sortedByCrowd = [...rows].sort((a, b) => a.percentOfAnnualVisits - b.percentOfAnnualVisits);
-  const withPercentile = rows.map((r) => {
-    const rank = sortedByCrowd.findIndex((s) => s.park === r.park);
-    const crowdPercentile = Math.round(((rank + 1) / sortedByCrowd.length) * 100);
-    return { ...r, crowdPercentile };
+/** Single source of truth for crowd percentile: each park's rank among that
+ * month's percentOfAnnualVisits, as a 1-100 percentile (low = less crowded).
+ * At n=4 (Phase 0.5 cohort) this only ever produces 25/50/75/100 — a small-n
+ * artifact, not a signal — but is exact now that every park (n=63) scores. */
+function withCrowdPercentile(rows: ScoredMonth[]): (ScoredMonth & { crowdPercentile: number })[] {
+  const sorted = [...rows].sort((a, b) => a.percentOfAnnualVisits - b.percentOfAnnualVisits);
+  return rows.map((r) => {
+    const rank = sorted.findIndex((s) => s.park === r.park);
+    return { ...r, crowdPercentile: Math.round(((rank + 1) / sorted.length) * 100) };
   });
-  return withPercentile
+}
+
+/** Hidden Gems This Month: Month Fit >= 85 AND crowd percentile <= 40. */
+export function hiddenGemsForMonth(month: MonthAbbr): (ScoredMonth & { crowdPercentile: number })[] {
+  return withCrowdPercentile(scoresForMonth(month))
     .filter((r) => r.overallMonthFit >= 85 && r.crowdPercentile <= 40)
     .sort((a, b) => b.overallMonthFit - a.overallMonthFit);
+}
+
+/** Least Crowded ranking: cross-park percentile bands (PRD §6.4), not an
+ * ordinal rank and not raw visits-per-acre — sorted least-crowded first. */
+export function crowdBandsForMonth(month: MonthAbbr): (ScoredMonth & { crowdPercentile: number; band: CrowdBand })[] {
+  return withCrowdPercentile(scoresForMonth(month))
+    .map((r) => ({ ...r, band: crowdBand(r.crowdPercentile) }))
+    .sort((a, b) => a.crowdPercentile - b.crowdPercentile);
 }
 
 export interface ParkHeaderLabels {
@@ -116,21 +129,18 @@ export function seasonFit(park: ParkCode, season: Season): number {
 }
 
 export function bestBySeason(season: Season): { park: ParkCode; fit: number; tier: Tier }[] {
-  return PARKS.map((p) => {
+  return ALL_PARKS_MINI.map((p) => {
     const fit = seasonFit(p.code, season);
     return { park: p.code, fit, tier: scoreToTier(fit) };
   }).sort((a, b) => b.fit - a.fit);
 }
 
-export function crowdPercentileWithinCohort(park: ParkCode, month: MonthAbbr): number {
-  const rows = scoresForMonth(month).sort((a, b) => a.percentOfAnnualVisits - b.percentOfAnnualVisits);
-  const rank = rows.findIndex((r) => r.park === park);
-  return Math.round(((rank + 1) / rows.length) * 100);
-}
-
-export function visitsPerAcre(park: ParkCode): number {
-  const p = getPark(park)!;
-  return Math.round((p.annualVisits2025 / p.acreage) * 100) / 100;
+/** Experimental only (PRD §6.4): visits per acre, real acreage/visitation exists
+ * only for the 4-park editorial cohort — never treat as a full-63 ranking. */
+export function visitsPerAcre(park: ParkCode): number | null {
+  const p = getPark(park);
+  if (!p) return null;
+  return Math.round((p.medianAnnualVisits / p.acreage) * 100) / 100;
 }
 
 export { MONTHS, SEASONS };

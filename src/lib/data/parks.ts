@@ -14,7 +14,8 @@ export const PARKS: Park[] = [
     state: "Maine",
     acreage: 49077,
     entryFee: "$35 / vehicle (7-day)",
-    annualVisits2025: 4079318,
+    medianAnnualVisits: 4079318, // 2025 official figure only; 5-yr median pending Phase 1
+    visitsWindow: "2025 (single year)",
     officialVisitRank2025: 7,
     tagline: "Granite coastline, quiet lakes, and the first sunrise in the U.S.",
     fieldNote: "Waves work granite into pink dust while spruce holds the ridgeline. Low tide opens the Bar Island bar; high tide erases it. The mountain, the pond, and the sea sit close enough here to visit all three before lunch.",
@@ -26,7 +27,8 @@ export const PARKS: Park[] = [
     state: "Wyoming / Montana / Idaho",
     acreage: 2219791,
     entryFee: "$35 / vehicle (7-day)",
-    annualVisits2025: 4762988,
+    medianAnnualVisits: 4762988, // 2025 official figure only; 5-yr median pending Phase 1
+    visitsWindow: "2025 (single year)",
     officialVisitRank2025: 3,
     tagline: "Geothermal basins, wildlife-thick valleys, and a road network that half-closes every winter.",
     fieldNote: "The ground breathes here — steam rising off a basin that's been erupting on its own schedule for longer than any road. Come summer the whole park is open and half of it is holding its breath for winter, when the interior seals shut and only snowcoaches get in.",
@@ -38,7 +40,8 @@ export const PARKS: Park[] = [
     state: "California / Nevada",
     acreage: 3373063,
     entryFee: "$30 / vehicle (7-day)",
-    annualVisits2025: 1190000,
+    medianAnnualVisits: 1190000, // 2025 official figure only; 5-yr median pending Phase 1
+    visitsWindow: "2025 (single year)",
     officialVisitRank2025: null,
     tagline: "The hottest, lowest, driest park in the system — and inverted: winter is peak season.",
     fieldNote: "The valley floor sits 282 feet below sea level and holds heat like a kiln. Everything here runs backwards from what a national park usually asks of you: come in winter, hike at sunrise, and let the salt flats and dunes do the talking at midday when nothing else moves.",
@@ -50,7 +53,8 @@ export const PARKS: Park[] = [
     state: "Tennessee / North Carolina",
     acreage: 522419,
     entryFee: "No standard entrance fee",
-    annualVisits2025: 11527939,
+    medianAnnualVisits: 11527939, // 2025 official figure only; 5-yr median pending Phase 1
+    visitsWindow: "2025 (single year)",
     officialVisitRank2025: 1,
     tagline: "The most-visited National Park — dense trail network, no gate, and the densest hiking pressure in the system.",
     fieldNote: "Ridge after blue ridge fades into haze — the terpenes the forest breathes out are the reason for the name and the color. There's no entrance gate and no fee, so the crowds come freely; the reward for timing it right is a quiet Cades Cove morning instead of a bumper-to-bumper one.",

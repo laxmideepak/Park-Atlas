@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { OFFICIAL_MOST_VISITED_2025, OFFICIAL_SYSTEMWIDE_2025 } from "@/lib/data/official-rankings";
 import { PARKS } from "@/lib/data/parks";
-import { hiddenGemsForMonth, getParkSummary, visitsPerAcre } from "@/lib/repo";
+import { hiddenGemsForMonth, getParkSummary, visitsPerAcre, crowdBandsForMonth } from "@/lib/repo";
 import { TierBadge } from "@/components/TierBadge";
 import { getParkAccent } from "@/lib/park-theme";
+import { CROWD_BAND_COLOR, type CrowdBand } from "@/lib/scoring";
 import { currentMonthAbbr } from "@/lib/months";
 
 export const revalidate = 86400; // re-check the calendar daily so "this month" never goes stale
@@ -12,7 +13,7 @@ export default function RankingsPage() {
   const CURRENT_MONTH = currentMonthAbbr();
   const gems = hiddenGemsForMonth(CURRENT_MONTH);
   const largest = [...PARKS].sort((a, b) => b.acreage - a.acreage);
-  const leastCrowded = [...PARKS].sort((a, b) => visitsPerAcre(a.code) - visitsPerAcre(b.code));
+  const leastCrowded = crowdBandsForMonth(CURRENT_MONTH).slice(0, 10);
 
   return (
     <div className="max-w-[1400px] mx-auto px-6 md:px-10 py-10 flex flex-col gap-16">
@@ -67,20 +68,44 @@ export default function RankingsPage() {
       </section>
 
       <section>
-        <h2 className="font-display uppercase text-2xl mb-1">Least Crowded <span className="text-xs font-mono text-paper-dim normal-case">&middot; Calculated, experimental</span></h2>
-        <p className="text-xs text-paper-dim font-mono mb-4">Visits per acre &mdash; always approximate: a huge wilderness park can look empty while everyone shares one corridor.</p>
+        <h2 className="font-display uppercase text-2xl mb-1">Least Crowded <span className="text-xs font-mono text-paper-dim normal-case">&middot; Calculated</span></h2>
+        <p className="text-xs text-paper-dim font-mono mb-4">
+          Cross-park crowd percentile for {CURRENT_MONTH}, lowest first &mdash; a band, not an ordinal rank (PRD &sect;6.4).
+        </p>
         <ol className="flex flex-col gap-1">
-          {leastCrowded.map((p, i) => (
-            <li key={p.code} className="flex items-center gap-4 py-2 border-b border-white/10 text-sm">
-              <span className="font-mono text-paper-dim w-6">{i + 1}</span>
-              <Dot accent={getParkAccent(p.code)} />
-              <Link href={`/parks/${p.code}`} className="font-medium hover:underline underline-offset-2 flex-1">
-                {p.name}
-              </Link>
-              <span className="font-mono text-paper-dim">{visitsPerAcre(p.code)} visits/acre</span>
-            </li>
-          ))}
+          {leastCrowded.map((p) => {
+            const summary = getParkSummary(p.park);
+            return (
+              <li key={p.park} className="flex items-center gap-4 py-2 border-b border-white/10 text-sm">
+                <Dot accent={getParkAccent(p.park)} />
+                <Link href={`/parks/${p.park}`} className="font-medium hover:underline underline-offset-2 flex-1">
+                  {summary.name}
+                </Link>
+                <CrowdBandBadge band={p.band} />
+                <span className="font-mono text-paper-dim">{p.crowdPercentile}th pctile</span>
+              </li>
+            );
+          })}
         </ol>
+        <details className="mt-4 group">
+          <summary className="cursor-pointer text-xs text-paper-dim underline underline-offset-2 list-none">
+            Visits per acre (experimental, 4-park sample only) &darr;
+          </summary>
+          <p className="text-xs text-paper-dim font-mono mt-2 mb-2">
+            Always approximate: a huge wilderness park can look empty on paper while everyone shares one
+            corridor (e.g. Death Valley&rsquo;s Badwater Road) &mdash; this is exactly the misleading case the
+            percentile ranking above is designed to avoid. Real acreage/visitation only exists for the
+            4-park editorial cohort today.
+          </p>
+          <ol className="flex flex-col gap-1">
+            {PARKS.map((p) => (
+              <li key={p.code} className="flex items-center gap-4 py-1.5 text-xs">
+                <Link href={`/parks/${p.code}`} className="hover:underline underline-offset-2 flex-1">{p.name}</Link>
+                <span className="font-mono text-paper-dim">{visitsPerAcre(p.code)} visits/acre</span>
+              </li>
+            ))}
+          </ol>
+        </details>
       </section>
 
       <section>
@@ -128,4 +153,15 @@ export default function RankingsPage() {
 
 function Dot({ accent }: { accent: string }) {
   return <span className="inline-block w-2 h-2 rounded-full flex-none" style={{ background: accent }} />;
+}
+
+function CrowdBandBadge({ band }: { band: CrowdBand }) {
+  return (
+    <span
+      className="text-[0.65rem] uppercase tracking-wide font-semibold px-2 py-0.5 rounded-full border"
+      style={{ background: `${CROWD_BAND_COLOR[band]}33`, borderColor: CROWD_BAND_COLOR[band] }}
+    >
+      {band}
+    </span>
+  );
 }

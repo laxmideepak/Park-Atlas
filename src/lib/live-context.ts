@@ -6,7 +6,7 @@
  * coordinates). Cached server-side; never called from the browser.
  */
 
-const USER_AGENT = "ParkAtlas (github.com/parkatlas, contact: hello@parkatlas.example)";
+const USER_AGENT = "ParkAtlas (https://github.com/laxmideepak/Park-Atlas)";
 const REVALIDATE_SECONDS = 60 * 30; // 30 min
 
 interface PointsResponse {

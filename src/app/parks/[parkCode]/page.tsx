@@ -66,8 +66,8 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
                 <Stat label="Acreage" value={`${cohortPark.acreage.toLocaleString()} ac`} />
                 <Stat label="Entry fee" value={liveProfile?.entranceFeeCost ? `${liveProfile.entranceFeeCost} ${liveProfile.entranceFeeDescription ?? ""}`.trim() : cohortPark.entryFee} />
                 <Stat
-                  label="2025 visits"
-                  value={`${cohortPark.annualVisits2025.toLocaleString()}${cohortPark.officialVisitRank2025 ? ` · #${cohortPark.officialVisitRank2025} official` : " · outside top 10"}`}
+                  label={`Visits (${cohortPark.visitsWindow})`}
+                  value={`${cohortPark.medianAnnualVisits.toLocaleString()}${cohortPark.officialVisitRank2025 ? ` · #${cohortPark.officialVisitRank2025} official 2025` : " · outside 2025 top 10"}`}
                 />
                 <Stat label="Typical trip" value={cohortPark.quickStats.tripLength} />
               </>
