@@ -5,7 +5,7 @@
  * app will actually import, so a bad snapshot can never ship. Wired as the
  * first step of `npm run build`.
  */
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync, statSync } from "node:fs";
 import { join } from "node:path";
 
 const DATA = (f) => JSON.parse(readFileSync(join(process.cwd(), "src", "lib", "data", f), "utf8"));
@@ -91,6 +91,17 @@ for (const [code, e] of ppParks) {
   if (!e.blurDataURL || !e.blurDataURL.startsWith("data:image/")) errors.push(`premium ${code}: missing/invalid blurDataURL (run scripts/gen-premium-blur.mjs)`);
 }
 ok(`premium-photos: ${ppParks.length} parks, licenses in allowlist, authors present on CC picks, blurDataURLs inline`);
+
+// --- self-hosted card images (pickCard's last-resort must never hotlink Commons) ---
+const ci = DATA("card-images.json");
+meta("card-images", ci._meta, null);
+for (const [code] of ppParks) {
+  const entry = ci.parks[code];
+  if (!entry) { errors.push(`card-images: premium park ${code} has no self-hosted card`); continue; }
+  const f = join(process.cwd(), "public", entry.file);
+  if (!existsSync(f) || statSync(f).size === 0) errors.push(`card-images ${code}: ${entry.file} missing/empty on disk`);
+}
+ok(`card-images: ${Object.keys(ci.parks).length} self-hosted cards cover all premium parks`);
 
 if (errors.length) {
   console.error(`\nDATASET VALIDATION FAILED (${errors.length}):\n - ` + errors.join("\n - "));

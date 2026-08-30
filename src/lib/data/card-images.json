@@ -1,0 +1,195 @@
+{
+  "_meta": {
+    "sourceUrl": "https://upload.wikimedia.org (premium-photos.json picks, self-hosted card-size)",
+    "datasetVersion": "Commons 960px thumbs of the premium picks",
+    "fetchedAt": "2026-08-30T04:27:30.368Z",
+    "script": "scripts/etl-card-images.mjs",
+    "recordCount": 61,
+    "totalBytes": 11519234
+  },
+  "parks": {
+    "acad": {
+      "file": "/cards/acad.jpg"
+    },
+    "npsa": {
+      "file": "/cards/npsa.jpg"
+    },
+    "arch": {
+      "file": "/cards/arch.jpg"
+    },
+    "badl": {
+      "file": "/cards/badl.jpg"
+    },
+    "bibe": {
+      "file": "/cards/bibe.jpg"
+    },
+    "bisc": {
+      "file": "/cards/bisc.jpg"
+    },
+    "blca": {
+      "file": "/cards/blca.jpg"
+    },
+    "brca": {
+      "file": "/cards/brca.jpg"
+    },
+    "cany": {
+      "file": "/cards/cany.jpg"
+    },
+    "care": {
+      "file": "/cards/care.jpg"
+    },
+    "cave": {
+      "file": "/cards/cave.jpg"
+    },
+    "chis": {
+      "file": "/cards/chis.jpg"
+    },
+    "cong": {
+      "file": "/cards/cong.jpg"
+    },
+    "crla": {
+      "file": "/cards/crla.jpg"
+    },
+    "cuva": {
+      "file": "/cards/cuva.jpg"
+    },
+    "deva": {
+      "file": "/cards/deva.jpg"
+    },
+    "dena": {
+      "file": "/cards/dena.jpg"
+    },
+    "drto": {
+      "file": "/cards/drto.jpg"
+    },
+    "ever": {
+      "file": "/cards/ever.jpg"
+    },
+    "gaar": {
+      "file": "/cards/gaar.jpg"
+    },
+    "jeff": {
+      "file": "/cards/jeff.jpg"
+    },
+    "glba": {
+      "file": "/cards/glba.jpg"
+    },
+    "grca": {
+      "file": "/cards/grca.jpg"
+    },
+    "grte": {
+      "file": "/cards/grte.jpg"
+    },
+    "grba": {
+      "file": "/cards/grba.jpg"
+    },
+    "grsa": {
+      "file": "/cards/grsa.jpg"
+    },
+    "grsm": {
+      "file": "/cards/grsm.jpg"
+    },
+    "gumo": {
+      "file": "/cards/gumo.jpg"
+    },
+    "hale": {
+      "file": "/cards/hale.jpg"
+    },
+    "havo": {
+      "file": "/cards/havo.jpg"
+    },
+    "hosp": {
+      "file": "/cards/hosp.jpg"
+    },
+    "indu": {
+      "file": "/cards/indu.jpg"
+    },
+    "isro": {
+      "file": "/cards/isro.jpg"
+    },
+    "jotr": {
+      "file": "/cards/jotr.jpg"
+    },
+    "katm": {
+      "file": "/cards/katm.jpg"
+    },
+    "kefj": {
+      "file": "/cards/kefj.jpg"
+    },
+    "kica": {
+      "file": "/cards/kica.jpg"
+    },
+    "kova": {
+      "file": "/cards/kova.jpg"
+    },
+    "lacl": {
+      "file": "/cards/lacl.jpg"
+    },
+    "lavo": {
+      "file": "/cards/lavo.jpg"
+    },
+    "maca": {
+      "file": "/cards/maca.jpg"
+    },
+    "meve": {
+      "file": "/cards/meve.jpg"
+    },
+    "mora": {
+      "file": "/cards/mora.jpg"
+    },
+    "neri": {
+      "file": "/cards/neri.jpg"
+    },
+    "noca": {
+      "file": "/cards/noca.jpg"
+    },
+    "olym": {
+      "file": "/cards/olym.jpg"
+    },
+    "pefo": {
+      "file": "/cards/pefo.jpg"
+    },
+    "pinn": {
+      "file": "/cards/pinn.jpg"
+    },
+    "redw": {
+      "file": "/cards/redw.jpg"
+    },
+    "romo": {
+      "file": "/cards/romo.jpg"
+    },
+    "sagu": {
+      "file": "/cards/sagu.jpg"
+    },
+    "seki": {
+      "file": "/cards/seki.jpg"
+    },
+    "shen": {
+      "file": "/cards/shen.jpg"
+    },
+    "viis": {
+      "file": "/cards/viis.jpg"
+    },
+    "voya": {
+      "file": "/cards/voya.jpg"
+    },
+    "whsa": {
+      "file": "/cards/whsa.jpg"
+    },
+    "wica": {
+      "file": "/cards/wica.jpg"
+    },
+    "wrst": {
+      "file": "/cards/wrst.jpg"
+    },
+    "yell": {
+      "file": "/cards/yell.jpg"
+    },
+    "yose": {
+      "file": "/cards/yose.jpg"
+    },
+    "zion": {
+      "file": "/cards/zion.jpg"
+    }
+  }
+}

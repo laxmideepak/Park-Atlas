@@ -2,6 +2,7 @@ import dims from "./data/image-dims.json";
 import { HERO_MANIFEST } from "./data/hero-manifest";
 import premium from "./data/premium-photos.json";
 import scroller from "./data/scroller-images.json";
+import cards from "./data/card-images.json";
 import type { ParkImage } from "./nps";
 
 /** Community-award-tier photos (Wikimedia Commons Featured/Quality/Valued,
@@ -95,15 +96,33 @@ export function pickHero(images: ParkImage[], parkCode?: string): ParkImage | nu
   return [...candidates].sort((a, b) => (getDims(b.url)?.width ?? 0) - (getDims(a.url)?.width ?? 0))[0];
 }
 
+/** Premium picks downloaded to /public/cards by scripts/etl-card-images.mjs.
+ * The first cut hotlinked Commons 1280px thumbs on the theory only 2 parks
+ * would fall back — but ~30 parks have zero rights-passing NPS card images,
+ * so a month page (all 63 parks) fired a 30+-wide Commons burst and got
+ * 429'd wholesale (observed in smoke). Cards therefore only ever serve
+ * premium pixels from our own origin, like the scroller. */
+function fromCardLocal(parkCode?: string): (ParkImage & { creditUrl: string }) | null {
+  if (!parkCode) return null;
+  const local = (cards.parks as Record<string, { file: string }>)[parkCode];
+  const entry = (premium.parks as Record<string, PremiumEntry>)[parkCode];
+  if (!local || !entry) return null;
+  return {
+    url: local.file,
+    title: entry.alt,
+    altText: entry.alt,
+    credit: `Photo: ${entry.author} · ${entry.license}`,
+    creditUrl: entry.sourcePage,
+    blurDataURL: entry.blurDataURL,
+  };
+}
+
 /** Card: any orientation, just needs to not be a thumbnail.
  * Last resort (founder #3/#4): when the rights filter leaves a park with
- * zero NPS images (2 of 63 at last count — chis, kica), fall back to the
- * premium pick at a 1280px thumb (cards render ~400px; no need to pull the
- * 3840px hero). No burst risk: only those zero-image parks ever touch
- * Commons from a grid, one image each, via the optimizer's 31-day cache. */
+ * zero NPS images, fall back to the self-hosted premium card. */
 export function pickCard(images: ParkImage[], parkCode?: string): ParkImage | null {
   const candidates = images.filter((im) => passes(im.url, 800));
-  return candidates[0] ?? fromPremium(parkCode, 1280);
+  return candidates[0] ?? fromCardLocal(parkCode);
 }
 
 /** Premium picks downloaded to /public/scroller by scripts/etl-scroller-images.mjs
