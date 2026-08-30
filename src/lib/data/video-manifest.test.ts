@@ -39,8 +39,10 @@ describe("video manifest (Living Heroes spec §1.1/§1.2)", () => {
 
   it("referenced files exist and hold the per-file size budgets", () => {
     for (const [key, e] of entries) {
+      // Desktop budget raised 2.5MB -> 4.0MB alongside the move to true-1080p
+      // sources (the 2.5MB spec figure predates them); see encode-hero-video.mjs.
       for (const [field, path, maxBytes] of [
-        ["srcDesktop", e.srcDesktop, 2.5e6],
+        ["srcDesktop", e.srcDesktop, 4.0e6],
         ["srcMobile", e.srcMobile, 1.0e6],
         ["poster", e.poster, 0.4e6],
       ] as const) {

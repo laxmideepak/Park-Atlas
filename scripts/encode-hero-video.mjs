@@ -5,8 +5,14 @@
  *   node scripts/encode-hero-video.mjs <input.(mp4|mov)> <basename> [startSec] [durationSec]
  *
  * Writes to public/video/:
- *   <basename>-1080.mp4   1920x1080 H.264 CRF~23 +faststart, audio stripped, target <= 2.5 MB
+ *   <basename>-1080.mp4   1920x1080 H.264 CRF~23 +faststart, audio stripped, target <= 4.0 MB
  *   <basename>-540.mp4     960x540 H.264 CRF~26 +faststart, audio stripped, target <= 1.0 MB
+ *
+ * Desktop budget history: the spec's 2.5 MB target was written when every
+ * available source was 720p NPS legacy b-roll. True-1080p sources (NPGallery
+ * publishes 12-16 Mbps masters) need ~2.7 Mbps for water/foliage motion to
+ * survive at 1080p; at 2.5 MB a 12s loop lands at CRF 32+ and visibly smears.
+ * Raised to 4.0 MB (still one video per page, preload="none", poster LCP).
  *   <basename>-poster.jpg  first frame of the encoded loop (the LCP element)
  * and prints the base64 blurDataURL + a ready-to-paste VideoManifestEntry snippet.
  *
@@ -70,7 +76,7 @@ const srcHeight = parseInt(execFileSync("ffprobe", [
 const [dw, dh] = srcHeight >= 1080 ? [1920, 1080] : [1280, 720];
 if (dh !== 1080) console.log(`source is ${srcHeight}p — desktop encode capped at ${dw}x${dh} (no upscaling)`);
 
-encode(`desktop ${dh}p`, desktop, dw, dh, 23, 2.5e6);
+encode(`desktop ${dh}p`, desktop, dw, dh, 23, 4.0e6);
 encode("mobile 540p", mobile, 960, 540, 26, 1.0e6);
 
 // Poster = the encoded loop's FIRST frame, so the 600ms poster->video crossfade
