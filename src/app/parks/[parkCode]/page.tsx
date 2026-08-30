@@ -126,7 +126,16 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
               )}
               <RevealGroup as="div" className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 text-sm" itemClassName="h-full">
                 {[
-                  <Stat key="acreage" label="Acreage (official)" value={<CountUp value={Math.round(acreage?.grossAcres ?? 0)} suffix=" ac" />} />,
+                  <Stat
+                    key="acreage"
+                    label="Acreage (official)"
+                    value={
+                      <>
+                        <CountUp value={Math.round(acreage?.grossAcres ?? 0)} suffix=" ac" />
+                        <sup className="font-mono">&dagger;</sup>
+                      </>
+                    }
+                  />,
                   <Stat
                     key="fee"
                     label="Entry fee"
@@ -135,7 +144,12 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
                   <Stat
                     key="visits"
                     label="Visits (5-yr median)"
-                    value={`${(visitation?.medianAnnualVisits ?? 0).toLocaleString()}${cohortPark?.officialVisitRank2025 ? ` · #${cohortPark.officialVisitRank2025} official 2025` : ""}`}
+                    value={
+                      <>
+                        {`${(visitation?.medianAnnualVisits ?? 0).toLocaleString()}${cohortPark?.officialVisitRank2025 ? ` · #${cohortPark.officialVisitRank2025} official 2025` : ""}`}
+                        <sup className="font-mono">&Dagger;</sup>
+                      </>
+                    }
                   />,
                   cohortPark ? (
                     <Stat key="trip" label="Typical trip" value={cohortPark.quickStats.tripLength} />
@@ -144,8 +158,10 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
                   ),
                 ]}
               </RevealGroup>
+              {/* Footnote daggers tie the two provenance-backed stats above
+                  († acreage, ‡ visits) to their sources — two marks max. */}
               <p className="font-mono text-mono-sm text-ink-soft -mt-2">
-                {ACREAGE_SOURCE_LABEL} &middot; {VISITATION_SOURCE_LABEL}
+                &dagger; {ACREAGE_SOURCE_LABEL} &middot; &Dagger; {VISITATION_SOURCE_LABEL}
               </p>
 
               {liveProfile && (
