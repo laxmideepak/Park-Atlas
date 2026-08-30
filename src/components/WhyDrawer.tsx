@@ -26,10 +26,6 @@ export function WhyDrawer({
   const reduceMotion = useReducedMotion();
   const month = monthByAbbr(row.month)!;
   const showWhyNotNow = (row.tier === "Specialized" || row.tier === "Limited") && row.whyNotNow?.length;
-  // 0ft is a real, valid elevation for a sea-level station — check the
-  // actual sentinel string, not elevation, so a real coastal station never
-  // gets mislabeled as an estimate.
-  const isEstimated = row.climateStation === "Regional estimate — no station identified yet";
 
   useEffect(() => {
     if (!open) return;
@@ -108,24 +104,20 @@ export function WhyDrawer({
                     <td className="py-1.5 pr-2">Climate suitability</td>
                     <td className="py-1.5 pr-2">{Math.round(CLIMATE_WEIGHT * 100)}%</td>
                     <td className="py-1.5 pr-2">{row.climateScore}</td>
-                    <td className="py-1.5">
-                      {isEstimated
-                        ? row.climateStation
-                        : `Hand-authored from ${row.climateStation} climatology (${row.climateStationElevFt} ft) · NOAA Normals pipeline pending`}
-                    </td>
+                    <td className="py-1.5">{row.climateSourceLabel}</td>
                   </tr>
                   <tr>
                     <td className="py-1.5 pr-2">Seasonal accessibility</td>
                     <td className="py-1.5 pr-2">{Math.round(ACCESSIBILITY_WEIGHT * 100)}%</td>
                     <td className="py-1.5 pr-2">{row.accessibilityScore}</td>
-                    <td className="py-1.5">{isEstimated ? "Estimated by park type — no NPS monthly-access dataset exists" : "Hand-authored from published NPS seasonal closure patterns"}</td>
+                    <td className="py-1.5">{row.accessCurated ? "Hand-curated from published NPS seasonal closure patterns" : "Estimated by park type — no NPS monthly-access dataset exists"}</td>
                   </tr>
                 </tbody>
               </table>
 
               <div className="flex flex-col gap-1 font-mono text-xs text-ink-soft">
                 <span>Data confidence: <strong className="text-ink">{row.dataConfidence}</strong></span>
-                <span>Popularity this month: {row.percentOfAnnualVisits}% of annual visits (informational, not scored)</span>
+                <span>Popularity this month: {row.percentOfAnnualVisits}% of annual visits — NPS IRMA Stats, 5-yr mean share (informational, not scored)</span>
                 <span>Month Fit {METHODOLOGY_VERSION} &middot; calculated {METHODOLOGY_CALCULATED_AT}</span>
               </div>
 

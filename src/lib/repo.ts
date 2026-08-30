@@ -4,6 +4,7 @@ import { ALL_PARKS_MINI } from "./data/all-parks-mini";
 import { PARK_MONTH_SCORES } from "./data/park-month-scores";
 import { MONTHS, SEASONS, monthByAbbr } from "./months";
 import { overallMonthFit, scoreToTier, bestBalanceScore, crowdBand, type CrowdBand } from "./scoring";
+import { parkVisitation, parkStation, climateSourceLabel } from "./provenance";
 
 export interface ParkSummary {
   code: string;
@@ -31,11 +32,39 @@ export function getParkSummary(code: string): ParkSummary {
 export interface ScoredMonth extends ParkMonthScore {
   overallMonthFit: number;
   tier: Tier;
+  /** True for the 4-park editorial cohort whose accessibility curves are
+   * hand-curated from published closure patterns; false = estimated by park
+   * type. (Restoration C6: WhyDrawer keys its accessibility source line off
+   * this instead of the old climate-station sentinel, since every park now
+   * has a real station.) */
+  accessCurated: boolean;
+  /** Server-derived from the committed park-stations/normals snapshots —
+   * clients render it verbatim and never import the dataset JSONs. */
+  climateSourceLabel: string;
 }
 
 function score(row: ParkMonthScore): ScoredMonth {
   const fit = overallMonthFit(row);
-  return { ...row, overallMonthFit: fit, tier: scoreToTier(fit) };
+  // Restoration (C6): visitation is REAL for all 63 — IRMA Stats monthly
+  // shares replace the hand-authored/estimated percentOfAnnualVisits, and
+  // the station identity fields come from the committed park-stations
+  // mapping. Fit inputs (climateScore/accessibilityScore) are untouched —
+  // the formula's semantics don't change here, only display/crowd data.
+  const real = parkVisitation(row.park);
+  const station = parkStation(row.park);
+  const patched: ParkMonthScore = {
+    ...row,
+    percentOfAnnualVisits: real ? real.monthlyShares[row.month] : row.percentOfAnnualVisits,
+    climateStation: station ? `${station.stationName} (${station.stationId})` : row.climateStation,
+    climateStationElevFt: station ? Math.round(station.elevationFt) : row.climateStationElevFt,
+  };
+  return {
+    ...patched,
+    overallMonthFit: fit,
+    tier: scoreToTier(fit),
+    accessCurated: Boolean(getPark(row.park)),
+    climateSourceLabel: climateSourceLabel(row.park),
+  };
 }
 
 export function allParks() {

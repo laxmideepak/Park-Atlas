@@ -9,11 +9,12 @@ const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 /** §6.3.4 — bone chart, ink bars, brass on the best-balance month, mono axis. */
 export function CrowdCalendar({
   rows,
-  estimated = false,
+  sourceLabel,
   bestBalanceMonth,
 }: {
   rows: ScoredMonth[];
-  estimated?: boolean;
+  /** Provenance-derived on the server (spec §5) — never hand-written here. */
+  sourceLabel: string;
   bestBalanceMonth?: string;
 }) {
   const reduce = useReducedMotion();
@@ -27,7 +28,7 @@ export function CrowdCalendar({
       <div className="flex gap-6 text-mono-sm font-mono text-ink-soft flex-wrap">
         <span>Busiest: <strong className="text-ink">{monthByAbbr(busiest.month)!.name}</strong> ({busiest.percentOfAnnualVisits}% of visits)</span>
         <span>Quietest: <strong className="text-ink">{monthByAbbr(quietest.month)!.name}</strong> ({quietest.percentOfAnnualVisits}% of visits)</span>
-        <span>{estimated ? "Estimated by park type · pending real IRMA data" : "Hand-authored monthly shares · totals from the NPS 2025 release"}</span>
+        <span>{sourceLabel}</span>
       </div>
       <div className="flex items-end gap-2 h-40">
         {rows.map((r, i) => {

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { METHODOLOGY_VERSION, METHODOLOGY_CALCULATED_AT } from "@/lib/scoring";
 import { MONTHS } from "@/lib/months";
+import { FOOTER_SOURCE_LINES } from "@/lib/provenance";
 import { Reveal } from "./Reveal";
 
 /** §7.7 — ink chapter, serif sign-off, mono columns. */
@@ -32,17 +33,21 @@ export function Footer() {
             <span className="text-bone uppercase tracking-wide mb-1">Sources</span>
             <span>NPS Data API</span>
             <span>National Weather Service</span>
-            <span>NOAA 1991&ndash;2020 Normals (planned)</span>
+            {FOOTER_SOURCE_LINES.map((line) => (
+              <span key={line}>{line}</span>
+            ))}
           </div>
         </div>
 
         <div className="flex flex-col md:flex-row justify-between gap-3 text-xs text-bone/60 border-t border-bone/10 pt-6">
           <p className="max-w-2xl">
             ParkAtlas is an independent project and is not affiliated with or endorsed by the National Park Service.
-            Park descriptions, fees, and alerts are fetched live from the NPS Data API for all 63 parks. Month
-            Fit climate/accessibility curves are hand-authored for the 4-park validation cohort (Acadia,
-            Yellowstone, Death Valley, Great Smoky Mountains) and estimated by park type for the rest &mdash; no
-            live NOAA/NPS accessibility pipeline exists yet for any park.
+            Park descriptions, fees, and alerts are fetched live from the NPS Data API for all 63 parks.
+            Visitation (monthly shares and 5-yr medians) comes from NPS IRMA Stats and acreage from the NPS
+            Land Resources quarterly report &mdash; real data, all 63 parks. Month Fit climate/accessibility
+            curves are still hand-authored for the 4-park validation cohort and estimated by park type for
+            the rest; NOAA 1991&ndash;2020 station normals are on file, with score derivation from them
+            planned next.
           </p>
           <p className="font-mono whitespace-nowrap">
             Month Fit {METHODOLOGY_VERSION} &middot; calculated {METHODOLOGY_CALCULATED_AT}

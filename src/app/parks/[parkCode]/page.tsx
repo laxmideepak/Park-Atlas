@@ -14,6 +14,7 @@ import { fetchParkProfile, fetchParkAlerts, fetchThingsToDo, fetchParkImages } f
 import { getLiveContext } from "@/lib/live-context";
 import { SITE_URL } from "@/lib/site";
 import { VIDEO_MANIFEST } from "@/lib/data/video-manifest";
+import { parkAcreage, parkVisitation, VISITATION_SOURCE_LABEL, ACREAGE_SOURCE_LABEL } from "@/lib/provenance";
 import { Reveal, RevealGroup } from "@/components/Reveal";
 import { ThemedSection } from "@/components/ThemedSection";
 import { CountUp } from "@/components/CountUp";
@@ -66,6 +67,8 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
     fetchParkImages(parkCode),
   ]);
 
+  const acreage = parkAcreage(parkCode);
+  const visitation = parkVisitation(parkCode);
   const detail = cohortPark ? PARK_DETAIL[cohortPark.code] : null;
   const alerts = liveAlerts.length > 0 ? liveAlerts : null;
   const months = scoresForPark(parkCode);
@@ -95,7 +98,7 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
         state={state}
         accent={accent}
         description={fieldNote}
-        acreageLabel={cohortPark ? `${cohortPark.acreage.toLocaleString()} ac` : undefined}
+        acreageLabel={acreage ? `${Math.round(acreage.grossAcres).toLocaleString()} ac` : undefined}
         officialRankLabel={cohortPark?.officialVisitRank2025 ? `#${cohortPark.officialVisitRank2025} most visited (official)` : undefined}
         liveContext={liveContext}
         parkCode={parkCode}
@@ -108,33 +111,33 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
 
           <div className="flex-1 min-w-0 flex flex-col gap-20">
             <section id="overview" className="scroll-mt-24 flex flex-col gap-6">
+              {/* Restoration C6: acreage + visitation are real for ALL 63
+                  (LWCF quarterly report + IRMA Stats 5-yr medians) — the old
+                  cohort-only figures and the "Not yet live" placeholder are
+                  both retired. */}
               <RevealGroup as="div" className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 text-sm" itemClassName="h-full">
-                {cohortPark
-                  ? [
-                      <Stat key="acreage" label="Acreage" value={<CountUp value={cohortPark.acreage} suffix=" ac" />} />,
-                      <Stat
-                        key="fee"
-                        label="Entry fee"
-                        value={liveProfile?.entranceFeeCost ? `${liveProfile.entranceFeeCost} ${liveProfile.entranceFeeDescription ?? ""}`.trim() : cohortPark.entryFee}
-                      />,
-                      <Stat
-                        key="visits"
-                        label={`Visits (${cohortPark.visitsWindow})`}
-                        value={`${cohortPark.medianAnnualVisits.toLocaleString()}${cohortPark.officialVisitRank2025 ? ` · #${cohortPark.officialVisitRank2025} official 2025` : " · outside 2025 top 10"}`}
-                      />,
-                      <Stat key="trip" label="Typical trip" value={cohortPark.quickStats.tripLength} />,
-                    ]
-                  : [
-                      <Stat
-                        key="fee"
-                        label="Entry fee"
-                        value={liveProfile?.entranceFeeCost ? `${liveProfile.entranceFeeCost} ${liveProfile.entranceFeeDescription ?? ""}`.trim() : "See nps.gov"}
-                      />,
-                      <Stat key="location" label="Location" value={state} />,
-                      <Stat key="best-month" label="Best overall month" value={labels.bestOverall.name} />,
-                      <Stat key="acreage" label="Acreage / visitation" value="Not yet live" />,
-                    ]}
+                {[
+                  <Stat key="acreage" label="Acreage (official)" value={<CountUp value={Math.round(acreage?.grossAcres ?? 0)} suffix=" ac" />} />,
+                  <Stat
+                    key="fee"
+                    label="Entry fee"
+                    value={liveProfile?.entranceFeeCost ? `${liveProfile.entranceFeeCost} ${liveProfile.entranceFeeDescription ?? ""}`.trim() : cohortPark?.entryFee ?? "See nps.gov"}
+                  />,
+                  <Stat
+                    key="visits"
+                    label="Visits (5-yr median)"
+                    value={`${(visitation?.medianAnnualVisits ?? 0).toLocaleString()}${cohortPark?.officialVisitRank2025 ? ` · #${cohortPark.officialVisitRank2025} official 2025` : ""}`}
+                  />,
+                  cohortPark ? (
+                    <Stat key="trip" label="Typical trip" value={cohortPark.quickStats.tripLength} />
+                  ) : (
+                    <Stat key="best-month" label="Best overall month" value={labels.bestOverall.name} />
+                  ),
+                ]}
               </RevealGroup>
+              <p className="font-mono text-mono-sm text-ink-soft -mt-2">
+                {ACREAGE_SOURCE_LABEL} &middot; {VISITATION_SOURCE_LABEL}
+              </p>
 
               {liveProfile && (
                 <details className="group rounded-sm border border-ink/12 bg-bone-deep open:bg-bone-deep">
@@ -198,7 +201,7 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
 
             <ThemedSection id="crowds" className="scroll-mt-24">
               <Reveal as="h2" className="font-display text-display-md mb-6">Crowd calendar</Reveal>
-              <CrowdCalendar rows={months} estimated={!cohortPark} bestBalanceMonth={labels.bestBalance.month} />
+              <CrowdCalendar rows={months} sourceLabel={VISITATION_SOURCE_LABEL} bestBalanceMonth={labels.bestBalance.month} />
             </ThemedSection>
           </div>
         </div>
