@@ -1,0 +1,1524 @@
+{
+  "_meta": {
+    "sourceUrl": "https://irmaservices.nps.gov/Stats/v1/visitation?unitCodes=ACAD,ARCH,BADL,BIBE,BISC,BLCA,BRCA,CANY,CARE,CAVE,CHIS,CONG,CRLA,CUVA,DENA,DEVA,DRTO,EVER,GAAR,GLAC,GLBA,GRBA,GRCA,GRSA,GRSM,GRTE,GUMO,HALE,HAVO,HOSP,INDU,ISRO,JEFF,JOTR,KATM,KEFJ,KICA,KOVA,LACL,LAVO,MACA,MEVE,MORA,NERI,NOCA,NPSA,OLYM,PEFO,PINN,REDW,ROMO,SAGU,SEQU,SHEN,THRO,VIIS,VOYA,WHSA,WICA,WRST,YELL,YOSE,ZION&startMonth=1&startYear=2021&endMonth=12&endYear=2025",
+    "datasetVersion": "IRMA Stats v1, CY2021-2025",
+    "fetchedAt": "2026-08-30T00:20:23.840Z",
+    "script": "scripts/etl-visitation.mjs",
+    "recordCount": 63,
+    "notes": "monthlyShares = mean percent-of-annual RecreationVisitors per calendar month across the 5 years, rescaled by 100/sum then rounded to 1 dp via largest-remainder so each park sums to exactly 100.0. seki→SEQU, kica→KICA (Stats has no SEKI unit). GAAR Oct–Apr zeros are real reported zeros."
+  },
+  "parks": {
+    "acad": {
+      "medianAnnualVisits": 3970260,
+      "monthlyShares": {
+        "jan": 0.4,
+        "feb": 0.3,
+        "mar": 0.7,
+        "apr": 2.6,
+        "may": 8.2,
+        "jun": 15.3,
+        "jul": 19.7,
+        "aug": 20,
+        "sep": 16.6,
+        "oct": 14,
+        "nov": 1.8,
+        "dec": 0.4
+      },
+      "years": [
+        4069098,
+        3970260,
+        3879890,
+        3961661,
+        4079318
+      ]
+    },
+    "npsa": {
+      "medianAnnualVisits": 12135,
+      "monthlyShares": {
+        "jan": 5.4,
+        "feb": 10.3,
+        "mar": 12.4,
+        "apr": 12.1,
+        "may": 5.1,
+        "jun": 3.8,
+        "jul": 9,
+        "aug": 3.9,
+        "sep": 10.1,
+        "oct": 10.5,
+        "nov": 10.8,
+        "dec": 6.6
+      },
+      "years": [
+        8495,
+        1887,
+        12135,
+        22567,
+        43258
+      ]
+    },
+    "arch": {
+      "medianAnnualVisits": 1482045,
+      "monthlyShares": {
+        "jan": 2.3,
+        "feb": 3.2,
+        "mar": 9.4,
+        "apr": 10.5,
+        "may": 12.6,
+        "jun": 12.2,
+        "jul": 11,
+        "aug": 9.7,
+        "sep": 10.6,
+        "oct": 9.7,
+        "nov": 5.6,
+        "dec": 3.2
+      },
+      "years": [
+        1806865,
+        1460652,
+        1482045,
+        1466528,
+        1511740
+      ]
+    },
+    "badl": {
+      "medianAnnualVisits": 1094245,
+      "monthlyShares": {
+        "jan": 1,
+        "feb": 1,
+        "mar": 2.3,
+        "apr": 3.5,
+        "may": 9.9,
+        "jun": 19.9,
+        "jul": 22.3,
+        "aug": 18.8,
+        "sep": 12.5,
+        "oct": 6,
+        "nov": 1.8,
+        "dec": 1
+      },
+      "years": [
+        1224226,
+        1006809,
+        1046400,
+        1094245,
+        1139361
+      ]
+    },
+    "bibe": {
+      "medianAnnualVisits": 561458,
+      "monthlyShares": {
+        "jan": 8.5,
+        "feb": 8.8,
+        "mar": 17,
+        "apr": 12.1,
+        "may": 7.8,
+        "jun": 4.5,
+        "jul": 3.7,
+        "aug": 3,
+        "sep": 4.5,
+        "oct": 8.6,
+        "nov": 10.8,
+        "dec": 10.7
+      },
+      "years": [
+        581220,
+        514107,
+        509129,
+        561458,
+        568104
+      ]
+    },
+    "bisc": {
+      "medianAnnualVisits": 571242,
+      "monthlyShares": {
+        "jan": 7.5,
+        "feb": 8.4,
+        "mar": 10,
+        "apr": 9.3,
+        "may": 10.3,
+        "jun": 8.5,
+        "jul": 10,
+        "aug": 7.7,
+        "sep": 7.7,
+        "oct": 6.1,
+        "nov": 6.7,
+        "dec": 7.8
+      },
+      "years": [
+        705655,
+        701023,
+        571242,
+        512213,
+        486567
+      ]
+    },
+    "blca": {
+      "medianAnnualVisits": 308910,
+      "monthlyShares": {
+        "jan": 3,
+        "feb": 2.3,
+        "mar": 3,
+        "apr": 4.1,
+        "may": 11.4,
+        "jun": 15.8,
+        "jul": 14.9,
+        "aug": 13.8,
+        "sep": 15.2,
+        "oct": 9.5,
+        "nov": 4.5,
+        "dec": 2.5
+      },
+      "years": [
+        308910,
+        297257,
+        357069,
+        335862,
+        250086
+      ]
+    },
+    "brca": {
+      "medianAnnualVisits": 2354660,
+      "monthlyShares": {
+        "jan": 1.5,
+        "feb": 1.7,
+        "mar": 4.3,
+        "apr": 9.5,
+        "may": 13.1,
+        "jun": 14.5,
+        "jul": 13.1,
+        "aug": 11.7,
+        "sep": 14.2,
+        "oct": 10.3,
+        "nov": 3.6,
+        "dec": 2.5
+      },
+      "years": [
+        2104600,
+        2354660,
+        2461269,
+        2498075,
+        1967367
+      ]
+    },
+    "cany": {
+      "medianAnnualVisits": 800322,
+      "monthlyShares": {
+        "jan": 1.4,
+        "feb": 2.1,
+        "mar": 9.5,
+        "apr": 13,
+        "may": 14.9,
+        "jun": 11.3,
+        "jul": 8.8,
+        "aug": 7.8,
+        "sep": 12,
+        "oct": 11.7,
+        "nov": 5.1,
+        "dec": 2.4
+      },
+      "years": [
+        911594,
+        779147,
+        800322,
+        818492,
+        796057
+      ]
+    },
+    "care": {
+      "medianAnnualVisits": 1388476,
+      "monthlyShares": {
+        "jan": 1.3,
+        "feb": 1.7,
+        "mar": 7,
+        "apr": 11.1,
+        "may": 15.9,
+        "jun": 13.1,
+        "jul": 9.2,
+        "aug": 8.1,
+        "sep": 12.7,
+        "oct": 12.7,
+        "nov": 4.8,
+        "dec": 2.4
+      },
+      "years": [
+        1405353,
+        1227608,
+        1268861,
+        1422490,
+        1388476
+      ]
+    },
+    "cave": {
+      "medianAnnualVisits": 394121,
+      "monthlyShares": {
+        "jan": 4.9,
+        "feb": 4.9,
+        "mar": 11.7,
+        "apr": 9.2,
+        "may": 8.6,
+        "jun": 11.2,
+        "jul": 12.8,
+        "aug": 7.8,
+        "sep": 6.8,
+        "oct": 7.1,
+        "nov": 7,
+        "dec": 8
+      },
+      "years": [
+        349244,
+        390932,
+        394121,
+        460474,
+        410778
+      ]
+    },
+    "chis": {
+      "medianAnnualVisits": 319252,
+      "monthlyShares": {
+        "jan": 4.5,
+        "feb": 5.6,
+        "mar": 7.5,
+        "apr": 8.6,
+        "may": 8.9,
+        "jun": 11,
+        "jul": 12.3,
+        "aug": 10.4,
+        "sep": 9.4,
+        "oct": 8.4,
+        "nov": 7.7,
+        "dec": 5.7
+      },
+      "years": [
+        319252,
+        323245,
+        328746,
+        262581,
+        227186
+      ]
+    },
+    "cong": {
+      "medianAnnualVisits": 242049,
+      "monthlyShares": {
+        "jan": 5.8,
+        "feb": 6.7,
+        "mar": 11.9,
+        "apr": 10.3,
+        "may": 12.1,
+        "jun": 8.6,
+        "jul": 7.1,
+        "aug": 5.7,
+        "sep": 7.1,
+        "oct": 8.9,
+        "nov": 8.7,
+        "dec": 7.1
+      },
+      "years": [
+        215181,
+        204522,
+        250114,
+        242049,
+        287833
+      ]
+    },
+    "crla": {
+      "medianAnnualVisits": 559976,
+      "monthlyShares": {
+        "jan": 1,
+        "feb": 1.2,
+        "mar": 1.9,
+        "apr": 2.9,
+        "may": 6.3,
+        "jun": 12.5,
+        "jul": 28.6,
+        "aug": 21.6,
+        "sep": 14.2,
+        "oct": 6.6,
+        "nov": 2,
+        "dec": 1.2
+      },
+      "years": [
+        647751,
+        527259,
+        559976,
+        504942,
+        632242
+      ]
+    },
+    "cuva": {
+      "medianAnnualVisits": 2912454,
+      "monthlyShares": {
+        "jan": 3.4,
+        "feb": 3.6,
+        "mar": 6.6,
+        "apr": 8.3,
+        "may": 10.5,
+        "jun": 11.8,
+        "jul": 12.9,
+        "aug": 12,
+        "sep": 10.2,
+        "oct": 10.3,
+        "nov": 6,
+        "dec": 4.4
+      },
+      "years": [
+        2575275,
+        2913312,
+        2860059,
+        2912454,
+        3025325
+      ]
+    },
+    "deva": {
+      "medianAnnualVisits": 1146551,
+      "monthlyShares": {
+        "jan": 7.6,
+        "feb": 9.7,
+        "mar": 13.3,
+        "apr": 11.5,
+        "may": 8.7,
+        "jun": 6.1,
+        "jul": 6.7,
+        "aug": 6.1,
+        "sep": 4.8,
+        "oct": 7.1,
+        "nov": 8.9,
+        "dec": 9.5
+      },
+      "years": [
+        1146551,
+        1128862,
+        1099632,
+        1440484,
+        1320134
+      ]
+    },
+    "dena": {
+      "medianAnnualVisits": 466227,
+      "monthlyShares": {
+        "jan": 0.3,
+        "feb": 0.4,
+        "mar": 1.1,
+        "apr": 1.2,
+        "may": 7.2,
+        "jun": 24.2,
+        "jul": 26.9,
+        "aug": 27.2,
+        "sep": 10.1,
+        "oct": 0.7,
+        "nov": 0.3,
+        "dec": 0.4
+      },
+      "years": [
+        229521,
+        427562,
+        498722,
+        466227,
+        543300
+      ]
+    },
+    "drto": {
+      "medianAnnualVisits": 84285,
+      "monthlyShares": {
+        "jan": 8.3,
+        "feb": 7.6,
+        "mar": 9.3,
+        "apr": 9.3,
+        "may": 10.3,
+        "jun": 9.6,
+        "jul": 8.8,
+        "aug": 7.7,
+        "sep": 6.9,
+        "oct": 5.9,
+        "nov": 7.6,
+        "dec": 8.7
+      },
+      "years": [
+        83817,
+        78488,
+        84285,
+        84873,
+        89355
+      ]
+    },
+    "ever": {
+      "medianAnnualVisits": 810189,
+      "monthlyShares": {
+        "jan": 11.4,
+        "feb": 11.6,
+        "mar": 11.8,
+        "apr": 9.9,
+        "may": 7.7,
+        "jun": 7.8,
+        "jul": 8,
+        "aug": 6.9,
+        "sep": 4.9,
+        "oct": 4.3,
+        "nov": 7,
+        "dec": 8.7
+      },
+      "years": [
+        942130,
+        1155193,
+        810189,
+        741983,
+        778198
+      ]
+    },
+    "gaar": {
+      "medianAnnualVisits": 11045,
+      "monthlyShares": {
+        "jan": 0,
+        "feb": 0,
+        "mar": 0,
+        "apr": 0,
+        "may": 3.6,
+        "jun": 24.1,
+        "jul": 30.8,
+        "aug": 29,
+        "sep": 12.5,
+        "oct": 0,
+        "nov": 0,
+        "dec": 0
+      },
+      "years": [
+        7362,
+        9457,
+        11045,
+        11907,
+        14923
+      ]
+    },
+    "jeff": {
+      "medianAnnualVisits": 2209028,
+      "monthlyShares": {
+        "jan": 2.5,
+        "feb": 2.9,
+        "mar": 8,
+        "apr": 7.3,
+        "may": 8.3,
+        "jun": 11.5,
+        "jul": 25.4,
+        "aug": 10.7,
+        "sep": 7,
+        "oct": 6.4,
+        "nov": 5.3,
+        "dec": 4.7
+      },
+      "years": [
+        1145081,
+        1618774,
+        2422836,
+        2563052,
+        2209028
+      ]
+    },
+    "glac": {
+      "medianAnnualVisits": 3081656,
+      "monthlyShares": {
+        "jan": 0.6,
+        "feb": 0.6,
+        "mar": 0.8,
+        "apr": 1.5,
+        "may": 6.6,
+        "jun": 18.1,
+        "jul": 24.9,
+        "aug": 22.7,
+        "sep": 18.3,
+        "oct": 4.5,
+        "nov": 0.8,
+        "dec": 0.6
+      },
+      "years": [
+        3081656,
+        2908458,
+        2933616,
+        3208755,
+        3136557
+      ]
+    },
+    "glba": {
+      "medianAnnualVisits": 703659,
+      "monthlyShares": {
+        "jan": 0.1,
+        "feb": 0,
+        "mar": 0.1,
+        "apr": 1.1,
+        "may": 12.2,
+        "jun": 17.5,
+        "jul": 20.1,
+        "aug": 22.4,
+        "sep": 18,
+        "oct": 8.3,
+        "nov": 0.1,
+        "dec": 0.1
+      },
+      "years": [
+        89768,
+        545758,
+        703659,
+        736282,
+        740044
+      ]
+    },
+    "grca": {
+      "medianAnnualVisits": 4732101,
+      "monthlyShares": {
+        "jan": 3.6,
+        "feb": 3.9,
+        "mar": 7.7,
+        "apr": 9.7,
+        "may": 10.8,
+        "jun": 10.7,
+        "jul": 11.4,
+        "aug": 10.2,
+        "sep": 9.2,
+        "oct": 9.4,
+        "nov": 7,
+        "dec": 6.4
+      },
+      "years": [
+        4532677,
+        4732101,
+        4733705,
+        4919163,
+        4430653
+      ]
+    },
+    "grte": {
+      "medianAnnualVisits": 3628222,
+      "monthlyShares": {
+        "jan": 1.6,
+        "feb": 1.6,
+        "mar": 1.9,
+        "apr": 2.2,
+        "may": 8.7,
+        "jun": 18,
+        "jul": 20.8,
+        "aug": 19.2,
+        "sep": 16.1,
+        "oct": 7.1,
+        "nov": 1.4,
+        "dec": 1.4
+      },
+      "years": [
+        3885230,
+        2806223,
+        3417106,
+        3628222,
+        3800648
+      ]
+    },
+    "grba": {
+      "medianAnnualVisits": 144875,
+      "monthlyShares": {
+        "jan": 1.4,
+        "feb": 1.3,
+        "mar": 1.9,
+        "apr": 5.4,
+        "may": 10.2,
+        "jun": 17.3,
+        "jul": 17.4,
+        "aug": 14.6,
+        "sep": 16.6,
+        "oct": 11.2,
+        "nov": 1.5,
+        "dec": 1.2
+      },
+      "years": [
+        144875,
+        142115,
+        143265,
+        152068,
+        161210
+      ]
+    },
+    "grsa": {
+      "medianAnnualVisits": 493428,
+      "monthlyShares": {
+        "jan": 1.1,
+        "feb": 1.5,
+        "mar": 4.1,
+        "apr": 5.4,
+        "may": 14.4,
+        "jun": 19,
+        "jul": 18.2,
+        "aug": 13.9,
+        "sep": 10.2,
+        "oct": 7.9,
+        "nov": 2.6,
+        "dec": 1.7
+      },
+      "years": [
+        602613,
+        493428,
+        512219,
+        437661,
+        432498
+      ]
+    },
+    "grsm": {
+      "medianAnnualVisits": 12937633,
+      "monthlyShares": {
+        "jan": 3.2,
+        "feb": 3.8,
+        "mar": 6.9,
+        "apr": 8,
+        "may": 9.7,
+        "jun": 11.4,
+        "jul": 12,
+        "aug": 9.5,
+        "sep": 9.3,
+        "oct": 12.6,
+        "nov": 7.7,
+        "dec": 5.9
+      },
+      "years": [
+        14161548,
+        12937633,
+        13297647,
+        12191834,
+        11527939
+      ]
+    },
+    "gumo": {
+      "medianAnnualVisits": 226134,
+      "monthlyShares": {
+        "jan": 5.3,
+        "feb": 7.3,
+        "mar": 15.7,
+        "apr": 12.4,
+        "may": 8.7,
+        "jun": 5.8,
+        "jul": 5.9,
+        "aug": 4.4,
+        "sep": 5.4,
+        "oct": 9.9,
+        "nov": 8.7,
+        "dec": 10.5
+      },
+      "years": [
+        243291,
+        219987,
+        227340,
+        226134,
+        206423
+      ]
+    },
+    "hale": {
+      "medianAnnualVisits": 853181,
+      "monthlyShares": {
+        "jan": 7.3,
+        "feb": 7.1,
+        "mar": 8.4,
+        "apr": 8.4,
+        "may": 9.2,
+        "jun": 9.4,
+        "jul": 9.4,
+        "aug": 7.9,
+        "sep": 8,
+        "oct": 8.2,
+        "nov": 7.8,
+        "dec": 8.9
+      },
+      "years": [
+        853181,
+        1087616,
+        791292,
+        732477,
+        853711
+      ]
+    },
+    "havo": {
+      "medianAnnualVisits": 1580961,
+      "monthlyShares": {
+        "jan": 9,
+        "feb": 7.9,
+        "mar": 7.6,
+        "apr": 7,
+        "may": 7.2,
+        "jun": 9.3,
+        "jul": 9.4,
+        "aug": 9,
+        "sep": 7.5,
+        "oct": 7.7,
+        "nov": 8.6,
+        "dec": 9.8
+      },
+      "years": [
+        1262747,
+        1580961,
+        1620294,
+        1433593,
+        1877854
+      ]
+    },
+    "hosp": {
+      "medianAnnualVisits": 2494611,
+      "monthlyShares": {
+        "jan": 5.1,
+        "feb": 8.2,
+        "mar": 10.1,
+        "apr": 9.5,
+        "may": 9.4,
+        "jun": 14.2,
+        "jul": 11.9,
+        "aug": 8.9,
+        "sep": 5.2,
+        "oct": 6.1,
+        "nov": 6,
+        "dec": 5.4
+      },
+      "years": [
+        2162884,
+        2646133,
+        2502967,
+        2461812,
+        2494611
+      ]
+    },
+    "indu": {
+      "medianAnnualVisits": 2765892,
+      "monthlyShares": {
+        "jan": 2.7,
+        "feb": 2.9,
+        "mar": 4.7,
+        "apr": 5.9,
+        "may": 10.3,
+        "jun": 15.7,
+        "jul": 18,
+        "aug": 15,
+        "sep": 9.6,
+        "oct": 7.5,
+        "nov": 4.1,
+        "dec": 3.6
+      },
+      "years": [
+        3177210,
+        2834180,
+        2765892,
+        2705209,
+        2629497
+      ]
+    },
+    "isro": {
+      "medianAnnualVisits": 28806,
+      "monthlyShares": {
+        "jan": 0,
+        "feb": 0,
+        "mar": 0,
+        "apr": 0.2,
+        "may": 5,
+        "jun": 20.8,
+        "jul": 30.6,
+        "aug": 30.6,
+        "sep": 12,
+        "oct": 0.8,
+        "nov": 0,
+        "dec": 0
+      },
+      "years": [
+        25844,
+        25454,
+        28965,
+        28806,
+        29091
+      ]
+    },
+    "jotr": {
+      "medianAnnualVisits": 3058294,
+      "monthlyShares": {
+        "jan": 8.6,
+        "feb": 9.6,
+        "mar": 13.4,
+        "apr": 11.9,
+        "may": 8.3,
+        "jun": 5.7,
+        "jul": 4.5,
+        "aug": 4.6,
+        "sep": 5.3,
+        "oct": 6.8,
+        "nov": 10.2,
+        "dec": 11.1
+      },
+      "years": [
+        3064400,
+        3058294,
+        3270404,
+        2991874,
+        2932644
+      ]
+    },
+    "katm": {
+      "medianAnnualVisits": 33908,
+      "monthlyShares": {
+        "jan": 0,
+        "feb": 0,
+        "mar": 0,
+        "apr": 0,
+        "may": 0.5,
+        "jun": 13,
+        "jul": 38.3,
+        "aug": 30.4,
+        "sep": 16.8,
+        "oct": 0.9,
+        "nov": 0,
+        "dec": 0.1
+      },
+      "years": [
+        24764,
+        33908,
+        33763,
+        36230,
+        34479
+      ]
+    },
+    "kefj": {
+      "medianAnnualVisits": 411782,
+      "monthlyShares": {
+        "jan": 0,
+        "feb": 0,
+        "mar": 0,
+        "apr": 0,
+        "may": 7.2,
+        "jun": 24.4,
+        "jul": 30.7,
+        "aug": 26.3,
+        "sep": 10.1,
+        "oct": 1.3,
+        "nov": 0,
+        "dec": 0
+      },
+      "years": [
+        411782,
+        389943,
+        387525,
+        419468,
+        425369
+      ]
+    },
+    "kica": {
+      "medianAnnualVisits": 643065,
+      "monthlyShares": {
+        "jan": 3.2,
+        "feb": 2.5,
+        "mar": 2.5,
+        "apr": 5.3,
+        "may": 12.6,
+        "jun": 16.5,
+        "jul": 17.9,
+        "aug": 14.2,
+        "sep": 10.9,
+        "oct": 7.4,
+        "nov": 4.3,
+        "dec": 2.7
+      },
+      "years": [
+        562918,
+        640986,
+        643065,
+        699389,
+        779791
+      ]
+    },
+    "kova": {
+      "medianAnnualVisits": 16925,
+      "monthlyShares": {
+        "jan": 5.8,
+        "feb": 3.9,
+        "mar": 4.8,
+        "apr": 4.3,
+        "may": 4.3,
+        "jun": 10.3,
+        "jul": 14.9,
+        "aug": 12.3,
+        "sep": 10.9,
+        "oct": 11.1,
+        "nov": 8.6,
+        "dec": 8.8
+      },
+      "years": [
+        11540,
+        16925,
+        17616,
+        17233,
+        7786
+      ]
+    },
+    "lacl": {
+      "medianAnnualVisits": 18278,
+      "monthlyShares": {
+        "jan": 0,
+        "feb": 0,
+        "mar": 0,
+        "apr": 0,
+        "may": 2.4,
+        "jun": 25.5,
+        "jul": 32.8,
+        "aug": 28.5,
+        "sep": 10,
+        "oct": 0.8,
+        "nov": 0,
+        "dec": 0
+      },
+      "years": [
+        18278,
+        18187,
+        16728,
+        18505,
+        19778
+      ]
+    },
+    "lavo": {
+      "medianAnnualVisits": 418978,
+      "monthlyShares": {
+        "jan": 2,
+        "feb": 1.7,
+        "mar": 1.7,
+        "apr": 2.8,
+        "may": 8.4,
+        "jun": 19,
+        "jul": 26.2,
+        "aug": 13.5,
+        "sep": 11.7,
+        "oct": 9,
+        "nov": 2.4,
+        "dec": 1.6
+      },
+      "years": [
+        359635,
+        446291,
+        418978,
+        357651,
+        504777
+      ]
+    },
+    "maca": {
+      "medianAnnualVisits": 660734,
+      "monthlyShares": {
+        "jan": 2.3,
+        "feb": 3.1,
+        "mar": 9.4,
+        "apr": 9.7,
+        "may": 9.5,
+        "jun": 12.9,
+        "jul": 15.5,
+        "aug": 10.5,
+        "sep": 8.9,
+        "oct": 8.7,
+        "nov": 5.1,
+        "dec": 4.4
+      },
+      "years": [
+        515774,
+        663147,
+        654450,
+        747042,
+        660734
+      ]
+    },
+    "meve": {
+      "medianAnnualVisits": 499790,
+      "monthlyShares": {
+        "jan": 1.2,
+        "feb": 1.3,
+        "mar": 3.3,
+        "apr": 5.6,
+        "may": 11.3,
+        "jun": 18.8,
+        "jul": 17.8,
+        "aug": 13.9,
+        "sep": 12.4,
+        "oct": 9.9,
+        "nov": 2.8,
+        "dec": 1.7
+      },
+      "years": [
+        548477,
+        499790,
+        505194,
+        480065,
+        463130
+      ]
+    },
+    "mora": {
+      "medianAnnualVisits": 1635342,
+      "monthlyShares": {
+        "jan": 1.6,
+        "feb": 1,
+        "mar": 1.4,
+        "apr": 1.9,
+        "may": 5.2,
+        "jun": 13.7,
+        "jul": 25.6,
+        "aug": 24.2,
+        "sep": 14.3,
+        "oct": 8.2,
+        "nov": 1.7,
+        "dec": 1.2
+      },
+      "years": [
+        1670063,
+        1622395,
+        1674294,
+        1620006,
+        1635342
+      ]
+    },
+    "neri": {
+      "medianAnnualVisits": 1707223,
+      "monthlyShares": {
+        "jan": 2.1,
+        "feb": 2.5,
+        "mar": 5.2,
+        "apr": 6.6,
+        "may": 11.1,
+        "jun": 13.2,
+        "jul": 16.1,
+        "aug": 13.4,
+        "sep": 10.6,
+        "oct": 11,
+        "nov": 5.3,
+        "dec": 2.9
+      },
+      "years": [
+        1682720,
+        1593523,
+        1707223,
+        1811937,
+        1958440
+      ]
+    },
+    "noca": {
+      "medianAnnualVisits": 30154,
+      "monthlyShares": {
+        "jan": 0.4,
+        "feb": 0.4,
+        "mar": 0.3,
+        "apr": 1.8,
+        "may": 3.9,
+        "jun": 9.8,
+        "jul": 32.4,
+        "aug": 23.8,
+        "sep": 20.9,
+        "oct": 6.1,
+        "nov": 0.2,
+        "dec": 0
+      },
+      "years": [
+        17855,
+        30154,
+        40351,
+        16485,
+        46925
+      ]
+    },
+    "olym": {
+      "medianAnnualVisits": 2947503,
+      "monthlyShares": {
+        "jan": 2.7,
+        "feb": 3,
+        "mar": 4.4,
+        "apr": 4.2,
+        "may": 7.7,
+        "jun": 9.7,
+        "jul": 16.5,
+        "aug": 21,
+        "sep": 13.5,
+        "oct": 8.4,
+        "nov": 5.7,
+        "dec": 3.2
+      },
+      "years": [
+        2718925,
+        2432972,
+        2947503,
+        3717267,
+        3584187
+      ]
+    },
+    "pefo": {
+      "medianAnnualVisits": 520491,
+      "monthlyShares": {
+        "jan": 4.9,
+        "feb": 4.2,
+        "mar": 9.3,
+        "apr": 8.6,
+        "may": 11.8,
+        "jun": 12.9,
+        "jul": 10.9,
+        "aug": 8.6,
+        "sep": 8.6,
+        "oct": 8.2,
+        "nov": 5.8,
+        "dec": 6.2
+      },
+      "years": [
+        590334,
+        505209,
+        520491,
+        559254,
+        315951
+      ]
+    },
+    "pinn": {
+      "medianAnnualVisits": 343208,
+      "monthlyShares": {
+        "jan": 7.2,
+        "feb": 8,
+        "mar": 11.4,
+        "apr": 11.6,
+        "may": 11.1,
+        "jun": 9.1,
+        "jul": 8.4,
+        "aug": 6.6,
+        "sep": 5.9,
+        "oct": 6.4,
+        "nov": 7.4,
+        "dec": 6.9
+      },
+      "years": [
+        348857,
+        275023,
+        341220,
+        354076,
+        343208
+      ]
+    },
+    "redw": {
+      "medianAnnualVisits": 458400,
+      "monthlyShares": {
+        "jan": 4,
+        "feb": 4.1,
+        "mar": 5.2,
+        "apr": 6.8,
+        "may": 10.5,
+        "jun": 14.2,
+        "jul": 14,
+        "aug": 12.6,
+        "sep": 11.7,
+        "oct": 8.4,
+        "nov": 4.7,
+        "dec": 3.8
+      },
+      "years": [
+        435879,
+        458400,
+        409105,
+        622883,
+        1202480
+      ]
+    },
+    "romo": {
+      "medianAnnualVisits": 4171431,
+      "monthlyShares": {
+        "jan": 2.8,
+        "feb": 2.6,
+        "mar": 3.6,
+        "apr": 3.9,
+        "may": 7.6,
+        "jun": 14.8,
+        "jul": 18.7,
+        "aug": 15.9,
+        "sep": 14,
+        "oct": 9.5,
+        "nov": 3.6,
+        "dec": 3
+      },
+      "years": [
+        4434848,
+        4300424,
+        4115837,
+        4154349,
+        4171431
+      ]
+    },
+    "sagu": {
+      "medianAnnualVisits": 946369,
+      "monthlyShares": {
+        "jan": 12.4,
+        "feb": 13.2,
+        "mar": 16.2,
+        "apr": 11.8,
+        "may": 6.8,
+        "jun": 4.3,
+        "jul": 3.8,
+        "aug": 3.7,
+        "sep": 4.1,
+        "oct": 5.7,
+        "nov": 8.1,
+        "dec": 9.9
+      },
+      "years": [
+        1079786,
+        908194,
+        1010906,
+        946369,
+        847749
+      ]
+    },
+    "seki": {
+      "medianAnnualVisits": 1153198,
+      "monthlyShares": {
+        "jan": 3.8,
+        "feb": 3.5,
+        "mar": 4.7,
+        "apr": 6.9,
+        "may": 10.3,
+        "jun": 11.4,
+        "jul": 16.7,
+        "aug": 15.3,
+        "sep": 10.5,
+        "oct": 7.8,
+        "nov": 5.1,
+        "dec": 4
+      },
+      "years": [
+        1059548,
+        1153198,
+        980567,
+        1309573,
+        1378337
+      ]
+    },
+    "shen": {
+      "medianAnnualVisits": 1592312,
+      "monthlyShares": {
+        "jan": 1.5,
+        "feb": 1.7,
+        "mar": 4.6,
+        "apr": 7.9,
+        "may": 9.9,
+        "jun": 10.6,
+        "jul": 11.7,
+        "aug": 11.2,
+        "sep": 9.5,
+        "oct": 19.9,
+        "nov": 9.4,
+        "dec": 2.1
+      },
+      "years": [
+        1592312,
+        1449300,
+        1576008,
+        1720211,
+        1682152
+      ]
+    },
+    "thro": {
+      "medianAnnualVisits": 732951,
+      "monthlyShares": {
+        "jan": 0.4,
+        "feb": 0.4,
+        "mar": 1.2,
+        "apr": 1.5,
+        "may": 9.9,
+        "jun": 18.7,
+        "jul": 21.9,
+        "aug": 20.4,
+        "sep": 16.4,
+        "oct": 7.4,
+        "nov": 1.5,
+        "dec": 0.3
+      },
+      "years": [
+        796085,
+        668679,
+        746862,
+        732951,
+        729893
+      ]
+    },
+    "viis": {
+      "medianAnnualVisits": 343685,
+      "monthlyShares": {
+        "jan": 10.1,
+        "feb": 9.4,
+        "mar": 11.5,
+        "apr": 10.1,
+        "may": 8.8,
+        "jun": 8.8,
+        "jul": 8.5,
+        "aug": 5.7,
+        "sep": 4,
+        "oct": 4.8,
+        "nov": 8,
+        "dec": 10.3
+      },
+      "years": [
+        323999,
+        196752,
+        343685,
+        423029,
+        471074
+      ]
+    },
+    "voya": {
+      "medianAnnualVisits": 220825,
+      "monthlyShares": {
+        "jan": 1.4,
+        "feb": 2.8,
+        "mar": 1.5,
+        "apr": 0.1,
+        "may": 12.9,
+        "jun": 20.5,
+        "jul": 21.6,
+        "aug": 22.2,
+        "sep": 10.8,
+        "oct": 5,
+        "nov": 1.1,
+        "dec": 0.1
+      },
+      "years": [
+        243042,
+        221434,
+        220825,
+        199030,
+        206326
+      ]
+    },
+    "whsa": {
+      "medianAnnualVisits": 705127,
+      "monthlyShares": {
+        "jan": 5.9,
+        "feb": 5.9,
+        "mar": 13.9,
+        "apr": 10.9,
+        "may": 9.8,
+        "jun": 8.7,
+        "jul": 9.3,
+        "aug": 6.5,
+        "sep": 6.5,
+        "oct": 7.4,
+        "nov": 7.1,
+        "dec": 8.1
+      },
+      "years": [
+        782469,
+        705127,
+        729096,
+        702236,
+        659742
+      ]
+    },
+    "wica": {
+      "medianAnnualVisits": 606258,
+      "monthlyShares": {
+        "jan": 2,
+        "feb": 1.9,
+        "mar": 3.1,
+        "apr": 6.5,
+        "may": 11.2,
+        "jun": 16.1,
+        "jul": 19.8,
+        "aug": 16.7,
+        "sep": 13.2,
+        "oct": 5,
+        "nov": 2.4,
+        "dec": 2.1
+      },
+      "years": [
+        709001,
+        607418,
+        592459,
+        489399,
+        606258
+      ]
+    },
+    "wrst": {
+      "medianAnnualVisits": 78305,
+      "monthlyShares": {
+        "jan": 0,
+        "feb": 0.1,
+        "mar": 0.3,
+        "apr": 0.7,
+        "may": 5.9,
+        "jun": 23.5,
+        "jul": 33.3,
+        "aug": 25.9,
+        "sep": 9.4,
+        "oct": 0.7,
+        "nov": 0.1,
+        "dec": 0.1
+      },
+      "years": [
+        50189,
+        65236,
+        78305,
+        81670,
+        108840
+      ]
+    },
+    "yell": {
+      "medianAnnualVisits": 4744353,
+      "monthlyShares": {
+        "jan": 1,
+        "feb": 1,
+        "mar": 0.8,
+        "apr": 1.7,
+        "may": 11.7,
+        "jun": 18.6,
+        "jul": 20.7,
+        "aug": 18.5,
+        "sep": 17.9,
+        "oct": 6.8,
+        "nov": 0.5,
+        "dec": 0.8
+      },
+      "years": [
+        4860242,
+        3290242,
+        4501382,
+        4744353,
+        4762988
+      ]
+    },
+    "yose": {
+      "medianAnnualVisits": 3897070,
+      "monthlyShares": {
+        "jan": 3,
+        "feb": 3.4,
+        "mar": 3.6,
+        "apr": 6.7,
+        "may": 10,
+        "jun": 13.2,
+        "jul": 13.9,
+        "aug": 13.9,
+        "sep": 12.2,
+        "oct": 10.6,
+        "nov": 5.6,
+        "dec": 3.9
+      },
+      "years": [
+        3287595,
+        3667550,
+        3897070,
+        4121807,
+        4278413
+      ]
+    },
+    "zion": {
+      "medianAnnualVisits": 4946592,
+      "monthlyShares": {
+        "jan": 2.9,
+        "feb": 3.1,
+        "mar": 8.5,
+        "apr": 10,
+        "may": 11.7,
+        "jun": 12.4,
+        "jul": 11.4,
+        "aug": 9.5,
+        "sep": 9.8,
+        "oct": 10.1,
+        "nov": 6.2,
+        "dec": 4.4
+      },
+      "years": [
+        5039835,
+        4692417,
+        4623238,
+        4946592,
+        4984525
+      ]
+    }
+  }
+}
