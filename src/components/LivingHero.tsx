@@ -104,7 +104,7 @@ export function LivingHero({
       />
       <a
         href={entry.sourceUrl}
-        className={`absolute bottom-3 right-4 z-10 font-mono text-mono-sm text-bone/70 hover:text-bone underline-offset-2 hover:underline ${
+        className={`tap-44 absolute bottom-3 right-4 z-10 font-mono text-mono-sm text-bone/70 hover:text-bone underline-offset-2 hover:underline ${
           creditGlass ? "glass-dark rounded-sm px-2.5 py-1" : ""
         }`}
       >

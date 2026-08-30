@@ -42,7 +42,7 @@ export function ParkHero({
 
   return (
     <section className="relative bg-ink">
-      <div className="relative h-[78vh] min-h-[420px] w-full overflow-hidden">
+      <div className="relative h-[78svh] min-h-[420px] w-full overflow-hidden">
         {video ? (
           <>
             <LivingHero entry={video} alt={hero?.altText || name} />

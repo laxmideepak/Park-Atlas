@@ -11,23 +11,29 @@ export function Footer() {
       <div className="max-w-[1360px] mx-auto px-6 md:px-10 py-16 flex flex-col gap-12">
         <Reveal as="p" className="font-display text-display-lg leading-none">Public data. Plain answers.</Reveal>
 
+        {/* Mobile pass: links carry a real ≥44px row height on touch-sized
+            screens (invisible-extension overlaps would swallow neighbors in a
+            stacked column, so the height is genuine here); sm+ keeps the
+            original compact rows. */}
         <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8 font-mono text-mono-sm text-bone/70">
           <div className="flex flex-col gap-2">
             <span className="text-bone uppercase tracking-wide mb-1">Months</span>
             {MONTHS.slice(0, 6).map((m) => (
-              <Link key={m.abbr} href={`/discover/month/${m.abbr}`} className="hover:text-brass transition-colors">{m.name}</Link>
+              <Link key={m.abbr} href={`/discover/month/${m.abbr}`} className="min-h-11 sm:min-h-0 flex items-center hover:text-brass transition-colors">{m.name}</Link>
             ))}
           </div>
           <div className="flex flex-col gap-2">
-            <span className="text-bone uppercase tracking-wide mb-1 sm:invisible">Months</span>
+            {/* second Months column: header is pure column-alignment spacer on
+                sm+; on mobile (stacked) it read as a duplicate heading — hide it */}
+            <span className="hidden sm:block sm:invisible text-bone uppercase tracking-wide mb-1">Months</span>
             {MONTHS.slice(6, 12).map((m) => (
-              <Link key={m.abbr} href={`/discover/month/${m.abbr}`} className="hover:text-brass transition-colors">{m.name}</Link>
+              <Link key={m.abbr} href={`/discover/month/${m.abbr}`} className="min-h-11 sm:min-h-0 flex items-center hover:text-brass transition-colors">{m.name}</Link>
             ))}
           </div>
           <div className="flex flex-col gap-2">
             <span className="text-bone uppercase tracking-wide mb-1">Parks</span>
-            <Link href="/parks" className="hover:text-brass transition-colors">All 63 parks</Link>
-            <Link href="/rankings" className="hover:text-brass transition-colors">Rankings</Link>
+            <Link href="/parks" className="min-h-11 sm:min-h-0 flex items-center hover:text-brass transition-colors">All 63 parks</Link>
+            <Link href="/rankings" className="min-h-11 sm:min-h-0 flex items-center hover:text-brass transition-colors">Rankings</Link>
           </div>
           <div className="flex flex-col gap-2">
             <span className="text-bone uppercase tracking-wide mb-1">Sources</span>

@@ -28,7 +28,16 @@ export function HomeHero({
   const scale = useTransform(scrollYProgress, [0, 1], reduceMotion ? [1, 1] : [1, 1.06]);
 
   return (
-    <section ref={ref} className="relative h-screen w-full overflow-hidden bg-ink">
+    // Mobile pass: h-screen (100vh) hid the headline's bottom + source strip
+    // behind mobile browser chrome AND overshot by the in-flow banner+nav
+    // above this section. svh is the stable small-viewport height (== vh on
+    // desktop, so ≥lg is pixel-identical to the old h-screen); below lg we
+    // also subtract the banner+nav rows (~7.25rem phone / ~6.25rem tablet) so
+    // the whole hero — scroll cue included — fits the first screen.
+    <section
+      ref={ref}
+      className="relative h-[calc(100svh-7.25rem)] md:h-[calc(100svh-6.25rem)] lg:h-svh w-full overflow-hidden bg-ink"
+    >
       {/* filter-free: this layer is under a continuous scroll-linked transform */}
       <motion.div className="absolute inset-0" style={{ y, scale, willChange: "transform" }}>
         {video ? (
@@ -43,7 +52,7 @@ export function HomeHero({
       </motion.div>
       <div className="absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-ink/80 via-ink/25 to-transparent" />
 
-      <div className="relative h-full max-w-[1360px] mx-auto px-6 md:px-10 flex flex-col justify-end pb-20">
+      <div className="relative h-full max-w-[1360px] mx-auto px-6 md:px-10 flex flex-col justify-end pb-24 lg:pb-20">
         <motion.h1
           initial={reduceMotion ? undefined : { opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -68,7 +77,7 @@ export function HomeHero({
 
       <Link
         href="#year-scroller"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-bone/60 font-mono text-mono-sm"
+        className="tap-44 absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-bone/60 font-mono text-mono-sm"
       >
         <motion.span
           animate={reduceMotion ? undefined : { y: [0, 8, 0] }}

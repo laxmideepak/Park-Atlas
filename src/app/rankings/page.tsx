@@ -35,7 +35,7 @@ export default function RankingsPage() {
               confidence-rated, and display as tiers &mdash; never a false-precision #1&ndash;63.
             </p>
           </div>
-          <Link href="/parks" className="font-mono text-mono-sm underline underline-offset-2 whitespace-nowrap">
+          <Link href="/parks" className="tap-44 font-mono text-mono-sm underline underline-offset-2 whitespace-nowrap">
             Browse all 63 parks &rarr;
           </Link>
         </div>
@@ -47,7 +47,7 @@ export default function RankingsPage() {
             {OFFICIAL_MOST_VISITED_2025.map((r) => (
               <Fragment key={r.rank}>
                 <span className="font-mono text-mono-sm text-ink-soft w-6">{r.rank}</span>
-                <Link href={`/parks/${r.parkCode}`} className="font-display text-display-md leading-tight flex-1 hover:underline underline-offset-4">
+                <Link href={`/parks/${r.parkCode}`} className="tap-44 font-display text-display-md leading-tight flex-1 hover:underline underline-offset-4">
                   {r.name}
                 </Link>
                 <span className="font-mono text-mono-sm text-ink-soft">{r.visits.toLocaleString()} visits</span>
@@ -64,7 +64,7 @@ export default function RankingsPage() {
             {largest.map((p, i) => (
               <Fragment key={p.code}>
                 <span className="font-mono text-mono-sm text-ink-soft w-6">{i + 1}</span>
-                <Link href={`/parks/${p.code}`} className="font-display text-display-md leading-tight flex-1 hover:underline underline-offset-4">
+                <Link href={`/parks/${p.code}`} className="tap-44 font-display text-display-md leading-tight flex-1 hover:underline underline-offset-4">
                   {p.name}
                 </Link>
                 <span className="font-mono text-mono-sm text-ink-soft">{p.acreage.toLocaleString()} acres</span>
@@ -83,7 +83,7 @@ export default function RankingsPage() {
               const summary = getParkSummary(p.park);
               return (
                 <Fragment key={p.park}>
-                  <Link href={`/parks/${p.park}`} className="font-display text-display-md leading-tight flex-1 hover:underline underline-offset-4">
+                  <Link href={`/parks/${p.park}`} className="tap-44 font-display text-display-md leading-tight flex-1 hover:underline underline-offset-4">
                     {summary.name}
                   </Link>
                   <CrowdBandBadge band={p.band} />
@@ -116,7 +116,7 @@ export default function RankingsPage() {
         <section>
           <div className="flex items-baseline justify-between flex-wrap gap-2 mb-1">
             <Reveal as="h2" className="font-display text-display-lg leading-none">Hidden gems this month <span className="font-mono text-mono-sm text-ink-soft normal-case">&middot; Calculated</span></Reveal>
-            <Link href={`/discover/month/${CURRENT_MONTH}`} className="font-mono text-mono-sm underline underline-offset-2">See all months &rarr;</Link>
+            <Link href={`/discover/month/${CURRENT_MONTH}`} className="tap-44 font-mono text-mono-sm underline underline-offset-2">See all months &rarr;</Link>
           </div>
           <Reveal as="p" delay={0.06} className="font-mono text-mono-sm text-ink-soft mb-6">Month Fit &ge;85 AND crowd percentile &le;40 &middot; recomputed monthly</Reveal>
           {gems.length === 0 ? (
@@ -127,7 +127,7 @@ export default function RankingsPage() {
                 const p = getParkSummary(g.park);
                 return (
                   <Fragment key={g.park}>
-                    <Link href={`/parks/${g.park}`} className="font-display text-display-md leading-tight flex-1 hover:underline underline-offset-4">
+                    <Link href={`/parks/${g.park}`} className="tap-44 font-display text-display-md leading-tight flex-1 hover:underline underline-offset-4">
                       {p.name}
                     </Link>
                     <TierBadge tier={g.tier} onLight />
@@ -142,9 +142,11 @@ export default function RankingsPage() {
         <section>
           <Reveal as="h2" className="font-display text-display-lg leading-none mb-1">Best by month <span className="font-mono text-mono-sm text-ink-soft normal-case">&middot; Calculated</span></Reveal>
           <Reveal as="p" delay={0.06} className="text-ink-soft mb-6">Tiered results for any month of the year, across all 63 parks.</Reveal>
-          <div className="flex flex-wrap gap-2">
+          {/* gap-y-3 under sm keeps wrapped pill rows' 44px touch extensions
+              (tap-44) from colliding between rows */}
+          <div className="flex flex-wrap gap-x-2 gap-y-3 sm:gap-2">
             {["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"].map((m) => (
-              <Link key={m} href={`/discover/month/${m}`} className="px-3 py-1.5 rounded-full border border-ink/20 font-mono text-mono-sm uppercase hover:border-brass transition-colors">
+              <Link key={m} href={`/discover/month/${m}`} className="tap-44 px-3 py-1.5 rounded-full border border-ink/20 font-mono text-mono-sm uppercase hover:border-brass transition-colors">
                 {m}
               </Link>
             ))}

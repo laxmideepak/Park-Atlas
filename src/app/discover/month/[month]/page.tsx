@@ -59,7 +59,7 @@ export default async function MonthPage(props: PageProps<"/discover/month/[month
   return (
     <div className="flex flex-col">
       {/* ink hero */}
-      <section className="relative h-[60vh] min-h-[380px] w-full overflow-hidden bg-ink">
+      <section className="relative h-[60svh] min-h-[380px] w-full overflow-hidden bg-ink">
         {heroImage ? (
           <Image src={heroImage.url} alt={heroImage.altText || ""} fill priority sizes="100vw" quality={85} className="object-cover" />
         ) : (
@@ -73,9 +73,11 @@ export default async function MonthPage(props: PageProps<"/discover/month/[month
         </div>
       </section>
 
-      {/* month switcher */}
+      {/* month switcher — mobile pass: 6-column grid under sm so all 12
+          months wrap into two clean rows instead of hiding half the year
+          behind a sideways scroll */}
       <nav className="bg-ink border-t border-bone/10 overflow-x-auto" aria-label="Choose a month">
-        <div className="max-w-[1360px] mx-auto px-6 md:px-10 flex gap-1">
+        <div className="max-w-[1360px] mx-auto px-6 md:px-10 grid grid-cols-6 sm:flex gap-1">
           {MONTHS.map((m) => (
             <Link
               key={m.abbr}

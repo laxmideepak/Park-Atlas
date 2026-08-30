@@ -166,7 +166,10 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
                 <FigureLabel label="Best balance" month={labels.bestBalance.name} />
               </RevealGroup>
 
-              <div className="flex items-end gap-2 h-32 mb-2">
+              {/* Mobile pass: gap-1 under md widens each of the 12 tappable
+                  bar columns (~21px → ~25px at 390px) — the drawer trigger is
+                  the full column, so every extra pixel is hit area. */}
+              <div className="flex items-end gap-1 md:gap-2 h-32 mb-2">
                 {months.map((m) => (
                   <WhyDrawer
                     key={m.month}
@@ -188,7 +191,7 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
                   />
                 ))}
               </div>
-              <div className="flex gap-2 mb-8">
+              <div className="flex gap-1 md:gap-2 mb-8">
                 {months.map((m) => (
                   <span key={m.month} className="flex-1 text-center font-mono text-mono-sm uppercase text-ink-soft">{m.month}</span>
                 ))}
