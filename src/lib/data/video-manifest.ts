@@ -11,8 +11,10 @@
  * identifiable people. Every clip gets a row in docs/sources.md.
  *
  * Files are produced by `node scripts/encode-hero-video.mjs` — never
- * hand-encode; the script enforces the size budgets (<=2.5MB desktop,
- * <=1.0MB mobile) and emits the poster + blurDataURL.
+ * hand-encode; the script enforces the size budgets (<=4.0MB desktop —
+ * raised from the spec's 2.5MB, which predates true-1080p sources; see
+ * the note in the encode script — <=1.0MB mobile) and emits the poster
+ * + blurDataURL.
  */
 export interface VideoManifestEntry {
   parkCode: string; // or "home-<mon>" for the 12 seasonal home heroes
@@ -26,20 +28,24 @@ export interface VideoManifestEntry {
 }
 
 export const VIDEO_MANIFEST: Record<string, VideoManifestEntry> = {
-  // August home hero (spec coverage plan: "Yellowstone bison for August").
-  // Source: Yellowstone Video Library, "Bison in Summer" — page metadata
-  // states "Copyright Info: Public domain", Location: Lamar Valley, no
-  // audio. 12s window trimmed from the 20s original; desktop kept at the
-  // source's native 720p (never upscale).
+  // August home hero. Replaced the original 720p Yellowstone "Bison in
+  // Summer" legacy-library clip (soft at 1440px+ next to the 4K photo
+  // heroes) with a true-1080p NPGallery master: a humpback whale surfacing
+  // at South Marble Island, Glacier Bay. NPGallery asset metadata states
+  // Constraint "Public domain", Granting Rights "Full", credit "NPS
+  // Video/S. Tevebaugh". Seasonally right for August — Glacier Bay's
+  // humpback season peaks June-August (summer greens, lingering high
+  // snowfields). 12s calm-to-calm window of the 14s original, whale
+  // surfaces mid-loop; encoded from the 16 Mbps 1920x1080 source.
   "home-aug": {
-    parkCode: "yell",
-    srcDesktop: "/video/yell-bison-lamar-1080.mp4",
-    srcMobile: "/video/yell-bison-lamar-540.mp4",
-    poster: "/video/yell-bison-lamar-poster.jpg",
+    parkCode: "glba",
+    srcDesktop: "/video/glba-humpback-marble-1080.mp4",
+    srcMobile: "/video/glba-humpback-marble-540.mp4",
+    poster: "/video/glba-humpback-marble-poster.jpg",
     posterBlur:
-      "data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD//gAQTGF2YzYyLjI4LjEwMQD/2wBDAAgKCgsKCw0NDQ0NDRAPEBAQEBAQEBAQEBASEhIVFRUSEhIQEBISFBQVFRcXFxUVFRUXFxkZGR4eHBwjIyQrKzP/xABgAAEBAQAAAAAAAAAAAAAAAAAFAgcBAQEAAAAAAAAAAAAAAAAAAAACEAABAgMJAQAAAAAAAAAAAAABAAQCMQaRoYEDYVESMvAhEQADAQEAAAAAAAAAAAAAAAAAARExIf/AABEIAAkAEAMBIgACEQADEQD/2gAMAwEAAhEDEQA/AFxU709suIa8iQbAqiqVyRLEH7eFn8U/bJFvIqK3nAf/2Q==",
-    credit: "NPS",
-    sourceUrl: "https://www.nps.gov/yell/learn/photosmultimedia/vl_bisonsummer.htm",
+      "data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD//gAQTGF2YzYyLjI4LjEwMQD/2wBDAAgKCgsKCw0NDQ0NDRAPEBAQEBAQEBAQEBASEhIVFRUSEhIQEBISFBQVFRcXFxUVFRUXFxkZGR4eHBwjIyQrKzP/xABeAAEBAQAAAAAAAAAAAAAAAAADAQUBAQAAAAAAAAAAAAAAAAAAAAQQAAICAQMFAQAAAAAAAAAAAAECBAARAwUSoXKRcTJSEQACAwEAAAAAAAAAAAAAAAAAUQERAhL/wAARCAAJABADASIAAhEAAxEA/9oADAMBAAIRAxEAPwDaEzcwmEkaKdq8SfeFx0oa8jd5AAaYAB+AVPkLmxPmpUVCA96Z/9k=",
+    credit: "NPS Video / S. Tevebaugh",
+    sourceUrl: "https://npgallery.nps.gov/AssetDetail/fa0e0f35-4cfc-4b69-a2a3-a30691e88fa3",
     durationSec: 12,
   },
 };

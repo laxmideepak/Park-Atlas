@@ -13,9 +13,14 @@ third-party rights holder**. Anything credited otherwise is excluded.
 
 ## Living Hero video clips
 
+The original August clip (`yell-bison-lamar-*`, from Yellowstone's legacy
+video library) was retired 2026-08-30 and its files deleted: the legacy
+library caps at 1280x720, which reads soft next to the site's 4K photo
+heroes on 1440px+ viewports. Replaced with a true-1080p NPGallery master.
+
 | Asset (public/video/) | Subject | Source page | Credit on page | PD signal verified | Retrieved |
 |---|---|---|---|---|---|
-| `yell-bison-lamar-*` (1080/540/poster) | Bison grazing, Lamar Valley, Yellowstone — 12s window of the 20s "Bison in Summer" clip 1 | https://www.nps.gov/yell/learn/photosmultimedia/vl_bisonsummer.htm | Yellowstone Video Library; page metadata states "Copyright Info: Public domain", Audio: none | Yes — curl-verified HTTP 200 video/mp4 direct from nps.gov; page shows no © / no third-party rights holder (independently re-verified by a second reviewer pass) | 2026-08-29 |
+| `glba-humpback-marble-*` (1080/540/poster) | Humpback whale surfacing at South Marble Island, Glacier Bay NP & Preserve — 12s calm-to-calm window of the 14s original ("Humpback Whale at South Marble Island", NPGallery asset fa0e0f35-4cfc-4b69-a2a3-a30691e88fa3) | https://npgallery.nps.gov/AssetDetail/fa0e0f35-4cfc-4b69-a2a3-a30691e88fa3 | "NPS Video/S. Tevebaugh"; NPGallery asset metadata states Constraint: "Public domain", Granting Rights: "Full"; no third-party rights holder | Yes — direct download https://npgallery.nps.gov/GetAsset/fa0e0f35-4cfc-4b69-a2a3-a30691e88fa3/original curl-verified HTTP 200 `video/mp4` from npgallery.nps.gov; ffprobe of the downloaded original confirms true 1920x1080 H.264, 14.26s, ~16 Mbps (not an upscale) | 2026-08-30 |
 
 ## Ambient audio
 
