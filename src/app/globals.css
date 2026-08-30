@@ -171,6 +171,14 @@ body {
   }
 }
 
+/* Editorial hanging punctuation — Safari-only today, free everywhere else
+   (unsupported browsers ignore it). Opening quotes/brackets hang into the
+   margin so the text edge stays optically flush. No manual indent hacks. */
+.standfirst,
+.pullquote {
+  hanging-punctuation: first;
+}
+
 /* card -> hero photo morph should be a quick cut, not a lazy dissolve */
 ::view-transition-old(*),
 ::view-transition-new(*) {

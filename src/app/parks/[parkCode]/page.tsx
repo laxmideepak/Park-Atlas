@@ -125,7 +125,7 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
               {fieldNote && (
                 <Reveal
                   as="p"
-                  className={`font-display text-standfirst leading-snug max-w-[58ch] text-ink${fieldNote.length > 220 ? " dropcap" : ""}`}
+                  className={`standfirst font-display text-standfirst leading-snug max-w-[58ch] text-ink${fieldNote.length > 220 ? " dropcap" : ""}`}
                 >
                   {fieldNote}
                 </Reveal>
@@ -325,7 +325,7 @@ function EditorialSections({ detail }: { detail: ParkDetail }) {
           field note; serif italic, brass tick, no quotation glyphs. */}
       <Reveal as="div">
         <span aria-hidden className="block w-6 h-[2px] bg-brass mb-4" />
-        <p className="font-display italic text-display-md leading-tight max-w-[24ch] text-ink">{detail.pullQuote}</p>
+        <p className="pullquote font-display italic text-display-md leading-tight max-w-[24ch] text-ink">{detail.pullQuote}</p>
       </Reveal>
 
       <ThemedSection id="must-see" className="scroll-mt-24">
