@@ -115,6 +115,15 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
                   (LWCF quarterly report + IRMA Stats 5-yr medians) — the old
                   cohort-only figures and the "Not yet live" placeholder are
                   both retired. */}
+              {/* Editorial standfirst — the full field note (curated cohort
+                  prose, or the NPS live description fallback) opens the
+                  overview in Instrument Serif roman; the hero keeps its
+                  clamped italic line as the cover tease. */}
+              {fieldNote && (
+                <Reveal as="p" className="font-display text-standfirst leading-snug max-w-[58ch] text-ink">
+                  {fieldNote}
+                </Reveal>
+              )}
               <RevealGroup as="div" className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 text-sm" itemClassName="h-full">
                 {[
                   <Stat key="acreage" label="Acreage (official)" value={<CountUp value={Math.round(acreage?.grossAcres ?? 0)} suffix=" ac" />} />,
