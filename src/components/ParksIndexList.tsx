@@ -114,7 +114,14 @@ export function ParksIndexList({ rows }: { rows: IndexRow[] }) {
             style={{ left: pos.x + 24, top: pos.y - 200 }}
           >
             {active.image ? (
-              <Image src={active.image.url} alt="" fill sizes="320px" className="object-cover img-grade" style={{ viewTransitionName: `park-hero-${active.code}` }} />
+              <>
+                <Image src={active.image.url} alt="" fill sizes="320px" className="object-cover img-grade" style={{ viewTransitionName: `park-hero-${active.code}` }} />
+                {/* glass pass: photo stays solid, only the label strip frosts */}
+                <span className="absolute inset-x-0 bottom-0 glass-dark flex items-center justify-between gap-2 px-3 py-2 font-mono text-mono-sm text-bone">
+                  <span className="truncate">{active.name}</span>
+                  <span className="flex-none opacity-60">{active.state}</span>
+                </span>
+              </>
             ) : (
               <div className="absolute inset-0 bg-ink flex items-center justify-center">
                 <span className="font-display text-display-md text-bone px-4 text-center">{active.name}</span>

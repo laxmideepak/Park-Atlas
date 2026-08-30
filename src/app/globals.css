@@ -90,6 +90,46 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
+/* Glass surfaces (Vantara pass) — blur + translucent fill + hairline border.
+   Floating/overlay surfaces only: glass only reads over imagery/contrast, so
+   flat-on-flat surfaces (ParkCard grid, section washes) stay solid. Perf
+   guardrails: blur capped at 12px, small surfaces only (the nav bar is the
+   largest allowed), and NEVER on an element inside a continuously-animating
+   transform (YearScroller track, HomeHero parallax layer) — backdrop-filter
+   under continuous transform re-filters every frame. */
+.glass-dark {
+  background: rgba(19, 23, 17, 0.55);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  backdrop-filter: blur(12px) saturate(1.2);
+  border: 1px solid rgba(237, 231, 218, 0.12);
+}
+.glass-light {
+  background: rgba(237, 231, 218, 0.62);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  backdrop-filter: blur(12px) saturate(1.2);
+  border: 1px solid rgba(19, 23, 17, 0.08);
+}
+/* No backdrop-filter support -> near-opaque fills so text stays readable */
+@supports not (backdrop-filter: blur(1px)) {
+  .glass-dark {
+    background: rgba(19, 23, 17, 0.92);
+  }
+  .glass-light {
+    background: rgba(237, 231, 218, 0.92);
+  }
+}
+
+/* AmbientSound equalizer glyph — 3 bars breathing while the soundscape plays.
+   (Global reduced-motion rule below freezes it to the 3px rest height.) */
+@keyframes eq-bar {
+  0%, 100% { height: 3px; }
+  50% { height: 12px; }
+}
+.eq-bar {
+  height: 3px;
+  animation: eq-bar 0.9s ease-in-out infinite;
+}
+
 /* card -> hero photo morph should be a quick cut, not a lazy dissolve */
 ::view-transition-old(*),
 ::view-transition-new(*) {

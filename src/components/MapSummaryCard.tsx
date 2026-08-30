@@ -14,7 +14,7 @@ export function MapSummaryCard({ pin, onClose }: { pin: MapPin; onClose: () => v
       animate={{ scale: 1, opacity: 1, y: 0 }}
       exit={{ scale: 0.5, opacity: 0 }}
       transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 280, damping: 20 }}
-      className="rounded-sm bg-paper text-basalt-deep p-4 w-[260px] shadow-lg flex flex-col gap-2.5"
+      className="rounded-sm glass-light text-basalt-deep p-4 w-[260px] shadow-lg flex flex-col gap-2.5"
     >
       <div className="flex items-start justify-between gap-2">
         <div>

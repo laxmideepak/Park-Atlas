@@ -157,8 +157,11 @@ export function UsMap({
         </AnimatePresence>
       </div>
 
-      {/* Month scrubber — same visual language as the discover month-switcher. */}
-      <div className="mt-6 border-t border-bone/10 overflow-x-auto">
+      {/* Month scrubber — same visual language as the discover month-switcher.
+          Glass pass: subtle .glass-dark strip behind the buttons (replaces the
+          old border-t; the utility brings its own hairline). It sits outside
+          the zooming motion.div, so no backdrop-filter-under-transform cost. */}
+      <div className="mt-6 glass-dark rounded-sm overflow-x-auto">
         <div role="group" aria-label="Show the map for a different month" className="flex gap-1">
           {MONTHS.map((m) => (
             <button
