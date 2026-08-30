@@ -46,6 +46,10 @@ export interface ParkDetail {
   water: WaterFeature[];
   dining: DiningInfo;
   alerts: Alert[];
+  /** Editorial margin notes, keyed by ThemedSection id ("hiking", "water"…).
+   * Rendered in the right gutter on wide viewports, inline below the eyebrow
+   * otherwise. Cohort parks only; 2–3 short notes, grounded in park data. */
+  marginNotes?: { section: string; note: string }[];
 }
 
 export const PARK_DETAIL: Record<ParkCode, ParkDetail> = {
@@ -81,6 +85,11 @@ export const PARK_DETAIL: Record<ParkCode, ParkDetail> = {
       { type: "Road", description: "Park Loop Road one-way section open; Ocean Path parking fills by 9am in summer.", lastUpdated: "2026-08-27T14:00:00Z" },
       { type: "Reservation", description: "Cadillac Summit Road vehicle reservation required through Oct.", lastUpdated: "2026-08-27T14:00:00Z" },
     ],
+    marginNotes: [
+      { section: "when-to-go", note: "Cadillac Summit Road requires a vehicle reservation through October." },
+      { section: "hiking", note: "Precipice closes for peregrine nesting most springs." },
+      { section: "dining", note: "Jordan Pond House is seasonal — the teahouse lawn has been serving since the 1890s." },
+    ],
   },
   yell: {
     hikes: [
@@ -114,6 +123,11 @@ export const PARK_DETAIL: Record<ParkCode, ParkDetail> = {
       { type: "Road", description: "All interior roads open; Dunraven Pass construction causing delays.", lastUpdated: "2026-08-27T16:00:00Z" },
       { type: "Wildlife", description: "Bear activity reported near Fishing Bridge; food storage orders in effect.", lastUpdated: "2026-08-26T09:00:00Z" },
     ],
+    marginNotes: [
+      { section: "hiking", note: "Dunraven Pass roadwork slows the drive to the Washburn trailhead." },
+      { section: "must-see", note: "Lamar Valley runs on dawn light — wolf watchers arrive before sunrise." },
+      { section: "water", note: "Shoshone Lake is the largest lake in the lower 48 you can't drive to." },
+    ],
   },
   "deva": {
     hikes: [
@@ -145,6 +159,11 @@ export const PARK_DETAIL: Record<ParkCode, ParkDetail> = {
       { type: "Heat", description: "Extreme heat advisory in effect for the valley floor; hike before 10am.", lastUpdated: "2026-08-27T12:00:00Z" },
       { type: "Road", description: "All paved roads open; some unpaved backcountry roads require 4WD after recent rain.", lastUpdated: "2026-08-25T10:00:00Z" },
     ],
+    marginNotes: [
+      { section: "when-to-go", note: "The hiking calendar here is inverted: November through March, not summer." },
+      { section: "hiking", note: "Heat protocol: valley-floor hikes end by 10 a.m. in summer." },
+      { section: "water", note: "Lake Manly returns to the basin floor only after major rain — days, not seasons." },
+    ],
   },
   "grsm": {
     hikes: [
@@ -175,6 +194,11 @@ export const PARK_DETAIL: Record<ParkCode, ParkDetail> = {
     alerts: [
       { type: "Road", description: "Clingmans Dome Rd open; Newfound Gap Rd occasionally closed overnight for maintenance.", lastUpdated: "2026-08-27T15:00:00Z" },
       { type: "Trail", description: "Alum Cave Trail bridge repair — expect single-file sections.", lastUpdated: "2026-08-24T11:00:00Z" },
+    ],
+    marginNotes: [
+      { section: "when-to-go", note: "Synchronous firefly viewing at Elkmont is lottery-only, drawn each spring." },
+      { section: "hiking", note: "Alum Cave's bridge repair means single-file stretches below LeConte." },
+      { section: "dining", note: "LeConte Lodge dining is for summit lodging guests only — pack food for everything else." },
     ],
   },
 };

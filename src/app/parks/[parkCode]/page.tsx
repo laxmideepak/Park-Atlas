@@ -83,6 +83,7 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
   // gap reads as a bug). Overview is 01; it has no ThemedSection, so its
   // numeral appears only in the ChapterRail.
   const chapterIndex: Record<string, number> = Object.fromEntries(chapters.map((c, i) => [c.id, i + 1]));
+  const marginNote = (section: string) => detail?.marginNotes?.find((n) => n.section === section)?.note;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -160,7 +161,7 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
               )}
             </section>
 
-            <ThemedSection id="when-to-go" index={chapterIndex["when-to-go"]} className="scroll-mt-24">
+            <ThemedSection id="when-to-go" index={chapterIndex["when-to-go"]} marginNote={marginNote("when-to-go")} className="scroll-mt-24">
               <Reveal as="h2" className="font-display text-display-md mb-1">When to go</Reveal>
               <Reveal as="p" delay={0.06} className="text-sm text-ink-soft mb-8">Weighed on climate and access, never on crowds.</Reveal>
 
@@ -207,7 +208,7 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
             {detail && <EditorialSections detail={detail} chapterIndex={chapterIndex} />}
             {!detail && <NonCohortSections name={name} liveThings={liveThings} npsUrl={liveProfile?.sourceUrl} chapterIndex={chapterIndex} />}
 
-            <ThemedSection id="crowds" index={chapterIndex["crowds"]} className="scroll-mt-24">
+            <ThemedSection id="crowds" index={chapterIndex["crowds"]} marginNote={marginNote("crowds")} className="scroll-mt-24">
               <Reveal as="h2" className="font-display text-display-md mb-6">Crowd calendar</Reveal>
               <CrowdCalendar rows={months} sourceLabel={VISITATION_SOURCE_LABEL} bestBalanceMonth={labels.bestBalance.month} />
             </ThemedSection>
@@ -264,9 +265,10 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
 }
 
 function EditorialSections({ detail, chapterIndex }: { detail: ParkDetail; chapterIndex: Record<string, number> }) {
+  const marginNote = (section: string) => detail.marginNotes?.find((n) => n.section === section)?.note;
   return (
     <>
-      <ThemedSection id="hiking" index={chapterIndex["hiking"]} className="scroll-mt-24">
+      <ThemedSection id="hiking" index={chapterIndex["hiking"]} marginNote={marginNote("hiking")} className="scroll-mt-24">
         <Reveal as="h2" className="font-display text-display-md mb-1">Hiking & trekking</Reveal>
         <Reveal as="p" delay={0.06} className="text-mono-sm font-mono text-ink-soft mb-6">Officially listed hikes (NPS) &mdash; computed GIS trail totals land in Phase 2</Reveal>
         <RevealGroup
@@ -292,7 +294,7 @@ function EditorialSections({ detail, chapterIndex }: { detail: ParkDetail; chapt
         </RevealGroup>
       </ThemedSection>
 
-      <ThemedSection id="must-see" index={chapterIndex["must-see"]} className="scroll-mt-24">
+      <ThemedSection id="must-see" index={chapterIndex["must-see"]} marginNote={marginNote("must-see")} className="scroll-mt-24">
         <Reveal as="h2" className="font-display text-display-md mb-6">Must-see spots</Reveal>
         <RevealGroup
           as="div"
@@ -309,7 +311,7 @@ function EditorialSections({ detail, chapterIndex }: { detail: ParkDetail; chapt
         </RevealGroup>
       </ThemedSection>
 
-      <ThemedSection id="water" index={chapterIndex["water"]} className="scroll-mt-24">
+      <ThemedSection id="water" index={chapterIndex["water"]} marginNote={marginNote("water")} className="scroll-mt-24">
         <Reveal as="h2" className="font-display text-display-md mb-1">Lakes & water</Reveal>
         <Reveal as="p" delay={0.06} className="text-mono-sm font-mono text-ink-soft mb-6">Hand-curated — USGS GNIS/NHD boundary intersection planned</Reveal>
         <RevealGroup
@@ -328,7 +330,7 @@ function EditorialSections({ detail, chapterIndex }: { detail: ParkDetail; chapt
         </RevealGroup>
       </ThemedSection>
 
-      <ThemedSection id="dining" index={chapterIndex["dining"]} className="scroll-mt-24">
+      <ThemedSection id="dining" index={chapterIndex["dining"]} marginNote={marginNote("dining")} className="scroll-mt-24">
         <div className="flex items-baseline gap-3 mb-1">
           <Reveal as="h2" className="font-display text-display-md">Dining availability</Reveal>
           <span className="font-mono text-sm font-semibold uppercase tracking-wide">{detail.dining.label}</span>
