@@ -12,7 +12,12 @@ export interface Chapter {
 }
 
 /** §7.3 — sticky section nav. IntersectionObserver drives the active state;
- * a brass tick slides between items via layoutId instead of just toggling color. */
+ * a brass tick slides between items via layoutId instead of just toggling color.
+ *
+ * Items carry a dimmed two-digit numeral (`01 Overview`) derived from their
+ * position in the already-filtered `chapters` prop — the same contiguous
+ * numbering the ThemedSection eyebrows use, so rail and sections share one
+ * table of contents. */
 export function ChapterRail({ chapters }: { chapters: Chapter[] }) {
   const [active, setActive] = useState(chapters[0]?.id);
   const lenis = useLenis();
@@ -47,7 +52,7 @@ export function ChapterRail({ chapters }: { chapters: Chapter[] }) {
     <>
       {/* desktop: sticky left rail */}
       <nav className="hidden lg:flex sticky top-24 flex-col gap-1 self-start font-mono text-mono-sm w-40 flex-none" aria-label="Section navigation">
-        {chapters.map((c) => (
+        {chapters.map((c, i) => (
           <a
             key={c.id}
             href={`#${c.id}`}
@@ -62,6 +67,7 @@ export function ChapterRail({ chapters }: { chapters: Chapter[] }) {
                 transition={{ type: "spring", stiffness: 400, damping: 30 }}
               />
             )}
+            <span className="text-ink-soft/70 mr-2">{String(i + 1).padStart(2, "0")}</span>
             {c.label}
           </a>
         ))}
@@ -70,7 +76,7 @@ export function ChapterRail({ chapters }: { chapters: Chapter[] }) {
       {/* mobile/tablet: horizontal scroll pill row (tap-44 extends each
           pill's hit box to 44px on touch — single row, so no overlap risk) */}
       <nav className="flex lg:hidden gap-2 overflow-x-auto py-2 font-mono text-mono-sm" aria-label="Section navigation">
-        {chapters.map((c) => (
+        {chapters.map((c, i) => (
           <a
             key={c.id}
             href={`#${c.id}`}
@@ -81,6 +87,7 @@ export function ChapterRail({ chapters }: { chapters: Chapter[] }) {
               color: active === c.id ? "var(--ink)" : "var(--ink-soft)",
             }}
           >
+            <span className="text-ink-soft/70 mr-1.5">{String(i + 1).padStart(2, "0")}</span>
             {c.label}
           </a>
         ))}

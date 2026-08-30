@@ -9,8 +9,23 @@ import { SectionPattern } from "@/components/SectionPattern";
  * for contrast). Unthemed ids (overview, current conditions) pass through as
  * a plain <section> — the id always lands on the outer <section> so the
  * ChapterRail's IntersectionObserver and anchor scrolls keep working.
+ *
+ * `index` is the section's 1-based position in the page's FILTERED chapters
+ * array (non-cohort parks drop chapters, so numbering must stay contiguous —
+ * a visible gap reads as a bug). Overview is always 01 but has no
+ * ThemedSection; its numeral appears only in the ChapterRail.
  */
-export function ThemedSection({ id, className, children }: { id: string; className?: string; children: ReactNode }) {
+export function ThemedSection({
+  id,
+  index,
+  className,
+  children,
+}: {
+  id: string;
+  index?: number;
+  className?: string;
+  children: ReactNode;
+}) {
   const theme = SECTION_THEMES[id];
   if (!theme) {
     return (
@@ -33,6 +48,7 @@ export function ThemedSection({ id, className, children }: { id: string; classNa
       </div>
       <div className="relative">
         <p className="font-mono text-mono-sm uppercase tracking-wide mb-2 flex items-center gap-2">
+          {typeof index === "number" && <span className="text-ink-soft/70">{String(index).padStart(2, "0")}</span>}
           <span aria-hidden className="inline-block w-6 h-[2px]" style={{ background: theme.hue }} />
           <span className="font-semibold" style={{ color: eyebrowColor }}>{theme.eyebrow}</span>
         </p>

@@ -78,6 +78,11 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
   const chapters = (detail ? CHAPTERS : CHAPTERS.filter((c) => ["overview", "when-to-go", "must-see", "crowds"].includes(c.id))).filter(
     (c) => c.id !== "must-see" || hasMustSee
   );
+  // 1-based table-of-contents numbering from the FILTERED chapter list — when
+  // non-cohort parks drop chapters, numerals renumber contiguously (a visible
+  // gap reads as a bug). Overview is 01; it has no ThemedSection, so its
+  // numeral appears only in the ChapterRail.
+  const chapterIndex: Record<string, number> = Object.fromEntries(chapters.map((c, i) => [c.id, i + 1]));
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -155,7 +160,7 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
               )}
             </section>
 
-            <ThemedSection id="when-to-go" className="scroll-mt-24">
+            <ThemedSection id="when-to-go" index={chapterIndex["when-to-go"]} className="scroll-mt-24">
               <Reveal as="h2" className="font-display text-display-md mb-1">When to go</Reveal>
               <Reveal as="p" delay={0.06} className="text-sm text-ink-soft mb-8">Weighed on climate and access, never on crowds.</Reveal>
 
@@ -199,10 +204,10 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
               <p className="text-mono-sm font-mono text-ink-soft">Tap any month for its full Why-panel — factor weights, sources, confidence.</p>
             </ThemedSection>
 
-            {detail && <EditorialSections detail={detail} />}
-            {!detail && <NonCohortSections name={name} liveThings={liveThings} npsUrl={liveProfile?.sourceUrl} />}
+            {detail && <EditorialSections detail={detail} chapterIndex={chapterIndex} />}
+            {!detail && <NonCohortSections name={name} liveThings={liveThings} npsUrl={liveProfile?.sourceUrl} chapterIndex={chapterIndex} />}
 
-            <ThemedSection id="crowds" className="scroll-mt-24">
+            <ThemedSection id="crowds" index={chapterIndex["crowds"]} className="scroll-mt-24">
               <Reveal as="h2" className="font-display text-display-md mb-6">Crowd calendar</Reveal>
               <CrowdCalendar rows={months} sourceLabel={VISITATION_SOURCE_LABEL} bestBalanceMonth={labels.bestBalance.month} />
             </ThemedSection>
@@ -258,10 +263,10 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
   );
 }
 
-function EditorialSections({ detail }: { detail: ParkDetail }) {
+function EditorialSections({ detail, chapterIndex }: { detail: ParkDetail; chapterIndex: Record<string, number> }) {
   return (
     <>
-      <ThemedSection id="hiking" className="scroll-mt-24">
+      <ThemedSection id="hiking" index={chapterIndex["hiking"]} className="scroll-mt-24">
         <Reveal as="h2" className="font-display text-display-md mb-1">Hiking & trekking</Reveal>
         <Reveal as="p" delay={0.06} className="text-mono-sm font-mono text-ink-soft mb-6">Officially listed hikes (NPS) &mdash; computed GIS trail totals land in Phase 2</Reveal>
         <RevealGroup
@@ -287,7 +292,7 @@ function EditorialSections({ detail }: { detail: ParkDetail }) {
         </RevealGroup>
       </ThemedSection>
 
-      <ThemedSection id="must-see" className="scroll-mt-24">
+      <ThemedSection id="must-see" index={chapterIndex["must-see"]} className="scroll-mt-24">
         <Reveal as="h2" className="font-display text-display-md mb-6">Must-see spots</Reveal>
         <RevealGroup
           as="div"
@@ -304,7 +309,7 @@ function EditorialSections({ detail }: { detail: ParkDetail }) {
         </RevealGroup>
       </ThemedSection>
 
-      <ThemedSection id="water" className="scroll-mt-24">
+      <ThemedSection id="water" index={chapterIndex["water"]} className="scroll-mt-24">
         <Reveal as="h2" className="font-display text-display-md mb-1">Lakes & water</Reveal>
         <Reveal as="p" delay={0.06} className="text-mono-sm font-mono text-ink-soft mb-6">Hand-curated — USGS GNIS/NHD boundary intersection planned</Reveal>
         <RevealGroup
@@ -323,7 +328,7 @@ function EditorialSections({ detail }: { detail: ParkDetail }) {
         </RevealGroup>
       </ThemedSection>
 
-      <ThemedSection id="dining" className="scroll-mt-24">
+      <ThemedSection id="dining" index={chapterIndex["dining"]} className="scroll-mt-24">
         <div className="flex items-baseline gap-3 mb-1">
           <Reveal as="h2" className="font-display text-display-md">Dining availability</Reveal>
           <span className="font-mono text-sm font-semibold uppercase tracking-wide">{detail.dining.label}</span>
@@ -355,15 +360,17 @@ function NonCohortSections({
   name,
   liveThings,
   npsUrl,
+  chapterIndex,
 }: {
   name: string;
   liveThings: { title: string; shortDescription: string; activity: string | null }[];
   npsUrl?: string;
+  chapterIndex: Record<string, number>;
 }) {
   return (
     <>
       {liveThings.length > 0 && (
-        <ThemedSection id="must-see" className="scroll-mt-24">
+        <ThemedSection id="must-see" index={chapterIndex["must-see"]} className="scroll-mt-24">
           <div className="flex items-baseline gap-3 mb-1">
             <Reveal as="h2" className="font-display text-display-md">Must-see spots</Reveal>
             <span className="text-mono-sm font-mono text-ink-soft">Live &middot; NPS Data API</span>
