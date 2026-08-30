@@ -11,11 +11,15 @@ export function CrowdCalendar({
   rows,
   sourceLabel,
   bestBalanceMonth,
+  figNumber,
 }: {
   rows: ScoredMonth[];
   /** Provenance-derived on the server (spec §5) — never hand-written here. */
   sourceLabel: string;
   bestBalanceMonth?: string;
+  /** Editorial figure number — owned at the page level so the numbering
+   * sequence lives with the page, not the component. */
+  figNumber?: number;
 }) {
   const reduce = useReducedMotion();
   const max = Math.max(...rows.map((r) => r.percentOfAnnualVisits));
@@ -58,9 +62,9 @@ export function CrowdCalendar({
           );
         })}
       </div>
-      <p className="text-mono-sm font-mono text-ink-soft">
-        Bars show each month&rsquo;s share of annual visits as a % of the peak month &mdash; the number travelers can act on.
-        Visitation is informational only and never enters the Month Fit score.
+      {/* Numbered-figure caption — uppercase via class, never hand-typed caps */}
+      <p className="text-mono-sm font-mono uppercase text-ink-soft">
+        {figNumber != null && <>Fig. {figNumber} &mdash; </>}Crowd calendar. Each bar: share of annual visits as % of peak. Informational &mdash; never scored.
       </p>
     </div>
   );

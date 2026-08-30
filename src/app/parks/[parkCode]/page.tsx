@@ -205,7 +205,10 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
                   <span key={m.month} className="flex-1 text-center font-mono text-mono-sm uppercase text-ink-soft">{m.month}</span>
                 ))}
               </div>
-              <p className="text-mono-sm font-mono text-ink-soft">Tap any month for its full Why-panel — factor weights, sources, confidence.</p>
+              {/* Numbered-figure caption — uppercase via class, never hand-typed caps */}
+              <p className="text-mono-sm font-mono uppercase text-ink-soft">
+                Fig. 1 &mdash; Month fit, twelve bars. Climate 60 &middot; Access 40. Tap any month for its Why-panel.
+              </p>
             </ThemedSection>
 
             {detail && <EditorialSections detail={detail} />}
@@ -213,7 +216,7 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
 
             <ThemedSection id="crowds" className="scroll-mt-24">
               <Reveal as="h2" className="font-display text-display-md mb-6">Crowd calendar</Reveal>
-              <CrowdCalendar rows={months} sourceLabel={VISITATION_SOURCE_LABEL} bestBalanceMonth={labels.bestBalance.month} />
+              <CrowdCalendar rows={months} sourceLabel={VISITATION_SOURCE_LABEL} bestBalanceMonth={labels.bestBalance.month} figNumber={2} />
             </ThemedSection>
           </div>
         </div>
