@@ -1,0 +1,339 @@
+{
+  "_meta": {
+    "sourceUrl": "https://www.nps.gov/subjects/lwcf/upload/NPS-Acreage-06-30-2026.xlsx",
+    "datasetVersion": "NPS Acreage 06-30-2026",
+    "fetchedAt": "2026-08-30T00:23:06.416Z",
+    "script": "scripts/etl-acreage.mjs",
+    "recordCount": 63
+  },
+  "parks": {
+    "acad": {
+      "grossAcres": 49076.65,
+      "areaName": "ACADIA NP"
+    },
+    "arch": {
+      "grossAcres": 76678.98,
+      "areaName": "ARCHES NP"
+    },
+    "badl": {
+      "grossAcres": 242742.9,
+      "areaName": "BADLANDS NP"
+    },
+    "bibe": {
+      "grossAcres": 801162.34,
+      "areaName": "BIG BEND NP"
+    },
+    "bisc": {
+      "grossAcres": 172971.11,
+      "areaName": "BISCAYNE NP"
+    },
+    "blca": {
+      "grossAcres": 30779.83,
+      "areaName": "BLACK CANYON OF GUNNISON"
+    },
+    "brca": {
+      "grossAcres": 35835.08,
+      "areaName": "BRYCE CANYON NP"
+    },
+    "cany": {
+      "grossAcres": 337597.83,
+      "areaName": "CANYONLANDS NP"
+    },
+    "care": {
+      "grossAcres": 241904.5,
+      "areaName": "CAPITOL REEF NP"
+    },
+    "cave": {
+      "grossAcres": 46766.45,
+      "areaName": "CARLSBAD CAVERNS NP"
+    },
+    "chis": {
+      "grossAcres": 249561,
+      "areaName": "CHANNEL ISLANDS NP"
+    },
+    "cong": {
+      "grossAcres": 26692.6,
+      "areaName": "CONGAREE NP"
+    },
+    "crla": {
+      "grossAcres": 183224.05,
+      "areaName": "CRATER LAKE NP"
+    },
+    "cuva": {
+      "grossAcres": 32607.2,
+      "areaName": "CUYAHOGA VALLEY NP"
+    },
+    "dena": {
+      "grossAcres": 6075028.96,
+      "areaName": "DENALI NP",
+      "components": [
+        {
+          "name": "DENALI NP",
+          "grossAcres": 4740911.16
+        },
+        {
+          "name": "DENALI N PRESERVE",
+          "grossAcres": 1334117.8
+        }
+      ]
+    },
+    "deva": {
+      "grossAcres": 3408374.95,
+      "areaName": "DEATH VALLEY NP"
+    },
+    "drto": {
+      "grossAcres": 64701.22,
+      "areaName": "DRY TORTUGAS NP"
+    },
+    "ever": {
+      "grossAcres": 1400539.3,
+      "areaName": "EVERGLADES NP"
+    },
+    "gaar": {
+      "grossAcres": 8472505.52,
+      "areaName": "GATES OF THE ARCTIC NP",
+      "components": [
+        {
+          "name": "GATES OF THE ARCTIC NP",
+          "grossAcres": 7523897.45
+        },
+        {
+          "name": "GATES OF ARCTIC N PRES",
+          "grossAcres": 948608.07
+        }
+      ]
+    },
+    "glac": {
+      "grossAcres": 1013126.39,
+      "areaName": "GLACIER NP"
+    },
+    "glba": {
+      "grossAcres": 3281789.43,
+      "areaName": "GLACIER BAY NP",
+      "components": [
+        {
+          "name": "GLACIER BAY NP",
+          "grossAcres": 3223383.43
+        },
+        {
+          "name": "GLACIER BAY N PRESERVE",
+          "grossAcres": 58406
+        }
+      ]
+    },
+    "grba": {
+      "grossAcres": 77180,
+      "areaName": "GREAT BASIN NP"
+    },
+    "grca": {
+      "grossAcres": 1201647.03,
+      "areaName": "GRAND CANYON NP"
+    },
+    "grsa": {
+      "grossAcres": 149022.95,
+      "areaName": "GREAT SAND DUNES NP",
+      "components": [
+        {
+          "name": "GREAT SAND DUNES NP",
+          "grossAcres": 107336.95
+        },
+        {
+          "name": "GREAT SAND DUNES N PRES",
+          "grossAcres": 41686
+        }
+      ]
+    },
+    "grsm": {
+      "grossAcres": 522426.88,
+      "areaName": "GREAT SMOKY MTS NP"
+    },
+    "grte": {
+      "grossAcres": 310044.36,
+      "areaName": "GRAND TETON NP"
+    },
+    "gumo": {
+      "grossAcres": 86367.1,
+      "areaName": "GUADALUPE MTS NP"
+    },
+    "hale": {
+      "grossAcres": 33489.24,
+      "areaName": "HALEAKALA NP"
+    },
+    "havo": {
+      "grossAcres": 344812.18,
+      "areaName": "HAWAII VOLCANOES NP"
+    },
+    "hosp": {
+      "grossAcres": 5554.15,
+      "areaName": "HOT SPRINGS NP"
+    },
+    "indu": {
+      "grossAcres": 16267.63,
+      "areaName": "INDIANA DUNES NP"
+    },
+    "isro": {
+      "grossAcres": 571790.3,
+      "areaName": "ISLE ROYALE NP"
+    },
+    "jeff": {
+      "grossAcres": 192.83,
+      "areaName": "GATEWAY ARCH NP"
+    },
+    "jotr": {
+      "grossAcres": 795155.85,
+      "areaName": "JOSHUA TREE NP"
+    },
+    "katm": {
+      "grossAcres": 4093228.13,
+      "areaName": "KATMAI NP",
+      "components": [
+        {
+          "name": "KATMAI NP",
+          "grossAcres": 3674529.33
+        },
+        {
+          "name": "KATMAI N PRESERVE",
+          "grossAcres": 418698.8
+        }
+      ]
+    },
+    "kefj": {
+      "grossAcres": 669650.05,
+      "areaName": "KENAI FJORDS NP"
+    },
+    "kica": {
+      "grossAcres": 461901.37,
+      "areaName": "KINGS CANYON NP"
+    },
+    "kova": {
+      "grossAcres": 1750716.16,
+      "areaName": "KOBUK VALLEY NP"
+    },
+    "lacl": {
+      "grossAcres": 4030110.17,
+      "areaName": "LAKE CLARK NP",
+      "components": [
+        {
+          "name": "LAKE CLARK NP",
+          "grossAcres": 2619816.49
+        },
+        {
+          "name": "LAKE CLARK N PRESERVE",
+          "grossAcres": 1410293.68
+        }
+      ]
+    },
+    "lavo": {
+      "grossAcres": 106589.02,
+      "areaName": "LASSEN VOLCANIC NP"
+    },
+    "maca": {
+      "grossAcres": 72041.73,
+      "areaName": "MAMMOTH CAVE NP"
+    },
+    "meve": {
+      "grossAcres": 52485.17,
+      "areaName": "MESA VERDE NP"
+    },
+    "mora": {
+      "grossAcres": 236381.64,
+      "areaName": "MT RAINIER NP"
+    },
+    "neri": {
+      "grossAcres": 72405.24,
+      "areaName": "NEW RIVER GORGE NP & PRES",
+      "components": [
+        {
+          "name": "NEW RIVER GORGE NP & PRES",
+          "grossAcres": 72405.24
+        }
+      ]
+    },
+    "noca": {
+      "grossAcres": 504780.94,
+      "areaName": "NORTH CASCADES NP"
+    },
+    "npsa": {
+      "grossAcres": 8256.67,
+      "areaName": "NP OF AMERICAN SAMOA"
+    },
+    "olym": {
+      "grossAcres": 923045.8,
+      "areaName": "OLYMPIC NP"
+    },
+    "pefo": {
+      "grossAcres": 221390.21,
+      "areaName": "PETRIFIED FOREST NP"
+    },
+    "pinn": {
+      "grossAcres": 26685.73,
+      "areaName": "PINNACLES NP"
+    },
+    "redw": {
+      "grossAcres": 139090.97,
+      "areaName": "REDWOOD NP"
+    },
+    "romo": {
+      "grossAcres": 265917.74,
+      "areaName": "ROCKY MT NP"
+    },
+    "sagu": {
+      "grossAcres": 92799.73,
+      "areaName": "SAGUARO NP"
+    },
+    "seki": {
+      "grossAcres": 404062.63,
+      "areaName": "SEQUOIA NP"
+    },
+    "shen": {
+      "grossAcres": 200454.01,
+      "areaName": "SHENANDOAH NP"
+    },
+    "thro": {
+      "grossAcres": 70446.89,
+      "areaName": "T ROOSEVELT NP"
+    },
+    "viis": {
+      "grossAcres": 15041.03,
+      "areaName": "VIRGIN ISLANDS NP"
+    },
+    "voya": {
+      "grossAcres": 218223.25,
+      "areaName": "VOYAGEURS NP"
+    },
+    "whsa": {
+      "grossAcres": 146344.31,
+      "areaName": "WHITE SANDS NP"
+    },
+    "wica": {
+      "grossAcres": 33970.84,
+      "areaName": "WIND CAVE NP"
+    },
+    "wrst": {
+      "grossAcres": 13175791.37,
+      "areaName": "WRANGELL-ST ELIAS NP",
+      "components": [
+        {
+          "name": "WRANGELL-ST ELIAS NP",
+          "grossAcres": 8323146.48
+        },
+        {
+          "name": "WRANGELL-ST ELIAS N PRES",
+          "grossAcres": 4852644.89
+        }
+      ]
+    },
+    "yell": {
+      "grossAcres": 2219790.71,
+      "areaName": "YELLOWSTONE NP"
+    },
+    "yose": {
+      "grossAcres": 761747.5,
+      "areaName": "YOSEMITE NP"
+    },
+    "zion": {
+      "grossAcres": 147242.66,
+      "areaName": "ZION NP"
+    }
+  }
+}
