@@ -1,0 +1,96 @@
+{
+  "_meta": {
+    "sourceUrl": "https://upload.wikimedia.org (premium-photos.json picks, self-hosted for the Year Scroller)",
+    "datasetVersion": "Commons 1920px thumbs of the premium picks",
+    "fetchedAt": "2026-08-30T04:14:01.666Z",
+    "script": "scripts/etl-scroller-images.mjs",
+    "recordCount": 12,
+    "totalBytes": 9371452
+  },
+  "parks": {
+    "gumo": {
+      "file": "/scroller/gumo.jpg",
+      "author": "Fredlyfish4",
+      "license": "CC BY-SA 3.0",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Guadalupe_Peak_from_Bowl_Trail.JPG",
+      "alt": "Panorama of Guadalupe Peak and Pine Spring Canyon from the Bowl Trail"
+    },
+    "care": {
+      "file": "/scroller/care.jpg",
+      "author": "Jtwag55",
+      "license": "CC BY 4.0",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:View_from_Rim_Overlook_Trail,_Capitol_Reef_National_Park,_Utah.jpg",
+      "alt": "Panoramic view of the Waterpocket Fold and canyon terrain from the Rim Overlook Trail"
+    },
+    "bibe": {
+      "file": "/scroller/bibe.jpg",
+      "author": "TripOfALifestyle.com",
+      "license": "CC BY 4.0",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Sunset_at_Big_Bend_National_Park.jpg",
+      "alt": "Ross Maxwell Scenic Drive winding toward Cerro Castellan at sunset, Big Bend"
+    },
+    "zion": {
+      "file": "/scroller/zion.jpg",
+      "author": "The Cosmonaut",
+      "license": "CC BY-SA 2.5 ca",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Mount_Spry_and_the_East_Temple.jpg",
+      "alt": "Panorama of Mount Spry and the East Temple sandstone cliffs"
+    },
+    "maca": {
+      "file": "/scroller/maca.jpg",
+      "author": "Daniel Schwen",
+      "license": "CC BY-SA 4.0",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:River_Styx.jpg",
+      "alt": "River Styx, the partly subterranean river, emerging onto the surface in Mammoth Cave NP"
+    },
+    "redw": {
+      "file": "/scroller/redw.jpg",
+      "author": "Dirtsc",
+      "license": "CC BY-SA 3.0",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Redwood_Creek_Valley_02.jpg",
+      "alt": "Redwood Creek Valley, Redwood National Park"
+    },
+    "katm": {
+      "file": "/scroller/katm.jpg",
+      "author": "Christoph Strässler from Oberdorf BL, Schweiz",
+      "license": "CC BY-SA 2.0",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Fishing_Brown_Bear_at_Brooks_Falls,_Katmai_National_Park_(10106346915).jpg",
+      "alt": "Brown bear fishing atop Brooks Falls with two salmon leaping mid-air"
+    },
+    "mora": {
+      "file": "/scroller/mora.jpg",
+      "author": "Timothy A. Gonsalves",
+      "license": "CC BY-SA 4.0",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Rainier_Aerial_West_Close_Washington_Mar23_R16_07149.jpg",
+      "alt": "Mount Rainier rising above a sea of clouds, aerial view from the west"
+    },
+    "cuva": {
+      "file": "/scroller/cuva.jpg",
+      "author": "Erik Drost",
+      "license": "CC BY 4.0",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Brandywine_Falls_at_Cuyahoga_Valley_National_Park.jpg",
+      "alt": "Brandywine Falls in autumn, full view of the falls and gorge"
+    },
+    "grsm": {
+      "file": "/scroller/grsm.jpg",
+      "author": "Acroterion",
+      "license": "CC BY-SA 4.0",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:View_east_from_Clingman%27s_Dome_GSMNP_NC1.jpg",
+      "alt": "View east from Clingmans Dome over layered blue ridges of the Smokies, with flame azalea and spruce-fir in the foreground"
+    },
+    "pefo": {
+      "file": "/scroller/pefo.jpg",
+      "author": "Finetooth",
+      "license": "CC BY-SA 3.0",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:The_PEFO_Tepees.jpg",
+      "alt": "The Tepees badland formations viewed from the main park road, Petrified Forest National Park"
+    },
+    "arch": {
+      "file": "/scroller/arch.jpg",
+      "author": "Thomas Wolf, www.foto-tw.de",
+      "license": "CC BY-SA 3.0",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Landscape_Arch_Utah.jpg",
+      "alt": "Landscape Arch in Devils Garden, Arches National Park (15242 px, featured + valued)"
+    }
+  }
+}
