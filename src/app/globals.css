@@ -98,7 +98,7 @@ body {
    transform (YearScroller track, HomeHero parallax layer) — backdrop-filter
    under continuous transform re-filters every frame. */
 .glass-dark {
-  background: rgba(19, 23, 17, 0.55);
+  background: rgba(19, 23, 17, 0.68);
   -webkit-backdrop-filter: blur(12px) saturate(1.2);
   backdrop-filter: blur(12px) saturate(1.2);
   border: 1px solid rgba(237, 231, 218, 0.12);
