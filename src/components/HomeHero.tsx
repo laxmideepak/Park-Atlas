@@ -32,7 +32,9 @@ export function HomeHero({
       {/* filter-free: this layer is under a continuous scroll-linked transform */}
       <motion.div className="absolute inset-0" style={{ y, scale, willChange: "transform" }}>
         {video ? (
-          <LivingHero entry={video} alt={image?.altText || "Living footage from a U.S. National Park"} />
+          // creditGlass off: this layer is under a continuous scroll-linked
+          // transform, where backdrop-filter would re-filter every frame.
+          <LivingHero entry={video} alt={image?.altText || "Living footage from a U.S. National Park"} creditGlass={false} />
         ) : image ? (
           <Image src={image.url} alt={image.altText || ""} fill priority sizes="100vw" quality={85} className="object-cover" />
         ) : (
@@ -56,7 +58,7 @@ export function HomeHero({
           initial={reduceMotion ? undefined : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="font-mono text-mono-sm uppercase tracking-wide text-bone/70 flex flex-wrap gap-x-4"
+          className="self-start glass-dark rounded-sm px-3 py-1.5 font-mono text-mono-sm uppercase tracking-wide text-bone/70 flex flex-wrap gap-x-4"
         >
           {sourceStrip.map((s) => (
             <span key={s}>{s}</span>

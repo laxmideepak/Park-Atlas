@@ -62,6 +62,10 @@ export function WhyDrawer({
               onClick={() => setOpen(false)}
               aria-hidden
             />
+            {/* glass-light with the fill bumped 0.62 → 0.78 (inline, so the
+                @supports fallback ordering can't fight it): the drawer's small
+                ink-soft mono text has to hold ≥4.5:1 even when the sheet floats
+                over an ink chapter, which 0.62 can't guarantee. */}
             <motion.div
               ref={sheetRef}
               tabIndex={-1}
@@ -72,10 +76,11 @@ export function WhyDrawer({
               animate={{ x: 0, opacity: 1 }}
               exit={reduceMotion ? { opacity: 0 } : { x: 24, opacity: 0 }}
               transition={{ duration: reduceMotion ? 0 : 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="fixed z-50 bg-bone text-ink overflow-y-auto
+              className="fixed z-50 glass-light text-ink overflow-y-auto
                          inset-x-0 bottom-0 max-h-[85vh] rounded-t-md
                          md:inset-y-0 md:left-auto md:right-0 md:bottom-auto md:w-[440px] md:max-h-none md:rounded-none
                          p-6 flex flex-col gap-5"
+              style={{ background: "rgba(237, 231, 218, 0.78)" }}
             >
               <div className="flex items-start justify-between gap-3">
                 <h3 className="font-display text-display-md">

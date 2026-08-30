@@ -20,7 +20,19 @@ import type { VideoManifestEntry } from "@/lib/data/video-manifest";
  * 4. Pauses when scrolled offscreen; resumes on return.
  * 5. Mobile (<= 768px) gets the separately-encoded 540p file.
  */
-export function LivingHero({ entry, alt }: { entry: VideoManifestEntry; alt: string }) {
+export function LivingHero({
+  entry,
+  alt,
+  creditGlass = true,
+}: {
+  entry: VideoManifestEntry;
+  alt: string;
+  /** Glass pass: frost the credit chip. Pass false when the hero sits inside a
+   * continuously-animating transform (HomeHero's scroll parallax layer) —
+   * backdrop-filter under continuous transform re-filters every frame (same
+   * guardrail as the .img-grade note in globals.css). */
+  creditGlass?: boolean;
+}) {
   const reduceMotion = useReducedMotion();
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -92,7 +104,9 @@ export function LivingHero({ entry, alt }: { entry: VideoManifestEntry; alt: str
       />
       <a
         href={entry.sourceUrl}
-        className="absolute bottom-3 right-4 z-10 font-mono text-mono-sm text-bone/70 hover:text-bone underline-offset-2 hover:underline"
+        className={`absolute bottom-3 right-4 z-10 font-mono text-mono-sm text-bone/70 hover:text-bone underline-offset-2 hover:underline ${
+          creditGlass ? "glass-dark rounded-sm px-2.5 py-1" : ""
+        }`}
       >
         Video: {entry.credit}
       </a>
