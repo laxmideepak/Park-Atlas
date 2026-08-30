@@ -17,6 +17,8 @@ export interface MonthMeta {
   name: string;
   index: number; // 0-11
   season: Season;
+  /** Hand-written standfirst for the month page hero — editorial, not derived from scores. */
+  lede: string;
 }
 
 export interface Park {

@@ -69,6 +69,9 @@ export default async function MonthPage(props: PageProps<"/discover/month/[month
         <div className="relative h-full max-w-[1360px] mx-auto px-6 md:px-10 flex flex-col justify-end pb-10">
           <p className="font-mono text-mono-sm uppercase tracking-wide text-bone/70 mb-1">By month</p>
           <h1 className="font-display text-display-xl leading-[0.95] text-bone mb-3">{month.name}</h1>
+          {/* standfirst — Instrument Serif roman (italic stays reserved for hero H1s) */}
+          {/* TODO: swap to text-standfirst token after ed-parkpage merges */}
+          <p className="font-display text-[clamp(1.375rem,2.2vw,1.75rem)] leading-snug max-w-[52ch] text-bone/90 mb-3">{month.lede}</p>
           <p className="font-mono text-mono-sm text-bone/70">climate 60 &middot; access 40 &middot; popularity 0 &middot; #1 right now: {topSummary.name}</p>
         </div>
       </section>
