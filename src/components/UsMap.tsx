@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef, useState, memo } from "react";
+import { useEffect, useRef, useState, memo } from "react";
+import Link from "next/link";
 import { motion, useReducedMotion, useInView, AnimatePresence } from "motion/react";
 import type { StatePath } from "@/lib/us-map-geo";
 // MapPin must stay a type-only import: us-map-pins' module graph is server-sized
@@ -48,8 +49,23 @@ export function UsMap({
   const [hovered, setHovered] = useState<string | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
   const [month, setMonth] = useState<MonthAbbr>(initialMonth);
+  // Mobile pass: under 768px a 63-pin SVG can't offer honest tap targets
+  // (pins render ~2px wide), so pins go visual-only and a plain "browse all"
+  // link does the navigation work instead of half-working micro-taps.
+  const [pinsInteractive, setPinsInteractive] = useState(true);
   const reduceMotion = useReducedMotion();
   const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    const update = () => {
+      setPinsInteractive(mq.matches);
+      if (!mq.matches) setSelected(null);
+    };
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
   const inView = useInView(sectionRef, { once: true, amount: 0.2 });
   const active = pins.find((p) => p.code === hovered);
   const picked = pins.find((p) => p.code === selected);
@@ -94,16 +110,21 @@ export function UsMap({
                     initial={reduceMotion ? undefined : { scale: 0, opacity: 0 }}
                     animate={inView ? { scale: 1, opacity: 1 } : undefined}
                     transition={reduceMotion ? { duration: 0 } : { delay: i * 0.012, type: "spring", stiffness: 320, damping: 22 }}
-                    style={{ transformOrigin: `${pin.x}px ${pin.y}px`, cursor: "pointer" }}
-                    whileHover={reduceMotion ? undefined : { scale: 1.7 }}
+                    style={{
+                      transformOrigin: `${pin.x}px ${pin.y}px`,
+                      cursor: pinsInteractive ? "pointer" : undefined,
+                      pointerEvents: pinsInteractive ? undefined : "none",
+                    }}
+                    whileHover={reduceMotion || !pinsInteractive ? undefined : { scale: 1.7 }}
                     onHoverStart={() => setHovered(pin.code)}
                     onHoverEnd={() => setHovered(null)}
                     onFocus={() => setHovered(pin.code)}
                     onBlur={() => setHovered(null)}
                     onClick={() => setSelected((s) => (s === pin.code ? null : pin.code))}
-                    tabIndex={inView || reduceMotion ? 0 : -1}
-                    role="button"
-                    aria-label={`${pin.name}, ${pin.state} — ${tier} in ${monthName}`}
+                    tabIndex={pinsInteractive && (inView || reduceMotion) ? 0 : -1}
+                    role={pinsInteractive ? "button" : undefined}
+                    aria-hidden={pinsInteractive ? undefined : true}
+                    aria-label={pinsInteractive ? `${pin.name}, ${pin.state} — ${tier} in ${monthName}` : undefined}
                   >
                     {/* Soft halo on Exceptional only — keeps that distinction subtle. */}
                     <motion.circle
@@ -157,12 +178,22 @@ export function UsMap({
         </AnimatePresence>
       </div>
 
+      {/* Mobile pass: honest navigation fallback while pins are visual-only. */}
+      <Link
+        href="/parks"
+        className="md:hidden inline-flex items-center min-h-11 mt-2 font-mono text-mono-sm text-bone underline underline-offset-2"
+      >
+        Browse all 63 parks &rarr;
+      </Link>
+
       {/* Month scrubber — same visual language as the discover month-switcher.
           Glass pass: subtle .glass-dark strip behind the buttons (replaces the
           old border-t; the utility brings its own hairline). It sits outside
-          the zooming motion.div, so no backdrop-filter-under-transform cost. */}
+          the zooming motion.div, so no backdrop-filter-under-transform cost.
+          Mobile pass: a 6-column grid under sm so all 12 months wrap into two
+          clean rows instead of hiding half the year behind a sideways scroll. */}
       <div className="mt-6 glass-dark rounded-sm overflow-x-auto">
-        <div role="group" aria-label="Show the map for a different month" className="flex gap-1">
+        <div role="group" aria-label="Show the map for a different month" className="grid grid-cols-6 sm:flex gap-1">
           {MONTHS.map((m) => (
             <button
               key={m.abbr}

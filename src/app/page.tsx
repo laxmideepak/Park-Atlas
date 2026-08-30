@@ -127,7 +127,7 @@ export default async function Home() {
               <ParkCard key={row.park} park={getParkSummary(row.park)} row={row} image={pickCard(imagesByCode.get(row.park) ?? [])} />
             ))}
           </RevealGroup>
-          <Link href={`/discover/month/${DEFAULT_MONTH}`} className="font-mono text-mono-sm underline underline-offset-2">
+          <Link href={`/discover/month/${DEFAULT_MONTH}`} className="tap-44 font-mono text-mono-sm underline underline-offset-2">
             See all 63 parks ranked for {month.name} &rarr;
           </Link>
 
@@ -171,7 +171,9 @@ export default async function Home() {
                 Not shown on this projection:{" "}
                 {offMap.map((p, i) => (
                   <span key={p.name}>
-                    <Link href={`/parks/${p.code}`} className="underline underline-offset-2">{p.name}</Link>
+                    {/* inline-flex keeps the link an atomic box so tap-44's
+                        extended hit area tracks it even at 390px widths */}
+                    <Link href={`/parks/${p.code}`} className="tap-44 inline-flex underline underline-offset-2">{p.name}</Link>
                     {i < offMap.length - 1 ? " & " : ""}
                   </span>
                 ))}

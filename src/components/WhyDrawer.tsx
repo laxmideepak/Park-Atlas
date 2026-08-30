@@ -41,7 +41,7 @@ export function WhyDrawer({
     <>
       <button
         onClick={() => setOpen(true)}
-        className={triggerClassName ?? "font-mono text-mono-sm text-ink-soft underline underline-offset-2 hover:text-brass transition-colors"}
+        className={triggerClassName ?? "tap-44 font-mono text-mono-sm text-ink-soft underline underline-offset-2 hover:text-brass transition-colors"}
       >
         {trigger ?? <>Why {row.overallMonthFit}? &#8599;</>}
       </button>
@@ -82,7 +82,7 @@ export function WhyDrawer({
                 <h3 className="font-display text-display-md">
                   Why {row.overallMonthFit}?
                 </h3>
-                <button onClick={() => setOpen(false)} aria-label="Close" className="text-ink-soft hover:text-ink text-xl leading-none">
+                <button onClick={() => setOpen(false)} aria-label="Close" className="tap-44 text-ink-soft hover:text-ink text-xl leading-none">
                   &times;
                 </button>
               </div>

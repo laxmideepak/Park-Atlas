@@ -30,7 +30,9 @@ export function CrowdCalendar({
         <span>Quietest: <strong className="text-ink">{monthByAbbr(quietest.month)!.name}</strong> ({quietest.percentOfAnnualVisits}% of visits)</span>
         <span>{sourceLabel}</span>
       </div>
-      <div className="flex items-end gap-2 h-40">
+      {/* gap-1 under md matches the When-to-go bars and buys the 12 narrow
+          columns room for their % labels at 390px */}
+      <div className="flex items-end gap-1 md:gap-2 h-40">
         {rows.map((r, i) => {
           const heightPct = (r.percentOfAnnualVisits / max) * 100;
           const pctOfPeak = Math.round((r.percentOfAnnualVisits / max) * 100);

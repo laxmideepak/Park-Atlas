@@ -51,12 +51,14 @@ export function ParksIndexList({ rows }: { rows: IndexRow[] }) {
       onMouseMove={hovered ? (e) => setPos({ x: e.clientX, y: e.clientY }) : undefined}
     >
       {/* filters */}
-      <div className="flex flex-wrap gap-2 mb-8 font-mono text-mono-sm">
+      {/* gap-y-3 under sm keeps wrapped pill rows' 44px touch extensions
+          (tap-44) from colliding between rows */}
+      <div className="flex flex-wrap gap-x-2 gap-y-3 sm:gap-2 mb-8 font-mono text-mono-sm">
         {REGIONS.map((r) => (
           <button
             key={r}
             onClick={() => setRegionFilter((cur) => (cur === r ? null : r))}
-            className="px-3 py-1.5 rounded-full border transition-colors"
+            className="tap-44 px-3 py-1.5 rounded-full border transition-colors"
             style={{ borderColor: regionFilter === r ? "var(--brass)" : "var(--ink-soft)", color: regionFilter === r ? "var(--ink)" : "var(--ink-soft)" }}
           >
             {r}
@@ -67,7 +69,7 @@ export function ParksIndexList({ rows }: { rows: IndexRow[] }) {
           <button
             key={t}
             onClick={() => setTierFilter((cur) => (cur === t ? null : t))}
-            className="px-3 py-1.5 rounded-full border transition-colors"
+            className="tap-44 px-3 py-1.5 rounded-full border transition-colors"
             style={{ borderColor: tierFilter === t ? "var(--brass)" : "var(--ink-soft)", color: tierFilter === t ? "var(--ink)" : "var(--ink-soft)" }}
           >
             {t}
@@ -76,7 +78,7 @@ export function ParksIndexList({ rows }: { rows: IndexRow[] }) {
         <span className="px-1 text-ink-soft">&middot;</span>
         <button
           onClick={() => setGuideOnly((v) => !v)}
-          className="px-3 py-1.5 rounded-full border transition-colors"
+          className="tap-44 px-3 py-1.5 rounded-full border transition-colors"
           style={{ borderColor: guideOnly ? "var(--brass)" : "var(--ink-soft)", color: guideOnly ? "var(--ink)" : "var(--ink-soft)" }}
         >
           Has full guide

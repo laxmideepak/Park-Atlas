@@ -42,7 +42,7 @@ export function ParkCard({
       </Link>
       <div className="p-5 flex flex-col gap-2.5 flex-1">
         <TierBadge tier={row.tier} onLight />
-        <Link href={`/parks/${park.code}`} className="font-display text-display-md leading-tight hover:underline underline-offset-4 decoration-1">
+        <Link href={`/parks/${park.code}`} className="tap-44 font-display text-display-md leading-tight hover:underline underline-offset-4 decoration-1">
           {park.name}
         </Link>
         <p className="text-sm text-ink-soft flex-1">{park.tagline}</p>

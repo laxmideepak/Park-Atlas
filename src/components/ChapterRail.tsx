@@ -67,14 +67,15 @@ export function ChapterRail({ chapters }: { chapters: Chapter[] }) {
         ))}
       </nav>
 
-      {/* mobile/tablet: horizontal scroll pill row */}
-      <nav className="flex lg:hidden gap-2 overflow-x-auto pb-2 font-mono text-mono-sm" aria-label="Section navigation">
+      {/* mobile/tablet: horizontal scroll pill row (tap-44 extends each
+          pill's hit box to 44px on touch — single row, so no overlap risk) */}
+      <nav className="flex lg:hidden gap-2 overflow-x-auto py-2 font-mono text-mono-sm" aria-label="Section navigation">
         {chapters.map((c) => (
           <a
             key={c.id}
             href={`#${c.id}`}
             onClick={(e) => goToChapter(e, c.id)}
-            className="flex-none px-3 py-1.5 rounded-full border"
+            className="tap-44 flex-none px-3 py-1.5 rounded-full border"
             style={{
               borderColor: active === c.id ? "var(--brass)" : "var(--ink-soft)",
               color: active === c.id ? "var(--ink)" : "var(--ink-soft)",

@@ -143,7 +143,7 @@ export function AmbientSound() {
       onClick={playing ? disable : enable}
       aria-pressed={playing}
       aria-label="Toggle ambient park sound"
-      className={`flex items-center gap-2 font-mono text-mono-sm uppercase tracking-wide transition-opacity cursor-pointer ${
+      className={`tap-44 flex items-center gap-2 font-mono text-mono-sm uppercase tracking-wide transition-opacity cursor-pointer ${
         playing ? "text-brass" : "opacity-50 hover:opacity-80"
       }`}
     >

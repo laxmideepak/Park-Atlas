@@ -119,6 +119,28 @@ body {
   }
 }
 
+/* Mobile pass: invisible tap-target extension for coarse pointers only —
+   grows a visually-small control's hit box to at least 44×44px (Apple HIG)
+   without changing its rendered size. Keep it OFF tightly-stacked vertical
+   lists (e.g. footer link columns), where extended boxes would overlap the
+   neighbor's visible text; those get real min-heights instead. */
+@media (pointer: coarse) {
+  /* :where() keeps specificity at zero so an explicit position utility
+     (.absolute on a hero scroll cue, .fixed, …) still wins over this. */
+  :where(.tap-44) {
+    position: relative;
+  }
+  .tap-44::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: max(100%, 44px);
+    height: max(100%, 44px);
+    transform: translate(-50%, -50%);
+  }
+}
+
 /* AmbientSound equalizer glyph — 3 bars breathing while the soundscape plays.
    (Global reduced-motion rule below freezes it to the 3px rest height.) */
 @keyframes eq-bar {
