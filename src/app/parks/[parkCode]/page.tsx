@@ -78,6 +78,12 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
   const chapters = (detail ? CHAPTERS : CHAPTERS.filter((c) => ["overview", "when-to-go", "must-see", "crowds"].includes(c.id))).filter(
     (c) => c.id !== "must-see" || hasMustSee
   );
+  // 1-based table-of-contents numbering from the FILTERED chapter list — when
+  // non-cohort parks drop chapters, numerals renumber contiguously (a visible
+  // gap reads as a bug). Overview is 01; it has no ThemedSection, so its
+  // numeral appears only in the ChapterRail.
+  const chapterIndex: Record<string, number> = Object.fromEntries(chapters.map((c, i) => [c.id, i + 1]));
+  const marginNote = (section: string) => detail?.marginNotes?.find((n) => n.section === section)?.note;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -107,7 +113,7 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
 
       <div className="bg-bone text-ink">
         <div className="max-w-[1360px] mx-auto px-6 md:px-10 py-10 flex flex-col lg:flex-row gap-12">
-          <ChapterRail chapters={chapters} />
+          <ChapterRail chapters={chapters} runningHead={mini.name} />
 
           <div className="flex-1 min-w-0 flex flex-col gap-20">
             <section id="overview" className="scroll-mt-24 flex flex-col gap-6">
@@ -186,7 +192,7 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
               )}
             </section>
 
-            <ThemedSection id="when-to-go" className="scroll-mt-24">
+            <ThemedSection id="when-to-go" index={chapterIndex["when-to-go"]} marginNote={marginNote("when-to-go")} className="scroll-mt-24">
               <Reveal as="h2" className="font-display text-display-md mb-1">When to go</Reveal>
               <Reveal as="p" delay={0.06} className="text-sm text-ink-soft mb-8">Weighed on climate and access, never on crowds.</Reveal>
 
@@ -233,10 +239,10 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
               </p>
             </ThemedSection>
 
-            {detail && <EditorialSections detail={detail} />}
-            {!detail && <NonCohortSections name={name} liveThings={liveThings} npsUrl={liveProfile?.sourceUrl} />}
+            {detail && <EditorialSections detail={detail} chapterIndex={chapterIndex} />}
+            {!detail && <NonCohortSections name={name} liveThings={liveThings} npsUrl={liveProfile?.sourceUrl} chapterIndex={chapterIndex} />}
 
-            <ThemedSection id="crowds" className="scroll-mt-24">
+            <ThemedSection id="crowds" index={chapterIndex["crowds"]} marginNote={marginNote("crowds")} className="scroll-mt-24">
               <Reveal as="h2" className="font-display text-display-md mb-6">Crowd calendar</Reveal>
               <CrowdCalendar rows={months} sourceLabel={VISITATION_SOURCE_LABEL} bestBalanceMonth={labels.bestBalance.month} figNumber={2} />
             </ThemedSection>
@@ -292,10 +298,11 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
   );
 }
 
-function EditorialSections({ detail }: { detail: ParkDetail }) {
+function EditorialSections({ detail, chapterIndex }: { detail: ParkDetail; chapterIndex: Record<string, number> }) {
+  const marginNote = (section: string) => detail.marginNotes?.find((n) => n.section === section)?.note;
   return (
     <>
-      <ThemedSection id="hiking" className="scroll-mt-24">
+      <ThemedSection id="hiking" index={chapterIndex["hiking"]} marginNote={marginNote("hiking")} className="scroll-mt-24">
         <Reveal as="h2" className="font-display text-display-md mb-1">Hiking & trekking</Reveal>
         <Reveal as="p" delay={0.06} className="text-mono-sm font-mono text-ink-soft mb-6">Officially listed hikes (NPS) &mdash; computed GIS trail totals land in Phase 2</Reveal>
         <RevealGroup
@@ -328,7 +335,7 @@ function EditorialSections({ detail }: { detail: ParkDetail }) {
         <p className="pullquote font-display italic text-display-md leading-tight max-w-[24ch] text-ink">{detail.pullQuote}</p>
       </Reveal>
 
-      <ThemedSection id="must-see" className="scroll-mt-24">
+      <ThemedSection id="must-see" index={chapterIndex["must-see"]} marginNote={marginNote("must-see")} className="scroll-mt-24">
         <Reveal as="h2" className="font-display text-display-md mb-6">Must-see spots</Reveal>
         <RevealGroup
           as="div"
@@ -345,7 +352,7 @@ function EditorialSections({ detail }: { detail: ParkDetail }) {
         </RevealGroup>
       </ThemedSection>
 
-      <ThemedSection id="water" className="scroll-mt-24">
+      <ThemedSection id="water" index={chapterIndex["water"]} marginNote={marginNote("water")} className="scroll-mt-24">
         <Reveal as="h2" className="font-display text-display-md mb-1">Lakes & water</Reveal>
         <Reveal as="p" delay={0.06} className="text-mono-sm font-mono text-ink-soft mb-6">Hand-curated — USGS GNIS/NHD boundary intersection planned</Reveal>
         <RevealGroup
@@ -364,7 +371,7 @@ function EditorialSections({ detail }: { detail: ParkDetail }) {
         </RevealGroup>
       </ThemedSection>
 
-      <ThemedSection id="dining" className="scroll-mt-24">
+      <ThemedSection id="dining" index={chapterIndex["dining"]} marginNote={marginNote("dining")} className="scroll-mt-24">
         <div className="flex items-baseline gap-3 mb-1">
           <Reveal as="h2" className="font-display text-display-md">Dining availability</Reveal>
           <span className="font-mono text-sm font-semibold uppercase tracking-wide">{detail.dining.label}</span>
@@ -401,15 +408,17 @@ function NonCohortSections({
   name,
   liveThings,
   npsUrl,
+  chapterIndex,
 }: {
   name: string;
   liveThings: { title: string; shortDescription: string; activity: string | null }[];
   npsUrl?: string;
+  chapterIndex: Record<string, number>;
 }) {
   return (
     <>
       {liveThings.length > 0 && (
-        <ThemedSection id="must-see" className="scroll-mt-24">
+        <ThemedSection id="must-see" index={chapterIndex["must-see"]} className="scroll-mt-24">
           <div className="flex items-baseline gap-3 mb-1">
             <Reveal as="h2" className="font-display text-display-md">Must-see spots</Reveal>
             <span className="text-mono-sm font-mono text-ink-soft">Live &middot; NPS Data API</span>

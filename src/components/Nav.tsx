@@ -5,6 +5,7 @@ import { AmbientSound } from "./AmbientSound";
 import { MobileMenu } from "./MobileMenu";
 import { NavShell } from "./NavShell";
 import { NearestPark } from "./NearestPark";
+import { RunningHead } from "./RunningHead";
 
 // Server-computed minimal points list (code/name/lat/lng only) — the client
 // component never imports the full parks module.
@@ -25,7 +26,11 @@ export function Nav() {
           </Link>
           <NearestPark parks={PARK_POINTS} />
         </div>
-        <div className="flex items-center gap-6 md:gap-8">
+        <div className="flex items-center gap-6 md:gap-8 min-w-0">
+          {/* Running head — park + active chapter, park pages only (chapter-spy
+              store is empty everywhere else). Sits right-of-center, ahead of
+              the links. */}
+          <RunningHead />
           <nav className="hidden md:flex items-center gap-8 font-mono text-mono-sm">
             <Link href={`/discover/month/${month.abbr}`} className="opacity-75 hover:opacity-100 hover:text-brass transition-colors">Months</Link>
             <Link href="/parks" className="opacity-75 hover:opacity-100 hover:text-brass transition-colors">Parks</Link>

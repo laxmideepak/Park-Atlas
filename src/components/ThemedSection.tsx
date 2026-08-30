@@ -9,8 +9,33 @@ import { SectionPattern } from "@/components/SectionPattern";
  * for contrast). Unthemed ids (overview, current conditions) pass through as
  * a plain <section> — the id always lands on the outer <section> so the
  * ChapterRail's IntersectionObserver and anchor scrolls keep working.
+ *
+ * `index` is the section's 1-based position in the page's FILTERED chapters
+ * array (non-cohort parks drop chapters, so numbering must stay contiguous —
+ * a visible gap reads as a bug). Overview is always 01 but has no
+ * ThemedSection; its numeral appears only in the ChapterRail.
+ *
+ * `marginNote` renders in the right gutter on very wide viewports, inline
+ * under the eyebrow otherwise. Gutter math: the column's right edge sits at
+ * the 1360px container's content edge, so the free gutter is
+ * (viewport − 1360)/2 + 40px of container padding. The proposed w-48 note at
+ * -right-56 needs 224px — that only exists at ≥1728px viewports, and even 2xl
+ * (1536 → 128px) overflows. A w-40 note at -right-48 needs 192px, which
+ * clears from ~1664px — hence the min-[1680px] gate (not xl/2xl).
  */
-export function ThemedSection({ id, className, children }: { id: string; className?: string; children: ReactNode }) {
+export function ThemedSection({
+  id,
+  index,
+  marginNote,
+  className,
+  children,
+}: {
+  id: string;
+  index?: number;
+  marginNote?: string;
+  className?: string;
+  children: ReactNode;
+}) {
   const theme = SECTION_THEMES[id];
   if (!theme) {
     return (
@@ -31,11 +56,21 @@ export function ThemedSection({ id, className, children }: { id: string; classNa
       >
         <SectionPattern kind={theme.pattern} hue={theme.hue} uid={id} />
       </div>
+      {marginNote && (
+        <aside className="hidden min-[1680px]:block absolute -right-48 top-0 w-40 font-mono text-mono-sm text-ink-soft leading-relaxed">
+          <span aria-hidden className="block w-4 h-[2px] mb-2" style={{ background: theme.hue }} />
+          {marginNote}
+        </aside>
+      )}
       <div className="relative">
         <p className="font-mono text-mono-sm uppercase tracking-wide mb-2 flex items-center gap-2">
+          {typeof index === "number" && <span className="text-ink-soft/70">{String(index).padStart(2, "0")}</span>}
           <span aria-hidden className="inline-block w-6 h-[2px]" style={{ background: theme.hue }} />
           <span className="font-semibold" style={{ color: eyebrowColor }}>{theme.eyebrow}</span>
         </p>
+        {marginNote && (
+          <p className="min-[1680px]:hidden font-mono text-mono-sm text-ink-soft leading-relaxed mb-4 max-w-prose">{marginNote}</p>
+        )}
         {children}
       </div>
     </section>
