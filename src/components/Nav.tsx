@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { currentMonthAbbr, monthByAbbr } from "@/lib/months";
+import { AmbientSound } from "./AmbientSound";
 
 /** §7.6, simplified: a solid ink bar rather than transparent-over-hero — the
  * transparent variant would go invisible on bone-first pages (rankings,
@@ -12,17 +13,20 @@ export function Nav() {
         <Link href="/" className="font-display italic text-2xl">
           ParkAtlas
         </Link>
-        <nav className="hidden md:flex items-center gap-8 font-mono text-mono-sm">
-          <Link href={`/discover/month/${month.abbr}`} className="opacity-75 hover:opacity-100 hover:text-brass transition-colors">Months</Link>
-          <Link href="/parks" className="opacity-75 hover:opacity-100 hover:text-brass transition-colors">Parks</Link>
-          <Link href="/rankings" className="opacity-75 hover:opacity-100 hover:text-brass transition-colors">Rankings</Link>
-          <Link
-            href={`/discover/month/${month.abbr}`}
-            className="px-3 py-1.5 rounded-full border border-bone/25 uppercase tracking-wide hover:border-brass transition-colors"
-          >
-            This month: {month.abbr}
-          </Link>
-        </nav>
+        <div className="flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-8 font-mono text-mono-sm">
+            <Link href={`/discover/month/${month.abbr}`} className="opacity-75 hover:opacity-100 hover:text-brass transition-colors">Months</Link>
+            <Link href="/parks" className="opacity-75 hover:opacity-100 hover:text-brass transition-colors">Parks</Link>
+            <Link href="/rankings" className="opacity-75 hover:opacity-100 hover:text-brass transition-colors">Rankings</Link>
+            <Link
+              href={`/discover/month/${month.abbr}`}
+              className="px-3 py-1.5 rounded-full border border-bone/25 uppercase tracking-wide hover:border-brass transition-colors"
+            >
+              This month: {month.abbr}
+            </Link>
+          </nav>
+          <AmbientSound />
+        </div>
       </div>
     </header>
   );
