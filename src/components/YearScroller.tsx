@@ -113,7 +113,15 @@ export function YearScroller({ chapters }: { chapters: YearChapter[] }) {
                   aria-label={`${c.monthName} — ${c.parkName}`}
                 >
                   {inWindow && c.image ? (
-                    <Image src={c.image.url} alt={c.image.altText || ""} fill sizes="100vw" quality={85} className="object-cover" />
+                    <Image
+                      src={c.image.url}
+                      alt={c.image.altText || ""}
+                      fill
+                      sizes="100vw"
+                      quality={85}
+                      {...(c.image.blurDataURL ? { placeholder: "blur" as const, blurDataURL: c.image.blurDataURL } : {})}
+                      className="object-cover"
+                    />
                   ) : (
                     <ContourField name="" accent={c.accent} />
                   )}
@@ -134,6 +142,17 @@ export function YearScroller({ chapters }: { chapters: YearChapter[] }) {
                       Everything good in {c.monthName} &rarr;
                     </Link>
                   </div>
+
+                  {/* attribution chip (same glass pattern as ParkHero) — CC BY/BY-SA
+                      picks legally require author + license on display; rendered
+                      after the content overlay so the link stays clickable */}
+                  {inWindow && c.image?.credit ? (
+                    c.image.creditUrl ? (
+                      <a href={c.image.creditUrl} className="tap-44 absolute bottom-3 right-4 glass-dark rounded-sm px-2.5 py-1 font-mono text-mono-sm text-bone/70 hover:text-bone underline-offset-2 hover:underline">{c.image.credit}</a>
+                    ) : (
+                      <p className="absolute bottom-3 right-4 glass-dark rounded-sm px-2.5 py-1 font-mono text-mono-sm text-bone/70">{c.image.credit}</p>
+                    )
+                  ) : null}
                 </div>
               );
             })}
@@ -161,11 +180,26 @@ function ChapterCard({ c }: { c: YearChapter }) {
   return (
     <Link href={`/discover/month/${c.monthAbbr}`} className="relative block aspect-[4/5] rounded-sm overflow-hidden group">
       {c.image ? (
-        <Image src={c.image.url} alt={c.image.altText || ""} fill sizes="50vw" quality={85} className="object-cover" style={{ filter: "saturate(0.97)" }} />
+        <Image
+          src={c.image.url}
+          alt={c.image.altText || ""}
+          fill
+          sizes="50vw"
+          quality={85}
+          {...(c.image.blurDataURL ? { placeholder: "blur" as const, blurDataURL: c.image.blurDataURL } : {})}
+          className="object-cover"
+          style={{ filter: "saturate(0.97)" }}
+        />
       ) : (
         <ContourField name={c.monthName} accent={c.accent} />
       )}
       <div className="absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-ink/80 via-ink/25 to-transparent" />
+      {/* attribution (CC BY/BY-SA) — non-interactive span: the whole card is
+          already a Link, and HTML forbids an <a> inside it. Top-right keeps
+          it clear of the justify-end text block. */}
+      {c.image?.credit && (
+        <span className="absolute top-3 right-3 glass-dark rounded-sm px-2.5 py-1 font-mono text-mono-sm text-bone/70">{c.image.credit}</span>
+      )}
       <div className="absolute inset-0 p-5 flex flex-col justify-end gap-2">
         <h3 className="font-display text-display-md text-bone leading-none">{c.monthName}</h3>
         <div className="flex flex-wrap items-center gap-3 font-mono text-mono-sm text-bone/80">
