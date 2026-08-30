@@ -7,9 +7,20 @@ import type { ParkImage } from "./nps";
  * license-verified: PD/CC0/CC BY/CC BY-SA only). Highest priority in the
  * hero chain; `creditUrl` links the Commons file page, which carries the
  * attribution + license notice CC BY/BY-SA legally require us to surface. */
+interface PremiumEntry {
+  url: string;
+  originalUrl: string;
+  sourceWidth: number;
+  author: string;
+  license: string;
+  sourcePage: string;
+  alt: string;
+  blurDataURL?: string;
+}
+
 function fromPremium(parkCode?: string): (ParkImage & { creditUrl: string }) | null {
   if (!parkCode) return null;
-  const entry = (premium.parks as Record<string, { url: string; author: string; license: string; sourcePage: string; alt: string }>)[parkCode];
+  const entry = (premium.parks as Record<string, PremiumEntry>)[parkCode];
   if (!entry) return null;
   return {
     url: entry.url,
@@ -17,6 +28,7 @@ function fromPremium(parkCode?: string): (ParkImage & { creditUrl: string }) | n
     altText: entry.alt,
     credit: `Photo: ${entry.author} · ${entry.license}`,
     creditUrl: entry.sourcePage,
+    blurDataURL: entry.blurDataURL,
   };
 }
 

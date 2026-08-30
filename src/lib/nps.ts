@@ -145,6 +145,10 @@ export interface ParkImage {
   /** Attribution target (e.g. a Wikimedia Commons file page) — CC BY/BY-SA
    * picks must surface author + license, and the chip links here. */
   creditUrl?: string;
+  /** Inline base64 micro-thumb (premium picks only) — `next/image`
+   * `placeholder="blur"` paints it in the first frame so a slow Commons
+   * hero never cold-loads as a blank slab. */
+  blurDataURL?: string;
 }
 
 /**

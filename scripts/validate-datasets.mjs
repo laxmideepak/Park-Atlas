@@ -87,8 +87,10 @@ for (const [code, e] of ppParks) {
   if (/CC BY/i.test(e.license) && !e.author?.trim()) errors.push(`premium ${code}: CC pick missing author`);
   if (e.sourceWidth < 2560) errors.push(`premium ${code}: ${e.sourceWidth}px under floor`);
   if (!e.url.startsWith("https://upload.wikimedia.org/")) errors.push(`premium ${code}: non-Commons url`);
+  // Blur placeholders (founder #5): every premium hero must paint instantly.
+  if (!e.blurDataURL || !e.blurDataURL.startsWith("data:image/")) errors.push(`premium ${code}: missing/invalid blurDataURL (run scripts/gen-premium-blur.mjs)`);
 }
-ok(`premium-photos: ${ppParks.length} parks, licenses in allowlist, authors present on CC picks`);
+ok(`premium-photos: ${ppParks.length} parks, licenses in allowlist, authors present on CC picks, blurDataURLs inline`);
 
 if (errors.length) {
   console.error(`\nDATASET VALIDATION FAILED (${errors.length}):\n - ` + errors.join("\n - "));

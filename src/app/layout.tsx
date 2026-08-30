@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { preconnect } from "react-dom";
 import { Instrument_Serif, Instrument_Sans, IBM_Plex_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -49,6 +50,11 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
+  // Premium heroes resolve from upload.wikimedia.org — warming the connection
+  // shaves the TLS handshake off the first hero byte wherever the browser
+  // touches Commons directly. The Metadata API doesn't cover resource hints;
+  // ReactDOM.preconnect is the documented Next way (hoisted into <head>).
+  preconnect("https://upload.wikimedia.org");
   return (
     <html
       lang="en"

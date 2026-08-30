@@ -56,7 +56,8 @@ export function ParkHero({
               fill
               priority
               sizes="100vw"
-              quality={85}
+              quality={75}
+              {...(hero.blurDataURL ? { placeholder: "blur" as const, blurDataURL: hero.blurDataURL } : {})}
               className="object-cover"
               style={{ viewTransitionName: `park-hero-${parkCode}` }}
             />
