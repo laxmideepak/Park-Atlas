@@ -220,24 +220,31 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
                     <p className="text-sm mt-1 font-medium">{a.title}</p>
                     <p className="text-sm text-bone/70 mt-0.5">{a.description}</p>
                   </div>
-                  <span className="text-mono-sm font-mono text-bone/60 whitespace-nowrap">{new Date(a.lastIndexedDate).toLocaleDateString()}</span>
+                  <span className="text-mono-sm font-mono text-bone/60 whitespace-nowrap">{formatAlertDate(a.lastIndexedDate)}</span>
                 </Fragment>
               ))}
             </RevealGroup>
-          ) : !cohortPark ? (
-            <p className="text-sm text-bone/70">No active NPS alerts for {name} right now.</p>
           ) : (
-            <RevealGroup as="div" className="flex flex-col gap-3" itemClassName="rounded-sm border border-bone/15 p-4 flex justify-between gap-4 flex-wrap">
-              {detail!.alerts.map((a, i) => (
-                <Fragment key={i}>
-                  <div>
-                    <span className="text-mono-sm font-mono uppercase tracking-wide text-brass">{a.type}</span>
-                    <p className="text-sm mt-1">{a.description}</p>
-                  </div>
-                  <span className="text-mono-sm font-mono text-bone/60 whitespace-nowrap">{new Date(a.lastUpdated).toLocaleString()}</span>
-                </Fragment>
-              ))}
-            </RevealGroup>
+            <p className="text-sm text-bone/70">No active NPS alerts for {name} right now.</p>
+          )}
+          {/* Editorial seasonal notes are NOT live alerts — audit #7: they used
+              to render styled identically to NPS alerts, under a "No alerts
+              reported" header, with hardcoded fixture timestamps. Now they're
+              their own honestly-labeled block, timestamps dropped. */}
+          {detail && detail.alerts.length > 0 && (
+            <div className="mt-8">
+              <p className="text-mono-sm font-mono uppercase tracking-wide text-bone/60 mb-3">
+                Editorial seasonal notes — not live NPS alerts
+              </p>
+              <RevealGroup as="div" className="flex flex-col gap-3" itemClassName="rounded-sm border border-bone/10 bg-bone/[0.03] p-4">
+                {detail.alerts.map((a, i) => (
+                  <Fragment key={i}>
+                    <span className="text-mono-sm font-mono uppercase tracking-wide text-bone/50">{a.type}</span>
+                    <p className="text-sm mt-1 text-bone/80">{a.description}</p>
+                  </Fragment>
+                ))}
+              </RevealGroup>
+            </div>
           )}
         </div>
       </section>
@@ -379,6 +386,15 @@ function NonCohortSections({
       )}
     </>
   );
+}
+
+/** NPS alert `lastIndexedDate` is non-ISO ("2025-01-27 12:37:06.0") — V8
+ * happens to parse it today, but that's engine luck, not a contract
+ * (audit #15). Parse defensively; hide the date rather than show
+ * "Invalid Date". */
+function formatAlertDate(raw: string): string {
+  const d = new Date(raw);
+  return isNaN(d.getTime()) ? "" : d.toLocaleDateString();
 }
 
 function Stat({ label, value }: { label: string; value: ReactNode }) {

@@ -32,7 +32,7 @@ export function Footer() {
             <span className="text-bone uppercase tracking-wide mb-1">Sources</span>
             <span>NPS Data API</span>
             <span>National Weather Service</span>
-            <span>NOAA 1991&ndash;2020 Normals</span>
+            <span>NOAA 1991&ndash;2020 Normals (planned)</span>
           </div>
         </div>
 

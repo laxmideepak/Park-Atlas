@@ -53,6 +53,10 @@ async function npsFetch<T>(path: string, params: Record<string, string>): Promis
         headers: { "X-Api-Key": key },
         next: { revalidate: REVALIDATE_SECONDS },
       });
+      const remaining = res.headers.get("x-ratelimit-remaining");
+      if (remaining !== null && Number(remaining) <= 100 && Number(remaining) % 25 === 0) {
+        console.warn(`[nps] quota low: ${remaining} requests remaining this hour`);
+      }
       if (res.ok) return (await res.json()) as T;
       if (res.status !== 429 && res.status < 500) return null; // real error, don't hammer
     } catch {
@@ -60,6 +64,13 @@ async function npsFetch<T>(path: string, params: Record<string, string>): Promis
     }
     await new Promise((r) => setTimeout(r, 1500 * (attempt + 1) + Math.floor(Math.random() * 500)));
   }
+  // Exhausted retries — almost always OVER_RATE_LIMIT. Silence here is how
+  // builds used to bake missing images/fees into static pages with no
+  // warning (audit #9): fail the BUILD loudly; at runtime (ISR revalidation)
+  // degrade gracefully so a quota blip never crashes a live page.
+  const message = `[nps] ${path}?${qs} failed after 3 attempts — likely OVER_RATE_LIMIT; static pages would bake in missing data`;
+  if (process.env.NEXT_PHASE === "phase-production-build") throw new Error(message);
+  console.error(message);
   return null;
 }
 
@@ -74,9 +85,11 @@ export interface NpsParkProfile {
 /** One /parks request per park, shared by profile + images. The two callers
  * previously used different no-op `fields` strings, so Next's fetch cache
  * saw two distinct URLs and every park cost 2 of the 1,000 hourly requests
- * for identical data (gov-data audit finding). Identical URL = deduped. */
+ * for identical data (audit #9/#12). `fields` is dropped entirely — it's
+ * not in the official swagger spec and the API ignores it, returning the
+ * full object regardless (live-verified). Identical URL = deduped. */
 function fetchParkRaw(park: string) {
-  return npsFetch<RawParksResponse>("/parks", { parkCode: park, fields: "images,entranceFees" });
+  return npsFetch<RawParksResponse>("/parks", { parkCode: park });
 }
 
 /** The fees array has no guaranteed order — Acadia's [0] is the $6 Cadillac
@@ -127,7 +140,14 @@ export interface ParkImage {
  */
 function isPublicDomainCredit(credit: string): boolean {
   const c = credit.toLowerCase();
-  return c.includes("nps") || c.includes("national park service");
+  // Exclusions first (audit #11): a credit can mention NPS and still not be
+  // federal work product — "Photo courtesy of X / NPS", partner co-credits,
+  // or an explicit ©. When in doubt, exclude; ContourField is the honest
+  // fallback, never a rights gamble.
+  if (c.includes("courtesy") || c.includes("permission") || c.includes("©") || c.includes("(c)")) return false;
+  // Word-boundary match — bare includes("nps") false-positives on strings
+  // that merely contain the letters (org names, nps.gov URLs in prose).
+  return /(^|[^a-z])nps([^a-z]|$)/.test(c) || c.includes("national park service");
 }
 
 export async function fetchParkImages(park: string): Promise<ParkImage[]> {

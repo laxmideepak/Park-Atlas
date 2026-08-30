@@ -40,7 +40,7 @@ export const PARKS: Park[] = [
     state: "California / Nevada",
     acreage: 3373063,
     entryFee: "$30 / vehicle (7-day)",
-    medianAnnualVisits: 1320000, // official 2025 release says "more than 1.32 million" — prior 1,190,000 matched no published figure; exact IRMA count pending
+    medianAnnualVisits: 1320134, // exact 2025 recreation visits per IRMA Stats (release rounds to "more than 1.32 million")
     visitsWindow: "2025 (single year)",
     officialVisitRank2025: null,
     tagline: "The hottest, lowest, driest park in the system — and inverted: winter is peak season.",
