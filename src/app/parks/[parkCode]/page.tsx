@@ -371,8 +371,13 @@ function EditorialSections({ detail }: { detail: ParkDetail }) {
             </Fragment>
           ))}
         </RevealGroup>
-        {detail.dining.operations.length === 0 && (
-          <p className="text-sm text-ink-soft">No concessioner dining inside the park &mdash; bring your own food.</p>
+        {detail.dining.operations.length === 0 ? (
+          <p className="text-sm text-ink-soft">
+            No concessioner dining inside the park &mdash; bring your own food.
+            <EndMark />
+          </p>
+        ) : (
+          <EndMark />
         )}
       </ThemedSection>
     </>
@@ -405,13 +410,17 @@ function NonCohortSections({
               </Fragment>
             ))}
           </RevealGroup>
+          {!npsUrl && <EndMark />}
         </ThemedSection>
       )}
 
       {npsUrl && (
         <section>
           <div className="rounded-sm border border-ink/12 bg-bone-deep p-5 flex items-center justify-between gap-4 flex-wrap">
-            <p className="text-sm text-ink-soft">Hiking, dining, and lodging details for {name} aren&rsquo;t in ParkAtlas yet.</p>
+            <p className="text-sm text-ink-soft">
+              Hiking, dining, and lodging details for {name} aren&rsquo;t in ParkAtlas yet.
+              <EndMark />
+            </p>
             <Link href={npsUrl} className="text-sm underline underline-offset-2 whitespace-nowrap">
               See the official NPS page &rarr;
             </Link>
@@ -429,6 +438,13 @@ function NonCohortSections({
 function formatAlertDate(raw: string): string {
   const d = new Date(raw);
   return isNaN(d.getTime()) ? "" : d.toLocaleDateString();
+}
+
+/** Editorial end-mark — one brass tombstone closes the last editorial block.
+ * Rendered exactly once per page: after Dining's grid (cohort) or after the
+ * NonCohortSections' final block (npsUrl card if present, else must-see grid). */
+function EndMark() {
+  return <span aria-hidden className="inline-block w-[7px] h-[7px] bg-brass align-baseline ml-2" />;
 }
 
 function Stat({ label, value }: { label: string; value: ReactNode }) {
