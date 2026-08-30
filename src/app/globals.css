@@ -58,6 +58,10 @@
   --text-display-xl: clamp(3.25rem, 9.5vw, 9rem);
   --text-display-lg: clamp(2.5rem, 6vw, 5.5rem);
   --text-display-md: clamp(1.75rem, 3.5vw, 3rem);
+  /* editorial standfirst — serif opening paragraph on park pages; sized to sit
+     between body-lg and display-md, always ≥22px so Instrument Serif never
+     goes wiry */
+  --text-standfirst: clamp(1.375rem, 2.2vw, 1.75rem);
   --text-body-lg: clamp(1.0625rem, 1.4vw, 1.25rem);
   --text-mono-sm: 0.75rem;
 }
@@ -150,6 +154,29 @@ body {
 .eq-bar {
   height: 3px;
   animation: eq-bar 0.9s ease-in-out infinite;
+}
+
+/* Editorial drop cap — `initial-letter` only (Chromium unprefixed, Safari via
+   -webkit-). Firefox has no support and simply renders no cap: acceptable
+   progressive enhancement. Deliberately NO float/line-height fallback — those
+   never align with Instrument Serif's metrics and would ship a worse cap to
+   every browser to spare one. */
+@supports (initial-letter: 3) or (-webkit-initial-letter: 3) {
+  .dropcap::first-letter {
+    -webkit-initial-letter: 3;
+    initial-letter: 3;
+    font-family: var(--font-instrument-serif);
+    color: var(--ink);
+    padding-right: 0.14em;
+  }
+}
+
+/* Editorial hanging punctuation — Safari-only today, free everywhere else
+   (unsupported browsers ignore it). Opening quotes/brackets hang into the
+   margin so the text edge stays optically flush. No manual indent hacks. */
+.standfirst,
+.pullquote {
+  hanging-punctuation: first;
 }
 
 /* card -> hero photo morph should be a quick cut, not a lazy dissolve */

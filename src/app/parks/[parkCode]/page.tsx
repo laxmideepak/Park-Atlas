@@ -115,9 +115,33 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
                   (LWCF quarterly report + IRMA Stats 5-yr medians) — the old
                   cohort-only figures and the "Not yet live" placeholder are
                   both retired. */}
+              {/* Editorial standfirst — the full field note (curated cohort
+                  prose, or the NPS live description fallback) opens the
+                  overview in Instrument Serif roman; the hero keeps its
+                  clamped italic line as the cover tease. */}
+              {/* Drop cap only when the note is long enough to wrap the
+                  3-line cap — length > 220 chars is a crude but honest proxy
+                  for "at least three full lines at 58ch". */}
+              {fieldNote && (
+                <Reveal
+                  as="p"
+                  className={`standfirst font-display text-standfirst leading-snug max-w-[58ch] text-ink${fieldNote.length > 220 ? " dropcap" : ""}`}
+                >
+                  {fieldNote}
+                </Reveal>
+              )}
               <RevealGroup as="div" className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 text-sm" itemClassName="h-full">
                 {[
-                  <Stat key="acreage" label="Acreage (official)" value={<CountUp value={Math.round(acreage?.grossAcres ?? 0)} suffix=" ac" />} />,
+                  <Stat
+                    key="acreage"
+                    label="Acreage (official)"
+                    value={
+                      <>
+                        <CountUp value={Math.round(acreage?.grossAcres ?? 0)} suffix=" ac" />
+                        <sup className="font-mono">&dagger;</sup>
+                      </>
+                    }
+                  />,
                   <Stat
                     key="fee"
                     label="Entry fee"
@@ -126,7 +150,12 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
                   <Stat
                     key="visits"
                     label="Visits (5-yr median)"
-                    value={`${(visitation?.medianAnnualVisits ?? 0).toLocaleString()}${cohortPark?.officialVisitRank2025 ? ` · #${cohortPark.officialVisitRank2025} official 2025` : ""}`}
+                    value={
+                      <>
+                        {`${(visitation?.medianAnnualVisits ?? 0).toLocaleString()}${cohortPark?.officialVisitRank2025 ? ` · #${cohortPark.officialVisitRank2025} official 2025` : ""}`}
+                        <sup className="font-mono">&Dagger;</sup>
+                      </>
+                    }
                   />,
                   cohortPark ? (
                     <Stat key="trip" label="Typical trip" value={cohortPark.quickStats.tripLength} />
@@ -135,8 +164,10 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
                   ),
                 ]}
               </RevealGroup>
+              {/* Footnote daggers tie the two provenance-backed stats above
+                  († acreage, ‡ visits) to their sources — two marks max. */}
               <p className="font-mono text-mono-sm text-ink-soft -mt-2">
-                {ACREAGE_SOURCE_LABEL} &middot; {VISITATION_SOURCE_LABEL}
+                &dagger; {ACREAGE_SOURCE_LABEL} &middot; &Dagger; {VISITATION_SOURCE_LABEL}
               </p>
 
               {liveProfile && (
@@ -196,7 +227,10 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
                   <span key={m.month} className="flex-1 text-center font-mono text-mono-sm uppercase text-ink-soft">{m.month}</span>
                 ))}
               </div>
-              <p className="text-mono-sm font-mono text-ink-soft">Tap any month for its full Why-panel — factor weights, sources, confidence.</p>
+              {/* Numbered-figure caption — uppercase via class, never hand-typed caps */}
+              <p className="text-mono-sm font-mono uppercase text-ink-soft">
+                Fig. 1 &mdash; Month fit, twelve bars. Climate 60 &middot; Access 40. Tap any month for its Why-panel.
+              </p>
             </ThemedSection>
 
             {detail && <EditorialSections detail={detail} />}
@@ -204,7 +238,7 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
 
             <ThemedSection id="crowds" className="scroll-mt-24">
               <Reveal as="h2" className="font-display text-display-md mb-6">Crowd calendar</Reveal>
-              <CrowdCalendar rows={months} sourceLabel={VISITATION_SOURCE_LABEL} bestBalanceMonth={labels.bestBalance.month} />
+              <CrowdCalendar rows={months} sourceLabel={VISITATION_SOURCE_LABEL} bestBalanceMonth={labels.bestBalance.month} figNumber={2} />
             </ThemedSection>
           </div>
         </div>
@@ -287,6 +321,13 @@ function EditorialSections({ detail }: { detail: ParkDetail }) {
         </RevealGroup>
       </ThemedSection>
 
+      {/* Editorial pull quote — written for the page, never lifted from the
+          field note; serif italic, brass tick, no quotation glyphs. */}
+      <Reveal as="div">
+        <span aria-hidden className="block w-6 h-[2px] bg-brass mb-4" />
+        <p className="pullquote font-display italic text-display-md leading-tight max-w-[24ch] text-ink">{detail.pullQuote}</p>
+      </Reveal>
+
       <ThemedSection id="must-see" className="scroll-mt-24">
         <Reveal as="h2" className="font-display text-display-md mb-6">Must-see spots</Reveal>
         <RevealGroup
@@ -343,8 +384,13 @@ function EditorialSections({ detail }: { detail: ParkDetail }) {
             </Fragment>
           ))}
         </RevealGroup>
-        {detail.dining.operations.length === 0 && (
-          <p className="text-sm text-ink-soft">No concessioner dining inside the park &mdash; bring your own food.</p>
+        {detail.dining.operations.length === 0 ? (
+          <p className="text-sm text-ink-soft">
+            No concessioner dining inside the park &mdash; bring your own food.
+            <EndMark />
+          </p>
+        ) : (
+          <EndMark />
         )}
       </ThemedSection>
     </>
@@ -377,13 +423,17 @@ function NonCohortSections({
               </Fragment>
             ))}
           </RevealGroup>
+          {!npsUrl && <EndMark />}
         </ThemedSection>
       )}
 
       {npsUrl && (
         <section>
           <div className="rounded-sm border border-ink/12 bg-bone-deep p-5 flex items-center justify-between gap-4 flex-wrap">
-            <p className="text-sm text-ink-soft">Hiking, dining, and lodging details for {name} aren&rsquo;t in ParkAtlas yet.</p>
+            <p className="text-sm text-ink-soft">
+              Hiking, dining, and lodging details for {name} aren&rsquo;t in ParkAtlas yet.
+              <EndMark />
+            </p>
             <Link href={npsUrl} className="text-sm underline underline-offset-2 whitespace-nowrap">
               See the official NPS page &rarr;
             </Link>
@@ -401,6 +451,13 @@ function NonCohortSections({
 function formatAlertDate(raw: string): string {
   const d = new Date(raw);
   return isNaN(d.getTime()) ? "" : d.toLocaleDateString();
+}
+
+/** Editorial end-mark — one brass tombstone closes the last editorial block.
+ * Rendered exactly once per page: after Dining's grid (cohort) or after the
+ * NonCohortSections' final block (npsUrl card if present, else must-see grid). */
+function EndMark() {
+  return <span aria-hidden className="inline-block w-[7px] h-[7px] bg-brass align-baseline ml-2" />;
 }
 
 function Stat({ label, value }: { label: string; value: ReactNode }) {
