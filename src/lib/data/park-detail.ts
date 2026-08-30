@@ -41,6 +41,9 @@ export interface Alert {
 }
 
 export interface ParkDetail {
+  /** One-line editorial pull quote — written for the page in the field-guide
+   * voice, never extracted from the park's fieldNote. */
+  pullQuote: string;
   hikes: Hike[];
   spots: Spot[];
   water: WaterFeature[];
@@ -50,6 +53,7 @@ export interface ParkDetail {
 
 export const PARK_DETAIL: Record<ParkCode, ParkDetail> = {
   acad: {
+    pullQuote: "The tide opens a road twice a day and takes it back without apology.",
     hikes: [
       { name: "Precipice Trail", distanceMi: 2.1, difficulty: "Strenuous", durationHr: "2-3", bestMonths: "Jun-Oct (closed spring for peregrine nesting)", reservation: false, npsRecommended: true, waterFeature: false, officiallyListed: true },
       { name: "Beehive Loop", distanceMi: 1.5, difficulty: "Strenuous", durationHr: "1.5-2", bestMonths: "May-Oct", reservation: false, npsRecommended: true, waterFeature: false, officiallyListed: true },
@@ -83,6 +87,7 @@ export const PARK_DETAIL: Record<ParkCode, ParkDetail> = {
     ],
   },
   yell: {
+    pullQuote: "The geysers kept this schedule long before anyone thought to publish one.",
     hikes: [
       { name: "Fairy Falls", distanceMi: 5.0, difficulty: "Moderate", durationHr: "2.5-3", bestMonths: "Jun-Sep", reservation: false, npsRecommended: true, waterFeature: true, officiallyListed: true },
       { name: "Mount Washburn", distanceMi: 6.2, difficulty: "Strenuous", durationHr: "3-4", bestMonths: "Jul-Sep", reservation: false, npsRecommended: true, waterFeature: false, officiallyListed: true },
@@ -116,6 +121,7 @@ export const PARK_DETAIL: Record<ParkCode, ParkDetail> = {
     ],
   },
   "deva": {
+    pullQuote: "Come winter, walk at dawn; the valley does not negotiate at noon.",
     hikes: [
       { name: "Golden Canyon to Zabriskie Point", distanceMi: 3.0, difficulty: "Moderate", durationHr: "2", bestMonths: "Nov-Mar", reservation: false, npsRecommended: true, waterFeature: false, officiallyListed: true },
       { name: "Mosaic Canyon", distanceMi: 4.0, difficulty: "Moderate", durationHr: "2-3", bestMonths: "Nov-Mar", reservation: false, npsRecommended: true, waterFeature: false, officiallyListed: true },
@@ -147,6 +153,7 @@ export const PARK_DETAIL: Record<ParkCode, ParkDetail> = {
     ],
   },
   "grsm": {
+    pullQuote: "The haze is the forest breathing; the name was never a metaphor.",
     hikes: [
       { name: "Alum Cave to Mount LeConte", distanceMi: 11.0, difficulty: "Strenuous", durationHr: "6-8", bestMonths: "Apr-Oct", reservation: false, npsRecommended: true, waterFeature: false, officiallyListed: true },
       { name: "Charlies Bunion", distanceMi: 8.1, difficulty: "Strenuous", durationHr: "5-6", bestMonths: "May-Oct", reservation: false, npsRecommended: true, waterFeature: false, officiallyListed: true },
