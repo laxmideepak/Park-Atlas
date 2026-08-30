@@ -1,0 +1,5642 @@
+{
+  "_meta": {
+    "sourceUrl": "https://www.ncei.noaa.gov/access/services/data/v1?dataset=normals-monthly-1991-2020&dataTypes=MLY-TMAX-NORMAL,MLY-TMIN-NORMAL,MLY-TAVG-NORMAL,MLY-PRCP-NORMAL,MLY-SNOW-NORMAL&format=json&units=standard&includeStationLocation=1&stations={IDS}",
+    "datasetVersion": "normals-monthly-1991-2020 v1.0.1, doi:10.25921/wck8-er13",
+    "fetchedAt": "2026-08-30T00:22:47.087Z",
+    "script": "scripts/etl-climate-normals.mjs",
+    "recordCount": 63
+  },
+  "parks": {
+    "acad": {
+      "stationId": "USC00170100",
+      "months": {
+        "jan": {
+          "tmaxF": 32.5,
+          "tminF": 15.1,
+          "tavgF": 23.8,
+          "prcpIn": 4.48,
+          "snowIn": null
+        },
+        "feb": {
+          "tmaxF": 34.9,
+          "tminF": 17.5,
+          "tavgF": 26.2,
+          "prcpIn": 3.84,
+          "snowIn": null
+        },
+        "mar": {
+          "tmaxF": 41.6,
+          "tminF": 25,
+          "tavgF": 33.3,
+          "prcpIn": 4.94,
+          "snowIn": null
+        },
+        "apr": {
+          "tmaxF": 53.2,
+          "tminF": 34.8,
+          "tavgF": 44,
+          "prcpIn": 5.15,
+          "snowIn": null
+        },
+        "may": {
+          "tmaxF": 64.5,
+          "tminF": 44.8,
+          "tavgF": 54.7,
+          "prcpIn": 4.5,
+          "snowIn": null
+        },
+        "jun": {
+          "tmaxF": 73.9,
+          "tminF": 53.8,
+          "tavgF": 63.9,
+          "prcpIn": 4.28,
+          "snowIn": null
+        },
+        "jul": {
+          "tmaxF": 79.3,
+          "tminF": 60.2,
+          "tavgF": 69.7,
+          "prcpIn": 3.27,
+          "snowIn": null
+        },
+        "aug": {
+          "tmaxF": 78.3,
+          "tminF": 59.7,
+          "tavgF": 69,
+          "prcpIn": 3.45,
+          "snowIn": null
+        },
+        "sep": {
+          "tmaxF": 70.9,
+          "tminF": 52.8,
+          "tavgF": 61.9,
+          "prcpIn": 4.22,
+          "snowIn": null
+        },
+        "oct": {
+          "tmaxF": 58.5,
+          "tminF": 42.8,
+          "tavgF": 50.6,
+          "prcpIn": 5.86,
+          "snowIn": null
+        },
+        "nov": {
+          "tmaxF": 47.8,
+          "tminF": 32.7,
+          "tavgF": 40.3,
+          "prcpIn": 5.89,
+          "snowIn": null
+        },
+        "dec": {
+          "tmaxF": 37.8,
+          "tminF": 22.4,
+          "tavgF": 30.1,
+          "prcpIn": 5.66,
+          "snowIn": null
+        }
+      }
+    },
+    "npsa": {
+      "stationId": "AQW00061705",
+      "months": {
+        "jan": {
+          "tmaxF": 87.8,
+          "tminF": 78.2,
+          "tavgF": 83,
+          "prcpIn": 15.25,
+          "snowIn": 0
+        },
+        "feb": {
+          "tmaxF": 88.1,
+          "tminF": 78.3,
+          "tavgF": 83.2,
+          "prcpIn": 13.7,
+          "snowIn": 0
+        },
+        "mar": {
+          "tmaxF": 88.4,
+          "tminF": 78.2,
+          "tavgF": 83.3,
+          "prcpIn": 10.95,
+          "snowIn": 0
+        },
+        "apr": {
+          "tmaxF": 87.8,
+          "tminF": 78.1,
+          "tavgF": 83,
+          "prcpIn": 11.27,
+          "snowIn": 0
+        },
+        "may": {
+          "tmaxF": 86.4,
+          "tminF": 77.9,
+          "tavgF": 82.2,
+          "prcpIn": 11.73,
+          "snowIn": 0
+        },
+        "jun": {
+          "tmaxF": 85.2,
+          "tminF": 77.8,
+          "tavgF": 81.5,
+          "prcpIn": 6.37,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 84.6,
+          "tminF": 77.2,
+          "tavgF": 80.9,
+          "prcpIn": 7.51,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 84.7,
+          "tminF": 77,
+          "tavgF": 80.9,
+          "prcpIn": 6.93,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 85.7,
+          "tminF": 77.5,
+          "tavgF": 81.6,
+          "prcpIn": 7.99,
+          "snowIn": 0
+        },
+        "oct": {
+          "tmaxF": 86.3,
+          "tminF": 77.7,
+          "tavgF": 82,
+          "prcpIn": 10.24,
+          "snowIn": 0
+        },
+        "nov": {
+          "tmaxF": 87,
+          "tminF": 78,
+          "tavgF": 82.5,
+          "prcpIn": 12.05,
+          "snowIn": 0
+        },
+        "dec": {
+          "tmaxF": 87.6,
+          "tminF": 78.2,
+          "tavgF": 82.9,
+          "prcpIn": 14.35,
+          "snowIn": 0
+        }
+      }
+    },
+    "arch": {
+      "stationId": "USC00420336",
+      "months": {
+        "jan": {
+          "tmaxF": 41.5,
+          "tminF": 22.3,
+          "tavgF": 31.9,
+          "prcpIn": 0.55,
+          "snowIn": 2.1
+        },
+        "feb": {
+          "tmaxF": 50,
+          "tminF": 29.1,
+          "tavgF": 39.6,
+          "prcpIn": 0.56,
+          "snowIn": 1.2
+        },
+        "mar": {
+          "tmaxF": 62.1,
+          "tminF": 36.9,
+          "tavgF": 49.5,
+          "prcpIn": 0.65,
+          "snowIn": 0.5
+        },
+        "apr": {
+          "tmaxF": 69.6,
+          "tminF": 43.7,
+          "tavgF": 56.7,
+          "prcpIn": 0.71,
+          "snowIn": 0
+        },
+        "may": {
+          "tmaxF": 80.1,
+          "tminF": 53,
+          "tavgF": 66.6,
+          "prcpIn": 0.75,
+          "snowIn": 0
+        },
+        "jun": {
+          "tmaxF": 92.5,
+          "tminF": 63,
+          "tavgF": 77.8,
+          "prcpIn": 0.43,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 98.7,
+          "tminF": 70.3,
+          "tavgF": 84.5,
+          "prcpIn": 0.73,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 95.8,
+          "tminF": 67.9,
+          "tavgF": 81.9,
+          "prcpIn": 0.9,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 87.1,
+          "tminF": 58.3,
+          "tavgF": 72.7,
+          "prcpIn": 0.88,
+          "snowIn": 0
+        },
+        "oct": {
+          "tmaxF": 72.1,
+          "tminF": 44.2,
+          "tavgF": 58.1,
+          "prcpIn": 1.12,
+          "snowIn": 0.1
+        },
+        "nov": {
+          "tmaxF": 55.9,
+          "tminF": 32.6,
+          "tavgF": 44.3,
+          "prcpIn": 0.56,
+          "snowIn": 0.7
+        },
+        "dec": {
+          "tmaxF": 41.9,
+          "tminF": 23.9,
+          "tavgF": 32.9,
+          "prcpIn": 0.61,
+          "snowIn": 3.5
+        }
+      }
+    },
+    "badl": {
+      "stationId": "USC00398911",
+      "months": {
+        "jan": {
+          "tmaxF": 35.1,
+          "tminF": 9.4,
+          "tavgF": 22.2,
+          "prcpIn": 0.28,
+          "snowIn": 3.8
+        },
+        "feb": {
+          "tmaxF": 39,
+          "tminF": 12.6,
+          "tavgF": 25.8,
+          "prcpIn": 0.53,
+          "snowIn": 6.4
+        },
+        "mar": {
+          "tmaxF": 50.2,
+          "tminF": 22.2,
+          "tavgF": 36.2,
+          "prcpIn": 0.87,
+          "snowIn": 5.5
+        },
+        "apr": {
+          "tmaxF": 60.1,
+          "tminF": 32.6,
+          "tavgF": 46.3,
+          "prcpIn": 1.9,
+          "snowIn": 3.7
+        },
+        "may": {
+          "tmaxF": 69.7,
+          "tminF": 43.5,
+          "tavgF": 56.6,
+          "prcpIn": 3.55,
+          "snowIn": 0.1
+        },
+        "jun": {
+          "tmaxF": 80.4,
+          "tminF": 53.9,
+          "tavgF": 67.2,
+          "prcpIn": 2.73,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 89,
+          "tminF": 60.1,
+          "tavgF": 74.6,
+          "prcpIn": 2.32,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 88.3,
+          "tminF": 58,
+          "tavgF": 73.2,
+          "prcpIn": 1.56,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 79.1,
+          "tminF": 47.3,
+          "tavgF": 63.2,
+          "prcpIn": 1.19,
+          "snowIn": 0
+        },
+        "oct": {
+          "tmaxF": 63.1,
+          "tminF": 33.6,
+          "tavgF": 48.4,
+          "prcpIn": 1.76,
+          "snowIn": 1.1
+        },
+        "nov": {
+          "tmaxF": 49,
+          "tminF": 21,
+          "tavgF": 35,
+          "prcpIn": 0.64,
+          "snowIn": 4.2
+        },
+        "dec": {
+          "tmaxF": 37.4,
+          "tminF": 11.7,
+          "tavgF": 24.6,
+          "prcpIn": 0.32,
+          "snowIn": 5.6
+        }
+      }
+    },
+    "bibe": {
+      "stationId": "USC00411715",
+      "months": {
+        "jan": {
+          "tmaxF": 58.1,
+          "tminF": 37.9,
+          "tavgF": 48,
+          "prcpIn": 0.58,
+          "snowIn": null
+        },
+        "feb": {
+          "tmaxF": 62.6,
+          "tminF": 40.8,
+          "tavgF": 51.7,
+          "prcpIn": 0.61,
+          "snowIn": null
+        },
+        "mar": {
+          "tmaxF": 68.8,
+          "tminF": 45.5,
+          "tavgF": 57.1,
+          "prcpIn": 0.5,
+          "snowIn": null
+        },
+        "apr": {
+          "tmaxF": 76.4,
+          "tminF": 52.3,
+          "tavgF": 64.3,
+          "prcpIn": 0.59,
+          "snowIn": null
+        },
+        "may": {
+          "tmaxF": 83.1,
+          "tminF": 60.1,
+          "tavgF": 71.6,
+          "prcpIn": 1.58,
+          "snowIn": null
+        },
+        "jun": {
+          "tmaxF": 86.9,
+          "tminF": 64.8,
+          "tavgF": 75.9,
+          "prcpIn": 2.74,
+          "snowIn": null
+        },
+        "jul": {
+          "tmaxF": 84.8,
+          "tminF": 65,
+          "tavgF": 74.9,
+          "prcpIn": 3.57,
+          "snowIn": null
+        },
+        "aug": {
+          "tmaxF": 83.9,
+          "tminF": 64.6,
+          "tavgF": 74.2,
+          "prcpIn": 3.06,
+          "snowIn": null
+        },
+        "sep": {
+          "tmaxF": 79.1,
+          "tminF": 59.9,
+          "tavgF": 69.5,
+          "prcpIn": 2.72,
+          "snowIn": null
+        },
+        "oct": {
+          "tmaxF": 74.1,
+          "tminF": 53.5,
+          "tavgF": 63.8,
+          "prcpIn": 1.29,
+          "snowIn": null
+        },
+        "nov": {
+          "tmaxF": 65.2,
+          "tminF": 44.6,
+          "tavgF": 54.9,
+          "prcpIn": 0.63,
+          "snowIn": null
+        },
+        "dec": {
+          "tmaxF": 59,
+          "tminF": 38.9,
+          "tavgF": 48.9,
+          "prcpIn": 0.46,
+          "snowIn": null
+        }
+      }
+    },
+    "bisc": {
+      "stationId": "USC00081306",
+      "months": {
+        "jan": {
+          "tmaxF": 77.5,
+          "tminF": 62.8,
+          "tavgF": 70.1,
+          "prcpIn": 2.44,
+          "snowIn": 0
+        },
+        "feb": {
+          "tmaxF": 78.9,
+          "tminF": 64.8,
+          "tavgF": 71.8,
+          "prcpIn": 2,
+          "snowIn": 0
+        },
+        "mar": {
+          "tmaxF": 80.9,
+          "tminF": 67.1,
+          "tavgF": 74,
+          "prcpIn": 2.37,
+          "snowIn": 0
+        },
+        "apr": {
+          "tmaxF": 83.8,
+          "tminF": 71.5,
+          "tavgF": 77.6,
+          "prcpIn": 3.17,
+          "snowIn": 0
+        },
+        "may": {
+          "tmaxF": 86.5,
+          "tminF": 74.9,
+          "tavgF": 80.7,
+          "prcpIn": 5.67,
+          "snowIn": 0
+        },
+        "jun": {
+          "tmaxF": 89.6,
+          "tminF": 78,
+          "tavgF": 83.8,
+          "prcpIn": 7.37,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 90.8,
+          "tminF": 79,
+          "tavgF": 84.9,
+          "prcpIn": 5.64,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 91.4,
+          "tminF": 79.4,
+          "tavgF": 85.4,
+          "prcpIn": 7.05,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 90.3,
+          "tminF": 78.7,
+          "tavgF": 84.5,
+          "prcpIn": 7.54,
+          "snowIn": 0
+        },
+        "oct": {
+          "tmaxF": 87.2,
+          "tminF": 76.1,
+          "tavgF": 81.6,
+          "prcpIn": 6.33,
+          "snowIn": 0
+        },
+        "nov": {
+          "tmaxF": 82.7,
+          "tminF": 70.7,
+          "tavgF": 76.7,
+          "prcpIn": 3.51,
+          "snowIn": 0
+        },
+        "dec": {
+          "tmaxF": 79.7,
+          "tminF": 66,
+          "tavgF": 72.9,
+          "prcpIn": 2.24,
+          "snowIn": 0
+        }
+      }
+    },
+    "blca": {
+      "stationId": "USC00050754",
+      "months": {
+        "jan": {
+          "tmaxF": 36.8,
+          "tminF": 12.9,
+          "tavgF": 24.8,
+          "prcpIn": 1.73,
+          "snowIn": null
+        },
+        "feb": {
+          "tmaxF": 39.7,
+          "tminF": 15.9,
+          "tavgF": 27.8,
+          "prcpIn": 1.74,
+          "snowIn": null
+        },
+        "mar": {
+          "tmaxF": 48.5,
+          "tminF": 22.9,
+          "tavgF": 35.7,
+          "prcpIn": 1.99,
+          "snowIn": null
+        },
+        "apr": {
+          "tmaxF": 56.1,
+          "tminF": 29.3,
+          "tavgF": 42.7,
+          "prcpIn": 1.84,
+          "snowIn": null
+        },
+        "may": {
+          "tmaxF": 66.4,
+          "tminF": 38.3,
+          "tavgF": 52.3,
+          "prcpIn": 1.59,
+          "snowIn": null
+        },
+        "jun": {
+          "tmaxF": 76.3,
+          "tminF": 46.3,
+          "tavgF": 61.3,
+          "prcpIn": 0.73,
+          "snowIn": null
+        },
+        "jul": {
+          "tmaxF": 82.1,
+          "tminF": 52.5,
+          "tavgF": 67.3,
+          "prcpIn": 1.65,
+          "snowIn": null
+        },
+        "aug": {
+          "tmaxF": 80.8,
+          "tminF": 51.9,
+          "tavgF": 66.3,
+          "prcpIn": 1.69,
+          "snowIn": null
+        },
+        "sep": {
+          "tmaxF": 72.4,
+          "tminF": 44.3,
+          "tavgF": 58.4,
+          "prcpIn": 2.08,
+          "snowIn": null
+        },
+        "oct": {
+          "tmaxF": 59.9,
+          "tminF": 32.8,
+          "tavgF": 46.3,
+          "prcpIn": 1.9,
+          "snowIn": null
+        },
+        "nov": {
+          "tmaxF": 46.8,
+          "tminF": 23.1,
+          "tavgF": 34.9,
+          "prcpIn": 1.49,
+          "snowIn": null
+        },
+        "dec": {
+          "tmaxF": 35.7,
+          "tminF": 13.1,
+          "tavgF": 24.4,
+          "prcpIn": 1.52,
+          "snowIn": null
+        }
+      }
+    },
+    "brca": {
+      "stationId": "USC00421008",
+      "months": {
+        "jan": {
+          "tmaxF": 36.9,
+          "tminF": 17,
+          "tavgF": 26.9,
+          "prcpIn": 1.91,
+          "snowIn": 19.8
+        },
+        "feb": {
+          "tmaxF": 38.8,
+          "tminF": 18.4,
+          "tavgF": 28.6,
+          "prcpIn": 1.7,
+          "snowIn": 18.1
+        },
+        "mar": {
+          "tmaxF": 45.8,
+          "tminF": 23.3,
+          "tavgF": 34.5,
+          "prcpIn": 1.27,
+          "snowIn": 13.2
+        },
+        "apr": {
+          "tmaxF": 53.5,
+          "tminF": 28.9,
+          "tavgF": 41.2,
+          "prcpIn": 0.77,
+          "snowIn": 5.9
+        },
+        "may": {
+          "tmaxF": 63.1,
+          "tminF": 36.6,
+          "tavgF": 49.9,
+          "prcpIn": 0.91,
+          "snowIn": 1.5
+        },
+        "jun": {
+          "tmaxF": 75.1,
+          "tminF": 44.6,
+          "tavgF": 59.8,
+          "prcpIn": 0.47,
+          "snowIn": 0.2
+        },
+        "jul": {
+          "tmaxF": 80,
+          "tminF": 52.1,
+          "tavgF": 66,
+          "prcpIn": 1.55,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 77.5,
+          "tminF": 50,
+          "tavgF": 63.7,
+          "prcpIn": 1.94,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 70.1,
+          "tminF": 41.6,
+          "tavgF": 55.9,
+          "prcpIn": 1.78,
+          "snowIn": 0
+        },
+        "oct": {
+          "tmaxF": 58.2,
+          "tminF": 31.9,
+          "tavgF": 45,
+          "prcpIn": 1.73,
+          "snowIn": 3
+        },
+        "nov": {
+          "tmaxF": 45.8,
+          "tminF": 22.8,
+          "tavgF": 34.3,
+          "prcpIn": 1.28,
+          "snowIn": 9.7
+        },
+        "dec": {
+          "tmaxF": 36.8,
+          "tminF": 17,
+          "tavgF": 26.9,
+          "prcpIn": 1.34,
+          "snowIn": 15.3
+        }
+      }
+    },
+    "cany": {
+      "stationId": "USC00421168",
+      "months": {
+        "jan": {
+          "tmaxF": 42,
+          "tminF": 17.4,
+          "tavgF": 29.7,
+          "prcpIn": 0.43,
+          "snowIn": 2
+        },
+        "feb": {
+          "tmaxF": 49,
+          "tminF": 22.6,
+          "tavgF": 35.8,
+          "prcpIn": 0.63,
+          "snowIn": 2.4
+        },
+        "mar": {
+          "tmaxF": 59.4,
+          "tminF": 29.6,
+          "tavgF": 44.5,
+          "prcpIn": 0.64,
+          "snowIn": 2.2
+        },
+        "apr": {
+          "tmaxF": 66.9,
+          "tminF": 36.3,
+          "tavgF": 51.6,
+          "prcpIn": 0.66,
+          "snowIn": 0.3
+        },
+        "may": {
+          "tmaxF": 77.4,
+          "tminF": 46.2,
+          "tavgF": 61.8,
+          "prcpIn": 0.7,
+          "snowIn": 0
+        },
+        "jun": {
+          "tmaxF": 89.2,
+          "tminF": 56.4,
+          "tavgF": 72.8,
+          "prcpIn": 0.29,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 94.9,
+          "tminF": 63.3,
+          "tavgF": 79.1,
+          "prcpIn": 0.87,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 91.9,
+          "tminF": 60.8,
+          "tavgF": 76.4,
+          "prcpIn": 0.96,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 83.6,
+          "tminF": 50.8,
+          "tavgF": 67.2,
+          "prcpIn": 0.85,
+          "snowIn": 0
+        },
+        "oct": {
+          "tmaxF": 69.6,
+          "tminF": 37.6,
+          "tavgF": 53.6,
+          "prcpIn": 1.14,
+          "snowIn": 0.1
+        },
+        "nov": {
+          "tmaxF": 54.7,
+          "tminF": 26.2,
+          "tavgF": 40.4,
+          "prcpIn": 0.62,
+          "snowIn": 1.2
+        },
+        "dec": {
+          "tmaxF": 42.3,
+          "tminF": 17.7,
+          "tavgF": 30,
+          "prcpIn": 0.56,
+          "snowIn": 3
+        }
+      }
+    },
+    "care": {
+      "stationId": "USC00421171",
+      "months": {
+        "jan": {
+          "tmaxF": 40.6,
+          "tminF": 20.5,
+          "tavgF": 30.5,
+          "prcpIn": 0.56,
+          "snowIn": 3.8
+        },
+        "feb": {
+          "tmaxF": 46.8,
+          "tminF": 25.7,
+          "tavgF": 36.2,
+          "prcpIn": 0.5,
+          "snowIn": 1.5
+        },
+        "mar": {
+          "tmaxF": 57.3,
+          "tminF": 33.6,
+          "tavgF": 45.4,
+          "prcpIn": 0.46,
+          "snowIn": 1.7
+        },
+        "apr": {
+          "tmaxF": 64.7,
+          "tminF": 39.2,
+          "tavgF": 51.9,
+          "prcpIn": 0.52,
+          "snowIn": 0.2
+        },
+        "may": {
+          "tmaxF": 74.3,
+          "tminF": 48.3,
+          "tavgF": 61.3,
+          "prcpIn": 0.65,
+          "snowIn": 0
+        },
+        "jun": {
+          "tmaxF": 86.4,
+          "tminF": 58.2,
+          "tavgF": 72.3,
+          "prcpIn": 0.35,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 91.2,
+          "tminF": 65.2,
+          "tavgF": 78.2,
+          "prcpIn": 1.03,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 87.8,
+          "tminF": 62.8,
+          "tavgF": 75.3,
+          "prcpIn": 1.12,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 79.7,
+          "tminF": 54.7,
+          "tavgF": 67.2,
+          "prcpIn": 0.95,
+          "snowIn": 0
+        },
+        "oct": {
+          "tmaxF": 65.9,
+          "tminF": 43.1,
+          "tavgF": 54.5,
+          "prcpIn": 0.87,
+          "snowIn": 0
+        },
+        "nov": {
+          "tmaxF": 51,
+          "tminF": 30.4,
+          "tavgF": 40.7,
+          "prcpIn": 0.5,
+          "snowIn": 1.5
+        },
+        "dec": {
+          "tmaxF": 40.2,
+          "tminF": 20.6,
+          "tavgF": 30.4,
+          "prcpIn": 0.37,
+          "snowIn": 2.2
+        }
+      }
+    },
+    "cave": {
+      "stationId": "USC00291480",
+      "months": {
+        "jan": {
+          "tmaxF": 56,
+          "tminF": 33.7,
+          "tavgF": 44.9,
+          "prcpIn": 0.32,
+          "snowIn": 0.4
+        },
+        "feb": {
+          "tmaxF": 60.9,
+          "tminF": 36.8,
+          "tavgF": 48.8,
+          "prcpIn": 0.44,
+          "snowIn": 0.9
+        },
+        "mar": {
+          "tmaxF": 67.9,
+          "tminF": 42.6,
+          "tavgF": 55.2,
+          "prcpIn": 0.57,
+          "snowIn": 0
+        },
+        "apr": {
+          "tmaxF": 75.7,
+          "tminF": 49.3,
+          "tavgF": 62.5,
+          "prcpIn": 0.5,
+          "snowIn": 0
+        },
+        "may": {
+          "tmaxF": 84.1,
+          "tminF": 58.3,
+          "tavgF": 71.2,
+          "prcpIn": 1.25,
+          "snowIn": 0
+        },
+        "jun": {
+          "tmaxF": 92.4,
+          "tminF": 65.7,
+          "tavgF": 79.1,
+          "prcpIn": 1.16,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 91.2,
+          "tminF": 67.8,
+          "tavgF": 79.5,
+          "prcpIn": 2.23,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 90.3,
+          "tminF": 66.3,
+          "tavgF": 78.3,
+          "prcpIn": 2,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 83.2,
+          "tminF": 60.4,
+          "tavgF": 71.8,
+          "prcpIn": 2.93,
+          "snowIn": 0
+        },
+        "oct": {
+          "tmaxF": 75.4,
+          "tminF": 52.1,
+          "tavgF": 63.8,
+          "prcpIn": 1.16,
+          "snowIn": 0
+        },
+        "nov": {
+          "tmaxF": 64.6,
+          "tminF": 41.9,
+          "tavgF": 53.2,
+          "prcpIn": 0.68,
+          "snowIn": 0.2
+        },
+        "dec": {
+          "tmaxF": 56.6,
+          "tminF": 35.1,
+          "tavgF": 45.9,
+          "prcpIn": 0.55,
+          "snowIn": 2
+        }
+      }
+    },
+    "chis": {
+      "stationId": "USW00093110",
+      "months": {
+        "jan": {
+          "tmaxF": 65.9,
+          "tminF": 46.1,
+          "tavgF": 56,
+          "prcpIn": 2.92,
+          "snowIn": null
+        },
+        "feb": {
+          "tmaxF": 65.4,
+          "tminF": 47.7,
+          "tavgF": 56.6,
+          "prcpIn": 3.26,
+          "snowIn": null
+        },
+        "mar": {
+          "tmaxF": 65.6,
+          "tminF": 49.3,
+          "tavgF": 57.4,
+          "prcpIn": 2.3,
+          "snowIn": null
+        },
+        "apr": {
+          "tmaxF": 66.6,
+          "tminF": 50.5,
+          "tavgF": 58.5,
+          "prcpIn": 0.69,
+          "snowIn": null
+        },
+        "may": {
+          "tmaxF": 68,
+          "tminF": 54.3,
+          "tavgF": 61.2,
+          "prcpIn": 0.34,
+          "snowIn": null
+        },
+        "jun": {
+          "tmaxF": 69.5,
+          "tminF": 57.9,
+          "tavgF": 63.7,
+          "prcpIn": 0.06,
+          "snowIn": null
+        },
+        "jul": {
+          "tmaxF": 72.9,
+          "tminF": 60.6,
+          "tavgF": 66.7,
+          "prcpIn": 0.02,
+          "snowIn": null
+        },
+        "aug": {
+          "tmaxF": 73.5,
+          "tminF": 60.6,
+          "tavgF": 67.1,
+          "prcpIn": 0.01,
+          "snowIn": null
+        },
+        "sep": {
+          "tmaxF": 73.5,
+          "tminF": 59.7,
+          "tavgF": 66.6,
+          "prcpIn": 0.08,
+          "snowIn": null
+        },
+        "oct": {
+          "tmaxF": 73.5,
+          "tminF": 55.4,
+          "tavgF": 64.5,
+          "prcpIn": 0.46,
+          "snowIn": null
+        },
+        "nov": {
+          "tmaxF": 70,
+          "tminF": 50.1,
+          "tavgF": 60.1,
+          "prcpIn": 0.71,
+          "snowIn": null
+        },
+        "dec": {
+          "tmaxF": 65.9,
+          "tminF": 46.9,
+          "tavgF": 56.4,
+          "prcpIn": 2.08,
+          "snowIn": null
+        }
+      }
+    },
+    "cong": {
+      "stationId": "USC00386299",
+      "months": {
+        "jan": {
+          "tmaxF": 57.9,
+          "tminF": 33.8,
+          "tavgF": 45.9,
+          "prcpIn": 4.31,
+          "snowIn": null
+        },
+        "feb": {
+          "tmaxF": 61.2,
+          "tminF": 36.4,
+          "tavgF": 48.8,
+          "prcpIn": 3.96,
+          "snowIn": null
+        },
+        "mar": {
+          "tmaxF": 68.2,
+          "tminF": 41.8,
+          "tavgF": 55,
+          "prcpIn": 4.21,
+          "snowIn": null
+        },
+        "apr": {
+          "tmaxF": 76.5,
+          "tminF": 49.9,
+          "tavgF": 63.2,
+          "prcpIn": 3.34,
+          "snowIn": null
+        },
+        "may": {
+          "tmaxF": 83.9,
+          "tminF": 59.2,
+          "tavgF": 71.6,
+          "prcpIn": 3.57,
+          "snowIn": null
+        },
+        "jun": {
+          "tmaxF": 90.2,
+          "tminF": 68.9,
+          "tavgF": 79.6,
+          "prcpIn": 5.17,
+          "snowIn": null
+        },
+        "jul": {
+          "tmaxF": 92.9,
+          "tminF": 72.2,
+          "tavgF": 82.6,
+          "prcpIn": 7.69,
+          "snowIn": null
+        },
+        "aug": {
+          "tmaxF": 90.9,
+          "tminF": 70.9,
+          "tavgF": 80.9,
+          "prcpIn": 6.39,
+          "snowIn": null
+        },
+        "sep": {
+          "tmaxF": 85.5,
+          "tminF": 64.6,
+          "tavgF": 75.1,
+          "prcpIn": 4.41,
+          "snowIn": null
+        },
+        "oct": {
+          "tmaxF": 76.2,
+          "tminF": 52.1,
+          "tavgF": 64.1,
+          "prcpIn": 3.52,
+          "snowIn": null
+        },
+        "nov": {
+          "tmaxF": 66,
+          "tminF": 40.4,
+          "tavgF": 53.2,
+          "prcpIn": 3.57,
+          "snowIn": null
+        },
+        "dec": {
+          "tmaxF": 60.1,
+          "tminF": 36.4,
+          "tavgF": 48.3,
+          "prcpIn": 4.4,
+          "snowIn": null
+        }
+      }
+    },
+    "crla": {
+      "stationId": "USC00351946",
+      "months": {
+        "jan": {
+          "tmaxF": 33.4,
+          "tminF": 19.8,
+          "tavgF": 26.6,
+          "prcpIn": 10.1,
+          "snowIn": 86.5
+        },
+        "feb": {
+          "tmaxF": 33.6,
+          "tminF": 18.9,
+          "tavgF": 26.3,
+          "prcpIn": 7.53,
+          "snowIn": 68.9
+        },
+        "mar": {
+          "tmaxF": 36.1,
+          "tminF": 20.3,
+          "tavgF": 28.2,
+          "prcpIn": 7.81,
+          "snowIn": 71.9
+        },
+        "apr": {
+          "tmaxF": 40.3,
+          "tminF": 23.1,
+          "tavgF": 31.7,
+          "prcpIn": 6.16,
+          "snowIn": 48.7
+        },
+        "may": {
+          "tmaxF": 49,
+          "tminF": 29.3,
+          "tavgF": 39.2,
+          "prcpIn": 3.65,
+          "snowIn": 14.5
+        },
+        "jun": {
+          "tmaxF": 57,
+          "tminF": 33.6,
+          "tavgF": 45.3,
+          "prcpIn": 2.27,
+          "snowIn": 3.7
+        },
+        "jul": {
+          "tmaxF": 68.9,
+          "tminF": 41.4,
+          "tavgF": 55.1,
+          "prcpIn": 0.8,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 69.3,
+          "tminF": 41.5,
+          "tavgF": 55.4,
+          "prcpIn": 0.83,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 63,
+          "tminF": 37.1,
+          "tavgF": 50.1,
+          "prcpIn": 1.93,
+          "snowIn": 1.8
+        },
+        "oct": {
+          "tmaxF": 50.7,
+          "tminF": 30.2,
+          "tavgF": 40.4,
+          "prcpIn": 4.8,
+          "snowIn": 17.2
+        },
+        "nov": {
+          "tmaxF": 38,
+          "tminF": 23.2,
+          "tavgF": 30.6,
+          "prcpIn": 9.6,
+          "snowIn": 59.3
+        },
+        "dec": {
+          "tmaxF": 32.7,
+          "tminF": 19.1,
+          "tavgF": 25.9,
+          "prcpIn": 11.28,
+          "snowIn": 90.6
+        }
+      }
+    },
+    "cuva": {
+      "stationId": "USC00338062",
+      "months": {
+        "jan": {
+          "tmaxF": 33.4,
+          "tminF": 18.3,
+          "tavgF": 25.9,
+          "prcpIn": 3.09,
+          "snowIn": null
+        },
+        "feb": {
+          "tmaxF": 36.4,
+          "tminF": 19,
+          "tavgF": 27.7,
+          "prcpIn": 2.55,
+          "snowIn": null
+        },
+        "mar": {
+          "tmaxF": 46,
+          "tminF": 25.3,
+          "tavgF": 35.7,
+          "prcpIn": 3.18,
+          "snowIn": null
+        },
+        "apr": {
+          "tmaxF": 59.7,
+          "tminF": 36.6,
+          "tavgF": 48.2,
+          "prcpIn": 3.69,
+          "snowIn": null
+        },
+        "may": {
+          "tmaxF": 70.4,
+          "tminF": 47.1,
+          "tavgF": 58.8,
+          "prcpIn": 4.12,
+          "snowIn": null
+        },
+        "jun": {
+          "tmaxF": 78.4,
+          "tminF": 56.4,
+          "tavgF": 67.4,
+          "prcpIn": 4.08,
+          "snowIn": null
+        },
+        "jul": {
+          "tmaxF": 82.3,
+          "tminF": 60.3,
+          "tavgF": 71.3,
+          "prcpIn": 4.2,
+          "snowIn": null
+        },
+        "aug": {
+          "tmaxF": 81.1,
+          "tminF": 58.8,
+          "tavgF": 70,
+          "prcpIn": 3.48,
+          "snowIn": null
+        },
+        "sep": {
+          "tmaxF": 74.4,
+          "tminF": 52.2,
+          "tavgF": 63.3,
+          "prcpIn": 3.79,
+          "snowIn": null
+        },
+        "oct": {
+          "tmaxF": 61.2,
+          "tminF": 41,
+          "tavgF": 51.1,
+          "prcpIn": 3.34,
+          "snowIn": null
+        },
+        "nov": {
+          "tmaxF": 48.7,
+          "tminF": 31.9,
+          "tavgF": 40.3,
+          "prcpIn": 2.99,
+          "snowIn": null
+        },
+        "dec": {
+          "tmaxF": 38.5,
+          "tminF": 24.3,
+          "tavgF": 31.4,
+          "prcpIn": 3.07,
+          "snowIn": null
+        }
+      }
+    },
+    "deva": {
+      "stationId": "USW00053139",
+      "months": {
+        "jan": {
+          "tmaxF": 65,
+          "tminF": 42.2,
+          "tavgF": 53.6,
+          "prcpIn": 0.23,
+          "snowIn": null
+        },
+        "feb": {
+          "tmaxF": 70.6,
+          "tminF": 48.8,
+          "tavgF": 59.7,
+          "prcpIn": 0.55,
+          "snowIn": null
+        },
+        "mar": {
+          "tmaxF": 79.3,
+          "tminF": 56.8,
+          "tavgF": 68.1,
+          "prcpIn": 0.21,
+          "snowIn": null
+        },
+        "apr": {
+          "tmaxF": 88.1,
+          "tminF": 64.1,
+          "tavgF": 76.1,
+          "prcpIn": 0.11,
+          "snowIn": null
+        },
+        "may": {
+          "tmaxF": 98.4,
+          "tminF": 73.3,
+          "tavgF": 85.8,
+          "prcpIn": 0.1,
+          "snowIn": null
+        },
+        "jun": {
+          "tmaxF": 108.6,
+          "tminF": 82.7,
+          "tavgF": 95.7,
+          "prcpIn": 0.04,
+          "snowIn": null
+        },
+        "jul": {
+          "tmaxF": 114.9,
+          "tminF": 89.8,
+          "tavgF": 102.3,
+          "prcpIn": 0.23,
+          "snowIn": null
+        },
+        "aug": {
+          "tmaxF": 113,
+          "tminF": 87.3,
+          "tavgF": 100.1,
+          "prcpIn": 0.12,
+          "snowIn": null
+        },
+        "sep": {
+          "tmaxF": 104.5,
+          "tminF": 79,
+          "tavgF": 91.8,
+          "prcpIn": 0.04,
+          "snowIn": null
+        },
+        "oct": {
+          "tmaxF": 89.1,
+          "tminF": 64.7,
+          "tavgF": 76.9,
+          "prcpIn": 0.09,
+          "snowIn": null
+        },
+        "nov": {
+          "tmaxF": 73.6,
+          "tminF": 50.6,
+          "tavgF": 62.1,
+          "prcpIn": 0.09,
+          "snowIn": null
+        },
+        "dec": {
+          "tmaxF": 62.6,
+          "tminF": 41,
+          "tavgF": 51.8,
+          "prcpIn": 0.14,
+          "snowIn": null
+        }
+      }
+    },
+    "dena": {
+      "stationId": "USW00096408",
+      "months": {
+        "jan": {
+          "tmaxF": 13.8,
+          "tminF": -5.3,
+          "tavgF": 4.3,
+          "prcpIn": 0.79,
+          "snowIn": null
+        },
+        "feb": {
+          "tmaxF": 24.7,
+          "tminF": 4.7,
+          "tavgF": 14.7,
+          "prcpIn": 0.72,
+          "snowIn": null
+        },
+        "mar": {
+          "tmaxF": 22,
+          "tminF": 3.1,
+          "tavgF": 12.6,
+          "prcpIn": 1.16,
+          "snowIn": null
+        },
+        "apr": {
+          "tmaxF": 38.4,
+          "tminF": 20.1,
+          "tavgF": 29.3,
+          "prcpIn": 1.06,
+          "snowIn": null
+        },
+        "may": {
+          "tmaxF": 53.5,
+          "tminF": 32.8,
+          "tavgF": 43.2,
+          "prcpIn": 1.97,
+          "snowIn": null
+        },
+        "jun": {
+          "tmaxF": 62.7,
+          "tminF": 43.9,
+          "tavgF": 53.3,
+          "prcpIn": 2.86,
+          "snowIn": null
+        },
+        "jul": {
+          "tmaxF": 64.1,
+          "tminF": 47,
+          "tavgF": 55.6,
+          "prcpIn": 5.1,
+          "snowIn": null
+        },
+        "aug": {
+          "tmaxF": 60.1,
+          "tminF": 42.8,
+          "tavgF": 51.5,
+          "prcpIn": 3.94,
+          "snowIn": null
+        },
+        "sep": {
+          "tmaxF": 49.7,
+          "tminF": 33.4,
+          "tavgF": 41.6,
+          "prcpIn": 2.23,
+          "snowIn": null
+        },
+        "oct": {
+          "tmaxF": 32.1,
+          "tminF": 17.5,
+          "tavgF": 24.8,
+          "prcpIn": 1.45,
+          "snowIn": null
+        },
+        "nov": {
+          "tmaxF": 19.8,
+          "tminF": 1.5,
+          "tavgF": 10.7,
+          "prcpIn": 1.04,
+          "snowIn": null
+        },
+        "dec": {
+          "tmaxF": 14.8,
+          "tminF": -5.6,
+          "tavgF": 4.6,
+          "prcpIn": 1.18,
+          "snowIn": null
+        }
+      }
+    },
+    "drto": {
+      "stationId": "USC00082418",
+      "months": {
+        "jan": {
+          "tmaxF": 73.9,
+          "tminF": 64.7,
+          "tavgF": 69.3,
+          "prcpIn": 2.35,
+          "snowIn": 0,
+          "snowImputed": true
+        },
+        "feb": {
+          "tmaxF": 75.5,
+          "tminF": 65.5,
+          "tavgF": 70.5,
+          "prcpIn": 1.69,
+          "snowIn": 0,
+          "snowImputed": true
+        },
+        "mar": {
+          "tmaxF": 78.7,
+          "tminF": 67.5,
+          "tavgF": 73.1,
+          "prcpIn": 2.07,
+          "snowIn": 0,
+          "snowImputed": true
+        },
+        "apr": {
+          "tmaxF": 82.7,
+          "tminF": 71.1,
+          "tavgF": 76.9,
+          "prcpIn": 2.6,
+          "snowIn": 0,
+          "snowImputed": true
+        },
+        "may": {
+          "tmaxF": 86,
+          "tminF": 74.5,
+          "tavgF": 80.3,
+          "prcpIn": 2.02,
+          "snowIn": 0,
+          "snowImputed": true
+        },
+        "jun": {
+          "tmaxF": 89.2,
+          "tminF": 77.4,
+          "tavgF": 83.3,
+          "prcpIn": 4.26,
+          "snowIn": 0,
+          "snowImputed": true
+        },
+        "jul": {
+          "tmaxF": 91,
+          "tminF": 77.9,
+          "tavgF": 84.4,
+          "prcpIn": 2.19,
+          "snowIn": 0,
+          "snowImputed": true
+        },
+        "aug": {
+          "tmaxF": 91.4,
+          "tminF": 79,
+          "tavgF": 85.2,
+          "prcpIn": 4.31,
+          "snowIn": 0,
+          "snowImputed": true
+        },
+        "sep": {
+          "tmaxF": 88.9,
+          "tminF": 77.9,
+          "tavgF": 83.4,
+          "prcpIn": 7.18,
+          "snowIn": 0,
+          "snowImputed": true
+        },
+        "oct": {
+          "tmaxF": 85,
+          "tminF": 75.8,
+          "tavgF": 80.4,
+          "prcpIn": 4.72,
+          "snowIn": 0,
+          "snowImputed": true
+        },
+        "nov": {
+          "tmaxF": 79.4,
+          "tminF": 70.5,
+          "tavgF": 74.9,
+          "prcpIn": 1.88,
+          "snowIn": 0,
+          "snowImputed": true
+        },
+        "dec": {
+          "tmaxF": 75.7,
+          "tminF": 66.6,
+          "tavgF": 71.2,
+          "prcpIn": 2.36,
+          "snowIn": 0,
+          "snowImputed": true
+        }
+      }
+    },
+    "ever": {
+      "stationId": "USC00083020",
+      "months": {
+        "jan": {
+          "tmaxF": 76.3,
+          "tminF": 57.6,
+          "tavgF": 66.9,
+          "prcpIn": 1.73,
+          "snowIn": 0
+        },
+        "feb": {
+          "tmaxF": 78.4,
+          "tminF": 60.2,
+          "tavgF": 69.3,
+          "prcpIn": 1.61,
+          "snowIn": 0
+        },
+        "mar": {
+          "tmaxF": 80.6,
+          "tminF": 61.8,
+          "tavgF": 71.2,
+          "prcpIn": 1.56,
+          "snowIn": 0
+        },
+        "apr": {
+          "tmaxF": 83.7,
+          "tminF": 66.1,
+          "tavgF": 74.9,
+          "prcpIn": 2.49,
+          "snowIn": 0
+        },
+        "may": {
+          "tmaxF": 86.7,
+          "tminF": 70.4,
+          "tavgF": 78.5,
+          "prcpIn": 3.62,
+          "snowIn": 0
+        },
+        "jun": {
+          "tmaxF": 89.1,
+          "tminF": 74.8,
+          "tavgF": 81.9,
+          "prcpIn": 7.05,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 90.2,
+          "tminF": 75.7,
+          "tavgF": 83,
+          "prcpIn": 6.32,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 90.5,
+          "tminF": 75.6,
+          "tavgF": 83,
+          "prcpIn": 6.8,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 89.3,
+          "tminF": 75.1,
+          "tavgF": 82.2,
+          "prcpIn": 7.18,
+          "snowIn": 0
+        },
+        "oct": {
+          "tmaxF": 86.7,
+          "tminF": 71.2,
+          "tavgF": 79,
+          "prcpIn": 4.41,
+          "snowIn": 0
+        },
+        "nov": {
+          "tmaxF": 82,
+          "tminF": 65.1,
+          "tavgF": 73.5,
+          "prcpIn": 2.36,
+          "snowIn": 0
+        },
+        "dec": {
+          "tmaxF": 78.3,
+          "tminF": 61.1,
+          "tavgF": 69.7,
+          "prcpIn": 1.66,
+          "snowIn": 0
+        }
+      }
+    },
+    "gaar": {
+      "stationId": "USW00026533",
+      "months": {
+        "jan": {
+          "tmaxF": -2.4,
+          "tminF": -18.9,
+          "tavgF": -10.6,
+          "prcpIn": 0.87,
+          "snowIn": 14
+        },
+        "feb": {
+          "tmaxF": 6.5,
+          "tminF": -13.3,
+          "tavgF": -3.4,
+          "prcpIn": 0.96,
+          "snowIn": 15.9
+        },
+        "mar": {
+          "tmaxF": 16.6,
+          "tminF": -9.2,
+          "tavgF": 3.7,
+          "prcpIn": 0.61,
+          "snowIn": 9.3
+        },
+        "apr": {
+          "tmaxF": 35.9,
+          "tminF": 13.2,
+          "tavgF": 24.6,
+          "prcpIn": 0.6,
+          "snowIn": 5.2
+        },
+        "may": {
+          "tmaxF": 55.7,
+          "tminF": 34.2,
+          "tavgF": 45,
+          "prcpIn": 0.89,
+          "snowIn": 1
+        },
+        "jun": {
+          "tmaxF": 69.9,
+          "tminF": 47.3,
+          "tavgF": 58.6,
+          "prcpIn": 1.46,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 70.2,
+          "tminF": 49.4,
+          "tavgF": 59.8,
+          "prcpIn": 2.32,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 62.6,
+          "tminF": 42.7,
+          "tavgF": 52.7,
+          "prcpIn": 2.71,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 49.8,
+          "tminF": 32.6,
+          "tavgF": 41.2,
+          "prcpIn": 2.13,
+          "snowIn": 3.2
+        },
+        "oct": {
+          "tmaxF": 28.4,
+          "tminF": 14.3,
+          "tavgF": 21.3,
+          "prcpIn": 1.17,
+          "snowIn": 12
+        },
+        "nov": {
+          "tmaxF": 7.6,
+          "tminF": -7,
+          "tavgF": 0.3,
+          "prcpIn": 1.15,
+          "snowIn": 19.1
+        },
+        "dec": {
+          "tmaxF": 1.9,
+          "tminF": -13.9,
+          "tavgF": -6,
+          "prcpIn": 1.14,
+          "snowIn": 18.2
+        }
+      }
+    },
+    "jeff": {
+      "stationId": "USW00003960",
+      "months": {
+        "jan": {
+          "tmaxF": 40.2,
+          "tminF": 24.1,
+          "tavgF": 32.1,
+          "prcpIn": 2.46,
+          "snowIn": null
+        },
+        "feb": {
+          "tmaxF": 45.6,
+          "tminF": 27.6,
+          "tavgF": 36.6,
+          "prcpIn": 1.96,
+          "snowIn": null
+        },
+        "mar": {
+          "tmaxF": 56.3,
+          "tminF": 36,
+          "tavgF": 46.1,
+          "prcpIn": 3.27,
+          "snowIn": null
+        },
+        "apr": {
+          "tmaxF": 67.5,
+          "tminF": 45.5,
+          "tavgF": 56.5,
+          "prcpIn": 4.48,
+          "snowIn": null
+        },
+        "may": {
+          "tmaxF": 76.7,
+          "tminF": 56.5,
+          "tavgF": 66.6,
+          "prcpIn": 4.84,
+          "snowIn": null
+        },
+        "jun": {
+          "tmaxF": 85.7,
+          "tminF": 64.7,
+          "tavgF": 75.2,
+          "prcpIn": 4.36,
+          "snowIn": null
+        },
+        "jul": {
+          "tmaxF": 89,
+          "tminF": 68.8,
+          "tavgF": 78.9,
+          "prcpIn": 3.7,
+          "snowIn": null
+        },
+        "aug": {
+          "tmaxF": 87.8,
+          "tminF": 66.1,
+          "tavgF": 76.9,
+          "prcpIn": 3.68,
+          "snowIn": null
+        },
+        "sep": {
+          "tmaxF": 80.7,
+          "tminF": 57.1,
+          "tavgF": 68.9,
+          "prcpIn": 3.36,
+          "snowIn": null
+        },
+        "oct": {
+          "tmaxF": 69.4,
+          "tminF": 46.1,
+          "tavgF": 57.7,
+          "prcpIn": 3.07,
+          "snowIn": null
+        },
+        "nov": {
+          "tmaxF": 55.3,
+          "tminF": 35.9,
+          "tavgF": 45.6,
+          "prcpIn": 3.34,
+          "snowIn": null
+        },
+        "dec": {
+          "tmaxF": 44.3,
+          "tminF": 28.6,
+          "tavgF": 36.4,
+          "prcpIn": 2.32,
+          "snowIn": null
+        }
+      }
+    },
+    "glac": {
+      "stationId": "USC00248809",
+      "months": {
+        "jan": {
+          "tmaxF": 29.9,
+          "tminF": 19.3,
+          "tavgF": 24.6,
+          "prcpIn": 3.54,
+          "snowIn": 32
+        },
+        "feb": {
+          "tmaxF": 33.6,
+          "tminF": 19.4,
+          "tavgF": 26.5,
+          "prcpIn": 2.17,
+          "snowIn": 16
+        },
+        "mar": {
+          "tmaxF": 42.5,
+          "tminF": 25.1,
+          "tavgF": 33.8,
+          "prcpIn": 2.58,
+          "snowIn": 14
+        },
+        "apr": {
+          "tmaxF": 52.6,
+          "tminF": 31.4,
+          "tavgF": 42,
+          "prcpIn": 2.15,
+          "snowIn": 3.1
+        },
+        "may": {
+          "tmaxF": 64.1,
+          "tminF": 39,
+          "tavgF": 51.6,
+          "prcpIn": 2.62,
+          "snowIn": 0.5
+        },
+        "jun": {
+          "tmaxF": 70.4,
+          "tminF": 45.1,
+          "tavgF": 57.8,
+          "prcpIn": 3.8,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 80.2,
+          "tminF": 49.6,
+          "tavgF": 64.9,
+          "prcpIn": 1.39,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 79.4,
+          "tminF": 47.9,
+          "tavgF": 63.6,
+          "prcpIn": 1.17,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 68,
+          "tminF": 40.8,
+          "tavgF": 54.4,
+          "prcpIn": 1.96,
+          "snowIn": 0
+        },
+        "oct": {
+          "tmaxF": 51.7,
+          "tminF": 32.9,
+          "tavgF": 42.3,
+          "prcpIn": 3.05,
+          "snowIn": 2
+        },
+        "nov": {
+          "tmaxF": 37,
+          "tminF": 26.4,
+          "tavgF": 31.7,
+          "prcpIn": 3.23,
+          "snowIn": 16.2
+        },
+        "dec": {
+          "tmaxF": 29.2,
+          "tminF": 19.9,
+          "tavgF": 24.5,
+          "prcpIn": 3.21,
+          "snowIn": 31.4
+        }
+      }
+    },
+    "glba": {
+      "stationId": "USC00502785",
+      "months": {
+        "jan": {
+          "tmaxF": 36.1,
+          "tminF": 29.3,
+          "tavgF": 32.7,
+          "prcpIn": 10.53,
+          "snowIn": 30.1
+        },
+        "feb": {
+          "tmaxF": 37.7,
+          "tminF": 29.9,
+          "tavgF": 33.8,
+          "prcpIn": 7.99,
+          "snowIn": 19.7
+        },
+        "mar": {
+          "tmaxF": 39.6,
+          "tminF": 30.6,
+          "tavgF": 35.1,
+          "prcpIn": 7.81,
+          "snowIn": 20.3
+        },
+        "apr": {
+          "tmaxF": 46,
+          "tminF": 35.1,
+          "tavgF": 40.5,
+          "prcpIn": 5.8,
+          "snowIn": 2.1
+        },
+        "may": {
+          "tmaxF": 51.9,
+          "tminF": 40.5,
+          "tavgF": 46.2,
+          "prcpIn": 4.73,
+          "snowIn": 0.1
+        },
+        "jun": {
+          "tmaxF": 55.8,
+          "tminF": 45.9,
+          "tavgF": 50.8,
+          "prcpIn": 3.59,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 58,
+          "tminF": 49.4,
+          "tavgF": 53.7,
+          "prcpIn": 4.94,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 59.1,
+          "tminF": 49.8,
+          "tavgF": 54.4,
+          "prcpIn": 7.87,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 55.8,
+          "tminF": 46.5,
+          "tavgF": 51.1,
+          "prcpIn": 12.18,
+          "snowIn": 0
+        },
+        "oct": {
+          "tmaxF": 48.2,
+          "tminF": 40,
+          "tavgF": 44.1,
+          "prcpIn": 14.53,
+          "snowIn": 1.5
+        },
+        "nov": {
+          "tmaxF": 40.3,
+          "tminF": 33.6,
+          "tavgF": 36.9,
+          "prcpIn": 12.26,
+          "snowIn": 15.8
+        },
+        "dec": {
+          "tmaxF": 37.4,
+          "tminF": 30.8,
+          "tavgF": 34.1,
+          "prcpIn": 11.81,
+          "snowIn": 20.4
+        }
+      }
+    },
+    "grca": {
+      "stationId": "USC00023596",
+      "months": {
+        "jan": {
+          "tmaxF": 44.3,
+          "tminF": 19.2,
+          "tavgF": 31.7,
+          "prcpIn": 1.76,
+          "snowIn": 12.9
+        },
+        "feb": {
+          "tmaxF": 46.3,
+          "tminF": 21.1,
+          "tavgF": 33.7,
+          "prcpIn": 1.23,
+          "snowIn": 7.8
+        },
+        "mar": {
+          "tmaxF": 53.6,
+          "tminF": 25,
+          "tavgF": 39.3,
+          "prcpIn": 1.85,
+          "snowIn": 8.1
+        },
+        "apr": {
+          "tmaxF": 60.9,
+          "tminF": 28.8,
+          "tavgF": 44.9,
+          "prcpIn": 0.64,
+          "snowIn": 2.8
+        },
+        "may": {
+          "tmaxF": 69.9,
+          "tminF": 35.6,
+          "tavgF": 52.8,
+          "prcpIn": 0.4,
+          "snowIn": 0.1
+        },
+        "jun": {
+          "tmaxF": 82,
+          "tminF": 43,
+          "tavgF": 62.5,
+          "prcpIn": 0.22,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 84.9,
+          "tminF": 50.4,
+          "tavgF": 67.7,
+          "prcpIn": 2.33,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 82.1,
+          "tminF": 49.8,
+          "tavgF": 65.9,
+          "prcpIn": 2.19,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 75.8,
+          "tminF": 43.7,
+          "tavgF": 59.8,
+          "prcpIn": 1.5,
+          "snowIn": 0
+        },
+        "oct": {
+          "tmaxF": 64.6,
+          "tminF": 33.3,
+          "tavgF": 49,
+          "prcpIn": 1.23,
+          "snowIn": 1.1
+        },
+        "nov": {
+          "tmaxF": 53.2,
+          "tminF": 24.7,
+          "tavgF": 39,
+          "prcpIn": 0.77,
+          "snowIn": 2.2
+        },
+        "dec": {
+          "tmaxF": 43,
+          "tminF": 18.2,
+          "tavgF": 30.6,
+          "prcpIn": 1.25,
+          "snowIn": 8
+        }
+      }
+    },
+    "grte": {
+      "stationId": "USC00486440",
+      "months": {
+        "jan": {
+          "tmaxF": 24,
+          "tminF": 1.2,
+          "tavgF": 12.6,
+          "prcpIn": 2.9,
+          "snowIn": 39.5
+        },
+        "feb": {
+          "tmaxF": 29.5,
+          "tminF": 3.9,
+          "tavgF": 16.7,
+          "prcpIn": 2.31,
+          "snowIn": 28.2
+        },
+        "mar": {
+          "tmaxF": 38.6,
+          "tminF": 11.8,
+          "tavgF": 25.2,
+          "prcpIn": 2.34,
+          "snowIn": 22
+        },
+        "apr": {
+          "tmaxF": 46.2,
+          "tminF": 21.4,
+          "tavgF": 33.8,
+          "prcpIn": 2.16,
+          "snowIn": 11.7
+        },
+        "may": {
+          "tmaxF": 56.4,
+          "tminF": 30.5,
+          "tavgF": 43.4,
+          "prcpIn": 2.36,
+          "snowIn": 2.9
+        },
+        "jun": {
+          "tmaxF": 67,
+          "tminF": 37,
+          "tavgF": 52,
+          "prcpIn": 1.75,
+          "snowIn": 0.3
+        },
+        "jul": {
+          "tmaxF": 76.9,
+          "tminF": 42.2,
+          "tavgF": 59.5,
+          "prcpIn": 1.02,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 76,
+          "tminF": 40.4,
+          "tavgF": 58.2,
+          "prcpIn": 1.28,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 66.3,
+          "tminF": 33.6,
+          "tavgF": 49.9,
+          "prcpIn": 1.64,
+          "snowIn": 0.4
+        },
+        "oct": {
+          "tmaxF": 51,
+          "tminF": 24.7,
+          "tavgF": 37.8,
+          "prcpIn": 1.92,
+          "snowIn": 6.5
+        },
+        "nov": {
+          "tmaxF": 34.7,
+          "tminF": 13.9,
+          "tavgF": 24.3,
+          "prcpIn": 2.61,
+          "snowIn": 23.5
+        },
+        "dec": {
+          "tmaxF": 24.1,
+          "tminF": 4,
+          "tavgF": 14.1,
+          "prcpIn": 3.1,
+          "snowIn": 39.9
+        }
+      }
+    },
+    "grba": {
+      "stationId": "USC00263340",
+      "months": {
+        "jan": {
+          "tmaxF": 39.5,
+          "tminF": 19.7,
+          "tavgF": 29.6,
+          "prcpIn": 1.3,
+          "snowIn": 12.3
+        },
+        "feb": {
+          "tmaxF": 40.6,
+          "tminF": 20.6,
+          "tavgF": 30.6,
+          "prcpIn": 1.49,
+          "snowIn": 20.7
+        },
+        "mar": {
+          "tmaxF": 48.3,
+          "tminF": 27,
+          "tavgF": 37.6,
+          "prcpIn": 1.21,
+          "snowIn": 7.3
+        },
+        "apr": {
+          "tmaxF": 55.3,
+          "tminF": 31.9,
+          "tavgF": 43.6,
+          "prcpIn": 1.57,
+          "snowIn": 7.2
+        },
+        "may": {
+          "tmaxF": 64.3,
+          "tminF": 40.2,
+          "tavgF": 52.3,
+          "prcpIn": 1.25,
+          "snowIn": 0.7
+        },
+        "jun": {
+          "tmaxF": 76.2,
+          "tminF": 49.4,
+          "tavgF": 62.8,
+          "prcpIn": 1.1,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 84.6,
+          "tminF": 58.1,
+          "tavgF": 71.4,
+          "prcpIn": 0.9,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 82.8,
+          "tminF": 55.9,
+          "tavgF": 69.3,
+          "prcpIn": 1.22,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 73.4,
+          "tminF": 47.7,
+          "tavgF": 60.6,
+          "prcpIn": 1.08,
+          "snowIn": 0
+        },
+        "oct": {
+          "tmaxF": 60.1,
+          "tminF": 36.3,
+          "tavgF": 48.2,
+          "prcpIn": 1.28,
+          "snowIn": 2
+        },
+        "nov": {
+          "tmaxF": 47.5,
+          "tminF": 26.1,
+          "tavgF": 36.8,
+          "prcpIn": 0.86,
+          "snowIn": 6.9
+        },
+        "dec": {
+          "tmaxF": 39.6,
+          "tminF": 19.5,
+          "tavgF": 29.5,
+          "prcpIn": 0.99,
+          "snowIn": 9.6
+        }
+      }
+    },
+    "grsa": {
+      "stationId": "USC00053541",
+      "months": {
+        "jan": {
+          "tmaxF": 33.4,
+          "tminF": 11.3,
+          "tavgF": 22.3,
+          "prcpIn": 0.58,
+          "snowIn": 8.1
+        },
+        "feb": {
+          "tmaxF": 38.8,
+          "tminF": 16.2,
+          "tavgF": 27.5,
+          "prcpIn": 0.44,
+          "snowIn": 6.2
+        },
+        "mar": {
+          "tmaxF": 48.5,
+          "tminF": 23.7,
+          "tavgF": 36.1,
+          "prcpIn": 0.88,
+          "snowIn": 8.5
+        },
+        "apr": {
+          "tmaxF": 55.8,
+          "tminF": 29.2,
+          "tavgF": 42.5,
+          "prcpIn": 1.19,
+          "snowIn": 7.9
+        },
+        "may": {
+          "tmaxF": 65.9,
+          "tminF": 37.8,
+          "tavgF": 51.9,
+          "prcpIn": 1.19,
+          "snowIn": 1.7
+        },
+        "jun": {
+          "tmaxF": 77.4,
+          "tminF": 47.6,
+          "tavgF": 62.5,
+          "prcpIn": 0.73,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 80.8,
+          "tminF": 51.7,
+          "tavgF": 66.3,
+          "prcpIn": 2.1,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 78.1,
+          "tminF": 50,
+          "tavgF": 64.1,
+          "prcpIn": 1.92,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 71.6,
+          "tminF": 43.5,
+          "tavgF": 57.5,
+          "prcpIn": 1.31,
+          "snowIn": 0
+        },
+        "oct": {
+          "tmaxF": 59.6,
+          "tminF": 32.8,
+          "tavgF": 46.2,
+          "prcpIn": 0.86,
+          "snowIn": 2.8
+        },
+        "nov": {
+          "tmaxF": 45.5,
+          "tminF": 21.6,
+          "tavgF": 33.6,
+          "prcpIn": 0.51,
+          "snowIn": 5.6
+        },
+        "dec": {
+          "tmaxF": 34.1,
+          "tminF": 12,
+          "tavgF": 23.1,
+          "prcpIn": 0.49,
+          "snowIn": 7
+        }
+      }
+    },
+    "grsm": {
+      "stationId": "USC00403420",
+      "months": {
+        "jan": {
+          "tmaxF": 46.6,
+          "tminF": 26.6,
+          "tavgF": 36.6,
+          "prcpIn": 4.75,
+          "snowIn": 2.4
+        },
+        "feb": {
+          "tmaxF": 50.8,
+          "tminF": 28.9,
+          "tavgF": 39.9,
+          "prcpIn": 4.27,
+          "snowIn": 2.4
+        },
+        "mar": {
+          "tmaxF": 59.2,
+          "tminF": 34.6,
+          "tavgF": 46.9,
+          "prcpIn": 5.58,
+          "snowIn": 1.3
+        },
+        "apr": {
+          "tmaxF": 68.8,
+          "tminF": 42,
+          "tavgF": 55.4,
+          "prcpIn": 4.93,
+          "snowIn": 0
+        },
+        "may": {
+          "tmaxF": 74.8,
+          "tminF": 50.9,
+          "tavgF": 62.8,
+          "prcpIn": 5.5,
+          "snowIn": 0
+        },
+        "jun": {
+          "tmaxF": 80.2,
+          "tminF": 58.7,
+          "tavgF": 69.5,
+          "prcpIn": 5.99,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 82.9,
+          "tminF": 62.7,
+          "tavgF": 72.8,
+          "prcpIn": 6.31,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 81.9,
+          "tminF": 61.6,
+          "tavgF": 71.8,
+          "prcpIn": 4.4,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 77.5,
+          "tminF": 56.1,
+          "tavgF": 66.8,
+          "prcpIn": 4.34,
+          "snowIn": 0
+        },
+        "oct": {
+          "tmaxF": 68.5,
+          "tminF": 44.2,
+          "tavgF": 56.4,
+          "prcpIn": 3.19,
+          "snowIn": 0
+        },
+        "nov": {
+          "tmaxF": 58.1,
+          "tminF": 33.7,
+          "tavgF": 45.9,
+          "prcpIn": 4.02,
+          "snowIn": 0.2
+        },
+        "dec": {
+          "tmaxF": 49.5,
+          "tminF": 29.4,
+          "tavgF": 39.5,
+          "prcpIn": 4.92,
+          "snowIn": 1.4
+        }
+      }
+    },
+    "gumo": {
+      "stationId": "USC00417044",
+      "months": {
+        "jan": {
+          "tmaxF": 53.9,
+          "tminF": 31.5,
+          "tavgF": 42.7,
+          "prcpIn": 0.63,
+          "snowIn": 0.7
+        },
+        "feb": {
+          "tmaxF": 56.2,
+          "tminF": 34.1,
+          "tavgF": 45.1,
+          "prcpIn": 0.7,
+          "snowIn": 0.4
+        },
+        "mar": {
+          "tmaxF": 63.4,
+          "tminF": 39.5,
+          "tavgF": 51.5,
+          "prcpIn": 0.54,
+          "snowIn": 0
+        },
+        "apr": {
+          "tmaxF": 70.7,
+          "tminF": 45.7,
+          "tavgF": 58.2,
+          "prcpIn": 0.5,
+          "snowIn": 0.2
+        },
+        "may": {
+          "tmaxF": 78.8,
+          "tminF": 55.2,
+          "tavgF": 67,
+          "prcpIn": 0.85,
+          "snowIn": 0
+        },
+        "jun": {
+          "tmaxF": 87.8,
+          "tminF": 63.5,
+          "tavgF": 75.7,
+          "prcpIn": 1.52,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 87.2,
+          "tminF": 64,
+          "tavgF": 75.6,
+          "prcpIn": 2.78,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 84.4,
+          "tminF": 62,
+          "tavgF": 73.2,
+          "prcpIn": 3.11,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 80.1,
+          "tminF": 58,
+          "tavgF": 69.1,
+          "prcpIn": 2.29,
+          "snowIn": 0
+        },
+        "oct": {
+          "tmaxF": 71.9,
+          "tminF": 49.7,
+          "tavgF": 60.8,
+          "prcpIn": 1.34,
+          "snowIn": 0.1
+        },
+        "nov": {
+          "tmaxF": 61,
+          "tminF": 39.2,
+          "tavgF": 50.1,
+          "prcpIn": 0.96,
+          "snowIn": 0
+        },
+        "dec": {
+          "tmaxF": 53.9,
+          "tminF": 33.2,
+          "tavgF": 43.5,
+          "prcpIn": 0.77,
+          "snowIn": 1.4
+        }
+      }
+    },
+    "hale": {
+      "stationId": "USC00511004",
+      "months": {
+        "jan": {
+          "tmaxF": 61,
+          "tminF": 43.9,
+          "tavgF": 52.5,
+          "prcpIn": 5.14,
+          "snowIn": 0
+        },
+        "feb": {
+          "tmaxF": 59.7,
+          "tminF": 42.7,
+          "tavgF": 51.2,
+          "prcpIn": 4.08,
+          "snowIn": 0
+        },
+        "mar": {
+          "tmaxF": 59.7,
+          "tminF": 43.1,
+          "tavgF": 51.4,
+          "prcpIn": 5.7,
+          "snowIn": 0
+        },
+        "apr": {
+          "tmaxF": 60.7,
+          "tminF": 43.8,
+          "tavgF": 52.2,
+          "prcpIn": 2.75,
+          "snowIn": 0
+        },
+        "may": {
+          "tmaxF": 63.2,
+          "tminF": 45.9,
+          "tavgF": 54.6,
+          "prcpIn": 2.44,
+          "snowIn": 0
+        },
+        "jun": {
+          "tmaxF": 65.6,
+          "tminF": 47.7,
+          "tavgF": 56.6,
+          "prcpIn": 1.62,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 65.5,
+          "tminF": 48.9,
+          "tavgF": 57.2,
+          "prcpIn": 2.7,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 66.1,
+          "tminF": 49.4,
+          "tavgF": 57.7,
+          "prcpIn": 2.17,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 64.7,
+          "tminF": 47.9,
+          "tavgF": 56.3,
+          "prcpIn": 2.53,
+          "snowIn": 0
+        },
+        "oct": {
+          "tmaxF": 64,
+          "tminF": 47.8,
+          "tavgF": 55.9,
+          "prcpIn": 3.25,
+          "snowIn": 0
+        },
+        "nov": {
+          "tmaxF": 63.1,
+          "tminF": 47,
+          "tavgF": 55,
+          "prcpIn": 4.59,
+          "snowIn": 0
+        },
+        "dec": {
+          "tmaxF": 61.1,
+          "tminF": 45.1,
+          "tavgF": 53.1,
+          "prcpIn": 5.28,
+          "snowIn": 0
+        }
+      }
+    },
+    "havo": {
+      "stationId": "USC00511303",
+      "months": {
+        "jan": {
+          "tmaxF": 68.3,
+          "tminF": 49.4,
+          "tavgF": 58.8,
+          "prcpIn": 8.77,
+          "snowIn": 0
+        },
+        "feb": {
+          "tmaxF": 68.2,
+          "tminF": 49.3,
+          "tavgF": 58.7,
+          "prcpIn": 8.15,
+          "snowIn": 0
+        },
+        "mar": {
+          "tmaxF": 67.5,
+          "tminF": 50.7,
+          "tavgF": 59.1,
+          "prcpIn": 10.27,
+          "snowIn": 0
+        },
+        "apr": {
+          "tmaxF": 68.3,
+          "tminF": 51.9,
+          "tavgF": 60.1,
+          "prcpIn": 9.16,
+          "snowIn": 0
+        },
+        "may": {
+          "tmaxF": 70.5,
+          "tminF": 53,
+          "tavgF": 61.8,
+          "prcpIn": 6.46,
+          "snowIn": 0
+        },
+        "jun": {
+          "tmaxF": 71.3,
+          "tminF": 54.3,
+          "tavgF": 62.8,
+          "prcpIn": 5.1,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 72.7,
+          "tminF": 55.6,
+          "tavgF": 64.1,
+          "prcpIn": 6.29,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 73.7,
+          "tminF": 56,
+          "tavgF": 64.8,
+          "prcpIn": 5.91,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 73.2,
+          "tminF": 55.4,
+          "tavgF": 64.3,
+          "prcpIn": 5.98,
+          "snowIn": 0
+        },
+        "oct": {
+          "tmaxF": 72.4,
+          "tminF": 55.1,
+          "tavgF": 63.7,
+          "prcpIn": 8.19,
+          "snowIn": 0
+        },
+        "nov": {
+          "tmaxF": 70.3,
+          "tminF": 54,
+          "tavgF": 62.1,
+          "prcpIn": 10.59,
+          "snowIn": 0
+        },
+        "dec": {
+          "tmaxF": 68.2,
+          "tminF": 51.7,
+          "tavgF": 59.9,
+          "prcpIn": 11.37,
+          "snowIn": 0
+        }
+      }
+    },
+    "hosp": {
+      "stationId": "USC00033466",
+      "months": {
+        "jan": {
+          "tmaxF": 51.7,
+          "tminF": 32,
+          "tavgF": 41.8,
+          "prcpIn": 3.76,
+          "snowIn": 0.6
+        },
+        "feb": {
+          "tmaxF": 56.3,
+          "tminF": 34.9,
+          "tavgF": 45.6,
+          "prcpIn": 4.64,
+          "snowIn": 0.4
+        },
+        "mar": {
+          "tmaxF": 64.9,
+          "tminF": 42.3,
+          "tavgF": 53.6,
+          "prcpIn": 5.53,
+          "snowIn": 0.1
+        },
+        "apr": {
+          "tmaxF": 73.7,
+          "tminF": 50.6,
+          "tavgF": 62.2,
+          "prcpIn": 5.86,
+          "snowIn": 0
+        },
+        "may": {
+          "tmaxF": 80.4,
+          "tminF": 60.4,
+          "tavgF": 70.4,
+          "prcpIn": 6.51,
+          "snowIn": 0
+        },
+        "jun": {
+          "tmaxF": 88.3,
+          "tminF": 68.4,
+          "tavgF": 78.3,
+          "prcpIn": 4.33,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 93.1,
+          "tminF": 72.1,
+          "tavgF": 82.6,
+          "prcpIn": 4.52,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 93,
+          "tminF": 71,
+          "tavgF": 82,
+          "prcpIn": 3.6,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 86.2,
+          "tminF": 63.9,
+          "tavgF": 75,
+          "prcpIn": 4.18,
+          "snowIn": 0
+        },
+        "oct": {
+          "tmaxF": 74.8,
+          "tminF": 52.2,
+          "tavgF": 63.5,
+          "prcpIn": 5.1,
+          "snowIn": 0
+        },
+        "nov": {
+          "tmaxF": 62.5,
+          "tminF": 42,
+          "tavgF": 52.3,
+          "prcpIn": 4.94,
+          "snowIn": 0
+        },
+        "dec": {
+          "tmaxF": 53.4,
+          "tminF": 34.7,
+          "tavgF": 44.1,
+          "prcpIn": 4.99,
+          "snowIn": 0
+        }
+      }
+    },
+    "indu": {
+      "stationId": "USC00124244",
+      "months": {
+        "jan": {
+          "tmaxF": 32.1,
+          "tminF": 17.8,
+          "tavgF": 24.9,
+          "prcpIn": 2.21,
+          "snowIn": 16
+        },
+        "feb": {
+          "tmaxF": 35.5,
+          "tminF": 21.1,
+          "tavgF": 28.3,
+          "prcpIn": 1.97,
+          "snowIn": 9.7
+        },
+        "mar": {
+          "tmaxF": 45.6,
+          "tminF": 29.8,
+          "tavgF": 37.7,
+          "prcpIn": 2.34,
+          "snowIn": 6
+        },
+        "apr": {
+          "tmaxF": 57.2,
+          "tminF": 39.5,
+          "tavgF": 48.4,
+          "prcpIn": 3.55,
+          "snowIn": 0.6
+        },
+        "may": {
+          "tmaxF": 68.4,
+          "tminF": 49.6,
+          "tavgF": 59,
+          "prcpIn": 4.27,
+          "snowIn": 0
+        },
+        "jun": {
+          "tmaxF": 77.5,
+          "tminF": 59.5,
+          "tavgF": 68.5,
+          "prcpIn": 4.31,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 81.6,
+          "tminF": 64.3,
+          "tavgF": 73,
+          "prcpIn": 3.98,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 80,
+          "tminF": 63.1,
+          "tavgF": 71.6,
+          "prcpIn": 4.08,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 74.3,
+          "tminF": 56.3,
+          "tavgF": 65.3,
+          "prcpIn": 3.65,
+          "snowIn": 0
+        },
+        "oct": {
+          "tmaxF": 62.3,
+          "tminF": 44.7,
+          "tavgF": 53.5,
+          "prcpIn": 3.75,
+          "snowIn": 0
+        },
+        "nov": {
+          "tmaxF": 48.7,
+          "tminF": 34.2,
+          "tavgF": 41.5,
+          "prcpIn": 2.76,
+          "snowIn": 0.7
+        },
+        "dec": {
+          "tmaxF": 37.4,
+          "tminF": 24.1,
+          "tavgF": 30.8,
+          "prcpIn": 2.29,
+          "snowIn": 7.3
+        }
+      }
+    },
+    "isro": {
+      "stationId": "USC00213296",
+      "months": {
+        "jan": {
+          "tmaxF": 20.3,
+          "tminF": 0.7,
+          "tavgF": 10.5,
+          "prcpIn": 1.35,
+          "snowIn": 12.2
+        },
+        "feb": {
+          "tmaxF": 24.3,
+          "tminF": 2,
+          "tavgF": 13.1,
+          "prcpIn": 1.03,
+          "snowIn": 8
+        },
+        "mar": {
+          "tmaxF": 34.4,
+          "tminF": 13,
+          "tavgF": 23.7,
+          "prcpIn": 1.33,
+          "snowIn": 8
+        },
+        "apr": {
+          "tmaxF": 45.4,
+          "tminF": 26.2,
+          "tavgF": 35.8,
+          "prcpIn": 2.79,
+          "snowIn": 7.7
+        },
+        "may": {
+          "tmaxF": 58.1,
+          "tminF": 36.8,
+          "tavgF": 47.4,
+          "prcpIn": 3.11,
+          "snowIn": 0.2
+        },
+        "jun": {
+          "tmaxF": 67.7,
+          "tminF": 46.1,
+          "tavgF": 56.9,
+          "prcpIn": 3.58,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 73.6,
+          "tminF": 52.3,
+          "tavgF": 63,
+          "prcpIn": 3.42,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 73,
+          "tminF": 52.1,
+          "tavgF": 62.6,
+          "prcpIn": 3.04,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 64.8,
+          "tminF": 44,
+          "tavgF": 54.4,
+          "prcpIn": 3.13,
+          "snowIn": 0
+        },
+        "oct": {
+          "tmaxF": 51.4,
+          "tminF": 33.3,
+          "tavgF": 42.4,
+          "prcpIn": 3.4,
+          "snowIn": 0.5
+        },
+        "nov": {
+          "tmaxF": 37.5,
+          "tminF": 21.8,
+          "tavgF": 29.6,
+          "prcpIn": 2.65,
+          "snowIn": 6.7
+        },
+        "dec": {
+          "tmaxF": 25.8,
+          "tminF": 9.2,
+          "tavgF": 17.5,
+          "prcpIn": 1.74,
+          "snowIn": 11.9
+        }
+      }
+    },
+    "jotr": {
+      "stationId": "USC00041738",
+      "months": {
+        "jan": {
+          "tmaxF": 65.8,
+          "tminF": 40,
+          "tavgF": 52.9,
+          "prcpIn": 0.82,
+          "snowIn": null
+        },
+        "feb": {
+          "tmaxF": 67.4,
+          "tminF": 41.6,
+          "tavgF": 54.5,
+          "prcpIn": 0.87,
+          "snowIn": null
+        },
+        "mar": {
+          "tmaxF": 74.8,
+          "tminF": 45.6,
+          "tavgF": 60.2,
+          "prcpIn": 0.45,
+          "snowIn": null
+        },
+        "apr": {
+          "tmaxF": 82.6,
+          "tminF": 51.4,
+          "tavgF": 67,
+          "prcpIn": 0.16,
+          "snowIn": null
+        },
+        "may": {
+          "tmaxF": 89.3,
+          "tminF": 58.2,
+          "tavgF": 73.7,
+          "prcpIn": 0.09,
+          "snowIn": null
+        },
+        "jun": {
+          "tmaxF": 98.7,
+          "tminF": 66.2,
+          "tavgF": 82.4,
+          "prcpIn": 0.01,
+          "snowIn": null
+        },
+        "jul": {
+          "tmaxF": 102.8,
+          "tminF": 74.1,
+          "tavgF": 88.4,
+          "prcpIn": 0.29,
+          "snowIn": null
+        },
+        "aug": {
+          "tmaxF": 101.5,
+          "tminF": 75.4,
+          "tavgF": 88.4,
+          "prcpIn": 0.35,
+          "snowIn": null
+        },
+        "sep": {
+          "tmaxF": 96.2,
+          "tminF": 67.8,
+          "tavgF": 82,
+          "prcpIn": 0.51,
+          "snowIn": null
+        },
+        "oct": {
+          "tmaxF": 86.3,
+          "tminF": 56,
+          "tavgF": 71.2,
+          "prcpIn": 0.2,
+          "snowIn": null
+        },
+        "nov": {
+          "tmaxF": 74.4,
+          "tminF": 46.3,
+          "tavgF": 60.3,
+          "prcpIn": 0.27,
+          "snowIn": null
+        },
+        "dec": {
+          "tmaxF": 64,
+          "tminF": 39.7,
+          "tavgF": 51.8,
+          "prcpIn": 0.58,
+          "snowIn": null
+        }
+      }
+    },
+    "katm": {
+      "stationId": "USW00025522",
+      "months": {
+        "jan": {
+          "tmaxF": 25.8,
+          "tminF": 9.8,
+          "tavgF": 17.8,
+          "prcpIn": 1.76,
+          "snowIn": null
+        },
+        "feb": {
+          "tmaxF": 31.1,
+          "tminF": 12.7,
+          "tavgF": 21.9,
+          "prcpIn": 2.15,
+          "snowIn": null
+        },
+        "mar": {
+          "tmaxF": 31.6,
+          "tminF": 14.2,
+          "tavgF": 22.9,
+          "prcpIn": 1,
+          "snowIn": null
+        },
+        "apr": {
+          "tmaxF": 42.8,
+          "tminF": 26.3,
+          "tavgF": 34.6,
+          "prcpIn": 1.45,
+          "snowIn": null
+        },
+        "may": {
+          "tmaxF": 52.3,
+          "tminF": 32.9,
+          "tavgF": 42.6,
+          "prcpIn": 1.46,
+          "snowIn": null
+        },
+        "jun": {
+          "tmaxF": 59.1,
+          "tminF": 40,
+          "tavgF": 49.6,
+          "prcpIn": 2.46,
+          "snowIn": null
+        },
+        "jul": {
+          "tmaxF": 61.5,
+          "tminF": 45.6,
+          "tavgF": 53.6,
+          "prcpIn": 3.67,
+          "snowIn": null
+        },
+        "aug": {
+          "tmaxF": 60.7,
+          "tminF": 45.1,
+          "tavgF": 52.9,
+          "prcpIn": 4.41,
+          "snowIn": null
+        },
+        "sep": {
+          "tmaxF": 54.3,
+          "tminF": 38.9,
+          "tavgF": 46.6,
+          "prcpIn": 5.12,
+          "snowIn": null
+        },
+        "oct": {
+          "tmaxF": 42.8,
+          "tminF": 28.1,
+          "tavgF": 35.5,
+          "prcpIn": 2.89,
+          "snowIn": null
+        },
+        "nov": {
+          "tmaxF": 32.6,
+          "tminF": 16.7,
+          "tavgF": 24.7,
+          "prcpIn": 3.63,
+          "snowIn": null
+        },
+        "dec": {
+          "tmaxF": 27,
+          "tminF": 12.1,
+          "tavgF": 19.6,
+          "prcpIn": 2.08,
+          "snowIn": null
+        }
+      }
+    },
+    "kefj": {
+      "stationId": "USW00026438",
+      "months": {
+        "jan": {
+          "tmaxF": 31.3,
+          "tminF": 21.1,
+          "tavgF": 26.2,
+          "prcpIn": 6.47,
+          "snowIn": null
+        },
+        "feb": {
+          "tmaxF": 34.3,
+          "tminF": 23.5,
+          "tavgF": 28.9,
+          "prcpIn": 6.35,
+          "snowIn": null
+        },
+        "mar": {
+          "tmaxF": 37.3,
+          "tminF": 24.9,
+          "tavgF": 31.1,
+          "prcpIn": 3.85,
+          "snowIn": null
+        },
+        "apr": {
+          "tmaxF": 45.4,
+          "tminF": 32.2,
+          "tavgF": 38.8,
+          "prcpIn": 4.29,
+          "snowIn": null
+        },
+        "may": {
+          "tmaxF": 53.4,
+          "tminF": 39.2,
+          "tavgF": 46.3,
+          "prcpIn": 3.5,
+          "snowIn": null
+        },
+        "jun": {
+          "tmaxF": 59,
+          "tminF": 45.7,
+          "tavgF": 52.3,
+          "prcpIn": 2.34,
+          "snowIn": null
+        },
+        "jul": {
+          "tmaxF": 62.2,
+          "tminF": 50.2,
+          "tavgF": 56.2,
+          "prcpIn": 3.11,
+          "snowIn": null
+        },
+        "aug": {
+          "tmaxF": 62,
+          "tminF": 49.6,
+          "tavgF": 55.8,
+          "prcpIn": 5.39,
+          "snowIn": null
+        },
+        "sep": {
+          "tmaxF": 55.7,
+          "tminF": 43.4,
+          "tavgF": 49.6,
+          "prcpIn": 9.9,
+          "snowIn": null
+        },
+        "oct": {
+          "tmaxF": 45.7,
+          "tminF": 34.7,
+          "tavgF": 40.2,
+          "prcpIn": 8.69,
+          "snowIn": null
+        },
+        "nov": {
+          "tmaxF": 36.1,
+          "tminF": 26.6,
+          "tavgF": 31.4,
+          "prcpIn": 7.6,
+          "snowIn": null
+        },
+        "dec": {
+          "tmaxF": 33.2,
+          "tminF": 23.2,
+          "tavgF": 28.2,
+          "prcpIn": 8.22,
+          "snowIn": null
+        }
+      }
+    },
+    "kica": {
+      "stationId": "USC00045026",
+      "months": {
+        "jan": {
+          "tmaxF": 39.2,
+          "tminF": 17.4,
+          "tavgF": 28.3,
+          "prcpIn": 8.72,
+          "snowIn": 42.4
+        },
+        "feb": {
+          "tmaxF": 41,
+          "tminF": 18.4,
+          "tavgF": 29.7,
+          "prcpIn": 7.87,
+          "snowIn": 61.5
+        },
+        "mar": {
+          "tmaxF": 45.3,
+          "tminF": 21.8,
+          "tavgF": 33.6,
+          "prcpIn": 6.42,
+          "snowIn": 37.1
+        },
+        "apr": {
+          "tmaxF": 50,
+          "tminF": 25.7,
+          "tavgF": 37.8,
+          "prcpIn": 3.24,
+          "snowIn": 22.2
+        },
+        "may": {
+          "tmaxF": 58.4,
+          "tminF": 33.1,
+          "tavgF": 45.7,
+          "prcpIn": 2.05,
+          "snowIn": 6
+        },
+        "jun": {
+          "tmaxF": 68.4,
+          "tminF": 39.5,
+          "tavgF": 54,
+          "prcpIn": 0.69,
+          "snowIn": 1.1
+        },
+        "jul": {
+          "tmaxF": 76.1,
+          "tminF": 45.9,
+          "tavgF": 61,
+          "prcpIn": 0.61,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 75.9,
+          "tminF": 44.1,
+          "tavgF": 60,
+          "prcpIn": 0.15,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 70,
+          "tminF": 39.2,
+          "tavgF": 54.6,
+          "prcpIn": 0.65,
+          "snowIn": 0
+        },
+        "oct": {
+          "tmaxF": 58.9,
+          "tminF": 31.1,
+          "tavgF": 45,
+          "prcpIn": 2.27,
+          "snowIn": 3.4
+        },
+        "nov": {
+          "tmaxF": 46.6,
+          "tminF": 23.4,
+          "tavgF": 35,
+          "prcpIn": 3.65,
+          "snowIn": 11.7
+        },
+        "dec": {
+          "tmaxF": 37.3,
+          "tminF": 17.2,
+          "tavgF": 27.3,
+          "prcpIn": 6.87,
+          "snowIn": 35
+        }
+      }
+    },
+    "kova": {
+      "stationId": "USW00026616",
+      "months": {
+        "jan": {
+          "tmaxF": 4.5,
+          "tminF": -8.4,
+          "tavgF": -1.9,
+          "prcpIn": 0.62,
+          "snowIn": 9.4
+        },
+        "feb": {
+          "tmaxF": 8.6,
+          "tminF": -5.8,
+          "tavgF": 1.4,
+          "prcpIn": 0.85,
+          "snowIn": 13.1
+        },
+        "mar": {
+          "tmaxF": 9.1,
+          "tminF": -6,
+          "tavgF": 1.5,
+          "prcpIn": 0.52,
+          "snowIn": 6.4
+        },
+        "apr": {
+          "tmaxF": 23.8,
+          "tminF": 8.8,
+          "tavgF": 16.3,
+          "prcpIn": 0.56,
+          "snowIn": 4.7
+        },
+        "may": {
+          "tmaxF": 39,
+          "tminF": 27.3,
+          "tavgF": 33.1,
+          "prcpIn": 0.44,
+          "snowIn": 1.2
+        },
+        "jun": {
+          "tmaxF": 53.2,
+          "tminF": 41.8,
+          "tavgF": 47.5,
+          "prcpIn": 0.6,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 60.1,
+          "tminF": 50.5,
+          "tavgF": 55.3,
+          "prcpIn": 1.6,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 56.6,
+          "tminF": 47.7,
+          "tavgF": 52.1,
+          "prcpIn": 2.13,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 47.5,
+          "tminF": 38.7,
+          "tavgF": 43.1,
+          "prcpIn": 1.42,
+          "snowIn": 0.6
+        },
+        "oct": {
+          "tmaxF": 30.8,
+          "tminF": 23,
+          "tavgF": 26.9,
+          "prcpIn": 1.07,
+          "snowIn": 5.9
+        },
+        "nov": {
+          "tmaxF": 15.9,
+          "tminF": 5.6,
+          "tavgF": 10.8,
+          "prcpIn": 0.82,
+          "snowIn": 11
+        },
+        "dec": {
+          "tmaxF": 8.6,
+          "tminF": -3.8,
+          "tavgF": 2.4,
+          "prcpIn": 0.73,
+          "snowIn": 11.9
+        }
+      }
+    },
+    "lacl": {
+      "stationId": "USC00500788",
+      "months": {
+        "jan": {
+          "tmaxF": 25.1,
+          "tminF": 12.9,
+          "tavgF": 19,
+          "prcpIn": 4.24,
+          "snowIn": null
+        },
+        "feb": {
+          "tmaxF": 30.6,
+          "tminF": 18,
+          "tavgF": 24.3,
+          "prcpIn": 4.63,
+          "snowIn": null
+        },
+        "mar": {
+          "tmaxF": 35.2,
+          "tminF": 19.9,
+          "tavgF": 27.6,
+          "prcpIn": 3.06,
+          "snowIn": null
+        },
+        "apr": {
+          "tmaxF": 45.7,
+          "tminF": 31,
+          "tavgF": 38.4,
+          "prcpIn": 2.68,
+          "snowIn": null
+        },
+        "may": {
+          "tmaxF": 58.5,
+          "tminF": 39.3,
+          "tavgF": 48.9,
+          "prcpIn": 3.05,
+          "snowIn": null
+        },
+        "jun": {
+          "tmaxF": 67.1,
+          "tminF": 46.8,
+          "tavgF": 57,
+          "prcpIn": 2.83,
+          "snowIn": null
+        },
+        "jul": {
+          "tmaxF": 69.4,
+          "tminF": 50.9,
+          "tavgF": 60.2,
+          "prcpIn": 4.22,
+          "snowIn": null
+        },
+        "aug": {
+          "tmaxF": 67.2,
+          "tminF": 50,
+          "tavgF": 58.6,
+          "prcpIn": 5.41,
+          "snowIn": null
+        },
+        "sep": {
+          "tmaxF": 58.3,
+          "tminF": 43.8,
+          "tavgF": 51.1,
+          "prcpIn": 7.27,
+          "snowIn": null
+        },
+        "oct": {
+          "tmaxF": 45.5,
+          "tminF": 33.6,
+          "tavgF": 39.5,
+          "prcpIn": 7.29,
+          "snowIn": null
+        },
+        "nov": {
+          "tmaxF": 32.2,
+          "tminF": 22.3,
+          "tavgF": 27.3,
+          "prcpIn": 5.28,
+          "snowIn": null
+        },
+        "dec": {
+          "tmaxF": 27,
+          "tminF": 16.5,
+          "tavgF": 21.7,
+          "prcpIn": 5.17,
+          "snowIn": null
+        }
+      }
+    },
+    "lavo": {
+      "stationId": "USC00045311",
+      "months": {
+        "jan": {
+          "tmaxF": 41.1,
+          "tminF": 21.8,
+          "tavgF": 31.5,
+          "prcpIn": 6.5,
+          "snowIn": null
+        },
+        "feb": {
+          "tmaxF": 41.8,
+          "tminF": 21.7,
+          "tavgF": 31.8,
+          "prcpIn": 5.51,
+          "snowIn": null
+        },
+        "mar": {
+          "tmaxF": 46,
+          "tminF": 24.3,
+          "tavgF": 35.1,
+          "prcpIn": 6.43,
+          "snowIn": null
+        },
+        "apr": {
+          "tmaxF": 50.2,
+          "tminF": 27.5,
+          "tavgF": 38.8,
+          "prcpIn": 4.3,
+          "snowIn": null
+        },
+        "may": {
+          "tmaxF": 60.7,
+          "tminF": 35.1,
+          "tavgF": 47.9,
+          "prcpIn": 2.9,
+          "snowIn": null
+        },
+        "jun": {
+          "tmaxF": 69.5,
+          "tminF": 41,
+          "tavgF": 55.3,
+          "prcpIn": 1.32,
+          "snowIn": null
+        },
+        "jul": {
+          "tmaxF": 78.8,
+          "tminF": 46.4,
+          "tavgF": 62.6,
+          "prcpIn": 0.34,
+          "snowIn": null
+        },
+        "aug": {
+          "tmaxF": 78.3,
+          "tminF": 44.9,
+          "tavgF": 61.6,
+          "prcpIn": 0.29,
+          "snowIn": null
+        },
+        "sep": {
+          "tmaxF": 72.4,
+          "tminF": 40.6,
+          "tavgF": 56.5,
+          "prcpIn": 0.65,
+          "snowIn": null
+        },
+        "oct": {
+          "tmaxF": 58.7,
+          "tminF": 33.4,
+          "tavgF": 46,
+          "prcpIn": 2.7,
+          "snowIn": null
+        },
+        "nov": {
+          "tmaxF": 47.1,
+          "tminF": 26.2,
+          "tavgF": 36.6,
+          "prcpIn": 4.68,
+          "snowIn": null
+        },
+        "dec": {
+          "tmaxF": 39.5,
+          "tminF": 21.7,
+          "tavgF": 30.6,
+          "prcpIn": 6.49,
+          "snowIn": null
+        }
+      }
+    },
+    "maca": {
+      "stationId": "USC00155097",
+      "months": {
+        "jan": {
+          "tmaxF": 47.9,
+          "tminF": 29.3,
+          "tavgF": 38.6,
+          "prcpIn": 3.73,
+          "snowIn": 0.7
+        },
+        "feb": {
+          "tmaxF": 53.2,
+          "tminF": 32.2,
+          "tavgF": 42.7,
+          "prcpIn": 4.47,
+          "snowIn": 1.4
+        },
+        "mar": {
+          "tmaxF": 62.3,
+          "tminF": 39.5,
+          "tavgF": 50.9,
+          "prcpIn": 5.01,
+          "snowIn": 0.6
+        },
+        "apr": {
+          "tmaxF": 73.4,
+          "tminF": 48,
+          "tavgF": 60.7,
+          "prcpIn": 4.92,
+          "snowIn": 0
+        },
+        "may": {
+          "tmaxF": 81.2,
+          "tminF": 56.8,
+          "tavgF": 69,
+          "prcpIn": 5.16,
+          "snowIn": 0
+        },
+        "jun": {
+          "tmaxF": 88,
+          "tminF": 64.4,
+          "tavgF": 76.2,
+          "prcpIn": 4.84,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 91,
+          "tminF": 68.3,
+          "tavgF": 79.6,
+          "prcpIn": 4.93,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 90.2,
+          "tminF": 66.7,
+          "tavgF": 78.5,
+          "prcpIn": 3.82,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 85,
+          "tminF": 60,
+          "tavgF": 72.5,
+          "prcpIn": 3.95,
+          "snowIn": 0
+        },
+        "oct": {
+          "tmaxF": 74,
+          "tminF": 49.1,
+          "tavgF": 61.6,
+          "prcpIn": 3.79,
+          "snowIn": 0
+        },
+        "nov": {
+          "tmaxF": 61.2,
+          "tminF": 39.7,
+          "tavgF": 50.5,
+          "prcpIn": 4.09,
+          "snowIn": 0
+        },
+        "dec": {
+          "tmaxF": 51,
+          "tminF": 33,
+          "tavgF": 42,
+          "prcpIn": 4.78,
+          "snowIn": 1.3
+        }
+      }
+    },
+    "meve": {
+      "stationId": "USC00055531",
+      "months": {
+        "jan": {
+          "tmaxF": 39.6,
+          "tminF": 20,
+          "tavgF": 29.8,
+          "prcpIn": 1.96,
+          "snowIn": 18.1
+        },
+        "feb": {
+          "tmaxF": 42.7,
+          "tminF": 23.3,
+          "tavgF": 33,
+          "prcpIn": 1.66,
+          "snowIn": 12
+        },
+        "mar": {
+          "tmaxF": 51.2,
+          "tminF": 29.6,
+          "tavgF": 40.4,
+          "prcpIn": 1.38,
+          "snowIn": 8
+        },
+        "apr": {
+          "tmaxF": 59.3,
+          "tminF": 34.4,
+          "tavgF": 46.8,
+          "prcpIn": 1.14,
+          "snowIn": 5
+        },
+        "may": {
+          "tmaxF": 69.2,
+          "tminF": 42.6,
+          "tavgF": 55.9,
+          "prcpIn": 1.13,
+          "snowIn": 0.6
+        },
+        "jun": {
+          "tmaxF": 81.3,
+          "tminF": 52.3,
+          "tavgF": 66.8,
+          "prcpIn": 0.47,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 86.4,
+          "tminF": 58.6,
+          "tavgF": 72.5,
+          "prcpIn": 1.41,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 83.5,
+          "tminF": 57,
+          "tavgF": 70.3,
+          "prcpIn": 2.05,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 76,
+          "tminF": 50,
+          "tavgF": 63,
+          "prcpIn": 1.77,
+          "snowIn": 0
+        },
+        "oct": {
+          "tmaxF": 63.3,
+          "tminF": 38.6,
+          "tavgF": 50.9,
+          "prcpIn": 1.44,
+          "snowIn": 1.5
+        },
+        "nov": {
+          "tmaxF": 50.4,
+          "tminF": 28.8,
+          "tavgF": 39.6,
+          "prcpIn": 1.19,
+          "snowIn": 5.6
+        },
+        "dec": {
+          "tmaxF": 39.9,
+          "tminF": 20.4,
+          "tavgF": 30.2,
+          "prcpIn": 1.51,
+          "snowIn": 14.2
+        }
+      }
+    },
+    "mora": {
+      "stationId": "USC00456898",
+      "months": {
+        "jan": {
+          "tmaxF": 34.5,
+          "tminF": 23.8,
+          "tavgF": 29.2,
+          "prcpIn": 17.22,
+          "snowIn": null
+        },
+        "feb": {
+          "tmaxF": 34.1,
+          "tminF": 22.6,
+          "tavgF": 28.3,
+          "prcpIn": 12.93,
+          "snowIn": null
+        },
+        "mar": {
+          "tmaxF": 35.7,
+          "tminF": 23.6,
+          "tavgF": 29.7,
+          "prcpIn": 13.21,
+          "snowIn": null
+        },
+        "apr": {
+          "tmaxF": 40,
+          "tminF": 26.4,
+          "tavgF": 33.2,
+          "prcpIn": 8.35,
+          "snowIn": null
+        },
+        "may": {
+          "tmaxF": 48.2,
+          "tminF": 33,
+          "tavgF": 40.6,
+          "prcpIn": 5.08,
+          "snowIn": null
+        },
+        "jun": {
+          "tmaxF": 53.6,
+          "tminF": 36.8,
+          "tavgF": 45.2,
+          "prcpIn": 3.84,
+          "snowIn": null
+        },
+        "jul": {
+          "tmaxF": 62.2,
+          "tminF": 43.9,
+          "tavgF": 53.1,
+          "prcpIn": 1.41,
+          "snowIn": null
+        },
+        "aug": {
+          "tmaxF": 63.6,
+          "tminF": 45.2,
+          "tavgF": 54.4,
+          "prcpIn": 1.64,
+          "snowIn": null
+        },
+        "sep": {
+          "tmaxF": 57.4,
+          "tminF": 41.2,
+          "tavgF": 49.3,
+          "prcpIn": 4.43,
+          "snowIn": null
+        },
+        "oct": {
+          "tmaxF": 46.4,
+          "tminF": 32.8,
+          "tavgF": 39.6,
+          "prcpIn": 11.25,
+          "snowIn": null
+        },
+        "nov": {
+          "tmaxF": 37,
+          "tminF": 26,
+          "tavgF": 31.5,
+          "prcpIn": 18.16,
+          "snowIn": null
+        },
+        "dec": {
+          "tmaxF": 32.6,
+          "tminF": 22,
+          "tavgF": 27.3,
+          "prcpIn": 18.92,
+          "snowIn": null
+        }
+      }
+    },
+    "neri": {
+      "stationId": "USC00466591",
+      "months": {
+        "jan": {
+          "tmaxF": 40.7,
+          "tminF": 22.8,
+          "tavgF": 31.8,
+          "prcpIn": 3.48,
+          "snowIn": null
+        },
+        "feb": {
+          "tmaxF": 44.2,
+          "tminF": 24.6,
+          "tavgF": 34.4,
+          "prcpIn": 3.28,
+          "snowIn": null
+        },
+        "mar": {
+          "tmaxF": 52.3,
+          "tminF": 31.2,
+          "tavgF": 41.7,
+          "prcpIn": 4.18,
+          "snowIn": null
+        },
+        "apr": {
+          "tmaxF": 64.3,
+          "tminF": 41,
+          "tavgF": 52.7,
+          "prcpIn": 4.18,
+          "snowIn": null
+        },
+        "may": {
+          "tmaxF": 71.5,
+          "tminF": 49.7,
+          "tavgF": 60.6,
+          "prcpIn": 5.13,
+          "snowIn": null
+        },
+        "jun": {
+          "tmaxF": 78.5,
+          "tminF": 57.6,
+          "tavgF": 68,
+          "prcpIn": 5.55,
+          "snowIn": null
+        },
+        "jul": {
+          "tmaxF": 81.3,
+          "tminF": 61.3,
+          "tavgF": 71.3,
+          "prcpIn": 4.61,
+          "snowIn": null
+        },
+        "aug": {
+          "tmaxF": 80.6,
+          "tminF": 60.3,
+          "tavgF": 70.4,
+          "prcpIn": 4.14,
+          "snowIn": null
+        },
+        "sep": {
+          "tmaxF": 75.4,
+          "tminF": 54.2,
+          "tavgF": 64.8,
+          "prcpIn": 3.66,
+          "snowIn": null
+        },
+        "oct": {
+          "tmaxF": 65.2,
+          "tminF": 42.4,
+          "tavgF": 53.8,
+          "prcpIn": 2.87,
+          "snowIn": null
+        },
+        "nov": {
+          "tmaxF": 54.2,
+          "tminF": 33.4,
+          "tavgF": 43.8,
+          "prcpIn": 2.93,
+          "snowIn": null
+        },
+        "dec": {
+          "tmaxF": 44.6,
+          "tminF": 27,
+          "tavgF": 35.8,
+          "prcpIn": 3.85,
+          "snowIn": null
+        }
+      }
+    },
+    "noca": {
+      "stationId": "USC00455840",
+      "months": {
+        "jan": {
+          "tmaxF": 40.1,
+          "tminF": 32.2,
+          "tavgF": 36.2,
+          "prcpIn": 12.4,
+          "snowIn": 10.2
+        },
+        "feb": {
+          "tmaxF": 43.7,
+          "tminF": 32.9,
+          "tavgF": 38.3,
+          "prcpIn": 7.16,
+          "snowIn": 7.7
+        },
+        "mar": {
+          "tmaxF": 49.4,
+          "tminF": 35,
+          "tavgF": 42.2,
+          "prcpIn": 8.36,
+          "snowIn": 2.8
+        },
+        "apr": {
+          "tmaxF": 57.9,
+          "tminF": 39.5,
+          "tavgF": 48.7,
+          "prcpIn": 4.65,
+          "snowIn": 0.1
+        },
+        "may": {
+          "tmaxF": 66.5,
+          "tminF": 45.7,
+          "tavgF": 56.1,
+          "prcpIn": 3.01,
+          "snowIn": 0
+        },
+        "jun": {
+          "tmaxF": 70.4,
+          "tminF": 49.9,
+          "tavgF": 60.2,
+          "prcpIn": 2.58,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 78,
+          "tminF": 53.7,
+          "tavgF": 65.8,
+          "prcpIn": 1.4,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 78.6,
+          "tminF": 54.3,
+          "tavgF": 66.4,
+          "prcpIn": 1.68,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 71,
+          "tminF": 50.3,
+          "tavgF": 60.6,
+          "prcpIn": 3.55,
+          "snowIn": 0
+        },
+        "oct": {
+          "tmaxF": 57,
+          "tminF": 43.7,
+          "tavgF": 50.3,
+          "prcpIn": 8.78,
+          "snowIn": 0
+        },
+        "nov": {
+          "tmaxF": 45.4,
+          "tminF": 36.9,
+          "tavgF": 41.2,
+          "prcpIn": 13.58,
+          "snowIn": 2.4
+        },
+        "dec": {
+          "tmaxF": 39.5,
+          "tminF": 32.5,
+          "tavgF": 36,
+          "prcpIn": 11.7,
+          "snowIn": 6.3
+        }
+      }
+    },
+    "olym": {
+      "stationId": "USC00452548",
+      "months": {
+        "jan": {
+          "tmaxF": 41.1,
+          "tminF": 32.8,
+          "tavgF": 37,
+          "prcpIn": 8.87,
+          "snowIn": 1
+        },
+        "feb": {
+          "tmaxF": 43.8,
+          "tminF": 32.8,
+          "tavgF": 38.3,
+          "prcpIn": 6.14,
+          "snowIn": 0.5
+        },
+        "mar": {
+          "tmaxF": 49.7,
+          "tminF": 34.9,
+          "tavgF": 42.3,
+          "prcpIn": 6.94,
+          "snowIn": 0.2
+        },
+        "apr": {
+          "tmaxF": 56.3,
+          "tminF": 37.8,
+          "tavgF": 47.1,
+          "prcpIn": 3.28,
+          "snowIn": 0
+        },
+        "may": {
+          "tmaxF": 63.4,
+          "tminF": 43.2,
+          "tavgF": 53.3,
+          "prcpIn": 1.91,
+          "snowIn": 0
+        },
+        "jun": {
+          "tmaxF": 67.2,
+          "tminF": 47.2,
+          "tavgF": 57.2,
+          "prcpIn": 1.39,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 73.6,
+          "tminF": 50.7,
+          "tavgF": 62.2,
+          "prcpIn": 0.74,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 74.5,
+          "tminF": 51.6,
+          "tavgF": 63,
+          "prcpIn": 1.14,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 68.1,
+          "tminF": 48,
+          "tavgF": 58.1,
+          "prcpIn": 1.63,
+          "snowIn": 0
+        },
+        "oct": {
+          "tmaxF": 55.5,
+          "tminF": 41.5,
+          "tavgF": 48.5,
+          "prcpIn": 5.85,
+          "snowIn": 0
+        },
+        "nov": {
+          "tmaxF": 45.6,
+          "tminF": 36.1,
+          "tavgF": 40.8,
+          "prcpIn": 10.06,
+          "snowIn": 0.2
+        },
+        "dec": {
+          "tmaxF": 40.7,
+          "tminF": 32.7,
+          "tavgF": 36.7,
+          "prcpIn": 9.92,
+          "snowIn": 0.1
+        }
+      }
+    },
+    "pefo": {
+      "stationId": "USC00026468",
+      "months": {
+        "jan": {
+          "tmaxF": 50,
+          "tminF": 21.1,
+          "tavgF": 35.6,
+          "prcpIn": 0.59,
+          "snowIn": 0.8
+        },
+        "feb": {
+          "tmaxF": 56.4,
+          "tminF": 24.3,
+          "tavgF": 40.3,
+          "prcpIn": 0.64,
+          "snowIn": 0.6
+        },
+        "mar": {
+          "tmaxF": 64.5,
+          "tminF": 29.7,
+          "tavgF": 47.1,
+          "prcpIn": 0.65,
+          "snowIn": 0.8
+        },
+        "apr": {
+          "tmaxF": 72.1,
+          "tminF": 35.5,
+          "tavgF": 53.8,
+          "prcpIn": 0.4,
+          "snowIn": 0
+        },
+        "may": {
+          "tmaxF": 80.8,
+          "tminF": 43.5,
+          "tavgF": 62.2,
+          "prcpIn": 0.43,
+          "snowIn": 0
+        },
+        "jun": {
+          "tmaxF": 91.4,
+          "tminF": 52.7,
+          "tavgF": 72.1,
+          "prcpIn": 0.24,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 93.3,
+          "tminF": 60.1,
+          "tavgF": 76.7,
+          "prcpIn": 1.72,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 90.5,
+          "tminF": 59.3,
+          "tavgF": 74.9,
+          "prcpIn": 1.58,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 84.9,
+          "tminF": 51.9,
+          "tavgF": 68.4,
+          "prcpIn": 1.02,
+          "snowIn": 0
+        },
+        "oct": {
+          "tmaxF": 73.9,
+          "tminF": 39.3,
+          "tavgF": 56.6,
+          "prcpIn": 0.89,
+          "snowIn": 0.2
+        },
+        "nov": {
+          "tmaxF": 60.9,
+          "tminF": 28.1,
+          "tavgF": 44.5,
+          "prcpIn": 0.67,
+          "snowIn": 0.3
+        },
+        "dec": {
+          "tmaxF": 49.6,
+          "tminF": 20.7,
+          "tavgF": 35.1,
+          "prcpIn": 0.78,
+          "snowIn": 0.8
+        }
+      }
+    },
+    "pinn": {
+      "stationId": "USC00046926",
+      "months": {
+        "jan": {
+          "tmaxF": 62.6,
+          "tminF": 34,
+          "tavgF": 48.3,
+          "prcpIn": 3.46,
+          "snowIn": 0.1
+        },
+        "feb": {
+          "tmaxF": 63.7,
+          "tminF": 35.6,
+          "tavgF": 49.6,
+          "prcpIn": 3.45,
+          "snowIn": 0
+        },
+        "mar": {
+          "tmaxF": 67.5,
+          "tminF": 37.7,
+          "tavgF": 52.6,
+          "prcpIn": 2.8,
+          "snowIn": 0
+        },
+        "apr": {
+          "tmaxF": 72.3,
+          "tminF": 39.4,
+          "tavgF": 55.8,
+          "prcpIn": 0.96,
+          "snowIn": 0
+        },
+        "may": {
+          "tmaxF": 80,
+          "tminF": 43.1,
+          "tavgF": 61.5,
+          "prcpIn": 0.57,
+          "snowIn": 0
+        },
+        "jun": {
+          "tmaxF": 88.8,
+          "tminF": 46.6,
+          "tavgF": 67.7,
+          "prcpIn": 0.13,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 95.9,
+          "tminF": 50.4,
+          "tavgF": 73.2,
+          "prcpIn": 0.04,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 95.8,
+          "tminF": 50.3,
+          "tavgF": 73,
+          "prcpIn": 0.02,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 91.7,
+          "tminF": 48.1,
+          "tavgF": 69.9,
+          "prcpIn": 0.06,
+          "snowIn": 0
+        },
+        "oct": {
+          "tmaxF": 82.5,
+          "tminF": 42.7,
+          "tavgF": 62.6,
+          "prcpIn": 0.73,
+          "snowIn": 0
+        },
+        "nov": {
+          "tmaxF": 70.4,
+          "tminF": 36.7,
+          "tavgF": 53.5,
+          "prcpIn": 1.27,
+          "snowIn": 0
+        },
+        "dec": {
+          "tmaxF": 62,
+          "tminF": 33.4,
+          "tavgF": 47.7,
+          "prcpIn": 3.08,
+          "snowIn": 0
+        }
+      }
+    },
+    "redw": {
+      "stationId": "USC00046498",
+      "months": {
+        "jan": {
+          "tmaxF": 51.9,
+          "tminF": 36.3,
+          "tavgF": 44.1,
+          "prcpIn": null,
+          "snowIn": null
+        },
+        "feb": {
+          "tmaxF": 54.1,
+          "tminF": 37,
+          "tavgF": 45.5,
+          "prcpIn": null,
+          "snowIn": null
+        },
+        "mar": {
+          "tmaxF": 55.8,
+          "tminF": 37.4,
+          "tavgF": 46.6,
+          "prcpIn": null,
+          "snowIn": null
+        },
+        "apr": {
+          "tmaxF": 58,
+          "tminF": 39.4,
+          "tavgF": 48.7,
+          "prcpIn": null,
+          "snowIn": null
+        },
+        "may": {
+          "tmaxF": 60.6,
+          "tminF": 42.9,
+          "tavgF": 51.8,
+          "prcpIn": null,
+          "snowIn": null
+        },
+        "jun": {
+          "tmaxF": 64.5,
+          "tminF": 46.1,
+          "tavgF": 55.3,
+          "prcpIn": null,
+          "snowIn": null
+        },
+        "jul": {
+          "tmaxF": 67.1,
+          "tminF": 49.1,
+          "tavgF": 58.1,
+          "prcpIn": null,
+          "snowIn": null
+        },
+        "aug": {
+          "tmaxF": 68.6,
+          "tminF": 49,
+          "tavgF": 58.8,
+          "prcpIn": null,
+          "snowIn": null
+        },
+        "sep": {
+          "tmaxF": 69.4,
+          "tminF": 45.1,
+          "tavgF": 57.2,
+          "prcpIn": null,
+          "snowIn": null
+        },
+        "oct": {
+          "tmaxF": 64.6,
+          "tminF": 41.6,
+          "tavgF": 53.1,
+          "prcpIn": null,
+          "snowIn": null
+        },
+        "nov": {
+          "tmaxF": 56.3,
+          "tminF": 38.7,
+          "tavgF": 47.5,
+          "prcpIn": null,
+          "snowIn": null
+        },
+        "dec": {
+          "tmaxF": 50.8,
+          "tminF": 36.3,
+          "tavgF": 43.6,
+          "prcpIn": null,
+          "snowIn": null
+        }
+      }
+    },
+    "romo": {
+      "stationId": "USC00052761",
+      "months": {
+        "jan": {
+          "tmaxF": 37.1,
+          "tminF": 16.1,
+          "tavgF": 26.6,
+          "prcpIn": 0.82,
+          "snowIn": 9.8
+        },
+        "feb": {
+          "tmaxF": 37.5,
+          "tminF": 15.8,
+          "tavgF": 26.6,
+          "prcpIn": 0.68,
+          "snowIn": 13.3
+        },
+        "mar": {
+          "tmaxF": 45,
+          "tminF": 21.2,
+          "tavgF": 33.1,
+          "prcpIn": 1.58,
+          "snowIn": 18.8
+        },
+        "apr": {
+          "tmaxF": 51.5,
+          "tminF": 26.1,
+          "tavgF": 38.8,
+          "prcpIn": 2.26,
+          "snowIn": 19.3
+        },
+        "may": {
+          "tmaxF": 61.2,
+          "tminF": 34.7,
+          "tavgF": 47.9,
+          "prcpIn": 2.27,
+          "snowIn": 9.5
+        },
+        "jun": {
+          "tmaxF": 73.9,
+          "tminF": 42.6,
+          "tavgF": 58.3,
+          "prcpIn": 1.37,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 80.2,
+          "tminF": 48.2,
+          "tavgF": 64.2,
+          "prcpIn": 2.55,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 77.7,
+          "tminF": 46.4,
+          "tavgF": 62,
+          "prcpIn": 1.71,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 69.6,
+          "tminF": 39.2,
+          "tavgF": 54.4,
+          "prcpIn": 1.65,
+          "snowIn": 0.5
+        },
+        "oct": {
+          "tmaxF": 56.6,
+          "tminF": 30.2,
+          "tavgF": 43.4,
+          "prcpIn": 1.12,
+          "snowIn": 9.1
+        },
+        "nov": {
+          "tmaxF": 44.1,
+          "tminF": 23.5,
+          "tavgF": 33.8,
+          "prcpIn": 0.74,
+          "snowIn": 11
+        },
+        "dec": {
+          "tmaxF": 36.2,
+          "tminF": 16.4,
+          "tavgF": 26.3,
+          "prcpIn": 0.67,
+          "snowIn": 12.7
+        }
+      }
+    },
+    "sagu": {
+      "stationId": "USC00021330",
+      "months": {
+        "jan": {
+          "tmaxF": 64.5,
+          "tminF": 29.8,
+          "tavgF": 47.1,
+          "prcpIn": 1.1,
+          "snowIn": 0.8
+        },
+        "feb": {
+          "tmaxF": 67.7,
+          "tminF": 31.8,
+          "tavgF": 49.8,
+          "prcpIn": 1.07,
+          "snowIn": 0.2
+        },
+        "mar": {
+          "tmaxF": 74.5,
+          "tminF": 34.9,
+          "tavgF": 54.7,
+          "prcpIn": 0.64,
+          "snowIn": 0.3
+        },
+        "apr": {
+          "tmaxF": 81.7,
+          "tminF": 38.5,
+          "tavgF": 60.1,
+          "prcpIn": 0.26,
+          "snowIn": 0
+        },
+        "may": {
+          "tmaxF": 90.4,
+          "tminF": 46.2,
+          "tavgF": 68.3,
+          "prcpIn": 0.22,
+          "snowIn": 0
+        },
+        "jun": {
+          "tmaxF": 100,
+          "tminF": 55.9,
+          "tavgF": 77.9,
+          "prcpIn": 0.36,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 98.6,
+          "tminF": 65.4,
+          "tavgF": 82,
+          "prcpIn": 3.04,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 96.2,
+          "tminF": 65.6,
+          "tavgF": 80.9,
+          "prcpIn": 2.54,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 92,
+          "tminF": 58.2,
+          "tavgF": 75.1,
+          "prcpIn": 1.46,
+          "snowIn": 0
+        },
+        "oct": {
+          "tmaxF": 83.8,
+          "tminF": 45.6,
+          "tavgF": 64.7,
+          "prcpIn": 0.61,
+          "snowIn": 0
+        },
+        "nov": {
+          "tmaxF": 72.7,
+          "tminF": 35.4,
+          "tavgF": 54,
+          "prcpIn": 0.58,
+          "snowIn": 0
+        },
+        "dec": {
+          "tmaxF": 63.6,
+          "tminF": 29,
+          "tavgF": 46.3,
+          "prcpIn": 1.09,
+          "snowIn": 0.1
+        }
+      }
+    },
+    "seki": {
+      "stationId": "USC00040343",
+      "months": {
+        "jan": {
+          "tmaxF": 57.6,
+          "tminF": 38.3,
+          "tavgF": 47.9,
+          "prcpIn": 4.89,
+          "snowIn": 0.1
+        },
+        "feb": {
+          "tmaxF": 60.3,
+          "tminF": 40.6,
+          "tavgF": 50.4,
+          "prcpIn": 4.29,
+          "snowIn": 0
+        },
+        "mar": {
+          "tmaxF": 64.2,
+          "tminF": 42.8,
+          "tavgF": 53.5,
+          "prcpIn": 4.02,
+          "snowIn": 0.1
+        },
+        "apr": {
+          "tmaxF": 68.9,
+          "tminF": 45.4,
+          "tavgF": 57.2,
+          "prcpIn": 2.48,
+          "snowIn": 0
+        },
+        "may": {
+          "tmaxF": 78.8,
+          "tminF": 53.7,
+          "tavgF": 66.3,
+          "prcpIn": 1.23,
+          "snowIn": 0
+        },
+        "jun": {
+          "tmaxF": 89.5,
+          "tminF": 62.4,
+          "tavgF": 75.9,
+          "prcpIn": 0.37,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 97.1,
+          "tminF": 69,
+          "tavgF": 83,
+          "prcpIn": 0.14,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 96.6,
+          "tminF": 68.1,
+          "tavgF": 82.3,
+          "prcpIn": 0.02,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 91.2,
+          "tminF": 62.5,
+          "tavgF": 76.9,
+          "prcpIn": 0.18,
+          "snowIn": 0
+        },
+        "oct": {
+          "tmaxF": 79.1,
+          "tminF": 53.4,
+          "tavgF": 66.2,
+          "prcpIn": 1.24,
+          "snowIn": 0
+        },
+        "nov": {
+          "tmaxF": 65.6,
+          "tminF": 43.8,
+          "tavgF": 54.7,
+          "prcpIn": 2.41,
+          "snowIn": 0
+        },
+        "dec": {
+          "tmaxF": 56.8,
+          "tminF": 38,
+          "tavgF": 47.4,
+          "prcpIn": 3.72,
+          "snowIn": 0
+        }
+      }
+    },
+    "shen": {
+      "stationId": "USC00440720",
+      "months": {
+        "jan": {
+          "tmaxF": 35.6,
+          "tminF": 19.1,
+          "tavgF": 27.3,
+          "prcpIn": null,
+          "snowIn": null
+        },
+        "feb": {
+          "tmaxF": 38,
+          "tminF": 21.5,
+          "tavgF": 29.7,
+          "prcpIn": null,
+          "snowIn": null
+        },
+        "mar": {
+          "tmaxF": 43.6,
+          "tminF": 26.6,
+          "tavgF": 35.1,
+          "prcpIn": null,
+          "snowIn": null
+        },
+        "apr": {
+          "tmaxF": 57,
+          "tminF": 36.7,
+          "tavgF": 46.9,
+          "prcpIn": null,
+          "snowIn": null
+        },
+        "may": {
+          "tmaxF": 64.4,
+          "tminF": 46.3,
+          "tavgF": 55.3,
+          "prcpIn": null,
+          "snowIn": null
+        },
+        "jun": {
+          "tmaxF": 70.2,
+          "tminF": 54.4,
+          "tavgF": 62.3,
+          "prcpIn": null,
+          "snowIn": null
+        },
+        "jul": {
+          "tmaxF": 74.8,
+          "tminF": 59.3,
+          "tavgF": 67.1,
+          "prcpIn": null,
+          "snowIn": null
+        },
+        "aug": {
+          "tmaxF": 72.5,
+          "tminF": 57.7,
+          "tavgF": 65.1,
+          "prcpIn": null,
+          "snowIn": null
+        },
+        "sep": {
+          "tmaxF": 69.2,
+          "tminF": 51.8,
+          "tavgF": 60.5,
+          "prcpIn": null,
+          "snowIn": null
+        },
+        "oct": {
+          "tmaxF": 58,
+          "tminF": 41.5,
+          "tavgF": 49.8,
+          "prcpIn": null,
+          "snowIn": null
+        },
+        "nov": {
+          "tmaxF": 48.1,
+          "tminF": 31.6,
+          "tavgF": 39.8,
+          "prcpIn": null,
+          "snowIn": null
+        },
+        "dec": {
+          "tmaxF": 39.5,
+          "tminF": 23.5,
+          "tavgF": 31.5,
+          "prcpIn": null,
+          "snowIn": null
+        }
+      }
+    },
+    "thro": {
+      "stationId": "USC00325813",
+      "months": {
+        "jan": {
+          "tmaxF": 27.6,
+          "tminF": 3.4,
+          "tavgF": 15.5,
+          "prcpIn": 0.32,
+          "snowIn": 4.4
+        },
+        "feb": {
+          "tmaxF": 31.9,
+          "tminF": 7.7,
+          "tavgF": 19.8,
+          "prcpIn": 0.44,
+          "snowIn": 7.2
+        },
+        "mar": {
+          "tmaxF": 43.7,
+          "tminF": 18.4,
+          "tavgF": 31.1,
+          "prcpIn": 0.63,
+          "snowIn": 3.8
+        },
+        "apr": {
+          "tmaxF": 55.5,
+          "tminF": 29.5,
+          "tavgF": 42.5,
+          "prcpIn": 1.59,
+          "snowIn": 3.4
+        },
+        "may": {
+          "tmaxF": 66.7,
+          "tminF": 40.5,
+          "tavgF": 53.6,
+          "prcpIn": 2.6,
+          "snowIn": 0.4
+        },
+        "jun": {
+          "tmaxF": 76.7,
+          "tminF": 50.1,
+          "tavgF": 63.4,
+          "prcpIn": 2.92,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 85.6,
+          "tminF": 55.9,
+          "tavgF": 70.8,
+          "prcpIn": 2.1,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 85.2,
+          "tminF": 53.2,
+          "tavgF": 69.2,
+          "prcpIn": 1.41,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 74.4,
+          "tminF": 42.8,
+          "tavgF": 58.6,
+          "prcpIn": 1.42,
+          "snowIn": 0.1
+        },
+        "oct": {
+          "tmaxF": 57.5,
+          "tminF": 30.1,
+          "tavgF": 43.8,
+          "prcpIn": 1.18,
+          "snowIn": 1.8
+        },
+        "nov": {
+          "tmaxF": 42.4,
+          "tminF": 18.1,
+          "tavgF": 30.2,
+          "prcpIn": 0.62,
+          "snowIn": 3
+        },
+        "dec": {
+          "tmaxF": 30.9,
+          "tminF": 7.3,
+          "tavgF": 19.1,
+          "prcpIn": 0.56,
+          "snowIn": 6
+        }
+      }
+    },
+    "viis": {
+      "stationId": "VQW00011640",
+      "months": {
+        "jan": {
+          "tmaxF": 84.1,
+          "tminF": 73.6,
+          "tavgF": 78.8,
+          "prcpIn": 2.64,
+          "snowIn": 0,
+          "snowImputed": true
+        },
+        "feb": {
+          "tmaxF": 84.3,
+          "tminF": 73.5,
+          "tavgF": 78.9,
+          "prcpIn": 1.9,
+          "snowIn": 0,
+          "snowImputed": true
+        },
+        "mar": {
+          "tmaxF": 84.5,
+          "tminF": 73.8,
+          "tavgF": 79.1,
+          "prcpIn": 1.86,
+          "snowIn": 0,
+          "snowImputed": true
+        },
+        "apr": {
+          "tmaxF": 85.7,
+          "tminF": 75.5,
+          "tavgF": 80.6,
+          "prcpIn": 2.24,
+          "snowIn": 0,
+          "snowImputed": true
+        },
+        "may": {
+          "tmaxF": 87.2,
+          "tminF": 77.5,
+          "tavgF": 82.3,
+          "prcpIn": 3.02,
+          "snowIn": 0,
+          "snowImputed": true
+        },
+        "jun": {
+          "tmaxF": 88.9,
+          "tminF": 79.3,
+          "tavgF": 84.1,
+          "prcpIn": 2.35,
+          "snowIn": 0,
+          "snowImputed": true
+        },
+        "jul": {
+          "tmaxF": 89.7,
+          "tminF": 79.3,
+          "tavgF": 84.5,
+          "prcpIn": 2.91,
+          "snowIn": 0,
+          "snowImputed": true
+        },
+        "aug": {
+          "tmaxF": 89.8,
+          "tminF": 79.6,
+          "tavgF": 84.7,
+          "prcpIn": 4.37,
+          "snowIn": 0,
+          "snowImputed": true
+        },
+        "sep": {
+          "tmaxF": 89.2,
+          "tminF": 79.5,
+          "tavgF": 84.4,
+          "prcpIn": 5.89,
+          "snowIn": 0,
+          "snowImputed": true
+        },
+        "oct": {
+          "tmaxF": 88.4,
+          "tminF": 78.3,
+          "tavgF": 83.3,
+          "prcpIn": 5.28,
+          "snowIn": 0,
+          "snowImputed": true
+        },
+        "nov": {
+          "tmaxF": 86.6,
+          "tminF": 76.6,
+          "tavgF": 81.6,
+          "prcpIn": 6.06,
+          "snowIn": 0,
+          "snowImputed": true
+        },
+        "dec": {
+          "tmaxF": 85.2,
+          "tminF": 74.9,
+          "tavgF": 80.1,
+          "prcpIn": 2.93,
+          "snowIn": 0,
+          "snowImputed": true
+        }
+      }
+    },
+    "voya": {
+      "stationId": "USC00214191",
+      "months": {
+        "jan": {
+          "tmaxF": 15.7,
+          "tminF": -7.8,
+          "tavgF": 3.9,
+          "prcpIn": 1.05,
+          "snowIn": null
+        },
+        "feb": {
+          "tmaxF": 21.2,
+          "tminF": -5.4,
+          "tavgF": 7.9,
+          "prcpIn": 0.72,
+          "snowIn": null
+        },
+        "mar": {
+          "tmaxF": 34.9,
+          "tminF": 9.7,
+          "tavgF": 22.3,
+          "prcpIn": 0.97,
+          "snowIn": null
+        },
+        "apr": {
+          "tmaxF": 49.3,
+          "tminF": 23.3,
+          "tavgF": 36.3,
+          "prcpIn": 1.77,
+          "snowIn": null
+        },
+        "may": {
+          "tmaxF": 63.6,
+          "tminF": 36.6,
+          "tavgF": 50.1,
+          "prcpIn": 3.26,
+          "snowIn": null
+        },
+        "jun": {
+          "tmaxF": 73.3,
+          "tminF": 47.7,
+          "tavgF": 60.5,
+          "prcpIn": 4.65,
+          "snowIn": null
+        },
+        "jul": {
+          "tmaxF": 77.5,
+          "tminF": 51.8,
+          "tavgF": 64.7,
+          "prcpIn": 4.22,
+          "snowIn": null
+        },
+        "aug": {
+          "tmaxF": 75.9,
+          "tminF": 49.3,
+          "tavgF": 62.6,
+          "prcpIn": 3.05,
+          "snowIn": null
+        },
+        "sep": {
+          "tmaxF": 66.4,
+          "tminF": 41.8,
+          "tavgF": 54.1,
+          "prcpIn": 4.07,
+          "snowIn": null
+        },
+        "oct": {
+          "tmaxF": 51.1,
+          "tminF": 30.9,
+          "tavgF": 41,
+          "prcpIn": 2.33,
+          "snowIn": null
+        },
+        "nov": {
+          "tmaxF": 34.1,
+          "tminF": 17.3,
+          "tavgF": 25.7,
+          "prcpIn": 1.79,
+          "snowIn": null
+        },
+        "dec": {
+          "tmaxF": 20.8,
+          "tminF": 2.4,
+          "tavgF": 11.6,
+          "prcpIn": 1.11,
+          "snowIn": null
+        }
+      }
+    },
+    "whsa": {
+      "stationId": "USC00299686",
+      "months": {
+        "jan": {
+          "tmaxF": 57,
+          "tminF": 22.4,
+          "tavgF": 39.7,
+          "prcpIn": 0.5,
+          "snowIn": 0.8
+        },
+        "feb": {
+          "tmaxF": 63,
+          "tminF": 26.7,
+          "tavgF": 44.9,
+          "prcpIn": 0.38,
+          "snowIn": 0
+        },
+        "mar": {
+          "tmaxF": 71.1,
+          "tminF": 33.4,
+          "tavgF": 52.2,
+          "prcpIn": 0.24,
+          "snowIn": 0
+        },
+        "apr": {
+          "tmaxF": 79,
+          "tminF": 40.9,
+          "tavgF": 59.9,
+          "prcpIn": 0.3,
+          "snowIn": 0
+        },
+        "may": {
+          "tmaxF": 88,
+          "tminF": 50.4,
+          "tavgF": 69.2,
+          "prcpIn": 0.45,
+          "snowIn": 0
+        },
+        "jun": {
+          "tmaxF": 97.3,
+          "tminF": 60.4,
+          "tavgF": 78.8,
+          "prcpIn": 0.72,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 97,
+          "tminF": 65.4,
+          "tavgF": 81.2,
+          "prcpIn": 1.64,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 94.8,
+          "tminF": 63.5,
+          "tavgF": 79.2,
+          "prcpIn": 1.88,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 88.8,
+          "tminF": 56.2,
+          "tavgF": 72.5,
+          "prcpIn": 1.46,
+          "snowIn": 0
+        },
+        "oct": {
+          "tmaxF": 79.3,
+          "tminF": 42.4,
+          "tavgF": 60.8,
+          "prcpIn": 1.05,
+          "snowIn": 0.1
+        },
+        "nov": {
+          "tmaxF": 66.6,
+          "tminF": 29.4,
+          "tavgF": 48,
+          "prcpIn": 0.45,
+          "snowIn": 0
+        },
+        "dec": {
+          "tmaxF": 56.5,
+          "tminF": 22.3,
+          "tavgF": 39.4,
+          "prcpIn": 0.74,
+          "snowIn": 0.7
+        }
+      }
+    },
+    "wica": {
+      "stationId": "USC00399347",
+      "months": {
+        "jan": {
+          "tmaxF": 39.7,
+          "tminF": 14.8,
+          "tavgF": 27.2,
+          "prcpIn": 0.45,
+          "snowIn": 6.3
+        },
+        "feb": {
+          "tmaxF": 40.7,
+          "tminF": 15.5,
+          "tavgF": 28.1,
+          "prcpIn": 0.7,
+          "snowIn": 7.1
+        },
+        "mar": {
+          "tmaxF": 50,
+          "tminF": 23.7,
+          "tavgF": 36.8,
+          "prcpIn": 1.07,
+          "snowIn": 9.6
+        },
+        "apr": {
+          "tmaxF": 57.7,
+          "tminF": 30.9,
+          "tavgF": 44.3,
+          "prcpIn": 2.32,
+          "snowIn": 7.8
+        },
+        "may": {
+          "tmaxF": 66.4,
+          "tminF": 40.9,
+          "tavgF": 53.7,
+          "prcpIn": 3.74,
+          "snowIn": 0.9
+        },
+        "jun": {
+          "tmaxF": 77.4,
+          "tminF": 50.1,
+          "tavgF": 63.8,
+          "prcpIn": 3.29,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 84.7,
+          "tminF": 56.6,
+          "tavgF": 70.7,
+          "prcpIn": 3.01,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 83.6,
+          "tminF": 54.9,
+          "tavgF": 69.2,
+          "prcpIn": 2.3,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 76.2,
+          "tminF": 46.2,
+          "tavgF": 61.2,
+          "prcpIn": 1.53,
+          "snowIn": 0.2
+        },
+        "oct": {
+          "tmaxF": 61.4,
+          "tminF": 34,
+          "tavgF": 47.7,
+          "prcpIn": 1.55,
+          "snowIn": 2.1
+        },
+        "nov": {
+          "tmaxF": 48.4,
+          "tminF": 23.4,
+          "tavgF": 35.9,
+          "prcpIn": 0.71,
+          "snowIn": 4.4
+        },
+        "dec": {
+          "tmaxF": 39.4,
+          "tminF": 15.4,
+          "tavgF": 27.4,
+          "prcpIn": 0.53,
+          "snowIn": 7.5
+        }
+      }
+    },
+    "wrst": {
+      "stationId": "USC00505757",
+      "months": {
+        "jan": {
+          "tmaxF": 6,
+          "tminF": -9.1,
+          "tavgF": -1.6,
+          "prcpIn": 0.93,
+          "snowIn": 13.2
+        },
+        "feb": {
+          "tmaxF": 20.7,
+          "tminF": -1.3,
+          "tavgF": 9.7,
+          "prcpIn": 1.11,
+          "snowIn": 7.9
+        },
+        "mar": {
+          "tmaxF": 32.9,
+          "tminF": 3.5,
+          "tavgF": 18.2,
+          "prcpIn": 0.4,
+          "snowIn": 5.4
+        },
+        "apr": {
+          "tmaxF": 47.7,
+          "tminF": 21.6,
+          "tavgF": 34.6,
+          "prcpIn": 0.31,
+          "snowIn": 2.5
+        },
+        "may": {
+          "tmaxF": 62.2,
+          "tminF": 30.9,
+          "tavgF": 46.6,
+          "prcpIn": 0.93,
+          "snowIn": 0.6
+        },
+        "jun": {
+          "tmaxF": 69.7,
+          "tminF": 38.9,
+          "tavgF": 54.3,
+          "prcpIn": 1.63,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 71.4,
+          "tminF": 43.3,
+          "tavgF": 57.3,
+          "prcpIn": 2.45,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 66.8,
+          "tminF": 40.2,
+          "tavgF": 53.5,
+          "prcpIn": 2.65,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 55.5,
+          "tminF": 33.1,
+          "tavgF": 44.3,
+          "prcpIn": 2.56,
+          "snowIn": 2.7
+        },
+        "oct": {
+          "tmaxF": 38.6,
+          "tminF": 20.2,
+          "tavgF": 29.4,
+          "prcpIn": 2.22,
+          "snowIn": 9.4
+        },
+        "nov": {
+          "tmaxF": 17.3,
+          "tminF": 2,
+          "tavgF": 9.7,
+          "prcpIn": 1.45,
+          "snowIn": 13.5
+        },
+        "dec": {
+          "tmaxF": 9.2,
+          "tminF": -4.5,
+          "tavgF": 2.3,
+          "prcpIn": 1.06,
+          "snowIn": 11.3
+        }
+      }
+    },
+    "yell": {
+      "stationId": "USW00094173",
+      "months": {
+        "jan": {
+          "tmaxF": 23,
+          "tminF": 1,
+          "tavgF": 12,
+          "prcpIn": 1.8,
+          "snowIn": null
+        },
+        "feb": {
+          "tmaxF": 26.1,
+          "tminF": 0.9,
+          "tavgF": 13.5,
+          "prcpIn": 1.7,
+          "snowIn": null
+        },
+        "mar": {
+          "tmaxF": 34.7,
+          "tminF": 7.7,
+          "tavgF": 21.2,
+          "prcpIn": 1.9,
+          "snowIn": null
+        },
+        "apr": {
+          "tmaxF": 40.9,
+          "tminF": 16.6,
+          "tavgF": 28.7,
+          "prcpIn": 2.28,
+          "snowIn": null
+        },
+        "may": {
+          "tmaxF": 50.6,
+          "tminF": 26.3,
+          "tavgF": 38.4,
+          "prcpIn": 2.35,
+          "snowIn": null
+        },
+        "jun": {
+          "tmaxF": 61.1,
+          "tminF": 33,
+          "tavgF": 47,
+          "prcpIn": 2.38,
+          "snowIn": null
+        },
+        "jul": {
+          "tmaxF": 72.2,
+          "tminF": 38.7,
+          "tavgF": 55.5,
+          "prcpIn": 1.51,
+          "snowIn": null
+        },
+        "aug": {
+          "tmaxF": 70.7,
+          "tminF": 37,
+          "tavgF": 53.9,
+          "prcpIn": 1.34,
+          "snowIn": null
+        },
+        "sep": {
+          "tmaxF": 60.5,
+          "tminF": 30.3,
+          "tavgF": 45.4,
+          "prcpIn": 1.57,
+          "snowIn": null
+        },
+        "oct": {
+          "tmaxF": 45.5,
+          "tminF": 21.8,
+          "tavgF": 33.6,
+          "prcpIn": 1.85,
+          "snowIn": null
+        },
+        "nov": {
+          "tmaxF": 32,
+          "tminF": 11,
+          "tavgF": 21.5,
+          "prcpIn": 2.06,
+          "snowIn": null
+        },
+        "dec": {
+          "tmaxF": 23.3,
+          "tminF": 2.7,
+          "tavgF": 13,
+          "prcpIn": 2.35,
+          "snowIn": null
+        }
+      }
+    },
+    "yose": {
+      "stationId": "USC00049855",
+      "months": {
+        "jan": {
+          "tmaxF": 47.5,
+          "tminF": 28.5,
+          "tavgF": 38,
+          "prcpIn": 6.98,
+          "snowIn": null
+        },
+        "feb": {
+          "tmaxF": 51.2,
+          "tminF": 30.2,
+          "tavgF": 40.7,
+          "prcpIn": 6.49,
+          "snowIn": null
+        },
+        "mar": {
+          "tmaxF": 56.7,
+          "tminF": 33.5,
+          "tavgF": 45.1,
+          "prcpIn": 5.47,
+          "snowIn": null
+        },
+        "apr": {
+          "tmaxF": 63.1,
+          "tminF": 37.6,
+          "tavgF": 50.4,
+          "prcpIn": 3.17,
+          "snowIn": null
+        },
+        "may": {
+          "tmaxF": 70.5,
+          "tminF": 44.5,
+          "tavgF": 57.5,
+          "prcpIn": 1.92,
+          "snowIn": null
+        },
+        "jun": {
+          "tmaxF": 80.5,
+          "tminF": 51,
+          "tavgF": 65.8,
+          "prcpIn": 0.46,
+          "snowIn": null
+        },
+        "jul": {
+          "tmaxF": 89.2,
+          "tminF": 57.4,
+          "tavgF": 73.3,
+          "prcpIn": 0.29,
+          "snowIn": null
+        },
+        "aug": {
+          "tmaxF": 89,
+          "tminF": 56.8,
+          "tavgF": 72.9,
+          "prcpIn": 0.16,
+          "snowIn": null
+        },
+        "sep": {
+          "tmaxF": 83,
+          "tminF": 51.4,
+          "tavgF": 67.2,
+          "prcpIn": 0.4,
+          "snowIn": null
+        },
+        "oct": {
+          "tmaxF": 70.9,
+          "tminF": 41.3,
+          "tavgF": 56.1,
+          "prcpIn": 1.56,
+          "snowIn": null
+        },
+        "nov": {
+          "tmaxF": 56,
+          "tminF": 32.5,
+          "tavgF": 44.3,
+          "prcpIn": 4.05,
+          "snowIn": null
+        },
+        "dec": {
+          "tmaxF": 45.9,
+          "tminF": 27.8,
+          "tavgF": 36.8,
+          "prcpIn": 5.6,
+          "snowIn": null
+        }
+      }
+    },
+    "zion": {
+      "stationId": "USC00429717",
+      "months": {
+        "jan": {
+          "tmaxF": 53.8,
+          "tminF": 30.4,
+          "tavgF": 42.1,
+          "prcpIn": 1.99,
+          "snowIn": 0.7
+        },
+        "feb": {
+          "tmaxF": 57.6,
+          "tminF": 33.6,
+          "tavgF": 45.6,
+          "prcpIn": 2.06,
+          "snowIn": 0.8
+        },
+        "mar": {
+          "tmaxF": 66.1,
+          "tminF": 38.7,
+          "tavgF": 52.4,
+          "prcpIn": 2.01,
+          "snowIn": 0.7
+        },
+        "apr": {
+          "tmaxF": 73.1,
+          "tminF": 43.8,
+          "tavgF": 58.4,
+          "prcpIn": 1.22,
+          "snowIn": 0
+        },
+        "may": {
+          "tmaxF": 83.5,
+          "tminF": 52.5,
+          "tavgF": 68,
+          "prcpIn": 0.77,
+          "snowIn": 0
+        },
+        "jun": {
+          "tmaxF": 95.3,
+          "tminF": 62.2,
+          "tavgF": 78.8,
+          "prcpIn": 0.23,
+          "snowIn": 0
+        },
+        "jul": {
+          "tmaxF": 100.3,
+          "tminF": 69.5,
+          "tavgF": 84.9,
+          "prcpIn": 1.15,
+          "snowIn": 0
+        },
+        "aug": {
+          "tmaxF": 98,
+          "tminF": 68.7,
+          "tavgF": 83.3,
+          "prcpIn": 1.63,
+          "snowIn": 0
+        },
+        "sep": {
+          "tmaxF": 90.7,
+          "tminF": 61.3,
+          "tavgF": 76,
+          "prcpIn": 1.17,
+          "snowIn": 0
+        },
+        "oct": {
+          "tmaxF": 78.1,
+          "tminF": 48.8,
+          "tavgF": 63.4,
+          "prcpIn": 1.22,
+          "snowIn": 0
+        },
+        "nov": {
+          "tmaxF": 63.9,
+          "tminF": 37.3,
+          "tavgF": 50.6,
+          "prcpIn": 1.18,
+          "snowIn": 0.1
+        },
+        "dec": {
+          "tmaxF": 52.5,
+          "tminF": 29.3,
+          "tavgF": 40.9,
+          "prcpIn": 1.64,
+          "snowIn": 1.7
+        }
+      }
+    }
+  }
+}
