@@ -1,13 +1,24 @@
 /**
  * Server-only NPS Data API client (P0-2: no browser-side calls, key stays
- * server-side, responses cached). Runs at build time for our statically
- * generated park pages, so the ~1,000 req/hr limit is a non-issue — each
- * park is fetched once per rebuild, not per visitor. `park` is the NPS
- * 4-letter park code directly (e.g. "acad", "zion") — used as-is, all 63.
+ * server-side, responses cached). `park` is the NPS 4-letter park code
+ * directly (e.g. "acad", "zion") — used as-is, all 63.
+ *
+ * Rate-limit budget (data-audit spec §5): the 1,000 req/hr cap is real and
+ * was exhausted twice in one day before this design. Parks and alerts are
+ * now fetched in BULK — one comma-list request each for all 63 codes
+ * (verified: `parkCode` accepts comma lists) — served per-park from the
+ * shared cached response. Only /thingstodo stays per-park (59 non-cohort
+ * pages). Build cost: ~61 calls with a cold cache, ~2 typical.
  */
+
+import { ALL_PARKS_MINI } from "./data/all-parks-mini";
 
 const NPS_BASE = "https://developer.nps.gov/api/v1";
 const REVALIDATE_SECONDS = 60 * 60 * 24; // daily
+
+// Sorted for a deterministic URL: Next's fetch cache dedupes by exact URL
+// across build workers, so all 9 workers share one real request.
+const ALL_CODES = ALL_PARKS_MINI.map((p) => p.code).sort().join(",");
 
 interface RawImage {
   url: string;
@@ -17,18 +28,22 @@ interface RawImage {
   credit: string;
 }
 
+interface RawPark {
+  parkCode: string;
+  description: string;
+  url: string;
+  entranceFees?: { cost: string; description: string; title: string }[];
+  operatingHours?: { name: string; description: string }[];
+  images?: RawImage[];
+}
+
 interface RawParksResponse {
-  data: {
-    description: string;
-    url: string;
-    entranceFees?: { cost: string; description: string; title: string }[];
-    operatingHours?: { name: string; description: string }[];
-    images?: RawImage[];
-  }[];
+  data: RawPark[];
 }
 
 interface RawAlertsResponse {
   data: {
+    parkCode: string;
     title: string;
     description: string;
     category: string;
@@ -82,14 +97,17 @@ export interface NpsParkProfile {
   retrievedAt: string;
 }
 
-/** One /parks request per park, shared by profile + images. The two callers
- * previously used different no-op `fields` strings, so Next's fetch cache
- * saw two distinct URLs and every park cost 2 of the 1,000 hourly requests
- * for identical data (audit #9/#12). `fields` is dropped entirely — it's
- * not in the official swagger spec and the API ignores it, returning the
- * full object regardless (live-verified). Identical URL = deduped. */
-function fetchParkRaw(park: string) {
-  return npsFetch<RawParksResponse>("/parks", { parkCode: park });
+/** ONE bulk /parks request for all 63 codes, shared by every profile and
+ * image lookup on every page — the deterministic URL means Next's fetch
+ * cache serves all build workers and all pages from a single real request.
+ * (Previously: 2 requests per park x 63; audit #9/#12.) */
+async function fetchAllParks(): Promise<Map<string, RawPark>> {
+  const json = await npsFetch<RawParksResponse>("/parks", { parkCode: ALL_CODES, limit: "70" });
+  return new Map((json?.data ?? []).map((p) => [p.parkCode.toLowerCase(), p]));
+}
+
+async function fetchParkRaw(park: string): Promise<RawPark | null> {
+  return (await fetchAllParks()).get(park.toLowerCase()) ?? null;
 }
 
 /** The fees array has no guaranteed order — Acadia's [0] is the $6 Cadillac
@@ -107,8 +125,7 @@ function pickEntranceFee(fees: { cost: string; description: string; title: strin
 }
 
 export async function fetchParkProfile(park: string): Promise<NpsParkProfile | null> {
-  const json = await fetchParkRaw(park);
-  const d = json?.data?.[0];
+  const d = await fetchParkRaw(park);
   if (!d) return null;
   const fee = pickEntranceFee(d.entranceFees);
   return {
@@ -151,8 +168,8 @@ function isPublicDomainCredit(credit: string): boolean {
 }
 
 export async function fetchParkImages(park: string): Promise<ParkImage[]> {
-  const json = await fetchParkRaw(park);
-  const images = json?.data?.[0]?.images ?? [];
+  const p = await fetchParkRaw(park);
+  const images = p?.images ?? [];
   return images
     .filter((im) => im.url && isPublicDomainCredit(im.credit ?? ""))
     .slice(0, 8)
@@ -167,15 +184,25 @@ export interface NpsAlert {
   url: string;
 }
 
+/** ONE bulk /alerts request for all 63 codes; per-park slices served from
+ * the shared cached response (each alert carries its parkCode). limit=800
+ * comfortably exceeds the systemwide active-alert count for 63 parks. */
+async function fetchAllAlerts(): Promise<Map<string, NpsAlert[]>> {
+  const json = await npsFetch<RawAlertsResponse>("/alerts", { parkCode: ALL_CODES, limit: "800" });
+  const byPark = new Map<string, NpsAlert[]>();
+  for (const a of json?.data ?? []) {
+    const code = (a.parkCode ?? "").toLowerCase();
+    const list = byPark.get(code) ?? [];
+    if (list.length < 6) {
+      list.push({ title: a.title, description: a.description, category: a.category, lastIndexedDate: a.lastIndexedDate, url: a.url });
+      byPark.set(code, list);
+    }
+  }
+  return byPark;
+}
+
 export async function fetchParkAlerts(park: string): Promise<NpsAlert[]> {
-  const json = await npsFetch<RawAlertsResponse>("/alerts", { parkCode: park, limit: "6" });
-  return json?.data?.map((a) => ({
-    title: a.title,
-    description: a.description,
-    category: a.category,
-    lastIndexedDate: a.lastIndexedDate,
-    url: a.url,
-  })) ?? [];
+  return (await fetchAllAlerts()).get(park.toLowerCase()) ?? [];
 }
 
 interface RawThingsToDoResponse {
