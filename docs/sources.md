@@ -19,6 +19,14 @@ third-party rights holder**. Anything credited otherwise is excluded.
 
 ## Ambient audio
 
-| Asset (public/audio/) | Subject | Source page | Credit on page | PD signal verified | Retrieved |
-|---|---|---|---|---|---|
-| `ambient-yell.mp3` | "Soundscape - Geyser Hill", Yellowstone — stream off the boardwalk with background geyser rumbles and wind (binaural); 60s loop cut of the 63s original, 96 kbps mp3, 1.5s afade at each end of the loop seam | https://www.nps.gov/yell/learn/photosmultimedia/sounds-soundscapes.htm | "Credit / Author: NPS/Peter Comley", date created 03/22/2015; no © symbol / no third-party rights holder anywhere in the element's metadata block | Yes — audio URL extracted from the page's raw HTML (https://www.nps.gov/nps-audiovideo/legacy/mp3/imr/avElement/yell-030401GeyserHillStreamOffBoardwalkBackgroundGeyserRumblesAndWindBinaural0101.mp3), curl-verified HTTP 200 `audio/mpeg` direct from nps.gov | 2026-08-29 |
+`ambient-dawn-chorus.mp3` is the live track (`src/components/AmbientSound.tsx`);
+the other two are committed alternates cut to the same loop spec (60–75s loop,
+1.5s afade at each end of the loop seam, 96 kbps mp3, loudness matched to
+≈ −36 LUFS integrated). The earlier `ambient-yell.mp3` (Geyser Hill
+stream/rumble) was retired 2026-08-29 and its file deleted.
+
+| Asset (public/audio/) | Subject | Source page | Credit on page | License | PD/CC0 signal verified | Retrieved |
+|---|---|---|---|---|---|---|
+| `ambient-dawn-chorus.mp3` | "Dawn Chorus", Yellowstone — many kinds of songbirds singing with woodpeckers drumming softly (per the page's audio transcript); 60s loop cut of the 62s original | https://www.nps.gov/yell/learn/photosmultimedia/sounds-dawnchorus.htm | "Credit / Author: NPS/Jennifer Jerrett", date created 06/28/2014; no © symbol / no third-party rights holder anywhere in the element's metadata block | Public domain (NPS) | Yes — audio URL extracted from the page's raw HTML (https://www.nps.gov/nps-audiovideo/legacy/mp3/imr/avElement/yell-YELLDawnChorus.mp3), curl-verified HTTP 200 `audio/mpeg` direct from nps.gov | 2026-08-29 |
+| `ambient-creek.mp3` | Small flowing creek, soft steady water (recorded as a seamless loop by the author); 75s cut of the 139s original | https://freesound.org/people/Hano_van_Dalen/sounds/767320/ | Uploaded by Hano_van_Dalen; sound page shows license "Creative Commons 0" | CC0 | Yes — license "Creative Commons 0" confirmed on the sound page at retrieval; preview mp3 (https://cdn.freesound.org/previews/767/767320_15758192-hq.mp3) curl-verified HTTP 200 `audio/mpeg`. CC0 requires no attribution; provenance logged anyway | 2026-08-29 |
+| `ambient-forest-birds.mp3` | Distant songbirds in a quiet forest (Skephult, Sweden), very sparse and serene; 75s cut of the 182s original, gentle 4:1 compression above −40 dB to tame two close bird calls that spiked ~38 dB over the bed | https://freesound.org/people/forestfjord/sounds/816111/ | Uploaded by forestfjord; sound page shows license "Creative Commons 0" | CC0 | Yes — license "Creative Commons 0" confirmed on the sound page at retrieval; preview mp3 (https://cdn.freesound.org/previews/816/816111_9361706-hq.mp3) curl-verified HTTP 200 `audio/mpeg`. CC0 requires no attribution; provenance logged anyway | 2026-08-29 |

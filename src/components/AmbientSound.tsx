@@ -19,8 +19,12 @@ import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "
  */
 
 const STORAGE_KEY = "parkatlas-sound";
-/** Geyser Hill stream + distant geyser rumble, Yellowstone (NPS, public domain). */
-const SRC = "/audio/ambient-yell.mp3";
+/**
+ * Dawn chorus songbirds, Yellowstone (NPS, public domain). Alternates, same
+ * politeness + provenance rules (see docs/sources.md "Ambient audio"):
+ * /audio/ambient-creek.mp3 and /audio/ambient-forest-birds.mp3.
+ */
+const SRC = "/audio/ambient-dawn-chorus.mp3";
 const TARGET_VOLUME = 0.35;
 const FADE_IN_MS = 1000;
 const FADE_OUT_MS = 350;
