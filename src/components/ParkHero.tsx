@@ -61,7 +61,11 @@ export function ParkHero({
               style={{ viewTransitionName: `park-hero-${parkCode}` }}
             />
             <div className="absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-ink/80 via-ink/25 to-transparent" />
-            <p className="absolute bottom-3 right-4 glass-dark rounded-sm px-2.5 py-1 font-mono text-mono-sm text-bone/70">{hero.credit}</p>
+            {hero.creditUrl ? (
+              <a href={hero.creditUrl} className="tap-44 absolute bottom-3 right-4 glass-dark rounded-sm px-2.5 py-1 font-mono text-mono-sm text-bone/70 hover:text-bone underline-offset-2 hover:underline">{hero.credit}</a>
+            ) : (
+              <p className="absolute bottom-3 right-4 glass-dark rounded-sm px-2.5 py-1 font-mono text-mono-sm text-bone/70">{hero.credit}</p>
+            )}
           </>
         ) : (
           <ContourField name={name} accent={accent} />

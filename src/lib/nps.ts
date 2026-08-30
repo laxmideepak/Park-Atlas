@@ -142,6 +142,9 @@ export interface ParkImage {
   title: string;
   altText: string;
   credit: string;
+  /** Attribution target (e.g. a Wikimedia Commons file page) — CC BY/BY-SA
+   * picks must surface author + license, and the chip links here. */
+  creditUrl?: string;
 }
 
 /**

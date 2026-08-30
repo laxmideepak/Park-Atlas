@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "www.nps.gov" },
       // NPGallery high-resolution originals (used by the future hero manifest).
       { protocol: "https", hostname: "npgallery.nps.gov" },
+      { protocol: "https", hostname: "upload.wikimedia.org" },
     ],
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 828, 1080, 1440, 1920, 2560, 3200],

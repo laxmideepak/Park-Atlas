@@ -76,6 +76,20 @@ if ((ac.parks.gaar.components?.length ?? 0) !== 2) errors.push("acreage: GAAR mu
 if (Math.abs(ac.parks.viis.grossAcres - 15041.03) > 200) errors.push("acreage: VIIS looks like the coral-reef trap");
 ok(`acreage: 63 parks, YELL ${ac.parks.yell.grossAcres.toLocaleString()} ac, GAAR 2-component sum, VIIS not coral-reef`);
 
+// --- premium photos ---
+const pp = DATA("premium-photos.json");
+meta("premium-photos", pp._meta, null);
+const ppParks = Object.entries(pp.parks);
+if (ppParks.length < 55) errors.push(`premium-photos: only ${ppParks.length} parks (expected ~61)`);
+const LICENSE_OK = /^(Public domain|CC0|CC BY(-SA)? [0-9.]+( [a-z]{2})?)$/i;
+for (const [code, e] of ppParks) {
+  if (!LICENSE_OK.test(e.license)) errors.push(`premium ${code}: license "${e.license}" outside allowlist`);
+  if (/CC BY/i.test(e.license) && !e.author?.trim()) errors.push(`premium ${code}: CC pick missing author`);
+  if (e.sourceWidth < 2560) errors.push(`premium ${code}: ${e.sourceWidth}px under floor`);
+  if (!e.url.startsWith("https://upload.wikimedia.org/")) errors.push(`premium ${code}: non-Commons url`);
+}
+ok(`premium-photos: ${ppParks.length} parks, licenses in allowlist, authors present on CC picks`);
+
 if (errors.length) {
   console.error(`\nDATASET VALIDATION FAILED (${errors.length}):\n - ` + errors.join("\n - "));
   process.exit(1);
