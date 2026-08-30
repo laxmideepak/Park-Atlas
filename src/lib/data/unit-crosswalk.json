@@ -1,0 +1,804 @@
+{
+  "_meta": {
+    "sourceUrl": "https://irmaservices.nps.gov/Unit/v2/api/{unitCode}",
+    "datasetVersion": "IRMA Unit Service v2",
+    "fetchedAt": "2026-08-30T00:13:27.751Z",
+    "script": "scripts/etl-unit-crosswalk.mjs",
+    "recordCount": 63
+  },
+  "units": {
+    "acad": {
+      "parkCode": "acad",
+      "unitCode": "ACAD",
+      "fullName": "Acadia National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "NER",
+      "states": [
+        "ME"
+      ],
+      "linkedSubunits": []
+    },
+    "npsa": {
+      "parkCode": "npsa",
+      "unitCode": "NPSA",
+      "fullName": "National Park of American Samoa",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "PWR",
+      "states": [
+        "AS"
+      ],
+      "linkedSubunits": []
+    },
+    "arch": {
+      "parkCode": "arch",
+      "unitCode": "ARCH",
+      "fullName": "Arches National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "IMR",
+      "states": [
+        "UT"
+      ],
+      "linkedSubunits": []
+    },
+    "badl": {
+      "parkCode": "badl",
+      "unitCode": "BADL",
+      "fullName": "Badlands National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "MWR",
+      "states": [
+        "SD"
+      ],
+      "linkedSubunits": [
+        "MIMI"
+      ]
+    },
+    "bibe": {
+      "parkCode": "bibe",
+      "unitCode": "BIBE",
+      "fullName": "Big Bend National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "IMR",
+      "states": [
+        "TX"
+      ],
+      "linkedSubunits": []
+    },
+    "bisc": {
+      "parkCode": "bisc",
+      "unitCode": "BISC",
+      "fullName": "Biscayne National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "SER",
+      "states": [
+        "FL"
+      ],
+      "linkedSubunits": []
+    },
+    "blca": {
+      "parkCode": "blca",
+      "unitCode": "BLCA",
+      "fullName": "Black Canyon of the Gunnison National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "IMR",
+      "states": [
+        "CO"
+      ],
+      "linkedSubunits": []
+    },
+    "brca": {
+      "parkCode": "brca",
+      "unitCode": "BRCA",
+      "fullName": "Bryce Canyon National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "IMR",
+      "states": [
+        "UT"
+      ],
+      "linkedSubunits": []
+    },
+    "cany": {
+      "parkCode": "cany",
+      "unitCode": "CANY",
+      "fullName": "Canyonlands National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "IMR",
+      "states": [
+        "UT"
+      ],
+      "linkedSubunits": []
+    },
+    "care": {
+      "parkCode": "care",
+      "unitCode": "CARE",
+      "fullName": "Capitol Reef National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "IMR",
+      "states": [
+        "UT"
+      ],
+      "linkedSubunits": []
+    },
+    "cave": {
+      "parkCode": "cave",
+      "unitCode": "CAVE",
+      "fullName": "Carlsbad Caverns National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "IMR",
+      "states": [
+        "NM"
+      ],
+      "linkedSubunits": []
+    },
+    "chis": {
+      "parkCode": "chis",
+      "unitCode": "CHIS",
+      "fullName": "Channel Islands National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "PWR",
+      "states": [
+        "CA"
+      ],
+      "linkedSubunits": []
+    },
+    "cong": {
+      "parkCode": "cong",
+      "unitCode": "CONG",
+      "fullName": "Congaree National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "SER",
+      "states": [
+        "SC"
+      ],
+      "linkedSubunits": []
+    },
+    "crla": {
+      "parkCode": "crla",
+      "unitCode": "CRLA",
+      "fullName": "Crater Lake National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "PWR",
+      "states": [
+        "OR"
+      ],
+      "linkedSubunits": []
+    },
+    "cuva": {
+      "parkCode": "cuva",
+      "unitCode": "CUVA",
+      "fullName": "Cuyahoga Valley National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "MWR",
+      "states": [
+        "OH"
+      ],
+      "linkedSubunits": []
+    },
+    "deva": {
+      "parkCode": "deva",
+      "unitCode": "DEVA",
+      "fullName": "Death Valley National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "PWR",
+      "states": [
+        "CA",
+        "NV"
+      ],
+      "linkedSubunits": []
+    },
+    "dena": {
+      "parkCode": "dena",
+      "unitCode": "DENA",
+      "fullName": "Denali National Park and Preserve",
+      "designation": null,
+      "designationName": null,
+      "region": "AKR",
+      "states": [
+        "AK"
+      ],
+      "linkedSubunits": [
+        "DENG",
+        "DENP"
+      ]
+    },
+    "drto": {
+      "parkCode": "drto",
+      "unitCode": "DRTO",
+      "fullName": "Dry Tortugas National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "SER",
+      "states": [
+        "FL"
+      ],
+      "linkedSubunits": []
+    },
+    "ever": {
+      "parkCode": "ever",
+      "unitCode": "EVER",
+      "fullName": "Everglades National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "SER",
+      "states": [
+        "FL"
+      ],
+      "linkedSubunits": []
+    },
+    "gaar": {
+      "parkCode": "gaar",
+      "unitCode": "GAAR",
+      "fullName": "Gates of the Arctic National Park and Preserve",
+      "designation": null,
+      "designationName": null,
+      "region": "AKR",
+      "states": [
+        "AK"
+      ],
+      "linkedSubunits": [
+        "GAAG",
+        "GAAP"
+      ]
+    },
+    "jeff": {
+      "parkCode": "jeff",
+      "unitCode": "JEFF",
+      "fullName": "Gateway Arch National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "MWR",
+      "states": [
+        "IL",
+        "MO"
+      ],
+      "linkedSubunits": []
+    },
+    "glac": {
+      "parkCode": "glac",
+      "unitCode": "GLAC",
+      "fullName": "Glacier National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "IMR",
+      "states": [
+        "MT"
+      ],
+      "linkedSubunits": []
+    },
+    "glba": {
+      "parkCode": "glba",
+      "unitCode": "GLBA",
+      "fullName": "Glacier Bay National Park and Preserve",
+      "designation": null,
+      "designationName": null,
+      "region": "AKR",
+      "states": [
+        "AK"
+      ],
+      "linkedSubunits": [
+        "GLBG",
+        "GLBP"
+      ]
+    },
+    "grca": {
+      "parkCode": "grca",
+      "unitCode": "GRCA",
+      "fullName": "Grand Canyon National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "IMR",
+      "states": [
+        "AZ"
+      ],
+      "linkedSubunits": []
+    },
+    "grte": {
+      "parkCode": "grte",
+      "unitCode": "GRTE",
+      "fullName": "Grand Teton National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "IMR",
+      "states": [
+        "WY"
+      ],
+      "linkedSubunits": [
+        "JODR"
+      ]
+    },
+    "grba": {
+      "parkCode": "grba",
+      "unitCode": "GRBA",
+      "fullName": "Great Basin National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "PWR",
+      "states": [
+        "NV"
+      ],
+      "linkedSubunits": []
+    },
+    "grsa": {
+      "parkCode": "grsa",
+      "unitCode": "GRSA",
+      "fullName": "Great Sand Dunes National Park and Preserve",
+      "designation": null,
+      "designationName": null,
+      "region": "IMR",
+      "states": [
+        "CO"
+      ],
+      "linkedSubunits": [
+        "GRDG",
+        "GRDP"
+      ]
+    },
+    "grsm": {
+      "parkCode": "grsm",
+      "unitCode": "GRSM",
+      "fullName": "Great Smoky Mountains National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "SER",
+      "states": [
+        "NC",
+        "TN"
+      ],
+      "linkedSubunits": []
+    },
+    "gumo": {
+      "parkCode": "gumo",
+      "unitCode": "GUMO",
+      "fullName": "Guadalupe Mountains National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "IMR",
+      "states": [
+        "TX"
+      ],
+      "linkedSubunits": []
+    },
+    "hale": {
+      "parkCode": "hale",
+      "unitCode": "HALE",
+      "fullName": "Haleakala National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "PWR",
+      "states": [
+        "HI"
+      ],
+      "linkedSubunits": []
+    },
+    "havo": {
+      "parkCode": "havo",
+      "unitCode": "HAVO",
+      "fullName": "Hawaii Volcanoes National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "PWR",
+      "states": [
+        "HI"
+      ],
+      "linkedSubunits": []
+    },
+    "hosp": {
+      "parkCode": "hosp",
+      "unitCode": "HOSP",
+      "fullName": "Hot Springs National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "MWR",
+      "states": [
+        "AR"
+      ],
+      "linkedSubunits": []
+    },
+    "indu": {
+      "parkCode": "indu",
+      "unitCode": "INDU",
+      "fullName": "Indiana Dunes National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "MWR",
+      "states": [
+        "IN"
+      ],
+      "linkedSubunits": []
+    },
+    "isro": {
+      "parkCode": "isro",
+      "unitCode": "ISRO",
+      "fullName": "Isle Royale National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "MWR",
+      "states": [
+        "MI"
+      ],
+      "linkedSubunits": []
+    },
+    "jotr": {
+      "parkCode": "jotr",
+      "unitCode": "JOTR",
+      "fullName": "Joshua Tree National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "PWR",
+      "states": [
+        "CA"
+      ],
+      "linkedSubunits": []
+    },
+    "katm": {
+      "parkCode": "katm",
+      "unitCode": "KATM",
+      "fullName": "Katmai National Park and Preserve",
+      "designation": null,
+      "designationName": null,
+      "region": "AKR",
+      "states": [
+        "AK"
+      ],
+      "linkedSubunits": [
+        "KATG",
+        "KATP"
+      ]
+    },
+    "kefj": {
+      "parkCode": "kefj",
+      "unitCode": "KEFJ",
+      "fullName": "Kenai Fjords National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "AKR",
+      "states": [
+        "AK"
+      ],
+      "linkedSubunits": []
+    },
+    "kica": {
+      "parkCode": "kica",
+      "unitCode": "KICA",
+      "fullName": "Kings Canyon National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "PWR",
+      "states": [
+        "CA"
+      ],
+      "linkedSubunits": []
+    },
+    "kova": {
+      "parkCode": "kova",
+      "unitCode": "KOVA",
+      "fullName": "Kobuk Valley National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "AKR",
+      "states": [
+        "AK"
+      ],
+      "linkedSubunits": []
+    },
+    "lacl": {
+      "parkCode": "lacl",
+      "unitCode": "LACL",
+      "fullName": "Lake Clark National Park and Preserve",
+      "designation": null,
+      "designationName": null,
+      "region": "AKR",
+      "states": [
+        "AK"
+      ],
+      "linkedSubunits": [
+        "LACG",
+        "LACP"
+      ]
+    },
+    "lavo": {
+      "parkCode": "lavo",
+      "unitCode": "LAVO",
+      "fullName": "Lassen Volcanic National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "PWR",
+      "states": [
+        "CA"
+      ],
+      "linkedSubunits": []
+    },
+    "maca": {
+      "parkCode": "maca",
+      "unitCode": "MACA",
+      "fullName": "Mammoth Cave National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "SER",
+      "states": [
+        "KY"
+      ],
+      "linkedSubunits": []
+    },
+    "meve": {
+      "parkCode": "meve",
+      "unitCode": "MEVE",
+      "fullName": "Mesa Verde National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "IMR",
+      "states": [
+        "CO"
+      ],
+      "linkedSubunits": []
+    },
+    "mora": {
+      "parkCode": "mora",
+      "unitCode": "MORA",
+      "fullName": "Mount Rainier National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "PWR",
+      "states": [
+        "WA"
+      ],
+      "linkedSubunits": []
+    },
+    "neri": {
+      "parkCode": "neri",
+      "unitCode": "NERI",
+      "fullName": "New River Gorge National Park and Preserve",
+      "designation": null,
+      "designationName": null,
+      "region": "NER",
+      "states": [
+        "WV"
+      ],
+      "linkedSubunits": []
+    },
+    "noca": {
+      "parkCode": "noca",
+      "unitCode": "NOCA",
+      "fullName": "North Cascades National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "PWR",
+      "states": [
+        "WA"
+      ],
+      "linkedSubunits": []
+    },
+    "olym": {
+      "parkCode": "olym",
+      "unitCode": "OLYM",
+      "fullName": "Olympic National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "PWR",
+      "states": [
+        "WA"
+      ],
+      "linkedSubunits": []
+    },
+    "pefo": {
+      "parkCode": "pefo",
+      "unitCode": "PEFO",
+      "fullName": "Petrified Forest National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "IMR",
+      "states": [
+        "AZ"
+      ],
+      "linkedSubunits": []
+    },
+    "pinn": {
+      "parkCode": "pinn",
+      "unitCode": "PINN",
+      "fullName": "Pinnacles National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "PWR",
+      "states": [
+        "CA"
+      ],
+      "linkedSubunits": []
+    },
+    "redw": {
+      "parkCode": "redw",
+      "unitCode": "REDW",
+      "fullName": "Redwood National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "PWR",
+      "states": [
+        "CA"
+      ],
+      "linkedSubunits": []
+    },
+    "romo": {
+      "parkCode": "romo",
+      "unitCode": "ROMO",
+      "fullName": "Rocky Mountain National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "IMR",
+      "states": [
+        "CO"
+      ],
+      "linkedSubunits": [
+        "CALA"
+      ]
+    },
+    "sagu": {
+      "parkCode": "sagu",
+      "unitCode": "SAGU",
+      "fullName": "Saguaro National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "IMR",
+      "states": [
+        "AZ"
+      ],
+      "linkedSubunits": []
+    },
+    "seki": {
+      "parkCode": "seki",
+      "unitCode": "SEKI",
+      "fullName": "Sequoia and Kings Canyon National Parks",
+      "designation": null,
+      "designationName": null,
+      "region": "PWR",
+      "states": [
+        "CA"
+      ],
+      "linkedSubunits": [
+        "KICA",
+        "SEQU"
+      ]
+    },
+    "shen": {
+      "parkCode": "shen",
+      "unitCode": "SHEN",
+      "fullName": "Shenandoah National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "NER",
+      "states": [
+        "VA"
+      ],
+      "linkedSubunits": []
+    },
+    "thro": {
+      "parkCode": "thro",
+      "unitCode": "THRO",
+      "fullName": "Theodore Roosevelt National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "MWR",
+      "states": [
+        "ND"
+      ],
+      "linkedSubunits": []
+    },
+    "viis": {
+      "parkCode": "viis",
+      "unitCode": "VIIS",
+      "fullName": "Virgin Islands National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "SER",
+      "states": [
+        "VI"
+      ],
+      "linkedSubunits": [
+        "VICR"
+      ]
+    },
+    "voya": {
+      "parkCode": "voya",
+      "unitCode": "VOYA",
+      "fullName": "Voyageurs National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "MWR",
+      "states": [
+        "MN"
+      ],
+      "linkedSubunits": []
+    },
+    "whsa": {
+      "parkCode": "whsa",
+      "unitCode": "WHSA",
+      "fullName": "White Sands National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "IMR",
+      "states": [
+        "NM"
+      ],
+      "linkedSubunits": []
+    },
+    "wica": {
+      "parkCode": "wica",
+      "unitCode": "WICA",
+      "fullName": "Wind Cave National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "MWR",
+      "states": [
+        "SD"
+      ],
+      "linkedSubunits": []
+    },
+    "wrst": {
+      "parkCode": "wrst",
+      "unitCode": "WRST",
+      "fullName": "Wrangell - St Elias National Park and Preserve",
+      "designation": null,
+      "designationName": null,
+      "region": "AKR",
+      "states": [
+        "AK"
+      ],
+      "linkedSubunits": [
+        "WRSG",
+        "WRSP"
+      ]
+    },
+    "yell": {
+      "parkCode": "yell",
+      "unitCode": "YELL",
+      "fullName": "Yellowstone National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "IMR",
+      "states": [
+        "ID",
+        "MT",
+        "WY"
+      ],
+      "linkedSubunits": []
+    },
+    "yose": {
+      "parkCode": "yose",
+      "unitCode": "YOSE",
+      "fullName": "Yosemite National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "PWR",
+      "states": [
+        "CA"
+      ],
+      "linkedSubunits": []
+    },
+    "zion": {
+      "parkCode": "zion",
+      "unitCode": "ZION",
+      "fullName": "Zion National Park",
+      "designation": "NP",
+      "designationName": "National Park",
+      "region": "IMR",
+      "states": [
+        "UT"
+      ],
+      "linkedSubunits": []
+    }
+  }
+}
