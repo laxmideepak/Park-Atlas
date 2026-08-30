@@ -1,0 +1,591 @@
+{
+  "_meta": {
+    "sourceUrl": "https://www.ncei.noaa.gov/data/normals-monthly/1991-2020/doc/inventory_30yr.txt",
+    "datasetVersion": "normals-monthly-1991-2020 v1.0.1, doi:10.25921/wck8-er13",
+    "fetchedAt": "2026-08-30T00:21:47.764Z",
+    "script": "scripts/build-park-stations.mjs",
+    "recordCount": 63
+  },
+  "stations": [
+    {
+      "parkCode": "acad",
+      "stationId": "USC00170100",
+      "stationName": "ACADIA NP",
+      "distanceKm": 4.7,
+      "elevationM": 143.3,
+      "elevationFt": 470.1,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "npsa",
+      "stationId": "AQW00061705",
+      "stationName": "PAGO PAGO WSO AP",
+      "distanceKm": 9.7,
+      "elevationM": 3.7,
+      "elevationFt": 12.1,
+      "hasTemp": true,
+      "caveat": "Tutuila unit only — Ta'u/Ofu have no normals station"
+    },
+    {
+      "parkCode": "arch",
+      "stationId": "USC00420336",
+      "stationName": "ARCHES NP HQS",
+      "distanceKm": 12.9,
+      "elevationM": 1247.5,
+      "elevationFt": 4092.8,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "badl",
+      "stationId": "USC00398911",
+      "stationName": "WASTA",
+      "distanceKm": 35.6,
+      "elevationM": 709.6,
+      "elevationFt": 2328.1,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "bibe",
+      "stationId": "USC00411715",
+      "stationName": "CHISOS BASIN",
+      "distanceKm": 5.4,
+      "elevationM": 1615.4,
+      "elevationFt": 5299.9,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "bisc",
+      "stationId": "USC00081306",
+      "stationName": "CAPE FLORIDA",
+      "distanceKm": 5,
+      "elevationM": 1.8,
+      "elevationFt": 5.9,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "blca",
+      "stationId": "USC00050754",
+      "stationName": "BLACK CANYON OF THE GUNNISON",
+      "distanceKm": 4,
+      "elevationM": 2484.4,
+      "elevationFt": 8150.9,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "brca",
+      "stationId": "USC00421008",
+      "stationName": "BRYCE CANYON NP HQRS",
+      "distanceKm": 5.9,
+      "elevationM": 2404.9,
+      "elevationFt": 7890.1,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "cany",
+      "stationId": "USC00421168",
+      "stationName": "CANYONLANDS-THE NEEDLES",
+      "distanceKm": 18.1,
+      "elevationM": 1495.3,
+      "elevationFt": 4905.8,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "care",
+      "stationId": "USC00421171",
+      "stationName": "CAPITOL REEF NP",
+      "distanceKm": 13,
+      "elevationM": 1676.4,
+      "elevationFt": 5500,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "cave",
+      "stationId": "USC00291480",
+      "stationName": "CARLSBAD CAVERNS",
+      "distanceKm": 1,
+      "elevationM": 1351.8,
+      "elevationFt": 4435,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "chis",
+      "stationId": "USW00093110",
+      "stationName": "OXNARD VENTURA CO AP",
+      "distanceKm": 28.9,
+      "elevationM": 11,
+      "elevationFt": 36.1,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "cong",
+      "stationId": "USC00386299",
+      "stationName": "N 5NE",
+      "distanceKm": 26.8,
+      "elevationM": 98.1,
+      "elevationFt": 321.9,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "crla",
+      "stationId": "USC00351946",
+      "stationName": "CRATER LAKE NPS HQ",
+      "distanceKm": 5.4,
+      "elevationM": 1976.6,
+      "elevationFt": 6484.9,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "cuva",
+      "stationId": "USC00338062",
+      "stationName": "STOW 4 SE",
+      "distanceKm": 14.7,
+      "elevationM": 323.1,
+      "elevationFt": 1060,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "deva",
+      "stationId": "USW00053139",
+      "stationName": "STOVEPIPE WELLS 1 SW",
+      "distanceKm": 12.3,
+      "elevationM": 25.6,
+      "elevationFt": 84,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "dena",
+      "stationId": "USW00096408",
+      "stationName": "DENALI 27 N",
+      "distanceKm": 40.1,
+      "elevationM": 678.2,
+      "elevationFt": 2225.1,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "drto",
+      "stationId": "USC00082418",
+      "stationName": "DRY TORTUGAS",
+      "distanceKm": 0.4,
+      "elevationM": 0.9,
+      "elevationFt": 3,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "ever",
+      "stationId": "USC00083020",
+      "stationName": "FLAMINGO RS",
+      "distanceKm": 16.5,
+      "elevationM": 0.9,
+      "elevationFt": 3,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "gaar",
+      "stationId": "USW00026533",
+      "stationName": "BETTLES AP",
+      "distanceKm": 122.9,
+      "elevationM": 195.7,
+      "elevationFt": 642.1,
+      "hasTemp": true,
+      "lowConfidence": true,
+      "caveat": "Bettles AP ~123 km, at the park's southern edge — interior Brooks Range values are extrapolation"
+    },
+    {
+      "parkCode": "jeff",
+      "stationId": "USW00003960",
+      "stationName": "CAHOKIA ST LOUIS AP",
+      "distanceKm": 6.4,
+      "elevationM": 125.9,
+      "elevationFt": 413.1,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "glac",
+      "stationId": "USC00248809",
+      "stationName": "W GLACIER",
+      "distanceKm": 26,
+      "elevationM": 959.5,
+      "elevationFt": 3148,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "glba",
+      "stationId": "USC00502785",
+      "stationName": "ELFIN COVE",
+      "distanceKm": 61.3,
+      "elevationM": 6.1,
+      "elevationFt": 20,
+      "hasTemp": true,
+      "lowConfidence": true
+    },
+    {
+      "parkCode": "grca",
+      "stationId": "USC00023596",
+      "stationName": "GRAND CANYON NP 2",
+      "distanceKm": 1.2,
+      "elevationM": 2068.1,
+      "elevationFt": 6785.1,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "grte",
+      "stationId": "USC00486440",
+      "stationName": "MORAN 5WNW",
+      "distanceKm": 10.4,
+      "elevationM": 2074.2,
+      "elevationFt": 6805.1,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "grba",
+      "stationId": "USC00263340",
+      "stationName": "GREAT BASIN NP",
+      "distanceKm": 7.4,
+      "elevationM": 2087.9,
+      "elevationFt": 6850.1,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "grsa",
+      "stationId": "USC00053541",
+      "stationName": "GREAT SAND DUNES NP & PRESERVE",
+      "distanceKm": 6.3,
+      "elevationM": 2494.2,
+      "elevationFt": 8183.1,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "grsm",
+      "stationId": "USC00403420",
+      "stationName": "GATLINBURG 2 SW",
+      "distanceKm": 1.1,
+      "elevationM": 443.2,
+      "elevationFt": 1454.1,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "gumo",
+      "stationId": "USC00417044",
+      "stationName": "PINE SPRINGS",
+      "distanceKm": 6.7,
+      "elevationM": 1704.1,
+      "elevationFt": 5590.9,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "hale",
+      "stationId": "USC00511004",
+      "stationName": "HALEAKALA RS 338",
+      "distanceKm": 9.2,
+      "elevationM": 2122,
+      "elevationFt": 6961.9,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "havo",
+      "stationId": "USC00511303",
+      "stationName": "HAWAII VOL NP HQ 54",
+      "distanceKm": 8.1,
+      "elevationM": 1210.4,
+      "elevationFt": 3971.1,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "hosp",
+      "stationId": "USC00033466",
+      "stationName": "HOT SPRINGS 1 NNE",
+      "distanceKm": 0.3,
+      "elevationM": 190.8,
+      "elevationFt": 626,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "indu",
+      "stationId": "USC00124244",
+      "stationName": "INDIANA DUNES NL",
+      "distanceKm": 3.8,
+      "elevationM": 207.3,
+      "elevationFt": 680.1,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "isro",
+      "stationId": "USC00213296",
+      "stationName": "GRAND PORTAGE",
+      "distanceKm": 86,
+      "elevationM": 222.5,
+      "elevationFt": 730,
+      "hasTemp": true,
+      "lowConfidence": true
+    },
+    {
+      "parkCode": "jotr",
+      "stationId": "USC00041738",
+      "stationName": "CHIRIACO SUMMIT",
+      "distanceKm": 28.5,
+      "elevationM": 520,
+      "elevationFt": 1706,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "katm",
+      "stationId": "USW00025522",
+      "stationName": "KING SALMON 42 SE",
+      "distanceKm": 62.9,
+      "elevationM": 201.5,
+      "elevationFt": 661.1,
+      "hasTemp": true,
+      "lowConfidence": true
+    },
+    {
+      "parkCode": "kefj",
+      "stationId": "USW00026438",
+      "stationName": "SEWARD AP",
+      "distanceKm": 26.5,
+      "elevationM": 6.7,
+      "elevationFt": 22,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "kica",
+      "stationId": "USC00045026",
+      "stationName": "LODGEPOLE",
+      "distanceKm": 27.2,
+      "elevationM": 2052.8,
+      "elevationFt": 6734.9,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "kova",
+      "stationId": "USW00026616",
+      "stationName": "KOTZEBUE RALPH WEIN AP",
+      "distanceKm": 155.7,
+      "elevationM": 9.1,
+      "elevationFt": 29.9,
+      "hasTemp": true,
+      "lowConfidence": true,
+      "caveat": "Nearest temp-normals station ~156 km (Kotzebue) — Brooks Range interior is extrapolation"
+    },
+    {
+      "parkCode": "lacl",
+      "stationId": "USC00500788",
+      "stationName": "BIG RIVER LAKES",
+      "distanceKm": 63.2,
+      "elevationM": 18.3,
+      "elevationFt": 60,
+      "hasTemp": true,
+      "lowConfidence": true,
+      "caveat": "Nearest temp-normals station ~63 km from park centroid"
+    },
+    {
+      "parkCode": "lavo",
+      "stationId": "USC00045311",
+      "stationName": "MANZANITA LAKE",
+      "distanceKm": 8,
+      "elevationM": 1752.6,
+      "elevationFt": 5750,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "maca",
+      "stationId": "USC00155097",
+      "stationName": "MAMMOTH CAVE",
+      "distanceKm": 7.8,
+      "elevationM": 231.6,
+      "elevationFt": 759.8,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "meve",
+      "stationId": "USC00055531",
+      "stationName": "MESA VERDE NP",
+      "distanceKm": 2.2,
+      "elevationM": 2176.9,
+      "elevationFt": 7142.1,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "mora",
+      "stationId": "USC00456898",
+      "stationName": "RAINIER PARADISE RS",
+      "distanceKm": 7.2,
+      "elevationM": 1654.1,
+      "elevationFt": 5426.8,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "neri",
+      "stationId": "USC00466591",
+      "stationName": "OAK HILL",
+      "distanceKm": 7.4,
+      "elevationM": 621.8,
+      "elevationFt": 2040,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "noca",
+      "stationId": "USC00455840",
+      "stationName": "NEWHALEM",
+      "distanceKm": 4.1,
+      "elevationM": 160,
+      "elevationFt": 524.9,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "olym",
+      "stationId": "USC00452548",
+      "stationName": "ELWHA RS",
+      "distanceKm": 24.1,
+      "elevationM": 109.7,
+      "elevationFt": 359.9,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "pefo",
+      "stationId": "USC00026468",
+      "stationName": "PETRIFIED FOREST NP",
+      "distanceKm": 14.1,
+      "elevationM": 1659.9,
+      "elevationFt": 5445.9,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "pinn",
+      "stationId": "USC00046926",
+      "stationName": "PINNACLES NM",
+      "distanceKm": 2.2,
+      "elevationM": 398.4,
+      "elevationFt": 1307.1,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "redw",
+      "stationId": "USC00046498",
+      "stationName": "ORICK PRAIRIE CREEK PARK",
+      "distanceKm": 17,
+      "elevationM": 48.8,
+      "elevationFt": 160.1,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "romo",
+      "stationId": "USC00052761",
+      "stationName": "ESTES PARK 3 SSE",
+      "distanceKm": 13.6,
+      "elevationM": 2381.1,
+      "elevationFt": 7812,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "sagu",
+      "stationId": "USC00021330",
+      "stationName": "CASCABEL",
+      "distanceKm": 14.3,
+      "elevationM": 973.5,
+      "elevationFt": 3193.9,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "seki",
+      "stationId": "USC00040343",
+      "stationName": "ASH MTN",
+      "distanceKm": 14.7,
+      "elevationM": 520.6,
+      "elevationFt": 1708,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "shen",
+      "stationId": "USC00440720",
+      "stationName": "BIG MEADOWS",
+      "distanceKm": 7.5,
+      "elevationM": 1079,
+      "elevationFt": 3540,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "thro",
+      "stationId": "USC00325813",
+      "stationName": "MEDORA",
+      "distanceKm": 8.3,
+      "elevationM": 691.3,
+      "elevationFt": 2268,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "viis",
+      "stationId": "VQW00011640",
+      "stationName": "CHARLOTTE AMALIE AP",
+      "distanceKm": 25,
+      "elevationM": 6.1,
+      "elevationFt": 20,
+      "hasTemp": true,
+      "caveat": "Charlotte Amalie AP on St. Thomas (~25 km) — all four nearest St. John stations are precip-only"
+    },
+    {
+      "parkCode": "voya",
+      "stationId": "USC00214191",
+      "stationName": "KABETOGAMA",
+      "distanceKm": 16,
+      "elevationM": 365.8,
+      "elevationFt": 1200.1,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "whsa",
+      "stationId": "USC00299686",
+      "stationName": "WHITE SANDS NATL MON",
+      "distanceKm": 0.6,
+      "elevationM": 1221,
+      "elevationFt": 4005.9,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "wica",
+      "stationId": "USC00399347",
+      "stationName": "WIND CAVE",
+      "distanceKm": 1.5,
+      "elevationM": 1266.4,
+      "elevationFt": 4154.9,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "wrst",
+      "stationId": "USC00505757",
+      "stationName": "MCCARTHY 3 SW",
+      "distanceKm": 70.8,
+      "elevationM": 381,
+      "elevationFt": 1250,
+      "hasTemp": true,
+      "lowConfidence": true,
+      "caveat": "Nearest temp-normals station ~71 km from park centroid"
+    },
+    {
+      "parkCode": "yell",
+      "stationId": "USW00094173",
+      "stationName": "YELLOWSTONE LAKE",
+      "distanceKm": 8.8,
+      "elevationM": 2388.1,
+      "elevationFt": 7835,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "yose",
+      "stationId": "USC00049855",
+      "stationName": "YOSEMITE PARK HQ",
+      "distanceKm": 0,
+      "elevationM": 1224.7,
+      "elevationFt": 4018,
+      "hasTemp": true
+    },
+    {
+      "parkCode": "zion",
+      "stationId": "USC00429717",
+      "stationName": "ZION NP",
+      "distanceKm": 11.8,
+      "elevationM": 1230.8,
+      "elevationFt": 4038.1,
+      "hasTemp": true
+    }
+  ]
+}
