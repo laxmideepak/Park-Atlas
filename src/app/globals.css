@@ -156,6 +156,21 @@ body {
   animation: eq-bar 0.9s ease-in-out infinite;
 }
 
+/* Editorial drop cap — `initial-letter` only (Chromium unprefixed, Safari via
+   -webkit-). Firefox has no support and simply renders no cap: acceptable
+   progressive enhancement. Deliberately NO float/line-height fallback — those
+   never align with Instrument Serif's metrics and would ship a worse cap to
+   every browser to spare one. */
+@supports (initial-letter: 3) or (-webkit-initial-letter: 3) {
+  .dropcap::first-letter {
+    -webkit-initial-letter: 3;
+    initial-letter: 3;
+    font-family: var(--font-instrument-serif);
+    color: var(--ink);
+    padding-right: 0.14em;
+  }
+}
+
 /* card -> hero photo morph should be a quick cut, not a lazy dissolve */
 ::view-transition-old(*),
 ::view-transition-new(*) {

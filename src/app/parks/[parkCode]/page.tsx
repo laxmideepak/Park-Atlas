@@ -119,8 +119,14 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
                   prose, or the NPS live description fallback) opens the
                   overview in Instrument Serif roman; the hero keeps its
                   clamped italic line as the cover tease. */}
+              {/* Drop cap only when the note is long enough to wrap the
+                  3-line cap — length > 220 chars is a crude but honest proxy
+                  for "at least three full lines at 58ch". */}
               {fieldNote && (
-                <Reveal as="p" className="font-display text-standfirst leading-snug max-w-[58ch] text-ink">
+                <Reveal
+                  as="p"
+                  className={`font-display text-standfirst leading-snug max-w-[58ch] text-ink${fieldNote.length > 220 ? " dropcap" : ""}`}
+                >
                   {fieldNote}
                 </Reveal>
               )}
