@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { useLenis } from "lenis/react";
+import { setChapterSpy } from "@/lib/chapter-spy";
 
 const RAIL_SCROLL_OFFSET = -96; // matches the sections' scroll-mt-24 (6rem)
 
@@ -17,8 +18,12 @@ export interface Chapter {
  * Items carry a dimmed two-digit numeral (`01 Overview`) derived from their
  * position in the already-filtered `chapters` prop — the same contiguous
  * numbering the ThemedSection eyebrows use, so rail and sections share one
- * table of contents. */
-export function ChapterRail({ chapters }: { chapters: Chapter[] }) {
+ * table of contents.
+ *
+ * `runningHead` (the park name) opts the page into the nav's running head:
+ * the rail publishes park + active chapter to the chapter-spy store, and
+ * clears it on unmount so other routes show nothing. */
+export function ChapterRail({ chapters, runningHead }: { chapters: Chapter[]; runningHead?: string }) {
   const [active, setActive] = useState(chapters[0]?.id);
   const lenis = useLenis();
   const reduceMotion = useReducedMotion();
@@ -47,6 +52,16 @@ export function ChapterRail({ chapters }: { chapters: Chapter[] }) {
     });
     return () => observer.disconnect();
   }, [chapters]);
+
+  useEffect(() => {
+    if (!runningHead) return;
+    const i = chapters.findIndex((c) => c.id === active);
+    if (i === -1) return;
+    setChapterSpy({ park: runningHead, id: chapters[i].id, label: chapters[i].label, index: i + 1 });
+  }, [active, chapters, runningHead]);
+
+  // Clear on unmount only — the store must outlive re-runs of the effect above.
+  useEffect(() => () => setChapterSpy(null), []);
 
   return (
     <>

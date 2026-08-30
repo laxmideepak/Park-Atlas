@@ -112,7 +112,7 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
 
       <div className="bg-bone text-ink">
         <div className="max-w-[1360px] mx-auto px-6 md:px-10 py-10 flex flex-col lg:flex-row gap-12">
-          <ChapterRail chapters={chapters} />
+          <ChapterRail chapters={chapters} runningHead={mini.name} />
 
           <div className="flex-1 min-w-0 flex flex-col gap-20">
             <section id="overview" className="scroll-mt-24 flex flex-col gap-6">
