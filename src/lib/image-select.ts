@@ -19,12 +19,23 @@ interface PremiumEntry {
   blurDataURL?: string;
 }
 
-function fromPremium(parkCode?: string): (ParkImage & { creditUrl: string }) | null {
+/** Rewrites a premium pick to a smaller Commons thumb. `width` must be on
+ * the CDN's thumbnail-size allowlist (upload.wikimedia.org 400s anything
+ * else — probed live: 20/40/120/250/330/500/960/1280/1920/3840). */
+function premiumUrl(entry: PremiumEntry, width?: number): string {
+  if (!width) return entry.url;
+  if (entry.sourceWidth <= width) return entry.originalUrl;
+  if (/\/thumb\/.+\/\d+px-/.test(entry.url)) return entry.url.replace(/\/\d+px-/, `/${width}px-`);
+  const file = entry.originalUrl.split("/").pop();
+  return entry.originalUrl.replace("/wikipedia/commons/", "/wikipedia/commons/thumb/") + `/${width}px-${file}`;
+}
+
+function fromPremium(parkCode?: string, width?: number): (ParkImage & { creditUrl: string }) | null {
   if (!parkCode) return null;
   const entry = (premium.parks as Record<string, PremiumEntry>)[parkCode];
   if (!entry) return null;
   return {
-    url: entry.url,
+    url: premiumUrl(entry, width),
     title: entry.alt,
     altText: entry.alt,
     credit: `Photo: ${entry.author} · ${entry.license}`,
@@ -84,10 +95,15 @@ export function pickHero(images: ParkImage[], parkCode?: string): ParkImage | nu
   return [...candidates].sort((a, b) => (getDims(b.url)?.width ?? 0) - (getDims(a.url)?.width ?? 0))[0];
 }
 
-/** Card: any orientation, just needs to not be a thumbnail. */
-export function pickCard(images: ParkImage[]): ParkImage | null {
+/** Card: any orientation, just needs to not be a thumbnail.
+ * Last resort (founder #3/#4): when the rights filter leaves a park with
+ * zero NPS images (2 of 63 at last count — chis, kica), fall back to the
+ * premium pick at a 1280px thumb (cards render ~400px; no need to pull the
+ * 3840px hero). No burst risk: only those zero-image parks ever touch
+ * Commons from a grid, one image each, via the optimizer's 31-day cache. */
+export function pickCard(images: ParkImage[], parkCode?: string): ParkImage | null {
   const candidates = images.filter((im) => passes(im.url, 800));
-  return candidates[0] ?? null;
+  return candidates[0] ?? fromPremium(parkCode, 1280);
 }
 
 /** Premium picks downloaded to /public/scroller by scripts/etl-scroller-images.mjs

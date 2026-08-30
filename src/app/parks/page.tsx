@@ -30,7 +30,7 @@ export default async function ParksIndexPage() {
       region: getRegion(p.state),
       tier: score?.tier ?? "Limited",
       hasFullGuide: Boolean(p.cohort),
-      image: pickCard(imagesByCode.get(p.code) ?? []),
+      image: pickCard(imagesByCode.get(p.code) ?? [], p.code),
     };
   });
 

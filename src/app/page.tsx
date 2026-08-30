@@ -124,7 +124,7 @@ export default async function Home() {
             stagger={0.05}
           >
             {best.slice(0, 8).map((row) => (
-              <ParkCard key={row.park} park={getParkSummary(row.park)} row={row} image={pickCard(imagesByCode.get(row.park) ?? [])} />
+              <ParkCard key={row.park} park={getParkSummary(row.park)} row={row} image={pickCard(imagesByCode.get(row.park) ?? [], row.park)} />
             ))}
           </RevealGroup>
           <Link href={`/discover/month/${DEFAULT_MONTH}`} className="tap-44 font-mono text-mono-sm underline underline-offset-2">
@@ -151,7 +151,7 @@ export default async function Home() {
                     key={g.park}
                     park={getParkSummary(g.park)}
                     row={g}
-                    image={pickCard(imagesByCode.get(g.park) ?? [])}
+                    image={pickCard(imagesByCode.get(g.park) ?? [], g.park)}
                     viewTransition={!topEightCodes.has(g.park)}
                   />
                 ))}

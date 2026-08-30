@@ -110,7 +110,7 @@ export default async function MonthPage(props: PageProps<"/discover/month/[month
                   stagger={0.04}
                 >
                   {rows.map((row) => (
-                    <ParkCard key={row.park} park={getParkSummary(row.park)} row={row} image={pickCard(imagesByCode.get(row.park) ?? [])} />
+                    <ParkCard key={row.park} park={getParkSummary(row.park)} row={row} image={pickCard(imagesByCode.get(row.park) ?? [], row.park)} />
                   ))}
                 </RevealGroup>
               </section>
@@ -141,7 +141,7 @@ export default async function MonthPage(props: PageProps<"/discover/month/[month
                     key={g.park}
                     park={getParkSummary(g.park)}
                     row={g}
-                    image={pickCard(imagesByCode.get(g.park) ?? [])}
+                    image={pickCard(imagesByCode.get(g.park) ?? [], g.park)}
                     viewTransition={false}
                   />
                 ))}
