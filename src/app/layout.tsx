@@ -33,6 +33,7 @@ const plexMono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+  verification: { google: "_kd-4CJoTWDLdtqfRWFYoKUF_tt8daqzQE4oS0QrMWo" },
   title: { default: `${SITE_NAME} — ${SITE_TAGLINE}`, template: `%s` },
   description:
     "Discover which U.S. National Park to visit and when, using transparent, versioned scores built from official NPS, NOAA, and USGS data.",
