@@ -85,15 +85,26 @@ export default async function ParkPage(props: PageProps<"/parks/[parkCode]">) {
   const chapterIndex: Record<string, number> = Object.fromEntries(chapters.map((c, i) => [c.id, i + 1]));
   const marginNote = (section: string) => detail?.marginNotes?.find((n) => n.section === section)?.note;
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "TouristAttraction",
-    name,
-    description: fieldNote,
-    address: { "@type": "PostalAddress", addressRegion: state, addressCountry: "US" },
-    geo: { "@type": "GeoCoordinates", latitude: mini.lat, longitude: mini.lng },
-    url: `${SITE_URL}/parks/${parkCode}`,
-  };
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "TouristAttraction",
+      name,
+      description: fieldNote,
+      address: { "@type": "PostalAddress", addressRegion: state, addressCountry: "US" },
+      geo: { "@type": "GeoCoordinates", latitude: mini.lat, longitude: mini.lng },
+      url: `${SITE_URL}/parks/${parkCode}`,
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "ParkAtlas", item: SITE_URL },
+        { "@type": "ListItem", position: 2, name: "Parks", item: `${SITE_URL}/parks` },
+        { "@type": "ListItem", position: 3, name },
+      ],
+    },
+  ];
 
   return (
     <div className="flex flex-col">

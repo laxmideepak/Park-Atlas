@@ -14,6 +14,7 @@ import { fetchParkImages } from "@/lib/nps";
 import { crowdRelief } from "@/lib/scoring";
 import { pickHero, pickCard, pickScrollerChapter } from "@/lib/image-select";
 import { VIDEO_MANIFEST } from "@/lib/data/video-manifest";
+import { SITE_URL } from "@/lib/site";
 import { Reveal, RevealGroup } from "@/components/Reveal";
 
 export const revalidate = 86400; // re-check the calendar daily so "this month" never goes stale
@@ -97,8 +98,18 @@ export default async function Home() {
     ? preloaderFacts
     : [`${month.name}'s best-scoring park right now is ${getParkSummary(best[0].park).name} — Fit ${best[0].overallMonthFit}.`];
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "ParkAtlas",
+    url: SITE_URL,
+    description:
+      "Which of the 63 U.S. National Parks to visit, and when — every park scored per month on climate and accessibility, never on popularity.",
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Preloader facts={facts} />
 
       <HomeHero

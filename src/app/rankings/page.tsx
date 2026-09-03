@@ -8,6 +8,7 @@ import { currentMonthAbbr } from "@/lib/months";
 import { NearestGemFallback } from "@/components/NearestGemFallback";
 import { Fragment } from "react";
 import { Reveal, RevealGroup } from "@/components/Reveal";
+import { SITE_URL } from "@/lib/site";
 
 export const revalidate = 86400; // re-check the calendar daily so "this month" never goes stale
 
@@ -24,8 +25,26 @@ export default function RankingsPage() {
   const largest = [...PARKS].sort((a, b) => b.acreage - a.acreage);
   const leastCrowded = crowdBandsForMonth(CURRENT_MONTH).slice(0, 10);
 
+  // List-intent structured data for "most visited national parks" queries —
+  // official NPS figures only, never the calculated tiers (those are
+  // deliberately not ordinal, and schema.org has no honest shape for them).
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Most Visited U.S. National Parks (Official NPS visitation)",
+    itemListOrder: "https://schema.org/ItemListOrderDescending",
+    numberOfItems: OFFICIAL_MOST_VISITED_2025.length,
+    itemListElement: OFFICIAL_MOST_VISITED_2025.map((r) => ({
+      "@type": "ListItem",
+      position: r.rank,
+      name: r.name,
+      url: `${SITE_URL}/parks/${r.parkCode}`,
+    })),
+  };
+
   return (
     <div className="bg-bone text-ink min-h-screen py-16">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="max-w-[1360px] mx-auto px-6 md:px-10 flex flex-col gap-16">
         <div className="flex items-start justify-between gap-4 flex-wrap">
           <div>

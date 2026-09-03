@@ -7,6 +7,7 @@ import { getParkSummary } from "@/lib/repo";
 import { bestByMonth, hiddenGemsForMonth } from "@/lib/repo";
 import { NearestGemFallback } from "@/components/NearestGemFallback";
 import { MONTHS, monthByAbbr } from "@/lib/months";
+import { SITE_URL } from "@/lib/site";
 import { MonthAbbr, Tier } from "@/lib/types";
 import { TIER_ORDER } from "@/lib/scoring";
 import { fetchParkImages } from "@/lib/nps";
@@ -56,8 +57,35 @@ export default async function MonthPage(props: PageProps<"/discover/month/[month
   for (const t of TIER_ORDER) byTier.set(t, []);
   for (const row of best) byTier.get(row.tier)!.push(row);
 
+  // Ranked-list structured data — the query this page exists to answer
+  // ("best national parks to visit in October") is a list-intent query.
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      name: `Best National Parks to Visit in ${month.name}`,
+      itemListOrder: "https://schema.org/ItemListOrderDescending",
+      numberOfItems: 10,
+      itemListElement: best.slice(0, 10).map((row, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: getParkSummary(row.park).name,
+        url: `${SITE_URL}/parks/${row.park}`,
+      })),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "ParkAtlas", item: SITE_URL },
+        { "@type": "ListItem", position: 2, name: `Best parks in ${month.name}` },
+      ],
+    },
+  ];
+
   return (
     <div className="flex flex-col">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {/* ink hero */}
       <section className="relative h-[60svh] min-h-[380px] w-full overflow-hidden bg-ink">
         {heroImage ? (

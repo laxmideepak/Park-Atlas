@@ -49,3 +49,8 @@ export const VIDEO_MANIFEST: Record<string, VideoManifestEntry> = {
     durationSec: 12,
   },
 };
+
+// Glacier Bay's humpback season runs June-September, so the same clip
+// honestly covers both late-summer home heroes. Object spread keeps one
+// source of truth for the encode paths and credit.
+VIDEO_MANIFEST["home-sep"] = { ...VIDEO_MANIFEST["home-aug"] };
